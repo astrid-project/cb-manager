@@ -25,10 +25,17 @@ In addition, the data model allow to see the status of the connections between t
 
 The network links are defined with the relative index where it indicated the type. All the possible network link types are defined in the NetworkLinkType index. At the moment, the possible types are: Point to Point (Point 2 Point), Multi-point, and Slice.
 
-
 [^1]: In the reference architecture the agents are Beats from Elastic Stack. Notwithstanding, the data model refers to a generic agent allowing to possibility to use different types.
 
 [^2]: In Elasticsearch, each document is identified by a unique id. For obvious reasons, in the description of the following indices, we omit the description of all the id fields.
+
+# Installation
+
+TODO
+
+# Usage
+
+TODO
 
 # References
 
