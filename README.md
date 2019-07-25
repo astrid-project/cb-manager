@@ -1,6 +1,22 @@
 # Context Broker APIs
 
-## Data Model
+## Table of Contents
+
+* [Data Model](#data-model)
+    * [Methods](#methods)
+        * [Execution Environment](#execution-environment)
+        * [Execution Environment Type](#execution-environment-type)
+        * [Network Link](#network-link)
+        * [Network Link Type](#network-link-type)
+        * [Connection](#connection)
+        * [Catalog](#catalog)
+        * [Data Collection](#data-collection)
+        * [Full Query](#full-query)
+* [Installation](#installation)
+* [Usage](#usage)
+* [References](#references)
+
+# Data Model
 
 ![Data Model](data_model.png)
 
