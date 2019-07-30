@@ -5,18 +5,20 @@ import logging
 
 connections.create_connection(hosts = ['localhost'], timeout = 20)
 
-app = Flask('ASTRID Context Broker API')
+title = 'ASTRID Context Broker API'
+
+app = Flask(title)
 
 log = logging.getLogger('ASTRID')
 log.setLevel(logging.DEBUG)
 
-ns_catalog = Namespace('catalog', path = '/catalog', description = 'TODO')
-ns_config = Namespace('config', path = '/config', description = 'TODO')
-ns_data = Namespace('data', path = '/data', description = 'TODO')
+ns_catalog = Namespace('catalog', path = '/catalog', description = 'Catalog of available agents')
+ns_config = Namespace('config', path = '/config', description = 'Configuration')
+ns_data = Namespace('data', path = '/data', description = 'Collected data')
 
 api = Api(app,
           version = '0.0.1',
-          title = 'ASTRID Contect Brokwer API',
+          title = title,
           description = 'Get and update collected data of the service chain with topology information')
         #   terms_url = 'TODO',
         #   contact = 'TODO',

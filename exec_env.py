@@ -23,7 +23,7 @@ class ExecEnv(Document):
     def get_properties():
         return {
             'hostname': { 'check': Validate.is_hostname, 'reason': 'Hostname not valid' },
-            'type_id': { 'check': ExecEnvType.exists, 'reason': 'Execution Environment Type not found' }
+            'type_id': { 'check': ExecEnvType.exists, 'reason': f'{ExecEnvType.get_name()} not found' }
         }
 
 ref = ExecEnv.init_with_try()
@@ -64,7 +64,6 @@ class ExecEnvResource_id(Resource):
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 @ns_config.response(status.HTTP_404_NOT_FOUND, f'{ref.get_name()} with the given ID not found', Error.found_model)
-@ns_config.response(status.HTTP_406_NOT_ACCEPTABLE, 'Not acceptable request', Error.not_acceptable_model)
 class ExecEnvResource_sel(Resource):
     @ns_config.doc(description = f'Get the {ref.get_name()} with the given ID')
     @ns_config.response(status.HTTP_200_OK, f'{ref.get_name()} with the given ID', model)
@@ -73,6 +72,7 @@ class ExecEnvResource_sel(Resource):
 
     @ns_config.doc(description = f'Update the {ref.get_name()} with the given ID')
     @ns_config.response(status.HTTP_202_ACCEPTED, f'{ref.get_name()} with the given ID currectly updated', Document.response_model)
+    @ns_config.response(status.HTTP_406_NOT_ACCEPTABLE, 'Not acceptable request', Error.not_acceptable_model)
     def put(self, id):
         return ref.updated(id)
 

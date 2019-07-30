@@ -1,6 +1,7 @@
 from app import api, ns_catalog
 from document import Document
 from elasticsearch_dsl import Text
+from error import Error
 from flask_api import status
 from flask_restplus import fields, Resource
 from validate import Validate
@@ -29,38 +30,48 @@ model = api.model(ref.Index.name, {
 }, description = 'Represent the available agent in the catalog', additionalProperties = True)
 
 @ns_catalog.route('/agent')
-@ns_catalog.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation')
-@ns_catalog.response(status.HTTP_403_FORBIDDEN, 'Authentication required')
+@ns_catalog.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
+@ns_catalog.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)   
 class AgentCatalogResource(Resource):
-    @ns_catalog.response(status.HTTP_200_OK, 'JSON Array of Agents')
-    @ns_catalog.marshal_list_with(model)
+    @ns_catalog.doc(description = f'Get the list of all {ref.get_name()}s')
+    @ns_catalog.response(status.HTTP_200_OK, f'List of {ref.get_name()}s', fields.List(fields.Nested(model)))
     def get(self):
         return ref.read_all()
 
-    @ns_catalog.expect(model, validate = True, required = True, description = 'Add a new object')
-    @ns_catalog.response(status.HTTP_201_CREATED, 'Agent correctly added')
-    @ns_catalog.response(status.HTTP_400_BAD_REQUEST, 'Invalid Syntax')
+    @ns_catalog.doc(description = f'Add a new {ref.get_name()}')
+    @ns_catalog.expect(model, description = f'{ref.get_name()} to add', required = True)
+    @ns_catalog.response(status.HTTP_201_CREATED, f'{ref.get_name()} correctly added', Document.response_model)
+    @ns_catalog.response(status.HTTP_406_NOT_ACCEPTABLE, 'Request not acceptable', Error.not_acceptable_model)
+    @ns_catalog.response(status.HTTP_409_CONFLICT, f'{ref.get_name()} with the same ID already found', Error.found_model)
     def post(self):
         return ref.created()
 
 @ns_catalog.route('/agent-id')
-@ns_catalog.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation')
-@ns_catalog.response(status.HTTP_403_FORBIDDEN, 'Authentication required')
+@ns_catalog.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
+@ns_catalog.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)   
 class AgentCatalogResource_id(Resource):
-    @ns_catalog.response(status.HTTP_200_OK, 'JSON Array of Agent IDs')
+    @ns_catalog.doc(description = f'Get the list of all {ref.get_name()} IDs')
+    @ns_catalog.response(status.HTTP_200_OK, f'List of {ref.get_name()} IDs', fields.List(fields.String(description = f'{ref.get_name()} ID', example = 'network-link-a')))
     def get(self):
         return ref.read_all_id()
 
 @ns_catalog.route('/agent/<string:id>')
-@ns_catalog.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation')
-@ns_catalog.response(status.HTTP_403_FORBIDDEN, 'Authentication required')
+@ns_catalog.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
+@ns_catalog.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
+@ns_catalog.response(status.HTTP_404_NOT_FOUND, f'{ref.get_name()} with the given ID not found', Error.found_model)
 class AgentCatalogResource_sel(Resource):
-    @ns_catalog.marshal_with(model)
+    @ns_catalog.doc(description = f'Get the {ref.get_name()} with the given ID')
+    @ns_catalog.response(status.HTTP_200_OK, f'{ref.get_name()} with the given ID', model)
     def get(self, id):
         return ref.read(id)
 
+    @ns_catalog.doc(description = f'Update the {ref.get_name()} with the given ID')
+    @ns_catalog.response(status.HTTP_202_ACCEPTED, f'{ref.get_name()} with the given ID currectly updated', Document.response_model)
+    @ns_catalog.response(status.HTTP_406_NOT_ACCEPTABLE, 'Not acceptable request', Error.not_acceptable_model)
     def put(self, id):
         return ref.updated(id)
 
+    @ns_catalog.doc(description = f'Delete the {ref.get_name()} with the given ID')
+    @ns_catalog.response(status.HTTP_202_ACCEPTED, f'{ref.get_name()} with the given ID currectly deleted', Document.response_model)
     def delete(self, id):
         return ref.deleted(id)

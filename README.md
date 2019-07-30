@@ -139,11 +139,28 @@ POST            | /data/graph-ql    | Returns the collected data filtered b
 
 # Installation
 
-TODO
+1. Prerequisite
+
+- python3
+- pip3
+
+2. Clone the repository.
+
+```bash
+git clone https://gitlab.com/astrid-repositories/wp2/context-broker-apis.git
+```
+
+3. Install the dipendence.
+
+```bash
+pip3 install -r requirements.txt
+```
 
 # Usage
 
-TODO
+```bash
+python3 context_broker-rest-api.py -h
+```
 
 # References
 
