@@ -162,6 +162,13 @@ pip3 install -r requirements.txt
 python3 context_broker-rest-api.py -h
 ```
 
+# ToDo
+
+[] Error if id included in body request for create or update.
+[] Complete Swagger API generator adding missing part in the code.
+[] Fix error in data model for Swagger API generation.
+[] Add docstring to code for API code generation. 
+
 # References
 
 [1] “Getting started with Beats,” [Online]. Available: https://www.elastic.co/guide/en/beats/libbeat/current/getting-started.html.
