@@ -22,6 +22,10 @@ class AgentInstance(Document):
         return 'Agent instance'
 
     @staticmethod
+    def get_url():
+        return 'agent'
+
+    @staticmethod
     def get_properties():
         return {
             'name': { 'check': Validate.is_name, 'reason': 'Name not valid' },
@@ -39,7 +43,7 @@ model = api.model(ref.Index.name, {
     'enabled': fields.Boolean(description ='Indicate if the agent instance is enabled or not', required = True, enum = [True, False])
 }, description = f'Represent the agent instance installed in the {ExecEnv.get_name()}s', additionalProperties = True)
 
-@ns_config.route('/agent')
+@ns_config.route(f'/{ref.get_url()}')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 class AgentInstanceResource(Resource):
@@ -56,7 +60,7 @@ class AgentInstanceResource(Resource):
     def post(self):
         return ref.created()
 
-@ns_config.route('/agent-id')
+@ns_config.route(f'/{ref.get_url()}-id')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 class AgentInstanceResource_id(Resource):
@@ -65,7 +69,7 @@ class AgentInstanceResource_id(Resource):
     def get(self):
         return ref.read_all_id()
 
-@ns_config.route('/agent/<string:id>')
+@ns_config.route(f'/{ref.get_url()}/{ref.get_id_url()}')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 @ns_config.response(status.HTTP_404_NOT_FOUND, f'{ref.get_name()} with the given ID not found', Error.found_model)

@@ -6,10 +6,11 @@ from elasticsearch_dsl import Document as DocumentElastic
 from flask import request
 from flask_restplus import fields
 from flask_api import status
+import inflection
 
 class Document(DocumentElastic):
     response_model = api.model('response-data', {
-        'date': fields.DateTime(description  = 'Execution datetime', required = True),
+        'when': fields.DateTime(description  = 'Execution datetime', required = True),
         'target': fields.String(description  = 'Target object', required = True),
         'action': fields.String(description  = 'Execution action', required = True),
         'success': fields.Boolean(description  = 'Execution performed with success or not', required = True)
@@ -21,9 +22,17 @@ class Document(DocumentElastic):
     def to_dict_with_id(self):
         return dict(self.to_dict(), id = self.get_id())
 
+    @staticmethod
+    def get_id_url():
+        return '<string:id>'
+
     @classmethod
     def get_by_id(cls, id):
         return cls.get(id = id)
+
+    @classmethod
+    def get_url(cls):
+        return inflection.dasherize(fields.camel_to_dash(cls.__name__))
 
     @classmethod
     def exists(cls, id):
@@ -43,7 +52,7 @@ class Document(DocumentElastic):
     @classmethod
     def __data(cls, action, **kwargs):
         out = {
-            'date': datetime.now().strftime('%Y/%m/%d-%H:%M:%S'),
+            'when': datetime.now().strftime('%Y/%m/%d-%H:%M:%S'),
             'target': cls.get_name(),
             'action': action,
             'success': True
@@ -79,7 +88,8 @@ class Document(DocumentElastic):
 
     @classmethod
     def read(cls, id):
-        try:
+        cls.error.validate_properties(id = id, include_required = False)
+        try:            
             return cls.get_by_id(id).to_dict_with_id(), status.HTTP_200_OK, cls.headers
         except elasticsearch.NotFoundError:
             cls.error.not_found(id)
@@ -89,7 +99,7 @@ class Document(DocumentElastic):
     @classmethod
     def created(cls):
         data = request.json
-        cls.error.validate_properties(**data)
+        cls.error.validate_properties(id = id, **data, include_required = True)
         id = data['id']
         del data['id']
         if hasattr(cls, 'apply'): cls.apply(data)
@@ -106,7 +116,7 @@ class Document(DocumentElastic):
     @classmethod
     def updated(cls, id):
         data = request.json
-        cls.error.validate_properties(id = id, **data)
+        cls.error.validate_properties(id = id, **data, include_required = False)
         try:
             cls.get_by_id(id).update(**data)
             return cls.__data('update'), status.HTTP_202_ACCEPTED, cls.headers
@@ -117,7 +127,7 @@ class Document(DocumentElastic):
 
     @classmethod
     def deleted(cls, id):
-        cls.error.validate_properties(id = id)
+        cls.error.validate_properties(id = id, include_required = True)
         try:
             cls.get_by_id(id).delete()
             return cls.__data('delete'), status.HTTP_202_ACCEPTED, cls.headers

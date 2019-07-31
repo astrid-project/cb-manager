@@ -12,7 +12,7 @@ class ExecEnvType(Document):
 
     class Index:
         name = 'exec-env-type'
-
+    
     @staticmethod
     def get_name():
         return 'Execution Environment Type'
@@ -30,7 +30,7 @@ model = api.model(ref.Index.name, {
     'name': fields.String(description ='General name', required = True, example = 'Virtual Machine')
 }, description = f'{ref.get_name()} object', additionalProperties = True)
 
-@ns_config.route('/exec-env-type')
+@ns_config.route(f'/{ref.get_url()}')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)   
 class ExecEnvTypeResource(Resource):
@@ -47,7 +47,7 @@ class ExecEnvTypeResource(Resource):
     def post(self):
         return ref.created()
 
-@ns_config.route('/exec-env-type-id')
+@ns_config.route(f'/{ref.get_url()}-id')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)   
 class ExecEnvTypeResource_id(Resource):
@@ -56,7 +56,7 @@ class ExecEnvTypeResource_id(Resource):
     def get(self):
         return ref.read_all_id()
 
-@ns_config.route('/exec-env-type/<string:id>')
+@ns_config.route(f'/{ref.get_url()}/{ref.get_id_url()}')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)   
 @ns_config.response(status.HTTP_404_NOT_FOUND, f'{ref.get_name()} with the given ID not found', Error.found_model)

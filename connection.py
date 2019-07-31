@@ -35,10 +35,10 @@ model = api.model(ref.Index.name, {
 }, description = f'Represent the relations between the {ExecEnv.get_name()}s and the {NetworkLink.get_name()}s', additionalProperties = True)
 
 
-@ns_config.route('/connection')
+@ns_config.route(f'/{ref.get_url()}')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
-class ConnetionResource(Resource):
+class ConnectionResource(Resource):
     @ns_config.doc(description = f'Get the list of all {ref.get_name()}s')
     @ns_config.response(status.HTTP_200_OK, f'List of {ref.get_name()}s', fields.List(fields.Nested(model)))
     def get(self):
@@ -52,20 +52,20 @@ class ConnetionResource(Resource):
     def post(self):
         return ref.created()
 
-@ns_config.route('/connection-id')
+@ns_config.route(f'/{ref.get_url()}-id')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
-class ConnetionResource_id(Resource):
+class ConnectionResource_id(Resource):
     @ns_config.doc(description = f'Get the list of all {ref.get_name()} IDs')
     @ns_config.response(status.HTTP_200_OK, f'List of {ref.get_name()} IDs', fields.List(fields.String(description = f'{ref.get_name()} ID', example = 'network-link-a')))
     def get(self):
         return ref.read_all_id()
 
-@ns_config.route('/connection/<string:id>')
+@ns_config.route(f'/{ref.get_url()}/{ref.get_id_url()}')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 @ns_config.response(status.HTTP_404_NOT_FOUND, f'{ref.get_name()} with the given ID not found', Error.found_model)
-class ConnetionResource_sel(Resource):
+class ConnectionResource_sel(Resource):
     @ns_config.doc(description = f'Get the {ref.get_name()} with the given ID')
     @ns_config.response(status.HTTP_200_OK, f'{ref.get_name()} with the given ID', model)
     def get(self, id):
@@ -82,7 +82,7 @@ class ConnetionResource_sel(Resource):
     def delete(self, id):
         return ref.deleted(id)
 
-@ns_config.route('/connection/exec-env/<string:id>')
+@ns_config.route(f'/{ref.get_url()}/{ExecEnv.get_url()}/{ExecEnv.get_id_url()}')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 @ns_config.response(status.HTTP_404_NOT_FOUND, f'{ExecEnv.get_name()} with the given ID not found', Error.found_model)
@@ -90,14 +90,16 @@ class ConnetionResource_by_exec_env(Resource):
     @ns_config.doc(description = f'Get the list of {ref.get_name()}s of the {ExecEnv.get_name()} with the given ID')
     @ns_config.response(status.HTTP_200_OK, f'List of {ref.get_name()} of the {ExecEnv.get_name()} with the given ID', fields.List(fields.Nested(model)))
     def get(self, id):
+        ExecEnv.read(id)
         return ref.read_by(exec_env_id = id)
 
     @ns_config.doc(description = f'Delete the {ref.get_name()}s of the {ExecEnv.get_name()} with the given ID')
     @ns_config.response(status.HTTP_202_ACCEPTED, f'{ref.get_name()}s of the {ExecEnv.get_name()} with the given ID currectly deleted', Document.response_model)
     def delete(self, id):
+        ExecEnv.read(id)
         return ref.deleted_by(exec_env_id = id)
 
-@ns_config.route('/connection/network_link/<string:id>')
+@ns_config.route(f'/{ref.get_url()}/{NetworkLink.get_url()}/{NetworkLink.get_id_url()}')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 @ns_config.response(status.HTTP_404_NOT_FOUND, f'{NetworkLink.get_name()} with the given ID not found', Error.found_model)
@@ -105,9 +107,11 @@ class ConnetionResource_by_network_link(Resource):
     @ns_config.doc(description = f'Get the {ref.get_name()} of the {NetworkLink.get_name()} with the given ID')
     @ns_config.response(status.HTTP_200_OK, f'List of {ref.get_name()}s if the {NetworkLink.get_name()} with the given ID', model)
     def get(self, id):
+        NetworkLink.read(id)
         return ref.read_by(network_link_id = id)
 
     @ns_config.doc(description = f'Delete the {ref.get_name()}s of the {NetworkLink.get_name()} with the given ID')
     @ns_config.response(status.HTTP_202_ACCEPTED, f'{ref.get_name()}s of the {NetworkLink.get_name()} with the given ID currectly deleted', Document.response_model)
     def delete(self, id):
+        NetworkLink.read(id)
         return ref.deleted_by(network_link_id = id)

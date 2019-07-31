@@ -15,7 +15,7 @@ class NetworkLinkType(Document):
 
     @staticmethod
     def get_name():
-        return 'Nework Link Type'
+        return 'Network Link Type'
 
     @staticmethod
     def get_properties():
@@ -30,7 +30,7 @@ model = api.model(ref.Index.name, {
     'name': fields.String(description ='General name', required = True, example = 'Point to Point')
 }, description = f'{ref.get_name()} object', additionalProperties = True)
 
-@ns_config.route('/network-link-type')
+@ns_config.route(f'/{ref.get_url()}')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)   
 class NetworkLinkTypeResource(Resource):
@@ -47,7 +47,7 @@ class NetworkLinkTypeResource(Resource):
     def post(self):
         return ref.created()
 
-@ns_config.route('/network-link-type-id')
+@ns_config.route(f'/{ref.get_url()}-id')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)   
 class NetworkLinkTypeResource_id(Resource):
@@ -56,7 +56,7 @@ class NetworkLinkTypeResource_id(Resource):
     def get(self):
         return ref.read_all_id()
 
-@ns_config.route('/network-link-type/<string:id>')
+@ns_config.route(f'/{ref.get_url()}/{ref.get_id_url()}')
 @ns_config.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_config.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 @ns_config.response(status.HTTP_404_NOT_FOUND, f'{ref.get_name()} with the given ID not found', Error.found_model)

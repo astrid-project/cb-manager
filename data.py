@@ -56,7 +56,7 @@ class DataResource(Resource):
     def get(self, id):
         return ref.read_all()
 
-@ns_data.route('/exec-env/<string:id>')
+@ns_data.route(f'/{ExecEnv.get_url()}/{ExecEnv.get_id_url()}')
 @ns_data.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_data.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 @ns_data.response(status.HTTP_404_NOT_FOUND, f'{ExecEnv.get_name()} with the given ID not found', Error.found_model)
@@ -64,9 +64,10 @@ class DataResource_by_exec_env(Resource):
     @ns_data.doc(description = f'Get the list of all {ref.get_name()} related to the {ExecEnv.get_name()} with the given ID')
     @ns_data.response(status.HTTP_200_OK, f'List of {ref.get_name()} related to the {ExecEnv.get_name()} with the given ID', fields.List(fields.Nested(model)))
     def get(self, id):
+        ExecEnv.read(id)
         return ref.read_by(exec_env_id = id)
 
-@ns_data.route('/agent/instance/<string:id>')
+@ns_data.route(f'/{AgentInstance.get_url()}/instance/{AgentInstance.get_id_url()}')
 @ns_data.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_data.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 @ns_data.response(status.HTTP_404_NOT_FOUND, f'{AgentInstance.get_name()} with the given ID not found', Error.found_model)
@@ -74,9 +75,10 @@ class DataResource_by_agent_instance(Resource):
     @ns_data.doc(description = f'Get the list of all {ref.get_name()} related to the {AgentInstance.get_name()} with the given ID')
     @ns_data.response(status.HTTP_200_OK, f'List of {ref.get_name()} related to the {AgentInstance.get_name()} with the given ID', fields.List(fields.Nested(model)))
     def get(self, id):
+        AgentInstance.read(id)
         return ref.read_by(agent_instance_id = id)
 
-@ns_data.route('/agent/catalog/<string:id>')
+@ns_data.route(f'/{AgentCatalog.get_url()}/catalog/{AgentCatalog.get_id_url()}')
 @ns_data.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_data.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 @ns_data.response(status.HTTP_404_NOT_FOUND, f'{AgentCatalog.get_name()} with the given ID not found', Error.found_model)
@@ -84,6 +86,7 @@ class DataResource_by_agent_catalog(Resource):
     @ns_data.doc(description = f'Get the list of all {ref.get_name()} related to the {AgentCatalog.get_name()} with the given ID')
     @ns_data.response(status.HTTP_200_OK, f'List of {ref.get_name()} related to the {AgentCatalog.get_name()} with the given ID', fields.List(fields.Nested(model)))
     def get(self, id):
+        AgentCatalog.read(id)
         return ref.read_by(agent_catalog_id = id)
 
 @ns_data.route('/timestamp/event/after/<string:after>')
@@ -113,7 +116,7 @@ class DataResource_by_timestamp_event(Resource):
     def get(self, after, before):
         return ref.read_by_datetime(property = 'timestamp_event', after = after, before = before)
 
-@ns_data.route('/timestamp/agent/after/<string:after>')
+@ns_data.route(f'/timestamp/{AgentInstance.get_url()}/after/<string:after>')
 @ns_data.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_data.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 class DataResource_by_timestamp_agent_after(Resource):
@@ -122,7 +125,7 @@ class DataResource_by_timestamp_agent_after(Resource):
     def get(self, after):
         return ref.read_by_datetime(property = 'timestamp_agent', after = after)
 
-@ns_data.route('/timestamp/agent/before/<string:before>')
+@ns_data.route(f'/timestamp/{AgentInstance.get_url()}/before/<string:before>')
 @ns_data.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_data.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 class DataResource_by_timestamp_agent_before(Resource):
@@ -131,7 +134,7 @@ class DataResource_by_timestamp_agent_before(Resource):
     def get(self, before):
         return ref.read_by_datetime(property = 'timestamp_agent', before = before)
 
-@ns_data.route('/timestamp/agent/<string:after>/<string:before>', doc = {'params': {'after': 'after', 'before': 'before'}})
+@ns_data.route(f'/timestamp/{AgentInstance.get_url()}/<string:after>/<string:before>')
 @ns_data.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_data.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 class DataResource_by_timestamp_agent(Resource):

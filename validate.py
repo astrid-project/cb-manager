@@ -19,4 +19,4 @@ class Validate:
 
     @staticmethod
     def is_id(x):
-        return isinstance(x, str)
+        return isinstance(x, str) and x.islower() and x.isprintable() and not x.isspace()

@@ -17,6 +17,10 @@ class AgentCatalog(Document):
         return 'Agent in Catalog'
 
     @staticmethod
+    def get_url():
+        return 'agent'
+
+    @staticmethod
     def get_properties():
         return {
             'name': { 'check': Validate.is_name, 'reason': 'Name not valid' }
@@ -29,7 +33,7 @@ model = api.model(ref.Index.name, {
     'name': fields.String(description ='General name', required = True, example = 'Filebeat')
 }, description = 'Represent the available agent in the catalog', additionalProperties = True)
 
-@ns_catalog.route('/agent')
+@ns_catalog.route(f'/{ref.get_url()}')
 @ns_catalog.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_catalog.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)   
 class AgentCatalogResource(Resource):
@@ -46,7 +50,7 @@ class AgentCatalogResource(Resource):
     def post(self):
         return ref.created()
 
-@ns_catalog.route('/agent-id')
+@ns_catalog.route(f'/{ref.get_url()}-id')
 @ns_catalog.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_catalog.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)   
 class AgentCatalogResource_id(Resource):
@@ -55,7 +59,7 @@ class AgentCatalogResource_id(Resource):
     def get(self):
         return ref.read_all_id()
 
-@ns_catalog.route('/agent/<string:id>')
+@ns_catalog.route(f'/{ref.get_url()}/{ref.get_id_url()}')
 @ns_catalog.response(status.HTTP_401_UNAUTHORIZED, 'Unauthorized operation', Error.unauth_op_model)
 @ns_catalog.response(status.HTTP_403_FORBIDDEN, 'Authentication required', Error.auth_model)
 @ns_catalog.response(status.HTTP_404_NOT_FOUND, f'{ref.get_name()} with the given ID not found', Error.found_model)
