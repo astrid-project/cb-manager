@@ -1,4 +1,5 @@
 elasticsearch-dsl>=6.0.0,<7.0.0
-flask-restplus
+flask-api
 flask-log
+flask-restplus
 inflection
