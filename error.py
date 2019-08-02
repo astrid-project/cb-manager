@@ -53,13 +53,14 @@ class Error:
         if 'id' in data:
             props.update(id = { 'check': Validate.is_id, 'reason': f'{self.target.get_name()} ID not acceptable' })
         for prop, prop_data in props.items():
-            if prop not in data.keys():
+            if prop not in data.keys() and prop_data['required']:
                 not_accetable_data.append({ 'property': prop, 'reason': 'missing' })
             elif not prop_data['check'](data[prop]):
                 not_accetable_data.append({ 'property': prop, 'value': data[prop], 'reason': prop_data['reason'] })
         if len(not_accetable_data) > 0:
             self.__abort(status.HTTP_406_NOT_ACCEPTABLE, when = datetime.now(), message = f'{self.target.get_name()} request not acceptable',
                 data = not_accetable_data, target = self.target.__name__)
+        return True
 
     def found(self, id):
         self.__abort(status.HTTP_409_CONFLICT, when = datetime.now(), message = f'{self.target.get_name()} found', target = self.target.__name__, id = id)

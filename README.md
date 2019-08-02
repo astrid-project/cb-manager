@@ -212,7 +212,8 @@ python3 context_broker-rest-api.py -h
 [ ] Complete Swagger API generator adding missing part in the code.
 [ ] Fix error in data model for Swagger API generation.
 [ ] Add docstring to code for API code generation. 
+[ ] Improve index-to-index relationship (maybe using InnerDoc).
 
 # References
 
-[1] “Getting started with Beats,” [Online]. Available: https://www.elastic.co/guide/en/beats/libbeat/current/getting-started.html.
+[^1]: “Getting started with Beats,” [Online]. Available: https://www.elastic.co/guide/en/beats/libbeat/current/getting-started.html.

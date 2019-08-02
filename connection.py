@@ -22,8 +22,8 @@ class Connection(Document):
     @staticmethod
     def get_properties():
         return {
-            'exec_env_id': { 'check': ExecEnv.exists, 'reason': f'{ExecEnv.get_name()} not found' },
-            'network_link_id': { 'check': NetworkLink.exists, 'reason': f'{NetworkLink.get_name()} not found' }
+            'exec_env_id': { 'check': ExecEnv.exists, 'reason': f'{ExecEnv.get_name()} not found', 'required': True },
+            'network_link_id': { 'check': NetworkLink.exists, 'reason': f'{NetworkLink.get_name()} not found', 'required': True }
         }
 
 ref = Connection.init_with_try()

@@ -20,7 +20,7 @@ class ExecEnvType(Document):
     @staticmethod
     def get_properties():
         return {
-            'name': { 'check': Validate.is_name, 'reason': 'Name not valid' }
+            'name': { 'check': Validate.is_name, 'reason': 'Name not valid', 'required': True }
         }
 
 ref = ExecEnvType.init_with_try()

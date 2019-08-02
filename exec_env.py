@@ -32,8 +32,8 @@ class ExecEnv(Document):
     @staticmethod
     def get_properties():
         return {
-            'hostname': { 'check': Validate.is_hostname, 'reason': 'Hostname not valid' },
-            'type_id': { 'check': ExecEnvType.exists, 'reason': f'{ExecEnvType.get_name()} not found' }
+            'hostname': { 'check': Validate.is_hostname, 'reason': 'Hostname not valid', 'required': True },
+            'type_id': { 'check': ExecEnvType.exists, 'reason': f'{ExecEnvType.get_name()} not found', 'required': True }
         }
 
 ref = ExecEnv.init_with_try()

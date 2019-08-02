@@ -1,14 +1,75 @@
 from app import api, ns_catalog
-from document import Document
+from document import Document, InnerDoc, Nested
 from elasticsearch_dsl import Text
 from error import Error
 from flask_api import status
 from flask_restplus import fields, Resource
 from validate import Validate
 
+type_single_values = ['number', 'time-duration', 'string', 'single-choice', 'multiple-choices', 'boolean']
+
+class AgentOption(InnerDoc):
+    name = Text()
+    type = Text()
+
+    class Index:
+        name = 'agent-option'
+
+    @staticmethod
+    def get_name():
+        return 'Agent Option'
+
+    @staticmethod
+    def get_properties():
+        return { 
+            'name': { 'check': Validate.is_name, 'reason': 'Name not valid', 'required': True },
+            'type': { 'check': Validate.is_single_choice(*type_single_values), 'reason': f"Type not valid (acceptable values: {', '.join(type_single_values)})", 'required': True }
+        }
+
+ref = AgentOption.init_with_try()
+
+agent_option_model = api.model(ref.Index.name, {
+    'name': fields.String(description ='Name', required = True, example = 'polling'),
+    'type': fields.String(decriptione = 'Option type', required = True, enum = type_single_values, example = 'time-duration')
+}, description = 'Represent the available options for each agent in the catalog', additionalProperties = True)
+
+class AgentRecipe(InnerDoc):
+    start = Text()
+    stop = Text()
+    install = Text()
+    uninstall = Text()
+
+    class Index:
+        name = 'agent-recipe'
+
+    @staticmethod
+    def get_name():
+        return 'Agent Recipe'
+
+    @staticmethod
+    def get_properties():
+        return { 
+            'start': { 'check': Validate.is_list_unique_type(str), 'reason': 'Start operations not valid', 'required': True },
+            'stop': { 'check': Validate.is_list_unique_type(str), 'reason': 'Stop operations not valid', 'required': True },
+            'install': { 'check': Validate.is_list_unique_type(str), 'reason': 'Install operations not valid', 'required': True },
+            'uninstall': { 'check': Validate.is_list_unique_type(str), 'reason': 'Uninstall operations not valid', 'required': True },
+        }
+
+ref = AgentRecipe.init_with_try()
+
+agent_recipe_model = api.model(ref.Index.name, {
+    'start': fields.List(fields.String(description ='Start operations', required = True, example = 'TODO')),
+    'stop': fields.List(fields.String(decriptione = 'Stop operations', required = True, example = 'TODO')),
+    'install': fields.List(fields.String(decriptione = 'Install operations', required = True, example = 'TODO')),
+    'uninstall': fields.List(fields.String(decriptione = 'Uninstall operations', required = True, example = 'TODO')),
+}, description = 'The recipe with the commands to start, stop, install an uninstall the agent', additionalProperties = True)
+
 class AgentCatalog(Document):
     name = Text()
-
+    options = Nested(AgentOption)
+    config = Text()
+    recipe = Nested(AgentRecipe)
+    
     class Index:
         name = 'agent-catalog'
 
@@ -23,14 +84,20 @@ class AgentCatalog(Document):
     @staticmethod
     def get_properties():
         return {
-            'name': { 'check': Validate.is_name, 'reason': 'Name not valid' }
+            'name': { 'check': Validate.is_name, 'reason': 'Name not valid', 'required': True },
+            'options': { 'check': Validate.is_list_obj(AgentOption, unique_by = 'name'), 'reason': 'Option list not valid', 'required': False },
+            'config': { 'check': Validate.is_str, 'reason': 'Config not valid', 'required': False },
+            'recipe': { 'check': Validate.is_obj(AgentRecipe), 'reason': 'Recipe not valid', 'required': True }
         }
 
 ref = AgentCatalog.init_with_try()
 
 model = api.model(ref.Index.name, {
     'id':  fields.String(description ='Unique ID', required = True, example = 'filebeat'),
-    'name': fields.String(description ='General name', required = True, example = 'Filebeat')
+    'name': fields.String(description ='General name', required = True, example = 'Filebeat'),
+    'options': fields.List(fields.Nested(agent_option_model), description = 'List of options', required = False),
+    'config': fields.String(description ='Configuration script', required = False, example = 'TODO'),
+    'recipe': fields.Nested(agent_recipe_model, description = 'Recipe data', required = True),
 }, description = 'Represent the available agent in the catalog', additionalProperties = True)
 
 @ns_catalog.route(f'/{ref.get_url()}')

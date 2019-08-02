@@ -26,10 +26,10 @@ class Data(Document):
     @staticmethod
     def get_properties():
         return {
-            'exec_env_id': { 'check': ExecEnv.exists, 'reason': f'{ExecEnv.get_name()} not found' },
-            'agent_instance_id': { 'check': AgentInstance.exists, 'reason': f'{AgentInstance.get_name()} not found' },
-            'timestamp_event': { 'check': Validate.is_datetime, 'reason': 'Date/Time not valid' },
-            'timestamp_agent': { 'check': Validate.is_datetime, 'reason': 'Date/Time not valid' }
+            'exec_env_id': { 'check': ExecEnv.exists, 'reason': f'{ExecEnv.get_name()} not found', 'required': False },
+            'agent_instance_id': { 'check': AgentInstance.exists, 'reason': f'{AgentInstance.get_name()} not found', 'required': False },
+            'timestamp_event': { 'check': Validate.is_datetime, 'reason': 'Date/Time not valid', 'required': False },
+            'timestamp_agent': { 'check': Validate.is_datetime, 'reason': 'Date/Time not valid', 'required': False }
         }
 
     @staticmethod

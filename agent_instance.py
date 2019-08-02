@@ -9,10 +9,12 @@ from flask_api import status
 from flask_restplus import fields, Resource
 from validate import Validate
 
+status_values = ['start', 'stop']
+
 class AgentInstance(Document):
     agent_catalog_id = Text()
     exec_env_id = Text()
-    enabled = Boolean()
+    status = Text()
 
     class Index:
         name = 'agent-instance'
@@ -28,11 +30,15 @@ class AgentInstance(Document):
     @staticmethod
     def get_properties():
         return {
-            'name': { 'check': Validate.is_name, 'reason': 'Name not valid' },
-            'agent_catalog_id': { 'check': AgentCatalog.exists, 'reason': f'{AgentCatalog.get_name()} not found' },
-            'exec_env_id': { 'check': ExecEnv.exists, 'reason': f'{ExecEnv.get_name()} not found' },
-            'enabled': { 'checl': Validate.is_boolean, 'reason': 'Must be true or false' }
+            'name': { 'check': Validate.is_name, 'reason': 'Name not valid', 'required': True },
+            'agent_catalog_id': { 'check': AgentCatalog.exists, 'reason': f'{AgentCatalog.get_name()} not found', 'required': True },
+            'exec_env_id': { 'check': ExecEnv.exists, 'reason': f'{ExecEnv.get_name()} not found', 'required': True },
+            'status': { 'check': Validate.is_single_choice(*status_values), 'reason': f"Status not valid (acceptable values: {', '.join(status_values)})", 'required': False}
         }
+
+    @staticmethod
+    def apply(data):
+        if 'status' not in data: data['status'] = 'stop'
 
 ref = AgentInstance.init_with_try()
 
@@ -40,7 +46,7 @@ model = api.model(ref.Index.name, {
     'id':  fields.String(description ='Unique ID', required = True, example = 'filebeat-apache'),
     'agent_catalog_id': fields.String(description = f'AgentCatalog.get_name() ID', required = True, example = 'filebeat'),
     'exec_env_id': fields.String(description = f'{ExecEnv.get_name()} ID', required = True, example = 'exec-env-apache'),
-    'enabled': fields.Boolean(description ='Indicate if the agent instance is enabled or not', required = True, enum = [True, False])
+    'status': fields.String(description = 'Status of the agent', required = False, enum = status_values)
 }, description = f'Represent the agent instance installed in the {ExecEnv.get_name()}s', additionalProperties = True)
 
 @ns_config.route(f'/{ref.get_url()}')

@@ -2,11 +2,23 @@ from app import api, log
 from datetime import datetime
 from error import Error
 import elasticsearch
-from elasticsearch_dsl import Document as DocumentElastic
+from elasticsearch_dsl import Document as DocumentElastic, InnerDoc as InnerDocElastic, Nested
+
 from flask import request
 from flask_restplus import fields
 from flask_api import status
 import inflection
+
+class InnerDoc(InnerDocElastic):
+    @classmethod
+    def init_with_try(cls):
+        try:
+            cls.error = Error(cls)
+            cls.headers = {'Powered-by': 'ASTRID'}
+            log.info('%s init', cls.__name__)
+        except Exception as e:
+            cls.error.generic(e)
+        return cls
 
 class Document(DocumentElastic):
     response_model = api.model('response-data', {
@@ -69,7 +81,6 @@ class Document(DocumentElastic):
 
     @classmethod
     def read_all_id(cls):
-        print(cls.read_all())
         return [item.get_id() for item in cls.search().execute()]
 
     @classmethod
@@ -99,9 +110,12 @@ class Document(DocumentElastic):
     @classmethod
     def created(cls):
         data = request.json
-        cls.error.validate_properties(id = id, **data, include_required = True)
-        id = data['id']
-        del data['id']
+        cls.error.validate_properties(**data, include_required = True)
+        if 'id' in data:
+            id = data['id']
+            del data['id']
+        else:
+            id = None
         if hasattr(cls, 'apply'): cls.apply(data)
         try:
             cls.get_by_id(id)
@@ -127,7 +141,7 @@ class Document(DocumentElastic):
 
     @classmethod
     def deleted(cls, id):
-        cls.error.validate_properties(id = id, include_required = True)
+        cls.error.validate_properties(id = id, include_required = False)
         try:
             cls.get_by_id(id).delete()
             return cls.__data('delete'), status.HTTP_202_ACCEPTED, cls.headers
@@ -140,7 +154,6 @@ class Document(DocumentElastic):
     def deleted_by(cls, **properties):
         try:
             res = cls.search().query('match', **properties).execute().delete()
-            print(res)
             return cls.__data('delete', success = res > 0, deleted = res), status.HTTP_202_ACCEPTED, cls.headers
         except Exception as e:
             cls.error.generic(e)

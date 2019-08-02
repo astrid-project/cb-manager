@@ -20,7 +20,7 @@ class NetworkLink(Document):
     @staticmethod
     def get_properties():
         return {
-            'type_id': { 'check': NetworkLinkType.exists, 'reason': f'{NetworkLink.get_name()} not found' }
+            'type_id': { 'check': NetworkLinkType.exists, 'reason': f'{NetworkLink.get_name()} not found', 'required': True }
         }
 
 ref = NetworkLink.init_with_try()
