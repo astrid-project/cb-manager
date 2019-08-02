@@ -208,11 +208,11 @@ python3 context_broker-rest-api.py -h
 
 # Coming soon
 
-[ ] Error if id included in body request for create or update.
-[ ] Complete Swagger API generator adding missing part in the code.
-[ ] Fix error in data model for Swagger API generation.
-[ ] Add docstring to code for API code generation. 
-[ ] Improve index-to-index relationship (maybe using InnerDoc).
+- Error if id included in body request for create or update.
+- Complete Swagger API generator adding missing part in the code.
+- Fix error in data model for Swagger API generation.
+- Add docstring to code for API code generation. 
+- Improve index-to-index relationship (maybe using InnerDoc).
 
 # References
 
