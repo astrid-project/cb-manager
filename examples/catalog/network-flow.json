@@ -1,0 +1,15 @@
+{
+	"name": "packetbeat",
+	"options": [
+        { "name": "interfaces.device", "type": "string", "list": true },
+        { "name": "timeout", "type": "time-duration" },
+        { "name": "period", "type": "time-duration" }
+	],
+	"config": "...",
+	"recipe": {
+		"start": "...",
+		"stop": "...",
+		"install": "...",
+		"uninstall": "..."
+	}
+}

@@ -33,14 +33,11 @@ class Validate:
         return isinstance(x, list)
 
     @staticmethod
-    def is_single_choice(*vals):
-        return lambda x: not Validate.is_list(x) and \
-                        x in vals
-
-    @staticmethod
-    def is_multiple_choice(*vals):
-        return lambda x: Validate.is_single_choice(vals) or \
-                            all(item in vals for item in x)
+    def is_choice(*vals, is_list = False):
+        if not is_list:
+            return lambda x: not Validate.is_list(x) and x in vals
+        else:
+            return lambda x: all(item in vals for item in x)
 
     @staticmethod
     def is_obj(obj):
@@ -60,3 +57,15 @@ class Validate:
         return lambda x: isinstance(x, list) and \
                             all(obj.error.validate_properties(**item, include_required = True) for item in x) and \
                                 (not unique_by or Validate.is_list_unique_value([item[unique_by] for item in x]))
+
+    @staticmethod
+    def _and(*vals):
+        return lambda x: all([val(x) for val in vals])
+
+    @staticmethod
+    def _or(*vals):
+        return lambda x: any([val(x) for val in vals])
+
+    @staticmethod
+    def run(func):
+        return lambda data : func(data)

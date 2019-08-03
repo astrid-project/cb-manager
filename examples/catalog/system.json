@@ -1,0 +1,14 @@
+{
+	"name": "metricbeat",
+	"options": [
+		{ "name": "period", "type": "time-duration" },
+		{ "name": "metricset", "type": "choice", "value": ["core", "cpu", "load", "memory", "network", "process", "uptime", "process_memory", "socket_summary"], "list": true }
+	],
+	"config": "...",
+	"recipe": {
+		"start": "...",
+		"stop": "...",
+		"install": "...",
+		"uninstall": "..."
+	}
+}

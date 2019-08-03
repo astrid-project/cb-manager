@@ -1,16 +1,20 @@
 from app import api, ns_catalog
 from document import Document, InnerDoc, Nested
-from elasticsearch_dsl import Text
+from elasticsearch_dsl import Text, Boolean
 from error import Error
 from flask_api import status
 from flask_restplus import fields, Resource
 from validate import Validate
 
-type_single_values = ['number', 'time-duration', 'string', 'single-choice', 'multiple-choices', 'boolean']
+type_values = ['integer', 'number', 'time-duration', 'string', 'choice', 'obj', 'boolean']
+
+def type_check(data):
+    return not data['type'] in ['choice', 'obj'] or 'value' in data
 
 class AgentOption(InnerDoc):
     name = Text()
     type = Text()
+    list = Boolean()
 
     class Index:
         name = 'agent-option'
@@ -22,15 +26,20 @@ class AgentOption(InnerDoc):
     @staticmethod
     def get_properties():
         return { 
+            AgentOption.ALL: { 'check': type_check, 'reason': 'Missing value property for this type of data' },
             'name': { 'check': Validate.is_name, 'reason': 'Name not valid', 'required': True },
-            'type': { 'check': Validate.is_single_choice(*type_single_values), 'reason': f"Type not valid (acceptable values: {', '.join(type_single_values)})", 'required': True }
+            'type': { 'check': Validate.is_choice(*type_values), 'reason': f"Type not valid (acceptable values: {', '.join(type_values)})", 'required': True }
         }
+
+    @staticmethod
+    def apply(data):
+        if 'list' not in data: data['list'] = False
 
 ref = AgentOption.init_with_try()
 
 agent_option_model = api.model(ref.Index.name, {
     'name': fields.String(description ='Name', required = True, example = 'polling'),
-    'type': fields.String(decriptione = 'Option type', required = True, enum = type_single_values, example = 'time-duration')
+    'type': fields.String(decriptione = 'Option type', required = True, enum = type_values, example = 'time-duration')
 }, description = 'Represent the available options for each agent in the catalog', additionalProperties = True)
 
 class AgentRecipe(InnerDoc):

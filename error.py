@@ -50,6 +50,10 @@ class Error:
     def validate_properties(self, include_required = False, **data):
         not_accetable_data = []
         props = self.target.get_properties() if include_required else {}
+        all_prop = None
+        if self.target.ALL in props.keys():
+            all_prop = props[self.target.ALL]
+            del props[self.target.ALL]
         if 'id' in data:
             props.update(id = { 'check': Validate.is_id, 'reason': f'{self.target.get_name()} ID not acceptable' })
         for prop, prop_data in props.items():
@@ -57,6 +61,8 @@ class Error:
                 not_accetable_data.append({ 'property': prop, 'reason': 'missing' })
             elif not prop_data['check'](data[prop]):
                 not_accetable_data.append({ 'property': prop, 'value': data[prop], 'reason': prop_data['reason'] })
+        if all_prop is not None and not all_prop['check'](data):
+            not_accetable_data.append({ 'reason': prop_data['reason'] })
         if len(not_accetable_data) > 0:
             self.__abort(status.HTTP_406_NOT_ACCEPTABLE, when = datetime.now(), message = f'{self.target.get_name()} request not acceptable',
                 data = not_accetable_data, target = self.target.__name__)

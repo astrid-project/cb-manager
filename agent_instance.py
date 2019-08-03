@@ -33,7 +33,7 @@ class AgentInstance(Document):
             'name': { 'check': Validate.is_name, 'reason': 'Name not valid', 'required': True },
             'agent_catalog_id': { 'check': AgentCatalog.exists, 'reason': f'{AgentCatalog.get_name()} not found', 'required': True },
             'exec_env_id': { 'check': ExecEnv.exists, 'reason': f'{ExecEnv.get_name()} not found', 'required': True },
-            'status': { 'check': Validate.is_single_choice(*status_values), 'reason': f"Status not valid (acceptable values: {', '.join(status_values)})", 'required': False}
+            'status': { 'check': Validate.is_choice(*status_values), 'reason': f"Status not valid (acceptable values: {', '.join(status_values)})", 'required': False}
         }
 
     @staticmethod

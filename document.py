@@ -10,6 +10,8 @@ from flask_api import status
 import inflection
 
 class InnerDoc(InnerDocElastic):
+    ALL = '__ALL__'
+    
     @classmethod
     def init_with_try(cls):
         try:
@@ -21,6 +23,8 @@ class InnerDoc(InnerDocElastic):
         return cls
 
 class Document(DocumentElastic):
+    ALL = '__ALL__'
+
     response_model = api.model('response-data', {
         'when': fields.DateTime(description  = 'Execution datetime', required = True),
         'target': fields.String(description  = 'Target object', required = True),
@@ -110,13 +114,13 @@ class Document(DocumentElastic):
     @classmethod
     def created(cls):
         data = request.json
+        if hasattr(cls, 'apply'): cls.apply(data)
         cls.error.validate_properties(**data, include_required = True)
         if 'id' in data:
             id = data['id']
             del data['id']
         else:
             id = None
-        if hasattr(cls, 'apply'): cls.apply(data)
         try:
             cls.get_by_id(id)
         except elasticsearch.NotFoundError:

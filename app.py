@@ -9,6 +9,8 @@ title = 'ASTRID Context Broker API'
 
 app = Flask(title)
 
+app.config['ERROR_404_HELP'] = False
+
 log = logging.getLogger('ASTRID')
 log.setLevel(logging.DEBUG)
 

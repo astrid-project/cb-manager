@@ -1,0 +1,17 @@
+{
+	"name": "packetbeat",
+	"options": [
+        { "name": "protocols", "type": "obj", "list": true, "value": [
+            { "name": "type", "type": "choice", "value":  ["dchpv4", "dns", "http", "memcache", "mysql", "pgsql", "redis", "thrift", "mongodb", "cassandra", "tls"] },
+            { "name": "ports", "type": "integer", "list": true }
+        ] },
+        { "name": "interfaces.device", "type": "string" }
+	],
+	"config": "...",
+	"recipe": {
+		"start": "...",
+		"stop": "...",
+		"install": "...",
+		"uninstall": "..."
+	}
+}
