@@ -1,13 +1,11 @@
 {
-	"name": "polycube-firewall",
-	"options": [
-        
-	],
-	"config": "...",
-	"recipe": {
-		"start": "...",
-		"stop": "...",
-		"install": "...",
-		"uninstall": "..."
-	}
+   "name": "polycube-firewall",
+   "options": [],
+   "config": "...",
+   "recipe": {
+      "start": [],
+      "stop": [],
+      "install": [],
+      "uninstall": []
+   }
 }

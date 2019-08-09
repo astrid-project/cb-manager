@@ -22,33 +22,39 @@
 
 **Term**     | **Meaning**
 :----------: | ---------------------
+
 *ACL*        | Access Control List
 *API*        | Application Program Interface
 *BA*         | Basic Authentication
 *BPF*        | Berkeley Packet Filter
 *CB*         | Context Broker
 *CRUD*       | Create - Read - Update - Delete
+*DB*         | Database
 *eBPF*       | extended BPF
 *ELK*        | Elastic - LogStash - Kibana
-ExecEnv    | Execution Environment
+*ExecEnv*    | Execution Environment
+*gRPC*       | 	Google RPC
 *HOBA*       | HTTP Origin-Bound Authentication
 *HTTP*       | Hyper Text Transfer Protocol
 *ID*         | Identification
 *IP*         | Internet Protocol
-*LDAP*       | Lightweight Directory Access Protocol
 *JSON*       | Java Object Notation
+*LDAP*       | Lightweight Directory Access Protocol
 *RBAC*       | Role-Based Access Control
 *regex*      | regular expression
 *RFC*        | Request For Comments
+*RPC*	     | Remote Procedure Call
 *SCM*        | Security Context Model
 *SLA*        | Service Level Agreements
+*SQL*	     | Structured Query Language
+*VNF*	     | Virtual Network Function
 *YANG*       | Yet Another Next Generation
 
 # Data Model
 
 ![Data Model](data_model.png)
 
-Each table in the figure represents an *index* in the Elastic nomenclature. Considering the *NoSQL* nature of the Elasticsearch engine for each document of any indices it is possible to add additional properties. The schema is not static and defined at priori, but it is dynamic allowing the possibility to add custom properties for a specific document. Elastic requires the name of the index in a lowercase format. For this reason, all the index names follow the *dash-case*[^1] format. Instead, each properties[^2] follow the *snake-case*[^3] format.
+Each table in the figure represents an *index* in the Elastic nomenclature. Considering the *NoSQL* nature of the Elasticsearch engine for each document of any indices it is possible to add additional properties. The schema is not static and defined at priori, but it is dynamic allowing the possibility to add custom properties for a specific document. Elastic requires the name of the index in a lowercase format. For this reason, all the index names follow the *dash-case*[^1] format. Instead, each property[^2] follows the snake-case[^3] format. All the properties marked with an asterisk (*) are required by the APIs in order to make the POST request (i.e. to create a new resource, for example an ExecEnv). Instead the ones underlined are identifies the specific resource (aka document in Elastic nomenclature or record in traditional DB one) and must be unique.
 
 The *data* index contains the all the data collected from the ExecEnvs by means of the agent[^4]. The common attributes are:
 
@@ -57,23 +63,27 @@ The *data* index contains the all the data collected from the ExecEnvs by means 
 3. *id* of the agent instance that collect the data (*agent_instance_id*).
 
 The ID property type accepts only lowercase values without space that start with an alphabetic character, e.g: apache is valid but not Apache.
-
 Then, the other two properties are related to the time-stamp:
 
 1. *timestamp-event* when event is occurred; and
-2. *timestamp-agent* when the agent collect the data.
 
-The concept of the agent instance will be described in detail in the following sections. For now, it is sufficient to note that, with agent instance, we refer to specific agent installed in the ExecEnv.
+2. *timestamp-agent* when the agent instance collect the data.
 
-The *exec-env* index contains the *hostname* of the remote host where is it allocated and the *type_id* field that correspond a specified type of ExecEnv. The different type of ExecEnv are defined with the index *exec-env-type*. Currently, the available types are: *i*) *Virtual Machine* and *ii*) *Container*. Obviously, it is possible to add other types depending on the specific requirements.
+The concept of the agent instance will be described in detail in the following sections. For now, it is sufficient to note that, with the term agent instance, we refer to a specific agent installed in the ExecEnv.
 
-The *agent-catalog* index contains specific information related to the agents, and in particular the Beats of the Elastic stack and specific application deployed with the PolyCube framework. For a detailed description of these properties see [3] and [4]. Instead, the *agent-instance* index contains the properties and configurations related to the agents currently installed on the ExecEnvs.
+The *exec-env* index contains the *hostname* of the remote host where is it allocated and the *type_id* field that correspond a specified type of ExecEnv. The different type of ExecEnv are defined with the index exec-env-type. Currently, the available ones are: *i*) *Virtual Machine* and *ii*) *Container*. Obviously, it is possible to add other types depending on the specific requirements.
 
-The network links are defined with the relative index where it indicated the type. All the possible network link types are defined in the *nettwork-link-type* index. At the moment, the possible types are: *Point to Point* (Point 2 Point), *Multi-point*, and *Slice*. Similar to the ExecEnv case, also for the network link, it is possible to add additional types depending on specific needs.
+The *agent-catalog* index contains specific information related to the agents, and in particular the Beats of the Elastic stack and eBPF-based services deployed with the *Polycube* framework. For a detailed description of these properties see [^6] and [^7]. Each agent in the catalog is characterized by one or more options. The options are defined with the *agent-option* *nested*-indexd]. This index described the option in terms of name and relative type. At this moment, the supported types are: *integer* (e.g. 1, 2, etc.), *number* (e..g 1, 2.3, etc.); *time-duration* (e.g. 1s, 2m, 3h, etc.); *string*; *choice*, *obj*, and *boolean* (i.e. true or false). There two additional (and optional) properties: *list* and *values*. The first one indicate if the option is a list or not (default value: false); while the latter one described the data in the case the type is choice or obj. To accept different types, the values property can be of any type.
 
-In addition, the data model allow to see the status of the connections between the execution environments. The *connection* index couples the ExecEnv and network link to which it belongs. This index should contains all the information regarding the network link and the ExecEnv as, for example, the IP address (version 4 and/or 6) or if the link is encrypted and how (which method, etc.).
+All the data of the installed agent is stored in the *agent-instance* index. This index contains the options got from the catalog with the actual values. In addition, it includes the ID of the ExecEnv where the agent is installed (*exec_env_id*) and the current *status* in terms of *started* or *stopped*.
 
-The *software* index contains the installed software with relative properties. Each software record is referred to a specific ExecEnv that indicate where the software is installed. This part is out of scope of the ASTRID project context and, for this reason, in the above figure, it is this highlighted with a dashed box. The API implementation, that will be described in the next sections, does not consider this index. Nervelessness, it represents a typical solution for various common cases. The proposed data model allows the customization with the integration of additional entities in very simple way.
+The network links are defined with the relative index where it is indicate the type. All the possible network link types are defined in the *network-link-type* index. At the moment, the possible types are: *Point to Point* (Point 2 Point), *Multi-point*, and *Slice*. Similar to the ExecEnv case, also for the network link, it is possible to add additional types depending on specific needs.
+
+In addition, the data model allow to see the status of the connections between the ExecEnvs. The *connection* index couples the ExecEnv and the network link to which it belongs. This index should contains all the information regarding the network link and the ExecEnv as, for example, the IP address (version 4 and/or 6) or if the link is encrypted and how (which method, etc.).
+
+The *software* index contains the installed software with relative properties. Each software record is referred to a specific ExecEnv that indicate where the software is installed. This part is out of scope of the ASTRID project context and, for this reason, in Figure 2, it is this highlighted with a dashed box. The API implementation, that will be described in the next sections, does not consider this index. Nervelessness, it represents a typical solution for various common cases. The proposed data model allows the customization with the integration of additional entities in very simple way.
+
+## References
 
 [^1]: In the dash-case (also referred as *hyphen-case* or *kebab-case*) format all the letters are lower-case, the punctuation is not allowed and the words are separated by single dash (or hyphen: -). Example: *exec-env*.
 
@@ -85,94 +95,82 @@ The *software* index contains the installed software with relative properties. E
 
 [^5]: In Elasticsearch, each document is identified by a unique id. For obvious reasons, in the description of the following indices, we omit the description of all the id fields.
 
+[^6]: "Getting started with Beats,"[Online]. Available: https://www.elastic.co/guide/en/beats/libbeat/current/getting-started.html
+
+[^7]: "Polycube. eBPF/XDP-based software framework for fast network services running in the Linux kernel," [Online]. Available: https://github.com/polycube-network/polycube.
+
+[^8]: With nested index, we refer to index that are embedded inside your parent one, https://www.elastic.co/blog/managing-relations-inside-elasticsearch.
+
 ## Methods
 
 ### ExecEnv
 
 **HTTP Method** | **Path**                | **Action**
 :-------------: | ----------------------- | ----------------------------------
-GET             | /config/exec-env-id     | Returns all ExecEnv IDs.
-GET             | /config/exec-env        | Returns all ExecEnvs.
-GET             | /config/exec-env/{*id*} | Returns the ExecEnv with id = {*id*}.
+GET             | /config/exec-env        | Returns the ExecEnvs selected by the query in the request body (or all it the request body is empty).
 POST            | /config/exec-env        | Create a new ExecEnv.
 PUT             | /config/exec-env/{*id*} | Update the ExecEnv with id = {*id*}.
-DELETE          | /config/exec-env/{*id*} | Delete the ExecEnv with id = {*id*}.
+DELETE          | /config/exec-env        | Delete the ExecEnvs selected by the query in the request body (or nothing it the request body is empty).
 
 ### ExecEnv type
 
 **HTTP Method** | **Path**                     | **Action**
 :-------------: | ---------------------------- | --------------------------------------
-GET             | /config/exec-env-type-id     | Returns all ExecEnv type IDs.
-GET             | /config/exec-env-type        | Returns all ExecEnv types.
-GET             | /config/exec-env-type/{*id*} | Returns the ExecEnv type with id = {*id*}.
+GET             | /config/exec-env-type        | Returns the ExecEnv types selected by the query in the request body (or all it the request body is empty).
 POST            | /config/exec-env-type        | Create a new ExecEnv type.
 PUT             | /config/exec-env-type/{*id*} | Update the ExecEnv with id = {*id*}.
-DELETE          | /config/exec-env-type/{*id*} | Delete the ExecEnv with id = {*id*}.
+DELETE          | /config/exec-env-type        | Delete the ExecEnv types selected by the query in the request body (or nothing it the request body is empty).
 
 #### Network link
 
-**HTTP Method** | **Path**                      | **Action**
-:-------------: | ----------------------------- | ----------------------------------------
-GET             | /config/network-link-id       | Returns all network link IDs.
-GET             | /config/network-link          | Returns all network links.
-GET             | /config/network-link/{*id*}   | Returns the network link with id = {*id*}.
-POST            | /config/network-link          | Create a new network link.
-PUT             | /config/network-link/{*id*}   | Update the network link with id = {*id*}.
-DELETE          | /config/network-link/{*id*}   | Delete the network link with id = {*id*}.
+**HTTP Method** | **Path**                    | **Action**
+:-------------: | --------------------------- | ----------------------------------------
+GET             | /config/network-link        | Returns the network links selected by the query in the request body (or all it the request body is empty).
+POST            | /config/network-link        | Create a new network link.
+PUT             | /config/network-link/{*id*} | Update the network link with id = {*id*}.
+DELETE          | /config/network-link        | Delete the network links selected by the query in the request body (or nothing it the request body is empty).
 
 #### Network link type
 
 **HTTP Method** | **Path**                         | **Action**
 :-------------: | -------------------------------- | ---------------------------------------------
-GET             | /config/network-link-type-id     | Returns all network link type IDs.
-GET             | /config/network-link-type        | Returns all network link types.
-GET             | /config/network-link-type/{*id*} | Returns the network link type with id = {*id*}.
+GET             | /config/network-link-type        | Returns the network link types selected by the query in the request body (or all it the request body is empty).
 POST            | /config/network-link-type        | Create a new network link type.
 PUT             | /config/network-link-type/{*id*} | Update the network link type with id = {*id*}.
-DELETE          | /config/network-link-type/{*id*} | Delete the network link type with id = {*id*}.
+DELETE          | /config/network-link-type        | Delete the network link types selected by the query in the request body (or nothing it the request body is empty).
 
 #### Connection
 
-**HTTP Method** | **Path**                                  | **Action**
-:-------------: | ----------------------------------------- | ---------------------------------------------------------------------------
-GET             | /config/connection-id                     | Returns all connection IDs.
-GET             | /config/connection-id/exec-env/{*id*}     | Returns all connection IDs filtered by the ExecEnv with id = {*id*}.
-GET             | /config/connection-id/network-link/{*id*} | Returns all connection IDs filtered by the network link ID {*id*}.
-GET             | /config/connection                        | Returns all connections.
-GET             | /config/connection/{*id*}                 | Returns the connection with id = {*id*}.
-GET             | /config/connection/exec-env/{*id*}        | Returns all connection filtered by the ExecEnv ID {*id*}.
-GET             | /config/connection/network-link/{*id*}    | Returns all connections filtered by the network link ID {*id*}.
-POST            | /config/connection                        | Create a new connection.
-PUT             | /config/connection/{*id*}                 | Update the connection with id = {*id*}.
-DELETE          | /config/connection/{*id*}                 | Delete the connection with id = {*id*}.
-DELETE          | /config/connection/exec-env/{*id*}        | Delete the connections filtered by the ExecEnv ID {*id*}.
-DELETE          | /config/connection/network-link/{*id*}    | Delete the connections filtered by the network link ID {*id*}.
+**HTTP Method** | **Path**                  | **Action**
+:-------------: | ------------------------- | ---------------------------------------------------------------------------
+GET             | /config/connection        | Returns the connections selected by the query in the request body (or all it the request body is empty).
+POST            | /config/connection        | Create a new connection.
+PUT             | /config/connection/{*id*} | Update the connection with id = {*id*}.
+DELETE          | /config/connection        | Delete the connections selected by the query in the request body (or nothing it the request body is empty).
+
+### Agent Instance
+
+**HTTP Method** | **Path*              | **Action**
+:-------------: | -------------------- | ----------------------------------
+GET             | /config/agent        | Returns the agent instances selected by the query in the request body (or all it the request body is empty)..
+POST            | /config/agent        | Set a new instance in the ExecEnv with the specified initial configuration.
+PUT             | /config/agent/{*id*} | Update the agent instance with id = {id}.
+DELETE          | /config/agent        | Delete the agent instances selected by the query in the request body (or nothing it the request body is empty).
 
 ### Catalog
 
-**HTTP Method** | **Path**              | **Action**
+**HTTP Method** | **Path*               | **Action**
 :-------------: | --------------------- | ----------------------------------
-GET             | /catalog/agent-id     | Returns all agent IDs available in the catalog.
-GET             | /catalog/agent        | Returns all agents available in the catalog.
-GET             | /catalog/agent/{*id*} | Returns the agent in the catalog with id = {id}.
-POST            | /catalog/agent        | Create a new agent in the catalog.
-PUT             | /catalog/agent/{*id*} | Update the agent with id = {id} in catalog.
-DELETE          | /catalog/agent/{*id*} | Delete the agent with id = {id} in catalog.
+GET             | /catalog/agent        | Returns the agents in catalog selected by the query in the request body (or all it the request body is empty).
+POST            | /catalog/agent        | Create a new agent in catalog.
+PUT             | /catalog/agent/{*id*} | Update the agent in catalog with id = {id}.
+DELETE          | /catalog/agent        | Delete the agents in catalog selected by the query in the request body (or nothing it the request body is empty).
 
 ### Data Collection
 
 **HTTP Method** | **Path**                                   | **Action**
-:-------------: | ------------------------------------------ | -----------------------------------------------------------------------
-POST            | /data                                      | Returns the collected data filtered by the query in the request body.
-GET             | /data/exec-env/{*id*}                      | Returns the collected data filtered by the ExecEnv with id = {*id*}.
-GET             | /data/agent/instance/{*id*}                | Returns the collected data filtered by the agent instance with id = {*id*}.
-GET             | /data/agent/instance/{*id*}                | Returns the collected data filtered by the agent with id = {*id*} in the Catalog.
-GET             | /data/timestamp/event/after/{*after*}      | Returns the collected data with event occurred after {*after*}.
-GET             | /data/timestamp/event/before/{*before*}    | Returns the collected data with event occurred before {*before*}.
-GET             | /data/timestamp/event/{*after*}/{*before*} | Returns the collected data with event occurred in the period between {*after*} and {*before*}.
-GET             | /data/timestamp/agent/after/{*after*}      | Returns the data collected by the agent after {*after*}.
-GET             | /data/timestamp/agent/before/{*before*}    | Returns the data collected by the agent before {*before*}.
-GET             | /data/timestamp/agent/{*after*}/{*before*} | Returns the data collected by the agent in the period between {*after*} and {*before*}.
+:-------------: | ---------------------------------------------------------------------------------
+GET             | /data                     | Returns the collected data selected by the query in the request body (or all it the request body is empty).
 
 #### Full Query
 
@@ -213,7 +211,3 @@ python3 context_broker-rest-api.py -h
 - Fix error in data model for Swagger API generation.
 - Add docstring to code for API code generation. 
 - Improve index-to-index relationship (maybe using InnerDoc).
-
-# References
-
-[^1]: “Getting started with Beats,” [Online]. Available: https://www.elastic.co/guide/en/beats/libbeat/current/getting-started.html.
