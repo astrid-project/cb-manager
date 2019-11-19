@@ -2,27 +2,29 @@
 
 ## Table of Contents
 
-* [Terminology](#terminology)
-* [Data Model](#data-model)
-    * [Methods](#methods)
-        * [Execution Environment](#execution-environment)
-        * [Execution Environment Type](#execution-environment-type)
-        * [Network Link](#network-link)
-        * [Network Link Type](#network-link-type)
-        * [Connection](#connection)
-        * [Catalog](#catalog)
-        * [Data Collection](#data-collection)
-        * [Full Query](#full-query)
-* [Installation](#installation)
-* [Usage](#usage)
-* [Coming Soon](#coming-soon)
-* [References](#references)
+- [Context Broker APIs](#context-broker-apis)
+  - [Table of Contents](#table-of-contents)
+- [Terminology](#terminology)
+- [Data Model](#data-model)
+  - [References](#references)
+  - [Methods](#methods)
+    - [ExecEnv](#execenv)
+    - [ExecEnv type](#execenv-type)
+      - [Network link](#network-link)
+      - [Network link type](#network-link-type)
+      - [Connection](#connection)
+    - [Agent Instance](#agent-instance)
+    - [Catalog](#catalog)
+    - [Data Collection](#data-collection)
+      - [Full Query](#full-query)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Coming soon](#coming-soon)
 
 # Terminology
 
 **Term**     | **Meaning**
 :----------: | ---------------------
-
 *ACL*        | Access Control List
 *API*        | Application Program Interface
 *BA*         | Basic Authentication
@@ -59,7 +61,7 @@ Each table in the figure represents an *index* in the Elastic nomenclature. Cons
 The *data* index contains the all the data collected from the ExecEnvs by means of the agent[^4]. The common attributes are:
 
 1. *id* (unique identifier)[^5];
-2. *id* of the source ExecEnv (*exec_env_id*); and 
+2. *id* of the source ExecEnv (*exec_env_id*); and
 3. *id* of the agent instance that collect the data (*agent_instance_id*).
 
 The ID property type accepts only lowercase values without space that start with an alphabetic character, e.g: apache is valid but not Apache.
@@ -209,5 +211,5 @@ python3 context_broker-rest-api.py -h
 - Error if id included in body request for create or update.
 - Complete Swagger API generator adding missing part in the code.
 - Fix error in data model for Swagger API generation.
-- Add docstring to code for API code generation. 
+- Add docstring to code for API code generation.
 - Improve index-to-index relationship (maybe using InnerDoc).
