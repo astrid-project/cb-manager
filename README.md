@@ -1,5 +1,11 @@
 # Context Broker APIs
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+
+APIs to interact with the ``Context Broker``'s database. Through a **REST** Interface, it exposes data and events stored in the internal storage system in a structured way. It provides uniform access to the capabilities of monitoring agents.
+
+---
+
 ## Table of Contents
 
 - [Context Broker APIs](#context-broker-apis)
@@ -23,6 +29,8 @@
   - [Production environment](#production-environment)
   - [Debug enabled in Development environment](#debug-enabled-in-development-environment)
 - [Extra](#extra)
+
+---
 
 # Terminologys
 
