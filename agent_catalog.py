@@ -6,22 +6,22 @@ from flask_restplus import fields
 from resource import Resource
 
 type_values = ['integer', 'number', 'time-duration',
-               'string', 'choice', 'obj', 'boolean']
+               'string', 'choice', 'obj', 'boolean', 'binary']
 
 
 def type_check(data):
     return not data['type'] in ['choice', 'obj'] or 'value' in data
 
 
-class AgentOption(InnerDoc):
-    LABEL = 'Agent Option'
+class AgentParameter(InnerDoc):
+    LABEL = 'Agent Parameter'
 
     name = Text()
     type = Text()
     list = Boolean()
 
     class Index:
-        name = 'agent-option'
+        name = 'agent-parameter'
 
     @staticmethod
     def apply(data):
@@ -29,12 +29,12 @@ class AgentOption(InnerDoc):
             data['list'] = False
 
 
-ref = AgentOption
+ref = AgentParameter
 
-agent_option_model = ns.model(ref.Index.name, {
+agent_parameter_model = ns.model(ref.Index.name, {
     'name': fields.String(description='Name', required=True, example='polling'),
-    'type': fields.String(decriptione='Option type', required=True, enum=type_values, example='time-duration')
-}, description='Represent the available options for each agent in the catalog', additionalProperties=True)
+    'type': fields.String(description='Parameter type', required=True, enum=type_values, example='time-duration')
+}, description='Represent the available parameters for each agent in the catalog', additionalProperties=True)
 
 type_values = ['filename']
 
@@ -43,7 +43,7 @@ class AgentCatalog(Document):
     LABEL = 'Agent in Catalog'
 
     name = Text()
-    options = Nested(AgentOption)
+    parameters = Nested(AgentParameter)
 
     class Index:
         name = 'agent-catalog'
@@ -58,7 +58,7 @@ ref = AgentCatalog
 model = ns.model(ref.Index.name, {
     'id':  fields.String(description='Unique ID', required=True, example='filebeat'),
     'name': fields.String(description='General name', required=True, example='Filebeat'),
-    'options': fields.List(fields.Nested(agent_option_model), description='List of options', required=False),
+    'parameters': fields.List(fields.Nested(agent_parameter_model), description='List of parameters', required=False),
 }, description='Represent the available agent in the catalog', additionalProperties=True)
 
 cnf = Config(target=ref, namespace=ns, model=model)

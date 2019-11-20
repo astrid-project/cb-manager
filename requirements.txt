@@ -3,3 +3,4 @@ flask-api
 flask-log
 flask-restplus
 inflection
+waitress

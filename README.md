@@ -4,7 +4,7 @@
 
 - [Context Broker APIs](#context-broker-apis)
   - [Table of Contents](#table-of-contents)
-- [Terminology](#terminology)
+- [Terminologys](#terminologys)
 - [Data Model](#data-model)
   - [References](#references)
   - [Methods](#methods)
@@ -19,9 +19,12 @@
       - [Full Query](#full-query)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Coming soon](#coming-soon)
+  - [Display help](#display-help)
+  - [Production environment](#production-environment)
+  - [Debug enabled in Development environment](#debug-enabled-in-development-environment)
+- [Extra](#extra)
 
-# Terminology
+# Terminologys
 
 **Term**     | **Meaning**
 :----------: | ---------------------
@@ -45,11 +48,11 @@
 *RBAC*       | Role-Based Access Control
 *regex*      | regular expression
 *RFC*        | Request For Comments
-*RPC*	     | Remote Procedure Call
+*RPC*	       | Remote Procedure Call
 *SCM*        | Security Context Model
 *SLA*        | Service Level Agreements
-*SQL*	     | Structured Query Language
-*VNF*	     | Virtual Network Function
+*SQL*	       | Structured Query Language
+*VNF*	       | Virtual Network Function
 *YANG*       | Yet Another Next Generation
 
 # Data Model
@@ -67,15 +70,15 @@ The *data* index contains the all the data collected from the ExecEnvs by means 
 The ID property type accepts only lowercase values without space that start with an alphabetic character, e.g: apache is valid but not Apache.
 Then, the other two properties are related to the time-stamp:
 
-1. *timestamp-event* when event is occurred; and
+1. *timestamp_event* when event is occurred; and
 
-2. *timestamp-agent* when the agent instance collect the data.
+2. *timestamp_agent* when the agent instance collect the data.
 
-The concept of the agent instance will be described in detail in the following sections. For now, it is sufficient to note that, with the term agent instance, we refer to a specific agent installed in the ExecEnv.
+With the term agent instance, we refer to a specific agent installed in the ExecEnv.
 
 The *exec-env* index contains the *hostname* of the remote host where is it allocated and the *type_id* field that correspond a specified type of ExecEnv. The different type of ExecEnv are defined with the index exec-env-type. Currently, the available ones are: *i*) *Virtual Machine* and *ii*) *Container*. Obviously, it is possible to add other types depending on the specific requirements.
 
-The *agent-catalog* index contains specific information related to the agents, and in particular the Beats of the Elastic stack and eBPF-based services deployed with the *Polycube* framework. For a detailed description of these properties see [^6] and [^7]. Each agent in the catalog is characterized by one or more options. The options are defined with the *agent-option* *nested*-indexd]. This index described the option in terms of name and relative type. At this moment, the supported types are: *integer* (e.g. 1, 2, etc.), *number* (e..g 1, 2.3, etc.); *time-duration* (e.g. 1s, 2m, 3h, etc.); *string*; *choice*, *obj*, and *boolean* (i.e. true or false). There two additional (and optional) properties: *list* and *values*. The first one indicate if the option is a list or not (default value: false); while the latter one described the data in the case the type is choice or obj. To accept different types, the values property can be of any type.
+The *agent-catalog* index contains specific information related to the agents, and in particular the Beats of the Elastic stack and eBPF-based services deployed with the *Polycube* framework. For a detailed description of these properties see [^6] and [^7]. Each agent in the catalog is characterized by one or more options. The options are defined with the *agent-option* *nested-index*[^8]. This index described the option in terms of name and relative type. At this moment, the supported types are: *integer* (e.g. 1, 2, etc.), *number* (e..g 1, 2.3, etc.); *time-duration* (e.g. 1s, 2m, 3h, etc.); *string*; *choice*, *obj*, and *boolean* (i.e. true or false). There two additional (and optional) properties: *list* and *values*. The first one indicate if the option is a list or not (default value: false); while the latter one described the data in the case the type is choice or obj. To accept different types, the values property can be of any type.
 
 All the data of the installed agent is stored in the *agent-instance* index. This index contains the options got from the catalog with the actual values. In addition, it includes the ID of the ExecEnv where the agent is installed (*exec_env_id*) and the current *status* in terms of *started* or *stopped*.
 
@@ -83,7 +86,7 @@ The network links are defined with the relative index where it is indicate the t
 
 In addition, the data model allow to see the status of the connections between the ExecEnvs. The *connection* index couples the ExecEnv and the network link to which it belongs. This index should contains all the information regarding the network link and the ExecEnv as, for example, the IP address (version 4 and/or 6) or if the link is encrypted and how (which method, etc.).
 
-The *software* index contains the installed software with relative properties. Each software record is referred to a specific ExecEnv that indicate where the software is installed. This part is out of scope of the ASTRID project context and, for this reason, in Figure 2, it is this highlighted with a dashed box. The API implementation, that will be described in the next sections, does not consider this index. Nervelessness, it represents a typical solution for various common cases. The proposed data model allows the customization with the integration of additional entities in very simple way.
+The *software* index contains the installed software with relative properties. Each software record is referred to a specific ExecEnv that indicate where the software is installed. This part is out of scope of the ASTRID project context and, for this reason, it is this highlighted with a dashed box. The API implementation does not consider this index. Nervelessness, it represents a typical solution for various common cases. The proposed data model allows the customization with the integration of additional entities in very simple way.
 
 ## References
 
@@ -161,25 +164,30 @@ DELETE          | /config/agent        | Delete the agent instances selected by 
 
 ### Catalog
 
-**HTTP Method** | **Path*               | **Action**
-:-------------: | --------------------- | ----------------------------------
-GET             | /catalog/agent        | Returns the agents in catalog selected by the query in the request body (or all it the request body is empty).
-POST            | /catalog/agent        | Create a new agent in catalog.
-PUT             | /catalog/agent/{*id*} | Update the agent in catalog with id = {id}.
-DELETE          | /catalog/agent        | Delete the agents in catalog selected by the query in the request body (or nothing it the request body is empty).
+**HTTP Method** | **Path*              | **Action**
+:-------------: | -------------------- | ----------------------------------
+GET             | /catalog             | Returns the agents in catalog selected by the query in the request body (or all it the request body is empty).
+GET             | /catalog/ebpf        | Returns the eBPF cubes in catalog selected by the query in the request body (or all it the request body is empty).
+POST            | /catalog             | Create a new agent in catalog.
+POST            | /catalog/ebpf        | Create a new eBPF cube in catalog.
+PUT             | /catalog/{*id*}      | Update the agent in catalog with id = {id}.
+PUT             | /catalog/ebpf/{*id*} | Update the eBPF cube in catalog with id = {id}.
+DELETE          | /catalog             | Delete the agents in catalog selected by the query in the request body (or nothing it the request body is empty).
+DELETE          | /catalog/ebpf        | Delete the eBPF cubes in catalog selected by the query in the request body (or nothing it the request body is empty).
 
 ### Data Collection
 
-**HTTP Method** | **Path**                                   | **Action**
+**HTTP Method** | **Path** | **Action**
 :-------------: | ---------------------------------------------------------------------------------
-GET             | /data                     | Returns the collected data selected by the query in the request body (or all it the request body is empty).
+GET             | /data    | Returns the collected data selected by the query in the request body (or all it the request body is empty).
 
 #### Full Query
 
-**HTTP Method** | **Path**          | **Action**
-:-------------: | ----------------- | ---------------------------------------------------------------------------------------------------|
-POST            | /data/elastic-dsl | Returns the collected data filtered by the query in the request body using the [Elastic DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html) syntax.
-POST            | /data/graph-ql    | Returns the collected data filtered by the query in the request body using the [GraphQL](https://graphql.org) syntax.
+**HTTP Method** | **Path**       | **Action**
+:-------------: | -------------- | ---------------------------------------------------------------------------------------------------|
+POST            | /data/dsl      | Returns the collected data filtered by the query in the request body using the [Elastic DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html) syntax.
+POST            | /data/graph-ql | Returns the collected data filtered by the query in the request body using the [GraphQL](https://graphql.org) syntax.
+POST            | /data/sql      | Returns the collected data filtered by the query in the request body using the [SQL](https://www.w3schools.com/sql/sql_syntax.asp) syntax.
 
 # Installation
 
@@ -194,7 +202,7 @@ POST            | /data/graph-ql    | Returns the collected data filtered b
 git clone https://gitlab.com/astrid-repositories/wp2/context-broker-apis.git
 ```
 
-3. Install the dipendence.
+3. Install the dependencies.
 
 ```bash
 pip3 install -r requirements.txt
@@ -202,14 +210,25 @@ pip3 install -r requirements.txt
 
 # Usage
 
+## Display help
+
 ```bash
 python3 context_broker-rest-api.py -h
 ```
 
-# Coming soon
+## Production environment
 
-- Error if id included in body request for create or update.
-- Complete Swagger API generator adding missing part in the code.
-- Fix error in data model for Swagger API generation.
-- Add docstring to code for API code generation.
-- Improve index-to-index relationship (maybe using InnerDoc).
+```bash
+python3 context_broker-rest-api.py -n production
+```
+
+## Debug enabled in Development environment
+
+```bash
+python3 context_broker-rest-api.py --debug -n development
+```
+
+# Extra
+
+See the *Issues** for *features* in development.
+
