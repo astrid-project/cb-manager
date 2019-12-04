@@ -1,8 +1,12 @@
 {
     "cSpell.words": [
         "Envs",
+        "HOBA",
         "Kibana",
+        "LDAP",
         "Polycube",
-        "docstring"
+        "RBAC",
+        "docstring",
+        "ebpf"
     ]
 }

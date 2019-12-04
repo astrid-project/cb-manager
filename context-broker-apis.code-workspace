@@ -6,6 +6,7 @@
 	],
 	"settings": {
 		"editor.wordWrap": "on",
-		"editor.wrappingIndent": "deepIndent"
+		"editor.wrappingIndent": "deepIndent",
+		"workbench.colorTheme": "Kimbie Dark"
 	}
 }

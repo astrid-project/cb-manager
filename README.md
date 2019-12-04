@@ -1,3 +1,5 @@
+% cspell:ignore execenv
+
 # Context Broker APIs
 
 APIs to interact with the ``Context Broker``'s database. Through a **REST** Interface, it exposes data and events stored in the internal storage system in a structured way. It provides uniform access to the capabilities of monitoring agents.
@@ -8,9 +10,8 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
 
 - [Context Broker APIs](#context-broker-apis)
   - [Table of Contents](#table-of-contents)
-- [Terminologys](#terminologys)
+- [Terminologies](#terminologies)
 - [Data Model](#data-model)
-  - [References](#references)
   - [Methods](#methods)
     - [ExecEnv](#execenv)
     - [ExecEnv type](#execenv-type)
@@ -27,10 +28,11 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
   - [Production environment](#production-environment)
   - [Debug enabled in Development environment](#debug-enabled-in-development-environment)
 - [Extra](#extra)
+- [References](#references)
 
 ---
 
-# Terminologys
+# Terminologies
 
 **Term**     | **Meaning**
 :----------: | ---------------------
@@ -93,24 +95,6 @@ The network links are defined with the relative index where it is indicate the t
 In addition, the data model allow to see the status of the connections between the ExecEnvs. The *connection* index couples the ExecEnv and the network link to which it belongs. This index should contains all the information regarding the network link and the ExecEnv as, for example, the IP address (version 4 and/or 6) or if the link is encrypted and how (which method, etc.).
 
 The *software* index contains the installed software with relative properties. Each software record is referred to a specific ExecEnv that indicate where the software is installed. This part is out of scope of the ASTRID project context and, for this reason, it is this highlighted with a dashed box. The API implementation does not consider this index. Nervelessness, it represents a typical solution for various common cases. The proposed data model allows the customization with the integration of additional entities in very simple way.
-
-## References
-
-[^1]: In the dash-case (also referred as *hyphen-case* or *kebab-case*) format all the letters are lower-case, the punctuation is not allowed and the words are separated by single dash (or hyphen: -). Example: *exec-env*.
-
-[^2]: We use the terms properties, fields and attributes interchangeably.
-
-[^3]: In the snake-case format all the letters are lower-case, the punctuation is not allowed and the words are separated by single underscore (_). Example: *exec_env_id*.
-
-[^4]: In our architecture the agents are Beats from Elastic Stack. Notwithstanding, the data model refers to a generic agent allowing to possibility to use different types.
-
-[^5]: In Elasticsearch, each document is identified by a unique id. For obvious reasons, in the description of the following indices, we omit the description of all the id fields.
-
-[^6]: "Getting started with Beats,"[Online]. Available: https://www.elastic.co/guide/en/beats/libbeat/current/getting-started.html
-
-[^7]: "Polycube. eBPF/XDP-based software framework for fast network services running in the Linux kernel," [Online]. Available: https://github.com/polycube-network/polycube.
-
-[^8]: With nested index, we refer to index that are embedded inside your parent one, https://www.elastic.co/blog/managing-relations-inside-elasticsearch.
 
 ## Methods
 
@@ -184,7 +168,7 @@ DELETE          | /catalog/ebpf        | Delete the eBPF cubes in catalog select
 ### Data Collection
 
 **HTTP Method** | **Path** | **Action**
-:-------------: | ---------------------------------------------------------------------------------
+:-------------: | -------- | -----------
 GET             | /data    | Returns the collected data selected by the query in the request body (or all it the request body is empty).
 
 #### Full Query
@@ -236,5 +220,22 @@ python3 context_broker-rest-api.py --debug -n development
 
 # Extra
 
-See the *Issues** for *features* in development.
+See the **Issues** for *features* in development.
 
+# References
+
+[^1]: In the dash-case (also referred as *hyphen-case* or *kebab-case*) format all the letters are lower-case, the punctuation is not allowed and the words are separated by single dash (or hyphen: -). Example: *exec-env*.
+
+[^2]: We use the terms properties, fields and attributes interchangeably.
+
+[^3]: In the snake-case format all the letters are lower-case, the punctuation is not allowed and the words are separated by single underscore (_). Example: *exec_env_id*.
+
+[^4]: In our architecture the agents are Beats from Elastic Stack. Notwithstanding, the data model refers to a generic agent allowing to possibility to use different types.
+
+[^5]: In Elasticsearch, each document is identified by a unique id. For obvious reasons, in the description of the following indices, we omit the description of all the id fields.
+
+[^6]: "Getting started with Beats,"[Online]. Available: https://www.elastic.co/guide/en/beats/libbeat/current/getting-started.html
+
+[^7]: "Polycube. eBPF/XDP-based software framework for fast network services running in the Linux kernel," [Online]. Available: https://github.com/polycube-network/polycube.
+
+[^8]: With nested index, we refer to index that are embedded inside your parent one, https://www.elastic.co/blog/managing-relations-inside-elasticsearch.
