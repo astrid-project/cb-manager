@@ -1,3 +1,4 @@
+// cspell:ignore Kimbie
 {
 	"folders": [
 		{
@@ -5,8 +6,10 @@
 		}
 	],
 	"settings": {
+		"workbench.colorTheme": "Kimbie Dark",
 		"editor.wordWrap": "on",
 		"editor.wrappingIndent": "deepIndent",
-		"workbench.colorTheme": "Kimbie Dark"
+		"files.insertFinalNewline": true,
+		"cSpell.language": "en-GB"
 	}
 }

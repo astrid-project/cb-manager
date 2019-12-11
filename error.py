@@ -1,3 +1,5 @@
+# cspell:ignore jsonify unauth strftime
+
 from app import api
 from datetime import datetime
 from flask import jsonify
@@ -15,12 +17,12 @@ class Error:
 
     unauth_op_model = api.model('unauthorized-operation-error-data', {
         'when': fields.DateTime(description='Response datetime', required=True),
-        'message': fields.String(description='Human readible message that describes the error', required=True, example='Operation not allowed'),
+        'message': fields.String(description='Human readable message that describes the error', required=True, example='Operation not allowed'),
     })
 
     auth_model = api.model('authentication-error-data', {
         'when': fields.DateTime(description='Response datetime', required=True),
-        'message': fields.String(description='Human readible message that describes the error', required=True, example='Authentication required'),
+        'message': fields.String(description='Human readable message that describes the error', required=True, example='Authentication required'),
     })
 
     not_acceptable_property_model = api.model('not-acceptable-property-error-data', {
@@ -31,14 +33,14 @@ class Error:
 
     not_acceptable_model = api.model('not-acceptable-error-data', {
         'when': fields.DateTime(description='Response datetime', required=True),
-        'message': fields.String(description='Human readible message that describes the error', required=True, example='Request not acceptable'),
+        'message': fields.String(description='Human readable message that describes the error', required=True, example='Request not acceptable'),
         'target': fields.String(description='Object target of the operation', required=True, example='ExecEnv'),
         'data': fields.List(fields.Nested(not_acceptable_property_model), description='List of not acceptable properties', required=True)
     })
 
     found_model = api.model('found-error-data', {
         'when': fields.DateTime(description='Response datetime', required=True),
-        'message': fields.String(description='Human readible message that describes the error', required=True, example='Network Link Type found'),
+        'message': fields.String(description='Human readable message that describes the error', required=True, example='Network Link Type found'),
         'target': fields.String(description='Object name', required=True, example='NetworkLinkType'),
         'id': fields.String(description='ID of object instance', required=True, example='pnt-to-pnt')
     })

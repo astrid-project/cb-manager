@@ -1,3 +1,5 @@
+# cspell:ignore dasherize strftime
+
 from app import api, log
 from datetime import datetime
 from error import Error

@@ -1,5 +1,7 @@
+# cspell:ignore unauth
+
 from app import ns_data as ns
-from config import Config
+from setup import Setup
 from document import Document
 from elasticsearch_dsl import Text, Date
 from flask_restplus import fields
@@ -39,16 +41,16 @@ model = ns.model(ref.Index.name, {
 }, description='Represent the collected data', additionalProperties=True)
 
 
-cnf = Config(target=ref, namespace=ns, model=model)
+setup = Setup(target=ref, namespace=ns, model=model)
 
 
-@cnf.route_root
-@cnf.unauth
-@cnf.forbidden
-@cnf.headers
+@setup.route_root
+@setup.unauth
+@setup.forbidden
+@setup.headers
 class Base(Resource):
-    @cnf.doc
-    @cnf.ok
-    @cnf.not_acceptable
+    @setup.doc
+    @setup.ok
+    @setup.not_acceptable
     def get(self):
         return ref.read()

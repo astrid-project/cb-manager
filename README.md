@@ -190,6 +190,7 @@ POST            | /data/sql      | Returns the collected data filtered by 
 
 ```bash
 git clone https://gitlab.com/astrid-repositories/wp2/context-broker-apis.git
+cd context-broker-apis
 ```
 
 3. Install the dependencies.
@@ -203,19 +204,19 @@ pip3 install -r requirements.txt
 ## Display help
 
 ```bash
-python3 context_broker-rest-api.py -h
+python3 main.py -h
 ```
 
 ## Production environment
 
 ```bash
-python3 context_broker-rest-api.py -n production
+python3 main.py -n production
 ```
 
 ## Debug enabled in Development environment
 
 ```bash
-python3 context_broker-rest-api.py --debug -n development
+python3 main.py --debug -n development
 ```
 
 # Extra

@@ -1,3 +1,5 @@
+# cspell:ignore reqparse ening
+
 from app import api
 from elasticsearch_dsl import Q, Search
 from flask_restplus import fields, reqparse, Resource
@@ -6,7 +8,7 @@ from request import Request
 filter_model = api.model('query-filter', {
     'property': fields.String(description='All the conditions must be satisfied', required=False),
     'expr': fields.Integer(description='At least on condition must be satisfied', required=False),
-}, description='Conditions to TODO')
+}, description='Conditions to ...') # FIXME add description
 
 api.model('query-clause', {})
 query_clause_model = api.model('query-clause', {
@@ -36,7 +38,7 @@ query_model = api.model('query', {
     'where': fields.Nested(query_clause_model, required=False),
     'order': fields.List(fields.Nested(query_order_model), required=False),
     'limit': fields.Nested(query_limit_model, required=False),
-}, description='Represent the query request', additonal_properties=False)
+}, description='Represent the query request', additional_properties=False)
 
 
 class Query:

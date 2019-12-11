@@ -1,5 +1,7 @@
+# cspell:ignore unauth
+
 from app import ns_config as ns
-from config import Config
+from setup import Setup
 from document import Document
 from elasticsearch_dsl import Text
 from flask_restplus import fields
@@ -22,43 +24,43 @@ model = ns.model(ref.Index.name, {
     'name': fields.String(description='General name', required=True, example='Point to Point')
 }, description=f'{ref.LABEL} object', additionalProperties=True)
 
-cnf = Config(target=ref, namespace=ns, model=model)
+setup = Setup(target=ref, namespace=ns, model=model)
 
 
-@cnf.route
-@cnf.unauth
-@cnf.forbidden
-@cnf.headers
+@setup.route
+@setup.unauth
+@setup.forbidden
+@setup.headers
 class Base(Resource):
-    @cnf.doc
-    @cnf.input
-    @cnf.accepted
-    @cnf.not_found
+    @setup.doc
+    @setup.input
+    @setup.accepted
+    @setup.not_found
     def delete(self):
         return ref.deleted()
 
-    @cnf.doc
-    @cnf.input
-    @cnf.ok
-    @cnf.not_found
+    @setup.doc
+    @setup.input
+    @setup.ok
+    @setup.not_found
     def get(self):
         return ref.read()
 
-    @cnf.doc
-    @cnf.input
-    @cnf.created
-    @cnf.conflict
+    @setup.doc
+    @setup.input
+    @setup.created
+    @setup.conflict
     def post(self):
         return ref.created()
 
 
-@cnf.route_selected
-@cnf.unauth
-@cnf.forbidden
-@cnf.headers
+@setup.route_selected
+@setup.unauth
+@setup.forbidden
+@setup.headers
 class Selected(Resource):
-    @cnf.doc
-    @cnf.input
-    @cnf.not_found
+    @setup.doc
+    @setup.input
+    @setup.not_found
     def put(self, id):
         return ref.updated(id)
