@@ -1,6 +1,0 @@
-elasticsearch-dsl>=7.0.0
-flask-api
-flask-log
-flask-restplus
-inflection
-waitress
