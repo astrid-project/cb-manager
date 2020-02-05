@@ -1,0 +1,1276 @@
+openapi: 3.0.0
+info:
+  version: '0.0.1'
+  title: ASTRID Service Chain Topology Data Collected
+  description: Get and update collected data of the service chain with topology information
+security:
+  - accessCode:
+      - read
+      - write
+components:
+  schemas:
+    exec-env:
+      description: Execution Envinroment object
+      properties:
+        id:
+          description: Unique ID
+          type: string
+          example: execEnvApache
+        hostname:
+          description: Hostname where the Execution Environment is allocated
+          type: string
+          format: hostname
+          example:
+            - host.domain.com
+        type-id:
+          $ref: '#/components/schemas/exec-env-type'
+      required:
+        - id
+        - host
+        - type-id
+      additionalProperties: true
+    exec-env-type:
+      description: Execution Envinroment Type object
+      properties:
+        id:
+          description: Unique ID
+          type: string
+          example: vm
+        name:
+          description: General name
+          type: string
+          example: Virtual Machine
+      required: 
+        - id
+        - name
+      additionalProperties: true
+    network-link:
+      description: Network Link Object
+      properties:
+        id:
+          description: Unique ID
+          type: string
+          example: networkLinkA
+        type-id:
+          $ref: '#/components/schemas/network-link-type'
+      required:
+        - id
+        - type-id
+      additionalProperties: true
+    network-link-type:
+      description: Network Link Type
+      properties:
+        id:
+          description: Unique ID
+          type: string
+          example: pntToPnt
+        name:
+          description: General name
+          type: string
+          example: Point to Point
+      required: 
+        - id
+        - name
+      additionalProperties: true
+    connection:
+      description: Represent the relations between the Execution Environments and the Network Links
+      properties:
+        id:
+          description: Unique ID
+          type: string
+          example: connection1
+        exec-env-id:
+          $ref: '#/components/schemas/exec-env'
+        network-link-id:
+          $ref: '#/components/schemas/network-link'
+      required: 
+        - id
+        - exec-env-id
+        - network-link-id
+      additionalProperties: true
+    agent-catalog:
+      description: Represent the available agent in the catalog
+      properties:
+        id:
+          description: Unique ID
+          type: string
+          example: filebeat
+        name:
+          description: General name
+          type: string
+          example: Filebeat
+      required: 
+        - id
+        - name
+      additionalProperties: true
+    agent-instance:
+      description: Represent the agent instance installed in the Execution Environments
+      properties:
+        id:
+          description: Unique ID
+          type: string
+          example: filebeat-execEnvApache
+        agent-id:
+          $ref: '#/components/schemas/agent-catalog'
+        exec-envs-id:
+          $ref: '#/components/schemas/agent-catalog'
+        enabled:
+          description: Indicate if the agent instance is enabled or not
+          type: boolean
+          oneof:
+            - true
+            - false
+      required: 
+        - id
+        - agent-id
+        - exec-env-id
+        - enabled
+      additionalProperties: true
+    data:
+      description: Represent the collected data
+      properties:
+        id:
+          description: Unique ID
+        exec-env-id:
+          $ref: '#/components/schemas/exec-env'
+        agent-instance-id:
+          $ref: '#/components/schemas/agent-instance'
+        timestamp-event:
+          description: Timestamp of the event in the collected data
+          type: string
+          format: date-time
+          example: "2015-01-01T12:10:30Z"
+        timestamp-agent:
+          description: Timestamp when the Agent collected the data
+          type: string
+          format: date-time
+          example: "2015-01-01T12:10:30Z"
+      additionalProperties: true
+    date-time-range:
+      description: Date-Time range
+      properties:
+        after:
+          type: string
+          format: date-time
+          example: "2015-01-01T12:10:30Z"
+        before:
+          type: string
+          format: date-time
+          example: "2015-01-01T12:10:30Z"
+    query-data:
+      description: Represent the query for to filter the collected data to get
+      properties:
+        exec-env-id:
+          description: Execution Environment ID
+          type: string
+          example: execEnvApache
+        agent-id:
+          description: ID of the Agent
+          type: string
+          example: apache
+        agent-instance-id:
+          description: ID of the Agent instance
+          type: string
+          example: apache
+        timestamp:
+          $ref: '#/components/schemas/date-time-range'
+  parameters:
+    exec-env-id:
+      name: id
+      description: ID of the Execution Enviroment
+      in: path
+      required: true
+      schema:
+        type: string
+        example: execEnvApache
+    exec-env-type-id:
+      name: id
+      description: ID of the Execution Enviroment Type
+      in: path
+      required: true
+      schema:
+        type: string
+        example: virtMach
+    network-link-id:
+      name: id
+      description: ID of the Network Link
+      in: path
+      required: true
+      schema:
+        type: string
+        example: networkLinkA
+    network-link-type-id:
+      name: id
+      description: ID of the Network Link Type
+      in: path
+      required: true
+      schema:
+        type: string
+        example: pntToPnt
+    connection-id:
+      name: id
+      description: ID of the Connection
+      in: path
+      required: true
+      schema:
+        type: string
+        example: connection1
+    agent-catalog-id:
+      name: id
+      description: ID of the Agent available in the Catalog
+      in: path
+      required: true
+      schema:
+        type: string
+        example: filebeat
+    agent-instance-id:
+      name: id
+      description: ID of the Agent instance installed in an Execution Environment
+      in: path
+      required: true
+      schema:
+        type: string
+        example: filebeat-execEnvApache
+    timestamp-after:
+      name: after
+      description: Lower bound of a time range
+      in: path
+      required: true
+      schema:
+        type: string
+        format: date-time
+        example: "2015-01-01T12:10:30Z"
+    timestamp-before:
+      name: before
+      description: Upper bound of a time range
+      in: path
+      required: true
+      schema:
+        type: string
+        format: date-time
+        example: "2015-01-01T12:10:30Z"
+  responses:
+    inv-syntax:
+      description: Invalid Syntax
+    auth-req:
+      description: Authentication required
+    unauth-oper:
+      description: Unauthorized operation
+    id-found:
+      description: ID already found
+    id-not-found:
+      description: ID not found
+paths:
+  /config/exec-env-id:
+    get:
+      summary: Returns the list of all Execution Environment IDs
+      responses:
+        200:
+          description: JSON Array of Execution Environment IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example: execEnvApache
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+  /config/exec-env:
+    get:
+      summary: Returns the list of all Execution Environments
+      responses:
+        200:
+          description: JSON Array of Execution Environments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/exec-env'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+    post:
+      summary: Add a new Execution Environment
+      requestBody:
+        description: JSON Object of the Execution Environment to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/exec-env'
+      responses:
+        201:
+          description: Execution Environment correctly added
+        406:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        409:
+          $ref: '#/components/responses/id-found'
+  /config/exec-env/{id}:
+    parameters: 
+      - $ref: '#/components/parameters/exec-env-id'
+    get:
+      summary: Returns an existing Execution Environment by ID
+      responses:
+        200:
+          description: JSON Object of the Execution Environment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exec-env'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    put:
+      summary: Update an existing Execution Environment by ID
+      requestBody:
+        description: JSON Object of the Execution Environment to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/exec-env'
+      responses:
+        201:
+          description: Execution Environment correctly updated
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    delete:
+      summary: Delete an existing Execution Enviroment by ID
+      responses:
+        200:
+          description: Execution Environment correctly deleted
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /config/exec-env-type-id:
+    get:
+      summary: Returns the list of all Execution Environment Type IDs
+      responses:
+        200:
+          description: JSON Array of Execution Environment Type IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/exec-env'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+  /config/exec-env-type:
+    get:
+      summary: Returns the list of all Execution Environment Types
+      responses:
+        200:
+          description: JSON Array of Execution Environment Types
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/exec-env-type'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+    post:
+      summary: Add a new Execution Environment Type
+      requestBody:
+        description: JSON Object of the Execution Environment Type to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/exec-env-type'
+      responses:
+        201:
+          description: Execution Environment Type correctly added
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        409:
+          $ref: '#/components/responses/id-found'
+  /config/exec-env-type/{id}:
+    parameters: 
+      - $ref: '#/components/parameters/exec-env-type-id'
+    get:
+      summary: Returns an existing Execution Environment Type by ID
+      responses:
+        200:
+          description: JSON Object of the Execution Environment Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exec-env-type'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    put:
+      summary: Update an existing Execution Environment Type by ID
+      requestBody:
+        description: JSON Object of the Execution Environment Type to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/exec-env-type'
+      responses:
+        201:
+          description: Execution Environment Type correctly updated
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    delete:
+      summary: Delete an existing Execution Environment Type by ID
+      parameters: 
+        - $ref: '#/components/parameters/exec-env-type-id'
+      responses:
+        200:
+          description: Execution Environment Type correctly deleted
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /config/network-link-id:
+    get:
+      summary: Returns the list of all Network Link IDs
+      responses:
+        200:
+          description: JSON Array of Network Link IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/network-link'
+        401:
+          description: Authentication required
+        403:
+          description: Unauthorized operation
+  /config/network-link:
+    get:
+      summary: Returns the list of all Network Links
+      responses:
+        200:
+          description: JSON Array of Network Links
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/network-link'
+        401:
+          description: Authentication required
+        403:
+          description: Unauthorized operation
+    post:
+      summary: Add a new Network Link
+      requestBody:
+        description: JSON Object of the Network Link to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/network-link'
+      responses:
+        201:
+          description: Network Link correctly added
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        409:
+          $ref: '#/components/responses/id-found'
+  /config/network-link/{id}:
+    parameters: 
+      - $ref: '#/components/parameters/network-link-id'
+    get:
+      summary: Returns an existing Network Link by ID
+      responses:
+        200:
+          description: JSON Object of the Network Link
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/network-link'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    put:
+      summary: Update an existing Network Link by ID
+      requestBody:
+        description: JSON Object Network Link to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/network-link'
+      responses:
+        201:
+          description: Network Link correctly updated
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    delete:
+      summary: Delete an existing Network Link by ID
+      responses:
+        200:
+          description: Network Link correctly deleted
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /config/network-link-type-id:
+    get:
+      summary: Returns the list of all Network Link Type IDs
+      responses:
+        200:
+          description: JSON Array of Network Link Type IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example: pntToPnt
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+  /config/network-link-type:
+    get:
+      summary: Returns the list of all Network Link Types
+      responses:
+        200:
+          description: JSON Array of Network Link Types
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/network-link-type'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+    post:
+      summary: Add a new Network Link Type
+      requestBody:
+        description: JSON Object of the Network Link Type to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/network-link-type'
+      responses:
+        201:
+          description: Network Link Type correctly added
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        409:
+          $ref: '#/components/responses/id-found'
+  /config/network-link-type/{id}:
+    parameters: 
+      - $ref: '#/components/parameters/network-link-type-id'
+    get:
+      summary: Returns an existing Network Link Type by ID
+      responses:
+        200:
+          description: JSON Object of the Network Link Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/network-link-type'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    put:
+      summary: Update an existing Network Link Type by ID
+      requestBody:
+        description: JSON Object of the Network Link Type to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/network-link-type'
+      responses:
+        201:
+          description: Network Link Type correctly updated
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    delete:
+      summary: Delete an existing Network Link Type by ID
+      parameters: 
+        - $ref: '#/components/parameters/network-link-type-id'
+      responses:
+        200:
+          description: Network Link Type correctly deleted
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /config/connection-id:
+    get:
+      summary: Returns the list of all Connection IDs
+      responses:
+        200:
+          description: JSON Array of Connection IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/connection'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+  /config/connection-id/exec-env/{id}:
+    parameters:
+      - $ref: '#/components/parameters/exec-env-id'
+    get:
+      summary: Returns the list of all Connection IDs filtered by the Execution Environment ID
+      responses:
+        200:
+          description: JSON Array of Connection IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/connection'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /config/connection-id/network-link/{id}:
+    parameters:
+      - $ref: '#/components/parameters/network-link-id'
+    get:
+      summary: Returns the list of all Connection IDs filtered by the Network Link ID
+      responses:
+        200:
+          description: JSON Array of Connection IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/connection'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /config/connection:
+    get:
+      summary: Returns the list of all Connections
+      responses:
+        200:
+          description: JSON Array of Connections
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/connection'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+    post:
+      summary: Add a new Connection
+      requestBody:
+        description: JSON object of the Connection to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/connection'
+      responses:
+        201:
+          description: Connection correctly added
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        409:
+          $ref: '#/components/responses/id-found'
+  /config/connection/{id}:
+    get:
+      summary: Returns an existing Connection by ID
+      parameters: 
+        - $ref: '#/components/parameters/connection-id'
+      responses:
+        200:
+          description: JSON Object of the Connection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connection'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    put:
+      summary: Update an existing Connection by ID
+      requestBody:
+        description: JSON Object of the Connection to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/connection'
+      parameters: 
+        - $ref: '#/components/parameters/connection-id'
+      responses:
+        201:
+          description: Connection correctly updated
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    delete:
+      summary: Delete an existing Connection by ID
+      parameters: 
+        - $ref: '#/components/parameters/connection-id'
+      responses:
+        200:
+          description: Connection correctly deleted
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /config/connection/exec-env/{id}:
+    parameters:
+      - $ref: '#/components/parameters/exec-env-id'
+    get:
+      summary: Returns the list of all Connections filtered by the Execution Environment ID
+      responses:
+        200:
+          description: JSON Array of Connections
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connection'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    delete:
+      summary: Delete existing Connections filtered by the Execution Environment ID
+      responses:
+        200:
+          description: Connections correctly deleted
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /config/connection/network-link/{id}:
+    parameters: 
+      - $ref: '#/components/parameters/network-link-id'
+    get:
+      summary: Returns the list of all Connections filtered by the Network Link ID
+      responses:
+        200:
+          description: JSON Array of Connections
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connection'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    delete:
+      summary: Delete existing Connections filtered by the Network Link ID
+      responses:
+        200:
+          description: Connections correctly deleted
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /config/agent-id:
+    get:
+      summary: Returns the list of all Agent instance IDs
+      responses:
+        200:
+          description: JSON Array of Agent instance IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/agent-instance'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+  /config/agent:
+    get:
+      summary: Returns the list of all Agent instances
+      responses:
+        200:
+          description: JSON Array of Agent instance
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/agent-instance'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+    post:
+      summary: Install a new Agent in the Execution Environment
+      requestBody:
+        description: JSON Object of the Agent to install
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/agent-instance'
+      responses:
+        201:
+          description: Agent correctly installed
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        409:
+          $ref: '#/components/responses/id-found'
+  /config/agent/{id}:
+    parameters: 
+      - $ref: '#/components/parameters/agent-instance-id'
+    get:
+      summary: Returns an existing Agent instance by ID
+      responses:
+        200:
+          description: JSON Object of the Agent instance
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/agent-instance'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    put:
+      summary: Update an existing Agent instance by ID
+      requestBody:
+        description: JSON Object of the Agent instance to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/agent-instance'
+      responses:
+        201:
+          description: Agent instance correctly updated
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    delete:
+      summary: Uninstall an existing Agent instance by ID
+      parameters: 
+        - $ref: '#/components/parameters/agent-instance-id'
+      responses:
+        200:
+          description: Agent instance correctly uninstalled
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /catalog/agent-id:
+    get:
+      summary: Returns the list of all Agent IDs
+      responses:
+        200:
+          description: JSON Array of Agent IDs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/agent-catalog'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+  /catalog/agent:
+    get:
+      summary: Returns the list of all available Agents
+      responses:
+        200:
+          description: JSON Array of Agents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/agent-catalog'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+    post:
+      summary: Add a new Agent
+      requestBody:
+        description: JSON Object of the Agent to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/agent-catalog'
+      responses:
+        201:
+          description: Agent correctly added
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        409:
+          $ref: '#/components/responses/id-found'
+  /catalog/agent/{id}:
+    get:
+      summary: Returns an existing Agent by ID
+      parameters: 
+        - $ref: '#/components/parameters/agent-catalog-id'
+      responses:
+        200:
+          description: JSON Object of the Agent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/agent-catalog'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    put:
+      summary: Update an existing Agent by ID
+      requestBody:
+        description: JSON object of the Agent to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/agent-catalog'
+      parameters: 
+        - $ref: '#/components/parameters/agent-catalog-id'
+      responses:
+        201:
+          description: Agent correctly updated
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+    delete:
+      summary: Delete an existing Agent by ID
+      parameters: 
+        - $ref: '#/components/parameters/agent-catalog-id'
+      responses:
+        200:
+          description: Agent correctly deleted
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /data:
+    post:
+      summary: Returns the collected data 
+      requestBody:
+        description: JSON object of the query to filter the data to get
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/query-data'
+      responses:
+        200:
+          description: JSON Array of the collected Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/data'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /data/exec-env/{id}:
+    get:
+      summary: Returns the data collected from an existing Execution Environment
+      parameters: 
+        - $ref: '#/components/parameters/exec-env-id'
+      responses:
+        200:
+          description: JSON Array of the collected Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/data'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /data/agent/instance/{id}:
+    get:
+      summary: Returns the data collected from an existing Agent instance
+      parameters: 
+        - $ref: '#/components/parameters/agent-instance-id'
+      responses:
+        200:
+          description: JSON Array of the collected Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/data'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /data/agent/catalog/{id}:
+    get:
+      summary: Returns the data collected from the Agent available in the Catalog
+      parameters: 
+        - $ref: '#/components/parameters/agent-catalog-id'
+      responses:
+        200:
+          description: JSON Array of the collected Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/data'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /data/timestamp/after/{after}:
+    get:
+      summary: Returns the data collected after a date-time
+      parameters: 
+        - $ref: '#/components/parameters/timestamp-after'
+      responses:
+        200:
+          description: JSON Array of the collected Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/data'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /data/timestamp/before/{before}:
+    get:
+      summary: Returns the data collected before a date-time
+      parameters: 
+        - $ref: '#/components/parameters/timestamp-before'
+      responses:
+        200:
+          description: JSON Array of the collected Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/data'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
+  /data/timestamp/{after}/{before}:
+    get:
+      summary: Returns the data collected in a period of date-time
+      parameters: 
+        - $ref: '#/components/parameters/timestamp-after'
+        - $ref: '#/components/parameters/timestamp-before'
+      responses:
+        200:
+          description: JSON Array of the collected Data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/data'
+        400:
+          $ref: '#/components/responses/inv-syntax'
+        401:
+          $ref: '#/components/responses/auth-req'
+        403:
+          $ref: '#/components/responses/unauth-oper'
+        404:
+          $ref: '#/components/responses/id-not-found'
