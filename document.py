@@ -95,7 +95,6 @@ class Document(DocumentElastic, BaseDocument):
             q.limit()
             s = q.get()
             res = s.execute()
-            print(res)
             return [cls.get_data(item) for item in res], status.HTTP_200_OK, cls.HEADERS
         except elasticsearch.RequestError as e:
             cls.error.request(e)
@@ -107,7 +106,7 @@ class Document(DocumentElastic, BaseDocument):
             cls.apply(data)
         id = data.pop('id', None)
         if id is None:
-            cls.error.not_found(message='Missing ID', what='id')
+            cls.error.HTTPBadRequest(title='Request not valid', description='id property not found')
         try:
             cls.get(id=id)
         except elasticsearch.NotFoundError:

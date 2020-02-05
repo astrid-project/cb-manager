@@ -7,14 +7,13 @@ import logging
 
 title = 'ASTRID Context Broker API'
 
-app = Flask(title)
-app.es_connection = es_connection
-app.config['ERROR_404_HELP'] = False
-
-
 def es_connection(hosts, timeout):
     connections.create_connection(hosts=hosts, timeout=timeout)
 
+
+app = Flask(title)
+app.es_connection = es_connection
+app.config['ERROR_404_HELP'] = False
 
 log = logging.getLogger('ASTRID')
 log.setLevel(logging.DEBUG)

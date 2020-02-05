@@ -15,7 +15,7 @@ import util
 import waitress
 
 parser = argparse.ArgumentParser(
-    prog='python3 context_broker-rest-api.py', description=api.title + ': ' + api.description)
+    prog=f'python3 {__FILENAME__}', description=api.title + ': ' + api.description)
 parser.add_argument('--port', '-p', type=int,
                     help='TCP Port of the REST Server', default=5000)
 parser.add_argument('--es-endpoint', '-e', type=str,
@@ -54,7 +54,7 @@ else:
     host = '0.0.0.0'
 
     if args.environment == 'production':
-        waitress.serve(app, host=host, port=5000)
+        waitress.serve(app, host=host, port=args.port)
     else:
         app.run(host=host, port=args.port,
                 debug=args.debug, use_reloader=False)

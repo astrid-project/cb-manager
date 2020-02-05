@@ -8,9 +8,8 @@ from request import Request
 filter_model = api.model('query-filter', {
     'property': fields.String(description='All the conditions must be satisfied', required=False),
     'expr': fields.Integer(description='At least on condition must be satisfied', required=False),
-}, description='Conditions to ...') # FIXME add description
+}, description='Conditions to ...')  # FIXME add description
 
-api.model('query-clause', {})
 query_clause_model = api.model('query-clause', {
     #    'and': fields.List(fields.Nested(api.models.get('query-clause')), description='All the conditions must be satisfied', required=False),
     #    'or': fields.List(fields.Nested(api.models.get('query-clause')), description='At least on condition must be satisfied', required=False),

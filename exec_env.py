@@ -3,7 +3,7 @@
 from app import ns_config as ns
 from setup import Setup
 from document import Document
-from elasticsearch_dsl import Text
+from elasticsearch_dsl import Text, Q, Search
 from flask_restplus import fields
 from resource import Resource
 
