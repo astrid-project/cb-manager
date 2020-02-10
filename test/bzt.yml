@@ -1,0 +1,10 @@
+execution:
+   concurrency: 100
+   hold-for: 2m30s
+   ramp-up: 1m
+   scenario:
+     requests:
+       - url: http://ip-addr:5000/exec-env
+         method: GET
+         label: api
+         timeout: 3s

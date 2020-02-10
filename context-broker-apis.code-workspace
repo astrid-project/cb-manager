@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
-		"workbench.colorTheme": "Abyss"
+		"workbench.colorTheme": "Abyss",
+		"files.insertFinalNewline": true
 	}
 }

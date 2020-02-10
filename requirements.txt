@@ -1,0 +1,4 @@
+elasticsearch-dsl>=7.0.0
+falcon
+falcon-auth
+waitress

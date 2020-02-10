@@ -1,10 +1,11 @@
 from .base import BaseResource
-from elasticsearch_dsl import Document, Text
+from elasticsearch_dsl import Document, Text, Date
 
 
 class ExecEnvDocument(Document):
     hostname = Text()
     type_id = Text()
+    # started = Date() # TODO
 
     class Index:
         name = 'exec-env'
