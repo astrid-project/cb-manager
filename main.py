@@ -18,6 +18,9 @@ version = config_parser.get('info', 'version')
 
 cb_port = config_parser.get('context-broker', 'port')
 
+auth_username = config_parser.get('auth', 'username')
+auth_password = config_parser.get('auth', 'password')
+
 es_endpoint = config_parser.get('elasticsearch', 'endpoint')
 es_timeout = config_parser.get('elasticsearch', 'timeout')
 
@@ -27,14 +30,23 @@ print(f'{title} v{version}')
 
 parser = argparse.ArgumentParser(
     prog='python3 {__FILENAME__}', description=f'{title}: {description}')
+
 parser.add_argument('--port', '-p', type=int,
                     help='TCP Port of the REST Server', default=cb_port)
+
+parser.add_argument('--auth-username', '-u', type=str,
+                    help='Authorized username', default=auth_username)
+parser.add_argument('--auth-password', '-a', type=str,
+                    help='Authorized password', default=auth_password)
+
 parser.add_argument('--es-endpoint', '-e', type=str,
-                    help='Elastic Search server hostname/IP:port', default=es_endpoint)
-parser.add_argument('--es-timeout', '-t', type=int,
-                    help='Timeout seconds for the connection to Elastic Search', default=es_timeout)
+                    help='Elasticsearch server hostname/IP:port', default=es_endpoint)
+parser.add_argument('--es-timeout', '-s', type=int,
+                    help='Timeout seconds for the connection to Elasticsearch', default=es_timeout)
+
 parser.add_argument('--write-config', '-w', help='Write options to config.ini',
                     action='store_true')
+
 parser.add_argument('--version', '-v', help='Show version',
                     action='store_const', const=version)
 
@@ -50,9 +62,11 @@ if args.write_config:
 if args.version is not None:
     print(args.version)
 else:
+    def auth(username, password):
+        return {'username': username} if username == args.auth_username and password == args.auth_password else False
+
     api = falcon.API(middleware=[
-        FalconAuthMiddleware(BasicAuthBackend(
-            lambda username, password: {'username': username})),
+        FalconAuthMiddleware(BasicAuthBackend(auth)),
         Marshmallow()
     ])
 
