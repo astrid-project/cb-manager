@@ -1,35 +1,80 @@
 from marshmallow import fields, Schema
 
 
-class QueryFilterSchema(Schema):
-    target = fields.String()
-    expr = fields.String()
+class QueryRequestFilterSchema(Schema):
+    """
+    For numeric comparison in the clause.
+    """
+    target = fields.String(required=True, description='The field to compare.', example='name')
+    expr = fields.String(required=True, description='The expression to compare to the field.', example='apache')
 
 
-class QueryClauseSchema(Schema):
-    _and = fields.List(fields.Nested(lambda: QueryClauseSchema()), data_key='and')
-    _or = fields.List(fields.Nested(lambda: QueryClauseSchema()), data_key='or')
-    _not = fields.List(fields.Nested(lambda: QueryClauseSchema()), data_key='not')
-    lte = fields.Nested(QueryFilterSchema())
-    gte = fields.Nested(QueryFilterSchema())
-    lt = fields.Nested(QueryFilterSchema())
-    gt = fields.Nested(QueryFilterSchema())
-    equal = fields.Nested(QueryFilterSchema())
-    reg_exp = fields.Nested(QueryFilterSchema(), data_key='reg-exp')
+class QueryRequestClauseSchema(Schema):
+    """
+    Represents a clause to filter a item based on various conditions.
+    """
+    _and = fields.List(fields.Nested(lambda: QueryRequestClauseSchema()), data_key='and',
+                       description='All the clause has to be satisfied.', example="""#TODO
+                            [
+                                {
+                                    "equal": {
+                                        "target": "name",
+                                        "expr:": "apache"
+                                        }
+                                    },
+                                    {
+                                    "lte": {
+                                        "target": "timeout",
+                                        "expr": 5
+                                    }
+                            ]""")
+    _or = fields.List(fields.Nested(lambda: QueryRequestClauseSchema()), data_key='or',
+                       description='At least the clause has to be satisfied.', example="""#TODO
+                            [
+                                {
+                                    "equal": {
+                                        "target": "name",
+                                        "expr:": "apache"
+                                        }
+                                    },
+                                    {
+                                    "lte": {
+                                        "target": "timeout",
+                                        "expr": 5
+                                    }
+                            ]""")
+    _not = fields.Nested(lambda: QueryRequestClauseSchema(), data_key='not',
+                       description='The clause has to be not satisfied.')
+    lte = fields.Nested(QueryRequestFilterSchema(), description='The target field must be lower or equal to the expr value.')
+    gte = fields.Nested(QueryRequestFilterSchema(), description='The target field must be greater or equal to the expr value.')
+    lt = fields.Nested(QueryRequestFilterSchema(), description='The target field must be lower than the expr value.')
+    gt = fields.Nested(QueryRequestFilterSchema(), description='The target field must be greater to the expr value.')
+    equal = fields.Nested(QueryRequestFilterSchema(), description='The target field must be equal to the expr value.')
+    reg_exp = fields.Nested(QueryRequestFilterSchema(), data_key='reg-exp',
+                            description='The target field must be satisfy the regular expression in expr.')
 
 
-class QueryOrderSchema(Schema):
-    target = fields.String()
-    mode = fields.String(enum=['asc', 'desc'])
+class QueryRequestOrderSchema(Schema):
+    """
+    Order the filtered items.
+    """
+    target = fields.String(required=True, description='The field to compare.', example='name')
+    mode = fields.String(enum=['asc', 'desc'], required=True, description='Order mode.', example='asc')
 
 
-class QueryLimitSchema(Schema):
-    _from = fields.Integer(data_key='from')
-    _to = fields.Integer(data_key='to')
+class QueryRequestLimitSchema(Schema):
+    """
+    Limit the items to return.
+    """
+    _from = fields.Integer(data_key='from', description='Started index of the items to return.', example=1)
+    _to = fields.Integer(data_key='to', description='Ended index of the items to return.', example=5)
 
 
-class QuerySchema(Schema):
-    select = fields.List(fields.String())
-    where = fields.Nested(QueryClauseSchema())
-    order = fields.Nested(QueryOrderSchema())
-    limit = fields.Nested(QueryLimitSchema())
+class QueryRequestSchema(Schema):
+    """
+    Query request to filter the items.
+    """
+    select = fields.List(fields.String(), description='Fields to return.', example='[id, name]')
+    where = fields.Nested(QueryRequestClauseSchema(), description='Filter the items based on different conditions.')
+    order = fields.List(fields.Nested(QueryRequestOrderSchema()), description='Order the filtered items.')
+    limit = fields.Nested(QueryRequestLimitSchema(), description='Limit the number of items to return.')

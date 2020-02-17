@@ -1,11 +1,18 @@
+from apispec import APISpec
+from apispec.ext.marshmallow import MarshmallowPlugin
 from configparser import ConfigParser
 from elasticsearch_dsl import connections
 from falcon_auth import FalconAuthMiddleware, BasicAuthBackend
+from falcon_apispec import FalconPlugin
 from falcon_marshmallow import Marshmallow
-from route import AgentCatalog, AgentInstance, Connection, Data, ExecEnv, ExecEnvType, NetworkLink, NetworkLinkType
-from utils import wrap
+from resource import *
+from schema import *
+from swagger_ui import falcon_api_doc
+from utils import *
 import argparse
 import falcon
+import hashlib
+import json
 import waitress
 
 
@@ -63,18 +70,60 @@ if args.version is not None:
     print(args.version)
 else:
     def auth(username, password):
-        return {'username': username} if username == args.auth_username and password == args.auth_password else False
+        if username == args.auth_username and hashlib.sha224(password.encode('utf-8')).hexdigest() == args.auth_password:
+            return {'username': username}
+        else:
+            False
 
     api = falcon.API(middleware=[
-        FalconAuthMiddleware(BasicAuthBackend(auth)),
+        FalconAuthMiddleware(BasicAuthBackend(auth), exempt_routes=['/api/doc', '/api/doc/swagger.json']),
         Marshmallow()
     ])
 
+    resource_set = (AgentCatalogResource, AgentCatalogSelectedResource,
+        AgentInstanceResource, AgentInstanceSelectedResource,
+        ConnectionResource, ConnectionSelectedResource,
+        DataResource, DataSelectedResource,
+        ExecEnvResource, ExecEnvSelectedResource,
+        ExecEnvTypeResource, ExecEnvTypeSelectedResource,
+        NetworkLinkResource, NetworkLinkSelectedResource,
+        NetworkLinkTypeResource, NetworkLinkTypeSelectedResource)
+
+    tags = []
+    for Resource in resource_set:
+        tags.append(Resource.tag)
+
+    api_spec = APISpec(
+        title=title,
+        version=version,
+        openapi_version='2.0',
+        produces=['application/json'],
+        consumes=['application/json'],
+        tags=tags,
+        plugins=[
+            FalconPlugin(api),
+            MarshmallowPlugin(),
+        ],
+    )
+
+    for schema in BadRequestSchema, UnauthorizedSchema:
+        api_spec.components.schema(schema.__name__, schema=schema)
+
     connections.create_connection(hosts=args.es_endpoint, timeout=args.es_timeout)
 
-    for RouteResource in AgentCatalog, AgentInstance, Connection, Data, ExecEnv, ExecEnvType, NetworkLink, NetworkLinkType:
-        RouteResource.doc_cls.init()
-        for route in wrap(RouteResource.route):
-            api.add_route(route, RouteResource())
+    for Resource in resource_set:
+        Resource.doc_cls.init()
+        for route in wrap(Resource.routes):
+            resource = Resource()
+            api.add_route(route, resource)
+            api_spec.path(resource=resource)
+
+    with open('./api/schema.yaml', 'w') as file:
+        file.write(api_spec.to_yaml())
+
+    with open('./api/schema.json', 'w') as file:
+        file.write(json.dumps(api_spec.to_dict(), indent=2))
+
+    falcon_api_doc(api, config_path='./api/schema.json', url_prefix='/api/doc', title='API doc')
 
     waitress.serve(api, host='0.0.0.0', port=args.port)

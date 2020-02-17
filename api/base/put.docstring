@@ -1,0 +1,21 @@
+{put_description}
+---
+summary: {put_summary}
+description: {put_description}
+parameters:
+    - name: payload
+      required: true
+      in: body
+      schema:
+        type: array
+        items: {schema}
+tags: [{tag}]
+responses:
+    200:
+        description: {put_responses_200_description}
+        schema:
+            type: array
+            items: UpdateResponseSchema
+    401:
+        description: Unauthorized
+        schema: UnauthorizedSchema

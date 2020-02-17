@@ -1,0 +1,2453 @@
+consumes:
+- application/json
+definitions:
+  AgentCatalog:
+    properties:
+      id:
+        description: ID of the agent in the catalog.
+        example: agent-filebeat-1
+        type: string
+      name:
+        description: Agent name.
+        example: filebeat
+        type: string
+      parameters:
+        description: List of agent parameters
+        items:
+          $ref: '#/definitions/AgentParameter'
+        type: array
+    required:
+    - id
+    - name
+    - parameters
+    type: object
+  AgentInstance:
+    properties:
+      agent_catalog_id:
+        description: ID of the agent in the catalog
+        example: agent-filebeat-1
+        type: string
+      exec_env_id:
+        description: ID of the execution environment where the agent instance is installed
+        example: exec-env-1
+        type: string
+      id:
+        description: ID of the agent instance installed in an execution environment.
+        example: agent-instance-1
+        type: string
+    required:
+    - agent_catalog_id
+    - exec_env_id
+    - id
+    type: object
+  AgentParameter:
+    properties:
+      list:
+        description: Indicate if the parameter can have multiple values.
+        example: true
+        type: boolean
+      name:
+        description: Parameter name.
+        example: period
+        type: string
+      type:
+        description: Parameter type.
+        enum:
+        - integer
+        - number
+        - time-duration
+        - string
+        - choice
+        - boolean
+        - binary
+        example: integer
+        type: string
+      values:
+        description: Possible values if the parameter type is choice.
+        items:
+          example:
+          - mysql
+          - http
+          type: string
+        type: array
+    required:
+    - list
+    - name
+    - type
+    type: object
+  BadRequestSchema:
+    properties:
+      description:
+        description: Human readable message that describes the error.
+        example: Could not decode the request body, either because it was not valid
+          JSON or because it was not encoded as UTF-8.
+        type: string
+      title:
+        description: Title error
+        enum:
+        - 400 Bad Request
+        example: 400 Bad Request
+        type: string
+    required:
+    - description
+    - title
+    type: object
+  Connection:
+    properties:
+      exec_env_id:
+        description: ID of the connected execution environment
+        example: exec-env-1
+        type: string
+      id:
+        description: ID of connection.
+        example: connection-1
+        type: string
+      network_link_id:
+        description: ID of the connected network link
+        example: network-link-1
+        type: string
+    required:
+    - exec_env_id
+    - id
+    - network_link_id
+    type: object
+  CreateResponse:
+    properties:
+      id:
+        description: id of the created item.
+        example: apache
+        type: string
+      status:
+        description: Status of the operation.
+        example: created
+        type: string
+    type: object
+  Data:
+    properties:
+      agent_instance_id:
+        description: ID of the agent instance in the execution environment that collected
+          the data
+        example: agent-filebeat-1
+        type: string
+      exec_env_id:
+        description: ID of the execution environment where the data was collected
+        example: exec-env-1
+        type: string
+      id:
+        description: ID of the data.
+        example: data-1
+        type: string
+      timestamp_agent:
+        description: Timestamp when the agent instance collected the data
+        example: '#TODO'
+        format: date-time
+        type: string
+      timestamp_event:
+        description: Timestamp of the event related to the collected data
+        example: '#TODO'
+        format: date-time
+        type: string
+    required:
+    - agent_instance_id
+    - exec_env_id
+    - id
+    - timestamp_agent
+    - timestamp_event
+    type: object
+  DeleteResponse:
+    properties:
+      id:
+        description: id of the updated item.
+        example: apache
+        type: string
+      status:
+        description: Status of the operation.
+        enum:
+        - noop
+        - updated
+        example: noop
+        type: string
+    type: object
+  ExecEnv:
+    properties:
+      hostname:
+        description: Hostname of the execution environment.
+        example: 192.168.1.2
+        type: string
+      id:
+        description: ID of the execution environment.
+        example: exec-env-type
+        type: string
+      type_id:
+        description: ID of the execution environment type.
+        example: vm
+        type: string
+    required:
+    - hostname
+    - id
+    - type_id
+    type: object
+  ExecEnvType:
+    properties:
+      id:
+        description: ID of the execution environment type.
+        example: vm
+        type: string
+      name:
+        description: Name of the execution environment.
+        example: Virtual Machine
+        type: string
+    required:
+    - id
+    - name
+    type: object
+  NetworkLink:
+    properties:
+      id:
+        description: ID of the network link.
+        example: network-link-1
+        type: string
+      type_id:
+        description: ID of the network link type.
+        example: pnt2pnt
+        type: string
+    required:
+    - id
+    - type_id
+    type: object
+  NetworkLinkType:
+    properties:
+      id:
+        description: ID of the network link type.
+        example: pnt2pnt
+        type: string
+      name:
+        description: Name of the network link type.
+        example: Point to point
+        type: string
+    required:
+    - id
+    - name
+    type: object
+  QueryRequest:
+    properties:
+      limit:
+        allOf:
+        - $ref: '#/definitions/QueryRequestLimit'
+        description: Limit the number of items to return.
+      order:
+        description: Order the filtered items.
+        items:
+          $ref: '#/definitions/QueryRequestOrder'
+        type: array
+      select:
+        description: Fields to return.
+        example: '[id, name]'
+        items:
+          type: string
+        type: array
+      where:
+        allOf:
+        - $ref: '#/definitions/QueryRequestClause'
+        description: Filter the items based on different conditions.
+    type: object
+  QueryRequestClause:
+    properties:
+      and:
+        description: All the clause has to be satisfied.
+        example: "#TODO\n                            [\n                         \
+          \       {\n                                    \"equal\": {\n          \
+          \                              \"target\": \"name\",\n                 \
+          \                       \"expr:\": \"apache\"\n                        \
+          \                }\n                                    },\n           \
+          \                         {\n                                    \"lte\"\
+          : {\n                                        \"target\": \"timeout\",\n\
+          \                                        \"expr\": 5\n                 \
+          \                   }\n                            ]"
+        items:
+          $ref: '#/definitions/QueryRequestClause'
+        type: array
+      equal:
+        allOf:
+        - $ref: '#/definitions/QueryRequestFilter'
+        description: The target field must be equal to the expr value.
+      gt:
+        allOf:
+        - $ref: '#/definitions/QueryRequestFilter'
+        description: The target field must be greater to the expr value.
+      gte:
+        allOf:
+        - $ref: '#/definitions/QueryRequestFilter'
+        description: The target field must be greater or equal to the expr value.
+      lt:
+        allOf:
+        - $ref: '#/definitions/QueryRequestFilter'
+        description: The target field must be lower than the expr value.
+      lte:
+        allOf:
+        - $ref: '#/definitions/QueryRequestFilter'
+        description: The target field must be lower or equal to the expr value.
+      not:
+        allOf:
+        - $ref: '#/definitions/QueryRequestClause'
+        description: The clause has to be not satisfied.
+      or:
+        description: At least the clause has to be satisfied.
+        example: "#TODO\n                            [\n                         \
+          \       {\n                                    \"equal\": {\n          \
+          \                              \"target\": \"name\",\n                 \
+          \                       \"expr:\": \"apache\"\n                        \
+          \                }\n                                    },\n           \
+          \                         {\n                                    \"lte\"\
+          : {\n                                        \"target\": \"timeout\",\n\
+          \                                        \"expr\": 5\n                 \
+          \                   }\n                            ]"
+        items:
+          $ref: '#/definitions/QueryRequestClause'
+        type: array
+      reg-exp:
+        allOf:
+        - $ref: '#/definitions/QueryRequestFilter'
+        description: The target field must be satisfy the regular expression in expr.
+    type: object
+  QueryRequestFilter:
+    properties:
+      expr:
+        description: The expression to compare to the field.
+        example: apache
+        type: string
+      target:
+        description: The field to compare.
+        example: name
+        type: string
+    required:
+    - expr
+    - target
+    type: object
+  QueryRequestLimit:
+    properties:
+      from:
+        description: Started index of the items to return.
+        example: 1
+        format: int32
+        type: integer
+      to:
+        description: Ended index of the items to return.
+        example: 5
+        format: int32
+        type: integer
+    type: object
+  QueryRequestOrder:
+    properties:
+      mode:
+        description: Order mode.
+        enum:
+        - asc
+        - desc
+        example: asc
+        type: string
+      target:
+        description: The field to compare.
+        example: name
+        type: string
+    required:
+    - mode
+    - target
+    type: object
+  UnauthorizedSchema:
+    properties:
+      description:
+        description: Human readable message that describes the error.
+        enum:
+        - Invalid Username/Password.
+        example: Invalid Username/Password.
+        type: string
+      title:
+        description: Title error
+        enum:
+        - 401 Unauthorized
+        example: 401 Unauthorized
+        type: string
+    required:
+    - description
+    - title
+    type: object
+  UpdateResponse:
+    properties:
+      id:
+        description: id of the updated item.
+        example: apache
+        type: string
+      status:
+        description: Status of the operation.
+        enum:
+        - noop
+        - updated
+        example: noop
+        type: string
+    type: object
+info:
+  title: ASTRID Context Broker API
+  version: 0.0.2
+paths:
+  /catalog:
+    delete:
+      description: Delete agents filtered by the query in the request body from the
+        catalog.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Agents filtered by the query in the request body deleted from
+            the catalog.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Delete (Multiple)
+      tags:
+      - agent-catalog
+    get:
+      description: Get the list of agents in the catalog filtered by the query in
+        the request body.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: List of agents in the catalog filtered by the query in the
+            request body.
+          schema:
+            items:
+              $ref: '#/definitions/AgentCatalog'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Read (Multiple)
+      tags:
+      - agent-catalog
+    post:
+      description: Add new agents to the catalog
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/AgentCatalog'
+          type: array
+      responses:
+        '200':
+          description: Agents inserted in the catalog.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Creation (Multiple)
+      tags:
+      - agent-catalog
+    put:
+      description: Update agents in the catalog.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/AgentCatalog'
+          type: array
+      responses:
+        '200':
+          description: Agents updated in the catalog.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Update (Multiple)
+      tags:
+      - agent-catalog
+  /catalog/ebpf:
+    delete:
+      description: Delete agents filtered by the query in the request body from the
+        catalog.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Agents filtered by the query in the request body deleted from
+            the catalog.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Delete (Multiple)
+      tags:
+      - agent-catalog
+    get:
+      description: Get the list of agents in the catalog filtered by the query in
+        the request body.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: List of agents in the catalog filtered by the query in the
+            request body.
+          schema:
+            items:
+              $ref: '#/definitions/AgentCatalog'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Read (Multiple)
+      tags:
+      - agent-catalog
+    post:
+      description: Add new agents to the catalog
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/AgentCatalog'
+          type: array
+      responses:
+        '200':
+          description: Agents inserted in the catalog.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Creation (Multiple)
+      tags:
+      - agent-catalog
+    put:
+      description: Update agents in the catalog.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/AgentCatalog'
+          type: array
+      responses:
+        '200':
+          description: Agents updated in the catalog.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Update (Multiple)
+      tags:
+      - agent-catalog
+  /catalog/{id}:
+    delete:
+      description: Delete the agent with the given `id` and filtered by the query
+        in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Agent with the given `id` and filtered by the query in the
+            request body deleted from the catalog.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Delete (Single)
+      tags:
+      - agent-catalog
+    get:
+      description: Get the agent in the catalog with the given `id` and filtered by
+        the query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Agent in the catalog with the given `id` and filtered by the
+            query in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/AgentCatalog'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Read (Single)
+      tags:
+      - agent-catalog
+    post:
+      description: Add a new agent in the catalog with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/AgentCatalog'
+          type: array
+      responses:
+        '200':
+          description: Agent with the given `id` inserted in the catalog.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Creation (Single)
+      tags:
+      - agent-catalog
+    put:
+      description: Update the agent in the catalog with the given `id`
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/AgentCatalog'
+          type: array
+      responses:
+        '200':
+          description: Agent with the given `id` updated in the catalog.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Update (Single)
+      tags:
+      - agent-catalog
+  /catalog/ebpf/{id}:
+    delete:
+      description: Delete the agent with the given `id` and filtered by the query
+        in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Agent with the given `id` and filtered by the query in the
+            request body deleted from the catalog.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Delete (Single)
+      tags:
+      - agent-catalog
+    get:
+      description: Get the agent in the catalog with the given `id` and filtered by
+        the query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Agent in the catalog with the given `id` and filtered by the
+            query in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/AgentCatalog'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Read (Single)
+      tags:
+      - agent-catalog
+    post:
+      description: Add a new agent in the catalog with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/AgentCatalog'
+          type: array
+      responses:
+        '200':
+          description: Agent with the given `id` inserted in the catalog.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Creation (Single)
+      tags:
+      - agent-catalog
+    put:
+      description: Update the agent in the catalog with the given `id`
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/AgentCatalog'
+          type: array
+      responses:
+        '200':
+          description: Agent with the given `id` updated in the catalog.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Update (Single)
+      tags:
+      - agent-catalog
+  /config/agent:
+    delete:
+      description: Remove the agent instances filtered by the query in the request
+        body from the execution-environments.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Agent instances filtered by the query in the request body uninstalled.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Instance Uninstall (Multiple)
+      tags:
+      - agent-instance
+    get:
+      description: Get the list of agent instances installed in the execution-environments
+        filtered by the query in the request body.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: List of agent instances installed in the execution-environment
+            filtered by the query in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/AgentInstance'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Instance Read (Multiple)
+      tags:
+      - agent-instance
+    post:
+      description: Install new agent instances in the execution-environments.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/AgentInstance'
+          type: array
+      responses:
+        '200':
+          description: Agent instances installed in the execution environments.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Instance Install (Multiple)
+      tags:
+      - agent-instance
+    put:
+      description: Update the agent instances in the execution-environments.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/AgentInstance'
+          type: array
+      responses:
+        '200':
+          description: Agent instances updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Instance Update (Multiple)
+      tags:
+      - agent-instance
+  /config/agent/{id}:
+    delete:
+      description: Remove the agent instance with the given `id` and filtered by the
+        query in the request body from the execution-environments.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Agent instance with the given `id` and filtered by the query
+            in the request body uninstalled.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Instance Uninstall (Single)
+      tags:
+      - agent-instance
+    get:
+      description: Get the agent instance with the given `id` installed in the execution-environments
+        filtered by the query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Agent instance with the given `id` installed in the execution-environment
+            filtered by the query in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/AgentInstance'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Instance Read (Single)
+      tags:
+      - agent-instance
+    post:
+      description: Install a new agent instance in the execution-environments with
+        the given `id` .
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/AgentInstance'
+          type: array
+      responses:
+        '200':
+          description: Agent instance with the given `id`  installed in the execution
+            environments.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Instance Install (Single)
+      tags:
+      - agent-instance
+    put:
+      description: Update the agent instance in the execution-environments with the
+        given `id` .
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/AgentInstance'
+          type: array
+      responses:
+        '200':
+          description: Agent instance with the given `id` updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Agent Instance Update (Single)
+      tags:
+      - agent-instance
+  /config/connection:
+    delete:
+      description: Delete the connection between execution environments and network
+        links with the given `id` and filtered by the query in the request body.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Connection between execution environments and network links
+            with the given `id` filtered by the query in the request body deleted.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Connection Delete (Single)
+      tags:
+      - connection
+    get:
+      description: Get the connection between execution environments with the given
+        `id` and network links filtered by the query in the request body.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Connection between execution environments and network links
+            with the given `id` and filtered by the query in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/Connection'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Connection Read (Single)
+      tags:
+      - connection
+    post:
+      description: Install a new connection between execution environments and network
+        links with the given `id`.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/Connection'
+          type: array
+      responses:
+        '200':
+          description: Connections created between execution environments and network
+            links.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Connection Creation (Single)
+      tags:
+      - connection
+    put:
+      description: Update the connection between execution environments and network
+        links with the given `id`.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/Connection'
+          type: array
+      responses:
+        '200':
+          description: Connection between execution environments and network links
+            with the given `id` updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Connection Update (Single)
+      tags:
+      - connection
+  /config/connection/{id}:
+    delete:
+      description: Delete the connection between execution environments and network
+        links with the given `id` and filtered by the query in the request body.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Connection between execution environments and network links
+            with the given `id` filtered by the query in the request body deleted.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Connection Delete (Single)
+      tags:
+      - connection
+    get:
+      description: Get the connection between execution environments with the given
+        `id` and network links filtered by the query in the request body.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Connection between execution environments and network links
+            with the given `id` and filtered by the query in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/Connection'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Connection Read (Single)
+      tags:
+      - connection
+    post:
+      description: Install a new connection between execution environments and network
+        links with the given `id`.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/Connection'
+          type: array
+      responses:
+        '200':
+          description: Connections created between execution environments and network
+            links.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Connection Creation (Single)
+      tags:
+      - connection
+    put:
+      description: Update the connection between execution environments and network
+        links with the given `id`.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/Connection'
+          type: array
+      responses:
+        '200':
+          description: Connection between execution environments and network links
+            with the given `id` updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Connection Update (Single)
+      tags:
+      - connection
+  /data:
+    delete:
+      description: Delete data with the given `id` and filtered by the query in the
+        request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Data with the given `id` and filtered by the query in the request
+            body deleted.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Data Delete (Single)
+      tags:
+      - data
+    get:
+      description: Get the data with the given `id` and filtered by the query in the
+        request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Data with the given `id` and filtered by the query in the request
+            body.
+          schema:
+            items:
+              $ref: '#/definitions/Data'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Data Read (Single)
+      tags:
+      - data
+    post:
+      description: Insert new data with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/Data'
+          type: array
+      responses:
+        '200':
+          description: Data with the given `id` inserted.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Data Insert (Single)
+      tags:
+      - data
+    put:
+      description: Update data with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/Data'
+          type: array
+      responses:
+        '200':
+          description: Data with the given `id` updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Data Update (Single)
+      tags:
+      - data
+  /config/exec-env:
+    delete:
+      description: Delete the execution environment with the given `id` and filtered
+        by the query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Execution environment with the given `id` and filtered by the
+            query in the request body deleted.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Delete (Single)
+      tags:
+      - exec-env
+    get:
+      description: Get the execution environment with the given `id` and filtered
+        by the query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Execution environment with the given `id` and filtered by the
+            query in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/ExecEnv'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Read (Single)
+      tags:
+      - exec-env
+    post:
+      description: Create a new execution environment with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/ExecEnv'
+          type: array
+      responses:
+        '200':
+          description: Execution environment with the given `id` created.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Creation (Single)
+      tags:
+      - exec-env
+    put:
+      description: Update the execution environment with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/ExecEnv'
+          type: array
+      responses:
+        '200':
+          description: Execution environment with the given `id` updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Update (Single)
+      tags:
+      - exec-env
+  /config/exec-env/{id}:
+    delete:
+      description: Delete the execution environment with the given `id` and filtered
+        by the query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Execution environment with the given `id` and filtered by the
+            query in the request body deleted.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Delete (Single)
+      tags:
+      - exec-env
+    get:
+      description: Get the execution environment with the given `id` and filtered
+        by the query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Execution environment with the given `id` and filtered by the
+            query in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/ExecEnv'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Read (Single)
+      tags:
+      - exec-env
+    post:
+      description: Create a new execution environment with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/ExecEnv'
+          type: array
+      responses:
+        '200':
+          description: Execution environment with the given `id` created.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Creation (Single)
+      tags:
+      - exec-env
+    put:
+      description: Update the execution environment with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/ExecEnv'
+          type: array
+      responses:
+        '200':
+          description: Execution environment with the given `id` updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Update (Single)
+      tags:
+      - exec-env
+  /config/exec-env-type:
+    delete:
+      description: Delete the execution environment type with the given `id` and filtered
+        by the query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Execution environment type with the given `id` and filtered
+            by the query in the request body deleted.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Type Delete (Single)
+      tags:
+      - exec-env-type
+    get:
+      description: Get the execution environment type with the given `id` and filtered
+        by the query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Execution environment type with the given `id` and filtered
+            by the query in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/ExecEnvType'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Type Read (Single)
+      tags:
+      - exec-env-type
+    post:
+      description: Create new execution environment type with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/ExecEnvType'
+          type: array
+      responses:
+        '200':
+          description: Execution environment type with the given `id` created.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Type Creation (Single)
+      tags:
+      - exec-env-type
+    put:
+      description: Update the execution environment type with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/ExecEnvType'
+          type: array
+      responses:
+        '200':
+          description: Execution environment type with the given `id` updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Type Update (Single)
+      tags:
+      - exec-env-type
+  /config/exec-env-type/{id}:
+    delete:
+      description: Delete the execution environment type with the given `id` and filtered
+        by the query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Execution environment type with the given `id` and filtered
+            by the query in the request body deleted.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Type Delete (Single)
+      tags:
+      - exec-env-type
+    get:
+      description: Get the execution environment type with the given `id` and filtered
+        by the query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Execution environment type with the given `id` and filtered
+            by the query in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/ExecEnvType'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Type Read (Single)
+      tags:
+      - exec-env-type
+    post:
+      description: Create new execution environment type with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/ExecEnvType'
+          type: array
+      responses:
+        '200':
+          description: Execution environment type with the given `id` created.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Type Creation (Single)
+      tags:
+      - exec-env-type
+    put:
+      description: Update the execution environment type with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/ExecEnvType'
+          type: array
+      responses:
+        '200':
+          description: Execution environment type with the given `id` updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Execution Environment Type Update (Single)
+      tags:
+      - exec-env-type
+  /config/networkslink:
+    delete:
+      description: Delete the network link with the given `id` and filtered by the
+        query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Network link with the given `id` and filtered by the query
+            in the request body deleted.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Delete (Single)
+      tags:
+      - network-link
+    get:
+      description: Get the network link with the given `id` and filtered by the query
+        in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Network link with the given `id` and filtered by the query
+            in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/NetworkLink'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Read (Single)
+      tags:
+      - network-link
+    post:
+      description: Create a new network link with the given `id` .
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/NetworkLink'
+          type: array
+      responses:
+        '200':
+          description: Network link with the given `id` created.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Creation (Single)
+      tags:
+      - network-link
+    put:
+      description: Update the network link with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/NetworkLink'
+          type: array
+      responses:
+        '200':
+          description: Network link with the given `id` updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Update (Single)
+      tags:
+      - network-link
+  /config/network-link/{id}:
+    delete:
+      description: Delete the network link with the given `id` and filtered by the
+        query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Network link with the given `id` and filtered by the query
+            in the request body deleted.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Delete (Single)
+      tags:
+      - network-link
+    get:
+      description: Get the network link with the given `id` and filtered by the query
+        in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Network link with the given `id` and filtered by the query
+            in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/NetworkLink'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Read (Single)
+      tags:
+      - network-link
+    post:
+      description: Create a new network link with the given `id` .
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/NetworkLink'
+          type: array
+      responses:
+        '200':
+          description: Network link with the given `id` created.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Creation (Single)
+      tags:
+      - network-link
+    put:
+      description: Update the network link with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/NetworkLink'
+          type: array
+      responses:
+        '200':
+          description: Network link with the given `id` updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Update (Single)
+      tags:
+      - network-link
+  /config/network-link-type:
+    delete:
+      description: Delete the network link type with the given `id` and filtered by
+        the query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Network link type with the given `id` and filtered by the query
+            in the request body deleted.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Type Delete (Single)
+      tags:
+      - network-link-type
+    get:
+      description: Get the network link type with the given `id` and filtered by the
+        query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Network link type with the given `id` and filtered by the query
+            in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/NetworkLinkType'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Type Read (Single)
+      tags:
+      - network-link-type
+    post:
+      description: Create a new network link type with the given `id` .
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/NetworkLinkType'
+          type: array
+      responses:
+        '200':
+          description: Network link type with the given `id` created.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Type Creation (Single)
+      tags:
+      - network-link-type
+    put:
+      description: Update the network link type with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/NetworkLinkType'
+          type: array
+      responses:
+        '200':
+          description: Network link type with the given `id` updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Type Update (Single)
+      tags:
+      - network-link-type
+  /config/network-link-type/{id}:
+    delete:
+      description: Delete the network link type with the given `id` and filtered by
+        the query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Network link type with the given `id` and filtered by the query
+            in the request body deleted.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Type Delete (Single)
+      tags:
+      - network-link-type
+    get:
+      description: Get the network link type with the given `id` and filtered by the
+        query in the request body.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Network link type with the given `id` and filtered by the query
+            in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/NetworkLinkType'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Type Read (Single)
+      tags:
+      - network-link-type
+    post:
+      description: Create a new network link type with the given `id` .
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/NetworkLinkType'
+          type: array
+      responses:
+        '200':
+          description: Network link type with the given `id` created.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Type Creation (Single)
+      tags:
+      - network-link-type
+    put:
+      description: Update the network link type with the given `id`.
+      parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/NetworkLinkType'
+          type: array
+      responses:
+        '200':
+          description: Network link type with the given `id` updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Network Link Type Update (Single)
+      tags:
+      - network-link-type
+produces:
+- application/json
+swagger: '2.0'
+tags:
+- description: "\n    Represents an agent in the catalog.\n    "
+  name: agent-catalog
+- description: "\n    Represents an agent in the catalog.\n    "
+  name: agent-catalog
+- description: "\n    Represents an agent instance installed in an execution environment.\n\
+    \    "
+  name: agent-instance
+- description: "\n    Represents an agent instance installed in an execution environment.\n\
+    \    "
+  name: agent-instance
+- description: "\n    Represents an connection between execution environments and\
+    \ network links.\n    "
+  name: connection
+- description: "\n    Represents an connection between execution environments and\
+    \ network links.\n    "
+  name: connection
+- description: "\n    Represents stored data.\n    "
+  name: data
+- description: "\n    Represents stored data.\n    "
+  name: data
+- description: "\n    Represents an execution environment.\n    "
+  name: exec-env
+- description: "\n    Represents an execution environment.\n    "
+  name: exec-env
+- description: "\n    Represents an execution environment type.\n    "
+  name: exec-env-type
+- description: "\n    Represents an execution environment type.\n    "
+  name: exec-env-type
+- description: "\n    Represents a network link.\n    "
+  name: network-link
+- description: "\n    Represents a network link.\n    "
+  name: network-link
+- description: "\n    Represents a network link type.\n    "
+  name: network-link-type
+- description: "\n    Represents a network link type.\n    "
+  name: network-link-type

@@ -1,4 +1,8 @@
+apispec
 elasticsearch-dsl>=7.0.0
 falcon
+falcon-apispec
 falcon-auth
+falcon-marshmallow
+swagger-ui-py
 waitress

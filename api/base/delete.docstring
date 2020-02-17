@@ -1,0 +1,20 @@
+{delete_description}
+---
+summary: {delete_summary}
+description: {delete_description}
+parameters:
+    - name: payload
+      required: true
+      in: body
+      schema: QueryRequestSchema
+tags: [{tag}]
+responses:
+    200:
+        description: {delete_responses_200_description}
+        schema: DeleteResponseSchema
+    400:
+        description: Bad request.
+        schema: BadRequestSchema
+    401:
+        description: Unauthorized.
+        schema: UnauthorizedSchema

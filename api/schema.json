@@ -1,0 +1,3589 @@
+{
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "agent-catalog",
+      "description": "\n    Represents an agent in the catalog.\n    "
+    },
+    {
+      "name": "agent-catalog",
+      "description": "\n    Represents an agent in the catalog.\n    "
+    },
+    {
+      "name": "agent-instance",
+      "description": "\n    Represents an agent instance installed in an execution environment.\n    "
+    },
+    {
+      "name": "agent-instance",
+      "description": "\n    Represents an agent instance installed in an execution environment.\n    "
+    },
+    {
+      "name": "connection",
+      "description": "\n    Represents an connection between execution environments and network links.\n    "
+    },
+    {
+      "name": "connection",
+      "description": "\n    Represents an connection between execution environments and network links.\n    "
+    },
+    {
+      "name": "data",
+      "description": "\n    Represents stored data.\n    "
+    },
+    {
+      "name": "data",
+      "description": "\n    Represents stored data.\n    "
+    },
+    {
+      "name": "exec-env",
+      "description": "\n    Represents an execution environment.\n    "
+    },
+    {
+      "name": "exec-env",
+      "description": "\n    Represents an execution environment.\n    "
+    },
+    {
+      "name": "exec-env-type",
+      "description": "\n    Represents an execution environment type.\n    "
+    },
+    {
+      "name": "exec-env-type",
+      "description": "\n    Represents an execution environment type.\n    "
+    },
+    {
+      "name": "network-link",
+      "description": "\n    Represents a network link.\n    "
+    },
+    {
+      "name": "network-link",
+      "description": "\n    Represents a network link.\n    "
+    },
+    {
+      "name": "network-link-type",
+      "description": "\n    Represents a network link type.\n    "
+    },
+    {
+      "name": "network-link-type",
+      "description": "\n    Represents a network link type.\n    "
+    }
+  ],
+  "paths": {
+    "/catalog": {
+      "delete": {
+        "summary": "Agent Delete (Multiple)",
+        "description": "Delete agents filtered by the query in the request body from the catalog.",
+        "parameters": [
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agents filtered by the query in the request body deleted from the catalog.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Agent Read (Multiple)",
+        "description": "Get the list of agents in the catalog filtered by the query in the request body.",
+        "parameters": [
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of agents in the catalog filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentCatalog"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Agent Creation (Multiple)",
+        "description": "Add new agents to the catalog",
+        "parameters": [
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentCatalog"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agents inserted in the catalog.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Agent Update (Multiple)",
+        "description": "Update agents in the catalog.",
+        "parameters": [
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentCatalog"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agents updated in the catalog.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/ebpf": {
+      "delete": {
+        "summary": "Agent Delete (Multiple)",
+        "description": "Delete agents filtered by the query in the request body from the catalog.",
+        "parameters": [
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agents filtered by the query in the request body deleted from the catalog.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Agent Read (Multiple)",
+        "description": "Get the list of agents in the catalog filtered by the query in the request body.",
+        "parameters": [
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of agents in the catalog filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentCatalog"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Agent Creation (Multiple)",
+        "description": "Add new agents to the catalog",
+        "parameters": [
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentCatalog"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agents inserted in the catalog.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Agent Update (Multiple)",
+        "description": "Update agents in the catalog.",
+        "parameters": [
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentCatalog"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agents updated in the catalog.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/{id}": {
+      "delete": {
+        "summary": "Agent Delete (Single)",
+        "description": "Delete the agent with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent with the given `id` and filtered by the query in the request body deleted from the catalog.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Agent Read (Single)",
+        "description": "Get the agent in the catalog with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent in the catalog with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentCatalog"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Agent Creation (Single)",
+        "description": "Add a new agent in the catalog with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentCatalog"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent with the given `id` inserted in the catalog.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Agent Update (Single)",
+        "description": "Update the agent in the catalog with the given `id`",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentCatalog"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent with the given `id` updated in the catalog.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/catalog/ebpf/{id}": {
+      "delete": {
+        "summary": "Agent Delete (Single)",
+        "description": "Delete the agent with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent with the given `id` and filtered by the query in the request body deleted from the catalog.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Agent Read (Single)",
+        "description": "Get the agent in the catalog with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent in the catalog with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentCatalog"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Agent Creation (Single)",
+        "description": "Add a new agent in the catalog with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentCatalog"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent with the given `id` inserted in the catalog.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Agent Update (Single)",
+        "description": "Update the agent in the catalog with the given `id`",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentCatalog"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "agent-catalog"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent with the given `id` updated in the catalog.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/config/agent": {
+      "delete": {
+        "summary": "Agent Instance Uninstall (Multiple)",
+        "description": "Remove the agent instances filtered by the query in the request body from the execution-environments.",
+        "parameters": [
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "agent-instance"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent instances filtered by the query in the request body uninstalled.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Agent Instance Read (Multiple)",
+        "description": "Get the list of agent instances installed in the execution-environments filtered by the query in the request body.",
+        "parameters": [
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "agent-instance"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of agent instances installed in the execution-environment filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentInstance"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Agent Instance Install (Multiple)",
+        "description": "Install new agent instances in the execution-environments.",
+        "parameters": [
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentInstance"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "agent-instance"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent instances installed in the execution environments.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Agent Instance Update (Multiple)",
+        "description": "Update the agent instances in the execution-environments.",
+        "parameters": [
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentInstance"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "agent-instance"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent instances updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/config/agent/{id}": {
+      "delete": {
+        "summary": "Agent Instance Uninstall (Single)",
+        "description": "Remove the agent instance with the given `id` and filtered by the query in the request body from the execution-environments.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "agent-instance"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent instance with the given `id` and filtered by the query in the request body uninstalled.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Agent Instance Read (Single)",
+        "description": "Get the agent instance with the given `id` installed in the execution-environments filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "agent-instance"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent instance with the given `id` installed in the execution-environment filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentInstance"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Agent Instance Install (Single)",
+        "description": "Install a new agent instance in the execution-environments with the given `id` .",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentInstance"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "agent-instance"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent instance with the given `id`  installed in the execution environments.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Agent Instance Update (Single)",
+        "description": "Update the agent instance in the execution-environments with the given `id` .",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AgentInstance"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "agent-instance"
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent instance with the given `id` updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/config/connection": {
+      "delete": {
+        "summary": "Connection Delete (Single)",
+        "description": "Delete the connection between execution environments and network links with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "connection"
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection between execution environments and network links with the given `id` filtered by the query in the request body deleted.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Connection Read (Single)",
+        "description": "Get the connection between execution environments with the given `id` and network links filtered by the query in the request body.",
+        "parameters": [
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "connection"
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection between execution environments and network links with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Connection"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Connection Creation (Single)",
+        "description": "Install a new connection between execution environments and network links with the given `id`.",
+        "parameters": [
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Connection"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "connection"
+        ],
+        "responses": {
+          "200": {
+            "description": "Connections created between execution environments and network links.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Connection Update (Single)",
+        "description": "Update the connection between execution environments and network links with the given `id`.",
+        "parameters": [
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Connection"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "connection"
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection between execution environments and network links with the given `id` updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/config/connection/{id}": {
+      "delete": {
+        "summary": "Connection Delete (Single)",
+        "description": "Delete the connection between execution environments and network links with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "connection"
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection between execution environments and network links with the given `id` filtered by the query in the request body deleted.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Connection Read (Single)",
+        "description": "Get the connection between execution environments with the given `id` and network links filtered by the query in the request body.",
+        "parameters": [
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "connection"
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection between execution environments and network links with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Connection"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Connection Creation (Single)",
+        "description": "Install a new connection between execution environments and network links with the given `id`.",
+        "parameters": [
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Connection"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "connection"
+        ],
+        "responses": {
+          "200": {
+            "description": "Connections created between execution environments and network links.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Connection Update (Single)",
+        "description": "Update the connection between execution environments and network links with the given `id`.",
+        "parameters": [
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Connection"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "connection"
+        ],
+        "responses": {
+          "200": {
+            "description": "Connection between execution environments and network links with the given `id` updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/data": {
+      "delete": {
+        "summary": "Data Delete (Single)",
+        "description": "Delete data with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "data"
+        ],
+        "responses": {
+          "200": {
+            "description": "Data with the given `id` and filtered by the query in the request body deleted.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Data Read (Single)",
+        "description": "Get the data with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "data"
+        ],
+        "responses": {
+          "200": {
+            "description": "Data with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Data"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Data Insert (Single)",
+        "description": "Insert new data with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Data"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "data"
+        ],
+        "responses": {
+          "200": {
+            "description": "Data with the given `id` inserted.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Data Update (Single)",
+        "description": "Update data with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Data"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "data"
+        ],
+        "responses": {
+          "200": {
+            "description": "Data with the given `id` updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/config/exec-env": {
+      "delete": {
+        "summary": "Execution Environment Delete (Single)",
+        "description": "Delete the execution environment with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "exec-env"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment with the given `id` and filtered by the query in the request body deleted.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Execution Environment Read (Single)",
+        "description": "Get the execution environment with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "exec-env"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExecEnv"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Execution Environment Creation (Single)",
+        "description": "Create a new execution environment with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExecEnv"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "exec-env"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment with the given `id` created.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Execution Environment Update (Single)",
+        "description": "Update the execution environment with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExecEnv"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "exec-env"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment with the given `id` updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/config/exec-env/{id}": {
+      "delete": {
+        "summary": "Execution Environment Delete (Single)",
+        "description": "Delete the execution environment with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "exec-env"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment with the given `id` and filtered by the query in the request body deleted.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Execution Environment Read (Single)",
+        "description": "Get the execution environment with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "exec-env"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExecEnv"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Execution Environment Creation (Single)",
+        "description": "Create a new execution environment with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExecEnv"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "exec-env"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment with the given `id` created.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Execution Environment Update (Single)",
+        "description": "Update the execution environment with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExecEnv"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "exec-env"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment with the given `id` updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/config/exec-env-type": {
+      "delete": {
+        "summary": "Execution Environment Type Delete (Single)",
+        "description": "Delete the execution environment type with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "exec-env-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment type with the given `id` and filtered by the query in the request body deleted.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Execution Environment Type Read (Single)",
+        "description": "Get the execution environment type with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "exec-env-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment type with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExecEnvType"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Execution Environment Type Creation (Single)",
+        "description": "Create new execution environment type with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExecEnvType"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "exec-env-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment type with the given `id` created.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Execution Environment Type Update (Single)",
+        "description": "Update the execution environment type with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExecEnvType"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "exec-env-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment type with the given `id` updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/config/exec-env-type/{id}": {
+      "delete": {
+        "summary": "Execution Environment Type Delete (Single)",
+        "description": "Delete the execution environment type with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "exec-env-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment type with the given `id` and filtered by the query in the request body deleted.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Execution Environment Type Read (Single)",
+        "description": "Get the execution environment type with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "exec-env-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment type with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExecEnvType"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Execution Environment Type Creation (Single)",
+        "description": "Create new execution environment type with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExecEnvType"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "exec-env-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment type with the given `id` created.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Execution Environment Type Update (Single)",
+        "description": "Update the execution environment type with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExecEnvType"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "exec-env-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Execution environment type with the given `id` updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/config/networkslink": {
+      "delete": {
+        "summary": "Network Link Delete (Single)",
+        "description": "Delete the network link with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "network-link"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link with the given `id` and filtered by the query in the request body deleted.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Network Link Read (Single)",
+        "description": "Get the network link with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "network-link"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkLink"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Network Link Creation (Single)",
+        "description": "Create a new network link with the given `id` .",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkLink"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "network-link"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link with the given `id` created.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Network Link Update (Single)",
+        "description": "Update the network link with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkLink"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "network-link"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link with the given `id` updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/config/network-link/{id}": {
+      "delete": {
+        "summary": "Network Link Delete (Single)",
+        "description": "Delete the network link with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "network-link"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link with the given `id` and filtered by the query in the request body deleted.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Network Link Read (Single)",
+        "description": "Get the network link with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "network-link"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkLink"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Network Link Creation (Single)",
+        "description": "Create a new network link with the given `id` .",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkLink"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "network-link"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link with the given `id` created.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Network Link Update (Single)",
+        "description": "Update the network link with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkLink"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "network-link"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link with the given `id` updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/config/network-link-type": {
+      "delete": {
+        "summary": "Network Link Type Delete (Single)",
+        "description": "Delete the network link type with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "network-link-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link type with the given `id` and filtered by the query in the request body deleted.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Network Link Type Read (Single)",
+        "description": "Get the network link type with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "network-link-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link type with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkLinkType"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Network Link Type Creation (Single)",
+        "description": "Create a new network link type with the given `id` .",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkLinkType"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "network-link-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link type with the given `id` created.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Network Link Type Update (Single)",
+        "description": "Update the network link type with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkLinkType"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "network-link-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link type with the given `id` updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    },
+    "/config/network-link-type/{id}": {
+      "delete": {
+        "summary": "Network Link Type Delete (Single)",
+        "description": "Delete the network link type with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "network-link-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link type with the given `id` and filtered by the query in the request body deleted.",
+            "schema": {
+              "$ref": "#/definitions/DeleteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Network Link Type Read (Single)",
+        "description": "Get the network link type with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "network-link-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link type with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkLinkType"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Network Link Type Creation (Single)",
+        "description": "Create a new network link type with the given `id` .",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkLinkType"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "network-link-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link type with the given `id` created.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CreateResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request.",
+            "schema": {
+              "$ref": "#/definitions/BadRequestSchema"
+            }
+          },
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Network Link Type Update (Single)",
+        "description": "Update the network link type with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/NetworkLinkType"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "network-link-type"
+        ],
+        "responses": {
+          "200": {
+            "description": "Network link type with the given `id` updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UpdateResponse"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "schema": {
+              "$ref": "#/definitions/UnauthorizedSchema"
+            }
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "ASTRID Context Broker API",
+    "version": "0.0.2"
+  },
+  "swagger": "2.0",
+  "definitions": {
+    "BadRequestSchema": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "enum": [
+            "400 Bad Request"
+          ],
+          "description": "Title error",
+          "example": "400 Bad Request"
+        },
+        "description": {
+          "type": "string",
+          "description": "Human readable message that describes the error.",
+          "example": "Could not decode the request body, either because it was not valid JSON or because it was not encoded as UTF-8."
+        }
+      },
+      "required": [
+        "description",
+        "title"
+      ]
+    },
+    "UnauthorizedSchema": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "enum": [
+            "401 Unauthorized"
+          ],
+          "description": "Title error",
+          "example": "401 Unauthorized"
+        },
+        "description": {
+          "type": "string",
+          "enum": [
+            "Invalid Username/Password."
+          ],
+          "description": "Human readable message that describes the error.",
+          "example": "Invalid Username/Password."
+        }
+      },
+      "required": [
+        "description",
+        "title"
+      ]
+    },
+    "QueryRequestLimit": {
+      "type": "object",
+      "properties": {
+        "to": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Ended index of the items to return.",
+          "example": 5
+        },
+        "from": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Started index of the items to return.",
+          "example": 1
+        }
+      }
+    },
+    "QueryRequestOrder": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "The field to compare.",
+          "example": "name"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "description": "Order mode.",
+          "example": "asc"
+        }
+      },
+      "required": [
+        "mode",
+        "target"
+      ]
+    },
+    "QueryRequestFilter": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "The field to compare.",
+          "example": "name"
+        },
+        "expr": {
+          "type": "string",
+          "description": "The expression to compare to the field.",
+          "example": "apache"
+        }
+      },
+      "required": [
+        "expr",
+        "target"
+      ]
+    },
+    "QueryRequestClause": {
+      "type": "object",
+      "properties": {
+        "gte": {
+          "description": "The target field must be greater or equal to the expr value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestFilter"
+            }
+          ]
+        },
+        "lte": {
+          "description": "The target field must be lower or equal to the expr value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestFilter"
+            }
+          ]
+        },
+        "or": {
+          "type": "array",
+          "description": "At least the clause has to be satisfied.",
+          "example": "#TODO\n                            [\n                                {\n                                    \"equal\": {\n                                        \"target\": \"name\",\n                                        \"expr:\": \"apache\"\n                                        }\n                                    },\n                                    {\n                                    \"lte\": {\n                                        \"target\": \"timeout\",\n                                        \"expr\": 5\n                                    }\n                            ]",
+          "items": {
+            "$ref": "#/definitions/QueryRequestClause"
+          }
+        },
+        "gt": {
+          "description": "The target field must be greater to the expr value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestFilter"
+            }
+          ]
+        },
+        "and": {
+          "type": "array",
+          "description": "All the clause has to be satisfied.",
+          "example": "#TODO\n                            [\n                                {\n                                    \"equal\": {\n                                        \"target\": \"name\",\n                                        \"expr:\": \"apache\"\n                                        }\n                                    },\n                                    {\n                                    \"lte\": {\n                                        \"target\": \"timeout\",\n                                        \"expr\": 5\n                                    }\n                            ]",
+          "items": {
+            "$ref": "#/definitions/QueryRequestClause"
+          }
+        },
+        "lt": {
+          "description": "The target field must be lower than the expr value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestFilter"
+            }
+          ]
+        },
+        "reg-exp": {
+          "description": "The target field must be satisfy the regular expression in expr.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestFilter"
+            }
+          ]
+        },
+        "not": {
+          "description": "The clause has to be not satisfied.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestClause"
+            }
+          ]
+        },
+        "equal": {
+          "description": "The target field must be equal to the expr value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestFilter"
+            }
+          ]
+        }
+      }
+    },
+    "QueryRequest": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "description": "Limit the number of items to return.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestLimit"
+            }
+          ]
+        },
+        "order": {
+          "type": "array",
+          "description": "Order the filtered items.",
+          "items": {
+            "$ref": "#/definitions/QueryRequestOrder"
+          }
+        },
+        "where": {
+          "description": "Filter the items based on different conditions.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestClause"
+            }
+          ]
+        },
+        "select": {
+          "type": "array",
+          "description": "Fields to return.",
+          "example": "[id, name]",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeleteResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "noop",
+            "updated"
+          ],
+          "description": "Status of the operation.",
+          "example": "noop"
+        },
+        "id": {
+          "type": "string",
+          "description": "id of the updated item.",
+          "example": "apache"
+        }
+      }
+    },
+    "AgentParameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Parameter name.",
+          "example": "period"
+        },
+        "list": {
+          "type": "boolean",
+          "description": "Indicate if the parameter can have multiple values.",
+          "example": true
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "integer",
+            "number",
+            "time-duration",
+            "string",
+            "choice",
+            "boolean",
+            "binary"
+          ],
+          "description": "Parameter type.",
+          "example": "integer"
+        },
+        "values": {
+          "type": "array",
+          "description": "Possible values if the parameter type is choice.",
+          "items": {
+            "type": "string",
+            "example": [
+              "mysql",
+              "http"
+            ]
+          }
+        }
+      },
+      "required": [
+        "list",
+        "name",
+        "type"
+      ]
+    },
+    "AgentCatalog": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Agent name.",
+          "example": "filebeat"
+        },
+        "parameters": {
+          "type": "array",
+          "description": "List of agent parameters",
+          "items": {
+            "$ref": "#/definitions/AgentParameter"
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the agent in the catalog.",
+          "example": "agent-filebeat-1"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "parameters"
+      ]
+    },
+    "CreateResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Status of the operation.",
+          "example": "created"
+        },
+        "id": {
+          "type": "string",
+          "description": "id of the created item.",
+          "example": "apache"
+        }
+      }
+    },
+    "UpdateResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "noop",
+            "updated"
+          ],
+          "description": "Status of the operation.",
+          "example": "noop"
+        },
+        "id": {
+          "type": "string",
+          "description": "id of the updated item.",
+          "example": "apache"
+        }
+      }
+    },
+    "AgentInstance": {
+      "type": "object",
+      "properties": {
+        "exec_env_id": {
+          "type": "string",
+          "description": "ID of the execution environment where the agent instance is installed",
+          "example": "exec-env-1"
+        },
+        "agent_catalog_id": {
+          "type": "string",
+          "description": "ID of the agent in the catalog",
+          "example": "agent-filebeat-1"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the agent instance installed in an execution environment.",
+          "example": "agent-instance-1"
+        }
+      },
+      "required": [
+        "agent_catalog_id",
+        "exec_env_id",
+        "id"
+      ]
+    },
+    "Connection": {
+      "type": "object",
+      "properties": {
+        "exec_env_id": {
+          "type": "string",
+          "description": "ID of the connected execution environment",
+          "example": "exec-env-1"
+        },
+        "network_link_id": {
+          "type": "string",
+          "description": "ID of the connected network link",
+          "example": "network-link-1"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of connection.",
+          "example": "connection-1"
+        }
+      },
+      "required": [
+        "exec_env_id",
+        "id",
+        "network_link_id"
+      ]
+    },
+    "Data": {
+      "type": "object",
+      "properties": {
+        "timestamp_event": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the event related to the collected data",
+          "example": "#TODO"
+        },
+        "exec_env_id": {
+          "type": "string",
+          "description": "ID of the execution environment where the data was collected",
+          "example": "exec-env-1"
+        },
+        "agent_instance_id": {
+          "type": "string",
+          "description": "ID of the agent instance in the execution environment that collected the data",
+          "example": "agent-filebeat-1"
+        },
+        "timestamp_agent": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the agent instance collected the data",
+          "example": "#TODO"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the data.",
+          "example": "data-1"
+        }
+      },
+      "required": [
+        "agent_instance_id",
+        "exec_env_id",
+        "id",
+        "timestamp_agent",
+        "timestamp_event"
+      ]
+    },
+    "ExecEnv": {
+      "type": "object",
+      "properties": {
+        "type_id": {
+          "type": "string",
+          "description": "ID of the execution environment type.",
+          "example": "vm"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the execution environment.",
+          "example": "exec-env-type"
+        },
+        "hostname": {
+          "type": "string",
+          "description": "Hostname of the execution environment.",
+          "example": "192.168.1.2"
+        }
+      },
+      "required": [
+        "hostname",
+        "id",
+        "type_id"
+      ]
+    },
+    "ExecEnvType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the execution environment.",
+          "example": "Virtual Machine"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the execution environment type.",
+          "example": "vm"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "NetworkLink": {
+      "type": "object",
+      "properties": {
+        "type_id": {
+          "type": "string",
+          "description": "ID of the network link type.",
+          "example": "pnt2pnt"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the network link.",
+          "example": "network-link-1"
+        }
+      },
+      "required": [
+        "id",
+        "type_id"
+      ]
+    },
+    "NetworkLinkType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network link type.",
+          "example": "Point to point"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the network link type.",
+          "example": "pnt2pnt"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    }
+  }
+}

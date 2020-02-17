@@ -1,0 +1,29 @@
+{post_description}
+---
+summary: {post_summary}
+description: {post_description}
+parameters:
+    - name: id
+      required: true
+      in: path
+      type: String
+    - name: payload
+      required: true
+      in: body
+      schema:
+        type: array
+        items: {schema}
+tags: [{tag}]
+responses:
+    200:
+        description: {post_responses_200_description}
+        schema:
+            type: array
+            items: CreateResponseSchema
+    400:
+        description: Bad request.
+        schema: BadRequestSchema
+    401:
+        description: Unauthorized.
+        schema: UnauthorizedSchema
+
