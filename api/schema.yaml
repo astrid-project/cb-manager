@@ -2415,39 +2415,37 @@ produces:
 - application/json
 swagger: '2.0'
 tags:
-- description: "\n    Represents an agent in the catalog.\n    "
+- description: Represents an agent in the catalog.
   name: agent-catalog
-- description: "\n    Represents an agent in the catalog.\n    "
+- description: Represents an agent in the catalog.
   name: agent-catalog
-- description: "\n    Represents an agent instance installed in an execution environment.\n\
-    \    "
+- description: Represents an agent instance installed in an execution environment.
   name: agent-instance
-- description: "\n    Represents an agent instance installed in an execution environment.\n\
-    \    "
+- description: Represents an agent instance installed in an execution environment.
   name: agent-instance
-- description: "\n    Represents an connection between execution environments and\
-    \ network links.\n    "
+- description: Represents an connection between execution environments and network
+    links.
   name: connection
-- description: "\n    Represents an connection between execution environments and\
-    \ network links.\n    "
+- description: Represents an connection between execution environments and network
+    links.
   name: connection
-- description: "\n    Represents stored data.\n    "
+- description: Represents stored data.
   name: data
-- description: "\n    Represents stored data.\n    "
+- description: Represents stored data.
   name: data
-- description: "\n    Represents an execution environment.\n    "
+- description: Represents an execution environment.
   name: exec-env
-- description: "\n    Represents an execution environment.\n    "
+- description: Represents an execution environment.
   name: exec-env
-- description: "\n    Represents an execution environment type.\n    "
+- description: Represents an execution environment type.
   name: exec-env-type
-- description: "\n    Represents an execution environment type.\n    "
+- description: Represents an execution environment type.
   name: exec-env-type
-- description: "\n    Represents a network link.\n    "
+- description: Represents a network link.
   name: network-link
-- description: "\n    Represents a network link.\n    "
+- description: Represents a network link.
   name: network-link
-- description: "\n    Represents a network link type.\n    "
+- description: Represents a network link type.
   name: network-link-type
-- description: "\n    Represents a network link type.\n    "
+- description: Represents a network link type.
   name: network-link-type

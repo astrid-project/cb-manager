@@ -25,6 +25,6 @@ def docstring_parameter(**kwrd_params):
                 mth.__doc__ = file.read().format(**kwrd_params)
             module = importlib.import_module('schema')
             schema = getattr(module, kwrd_params.get('schema', ''))
-            setattr(self, 'tag', { 'name': kwrd_params.get('tag', ''), 'description': schema.__doc__ })
+            setattr(self, 'tag', { 'name': kwrd_params.get('tag', ''), 'description': schema.__doc__.strip(' \n') })
         return self
     return decorator
