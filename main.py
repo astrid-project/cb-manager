@@ -34,7 +34,7 @@ es_timeout = config_parser.get('elasticsearch', 'timeout')
 
 print(f'{title} v{version}')
 
-<
+
 parser = argparse.ArgumentParser(
     prog='python3 {__FILENAME__}', description=f'{title}: {description}')
 
