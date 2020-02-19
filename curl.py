@@ -12,7 +12,7 @@ description = config_parser.get('info', 'description')
 version = config_parser.get('info', 'version')
 
 ip = 'localhost'
-port = config_parser.get('local-control-plane', 'port')
+port = config_parser.get('context-broker', 'port')
 username = config_parser.get('auth', 'username')
 password = 'astrid'
 timeout = 20
