@@ -3,6 +3,7 @@ import elasticsearch
 from elasticsearch_dsl import Search, Q
 from utils import fix_target
 
+
 class QueryParser:
     def __init__(self, index):
         self.s = Search(index=index)
@@ -16,6 +17,9 @@ class QueryParser:
         except elasticsearch.RequestError as req_error:
             raise falcon.HTTPBadRequest(
                 title=req_error.error, description=req_error.info)
+        except:
+            raise falcon.HTTPBadRequest(
+                title='Not valid JSON', description='The request has a not valid JSON body.')
         return self.s
 
     def _select(self, query):
