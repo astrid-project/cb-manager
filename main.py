@@ -13,6 +13,7 @@ import argparse
 import falcon
 import hashlib
 import json
+import threading
 import waitress
 
 
@@ -69,6 +70,18 @@ if args.write_config:
 if args.version is not None:
     print(args.version)
 else:
+    def elastic_connection():
+        try:
+            print(f'Info: start connection to Elasticsearch ({args.es_endpoint}).')
+            connections.create_connection(hosts=args.es_endpoint, timeout=args.es_timeout)
+        except:
+            print(f'Error: connection to Elasticsearch ({args.es_endpoint}) not possible.')
+            print(f'Try again after {args,es_timeout} seconds.')
+            threading.Timer(args,es_timeout, elastic_connection).start()
+        else:
+            print(f'Success: connection to Elasticsearch ({args.es_endpoint}) established.')
+
+
     def auth(username, password):
         if username == args.auth_username and hashlib.sha224(password.encode('utf-8')).hexdigest() == args.auth_password:
             return {'username': username}
@@ -109,7 +122,7 @@ else:
     for schema in BadRequestSchema, UnauthorizedSchema:
         api_spec.components.schema(schema.__name__, schema=schema)
 
-    connections.create_connection(hosts=args.es_endpoint, timeout=args.es_timeout)
+    elastic_connection()
 
     for Resource in resource_set:
         Resource.doc_cls.init()
