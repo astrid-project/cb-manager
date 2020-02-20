@@ -13,7 +13,6 @@ import argparse
 import falcon
 import hashlib
 import json
-import threading
 import waitress
 
 
@@ -76,8 +75,8 @@ else:
             connections.create_connection(hosts=args.es_endpoint, timeout=args.es_timeout)
         except:
             print(f'Error: connection to Elasticsearch ({args.es_endpoint}) not possible.')
-            print(f'Try again after {args,es_timeout} seconds.')
-            threading.Timer(args,es_timeout, elastic_connection).start()
+            print(f'Info: try again.')
+            elastic_connection()
         else:
             print(f'Success: connection to Elasticsearch ({args.es_endpoint}) established.')
 
@@ -125,11 +124,11 @@ else:
     elastic_connection()
 
     for Resource in resource_set:
-        Resource.doc_cls.init()
+        resource = Resource()
         for route in wrap(Resource.routes):
-            resource = Resource()
             api.add_route(route, resource)
             api_spec.path(resource=resource)
+            print(f'Success: {route} endpoint configured.')
 
     with open('./api/schema.yaml', 'w') as file:
         file.write(api_spec.to_yaml())

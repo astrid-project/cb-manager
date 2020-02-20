@@ -4,6 +4,21 @@ import elasticsearch
 from utils import *
 
 class BaseResource(object):
+    def __init__(self):
+        self.__init()
+
+    def __init(self):
+        try:
+            print(f'Info: start initialization index {self.doc_cls.Index.name}.')
+            self.doc_cls.init()
+        except:
+            print(f'Error: initialization index {self.doc_cls.Index.name} not possible.')
+            print(f'Info: try again.')
+            self.__init()
+        else:
+            print(f'Success: index {self.doc_cls.Index.name} initialized')
+
+
     def on_base_get(self, req, resp, id=None):
         try:
             res = QueryParser(index=self.doc_cls.Index.name).parse(
