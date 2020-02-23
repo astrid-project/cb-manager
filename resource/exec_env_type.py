@@ -5,7 +5,7 @@ from utils import docstring_parameter
 
 
 class ExecEnvTypeDocument(Document):
-    name = Text()
+    name = Text(required=True)
 
     class Index:
         name = 'exec-env-type'
@@ -27,7 +27,7 @@ class ExecEnvTypeDocument(Document):
 class ExecEnvTypeResource(BaseResource):
     doc_cls = ExecEnvTypeDocument
     doc_name = 'Execution Environment Type'
-    routes = '/config/exec-env-type', '/config/exec-env-type/{id}'
+    routes = '/config/exec-env-type/'
 
 
 @docstring_parameter(docstring='selected', schema='ExecEnvTypeSchema', tag='exec-env-type',
@@ -46,4 +46,4 @@ class ExecEnvTypeResource(BaseResource):
 class ExecEnvTypeSelectedResource(BaseResource):
     doc_cls = ExecEnvTypeDocument
     doc_name = 'Execution Environment Type'
-    routes = '/config/exec-env-type', '/config/exec-env-type/{id}'
+    routes = '/config/exec-env-type/{id}'

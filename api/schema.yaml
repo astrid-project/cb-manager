@@ -3,53 +3,65 @@ consumes:
 definitions:
   AgentCatalog:
     properties:
+      actions:
+        description: Action properties
+        items:
+          $ref: '#/definitions/AgentCatalogAction'
+        type: array
       id:
         description: ID of the agent in the catalog.
-        example: agent-filebeat-1
+        example: uyPMaXABjPI5oepgjezR
         type: string
       name:
         description: Agent name.
         example: filebeat
         type: string
       parameters:
-        description: List of agent parameters
+        description: Parameter properties
         items:
-          $ref: '#/definitions/AgentParameter'
+          $ref: '#/definitions/AgentCatalogParameter'
         type: array
     required:
+    - actions
     - id
     - name
     - parameters
     type: object
-  AgentInstance:
+  AgentCatalogAction:
     properties:
-      agent_catalog_id:
-        description: ID of the agent in the catalog
-        example: agent-filebeat-1
+      name:
+        description: Action name
+        enum:
+        - start
+        - stop
+        - install
+        - uninstall
+        example: start
         type: string
-      exec_env_id:
-        description: ID of the execution environment where the agent instance is installed
-        example: exec-env-1
-        type: string
-      id:
-        description: ID of the agent instance installed in an execution environment.
-        example: agent-instance-1
-        type: string
+      recipe:
+        description: Action recipe
+        items:
+          $ref: '#/definitions/Recipe'
+        type: array
     required:
-    - agent_catalog_id
-    - exec_env_id
-    - id
+    - name
+    - recipe
     type: object
-  AgentParameter:
+  AgentCatalogParameter:
     properties:
       list:
         description: Indicate if the parameter can have multiple values.
         example: true
         type: boolean
       name:
-        description: Parameter name.
+        description: Parameter name
         example: period
         type: string
+      recipe:
+        description: Parameter recipe
+        items:
+          $ref: '#/definitions/Recipe'
+        type: array
       type:
         description: Parameter type.
         enum:
@@ -71,9 +83,55 @@ definitions:
           type: string
         type: array
     required:
-    - list
     - name
+    - recipe
     - type
+    type: object
+  AgentInstance:
+    properties:
+      agent_catalog_id:
+        description: ID of the agent in the catalog
+        example: 23jqlaJVPCGa4C0o6ljn
+        type: string
+      exec_env_id:
+        description: ID of the execution environment where the agent instance is installed
+        example: 0xUosnMTCgO5FgVZLbQs
+        type: string
+      id:
+        description: ID of the agent instance installed in an execution environment.
+        example: uyPMaXABjPI5oepgjezR
+        type: string
+      parameters:
+        description: List of agent instance parameters
+        items:
+          $ref: '#/definitions/AgentInstanceParameter'
+        type: array
+      status:
+        description: Status of the agent instance
+        enum:
+        - start
+        - stop
+        example: start
+        type: string
+    required:
+    - agent_catalog_id
+    - exec_env_id
+    - id
+    - status
+    type: object
+  AgentInstanceParameter:
+    properties:
+      name:
+        description: Parameter name
+        example: period
+        type: string
+      value:
+        description: Paremeter value
+        example: 10s
+        type: string
+    required:
+    - name
+    - value
     type: object
   BadRequestSchema:
     properties:
@@ -84,8 +142,6 @@ definitions:
         type: string
       title:
         description: Title error
-        enum:
-        - 400 Bad Request
         example: 400 Bad Request
         type: string
     required:
@@ -96,15 +152,15 @@ definitions:
     properties:
       exec_env_id:
         description: ID of the connected execution environment
-        example: exec-env-1
+        example: 1V4nbnfz981Mn95RPtTr
         type: string
       id:
         description: ID of connection.
-        example: connection-1
+        example: aZ0aLlJ5Cq84Hsy3SyTW
         type: string
       network_link_id:
         description: ID of the connected network link
-        example: network-link-1
+        example: JAwfDEY7f2AtiEldMjPW
         type: string
     required:
     - exec_env_id
@@ -113,29 +169,45 @@ definitions:
     type: object
   CreateResponse:
     properties:
-      id:
-        description: id of the created item.
-        example: apache
-        type: string
+      data:
+        additionalProperties:
+          description: Field value.
+          example: vCPPaXABjPI5oepgPuyz
+        description: Data of the created item.
+        type: object
+      http-status-code:
+        description: HTTP Status Code
+        enum:
+        - !!python/object/apply:http.HTTPStatus
+          - 201
+        example: !!python/object/apply:http.HTTPStatus
+        - 201
+        format: int32
+        type: integer
       status:
         description: Status of the operation.
+        enum:
+        - created
         example: created
         type: string
+    required:
+    - data
+    - status
     type: object
   Data:
     properties:
       agent_instance_id:
         description: ID of the agent instance in the execution environment that collected
           the data
-        example: agent-filebeat-1
+        example: EHiirlGzEiU29VTdovTo
         type: string
       exec_env_id:
         description: ID of the execution environment where the data was collected
-        example: exec-env-1
+        example: MUgzilTNtWbQEaPjBZyv
         type: string
       id:
         description: ID of the data.
-        example: data-1
+        example: BXrHRn5RPU55Qh9JwMZn
         type: string
       timestamp_agent:
         description: Timestamp when the agent instance collected the data
@@ -148,25 +220,34 @@ definitions:
         format: date-time
         type: string
     required:
-    - agent_instance_id
-    - exec_env_id
     - id
-    - timestamp_agent
-    - timestamp_event
     type: object
   DeleteResponse:
     properties:
-      id:
-        description: id of the updated item.
-        example: apache
-        type: string
+      data:
+        additionalProperties:
+          description: Field value.
+          example: vCPPaXABjPI5oepgPuyz
+        description: Data of the delted item.
+        type: object
+      http-status-code:
+        description: HTTP Status Code
+        enum:
+        - !!python/object/apply:http.HTTPStatus
+          - 201
+        example: !!python/object/apply:http.HTTPStatus
+        - 200
+        format: int32
+        type: integer
       status:
         description: Status of the operation.
         enum:
-        - noop
-        - updated
-        example: noop
+        - deleted
+        example: deleted
         type: string
+    required:
+    - data
+    - status
     type: object
   ExecEnv:
     properties:
@@ -176,7 +257,7 @@ definitions:
         type: string
       id:
         description: ID of the execution environment.
-        example: exec-env-type
+        example: PiOIb3ABjPI5oepgse1C
         type: string
       type_id:
         description: ID of the execution environment type.
@@ -205,7 +286,7 @@ definitions:
     properties:
       id:
         description: ID of the network link.
-        example: network-link-1
+        example: x4fgctkm4MXQOUHYjIag
         type: string
       type_id:
         description: ID of the network link type.
@@ -228,6 +309,20 @@ definitions:
     required:
     - id
     - name
+    type: object
+  NotFoundSchema:
+    properties:
+      description:
+        description: Human readable message that describes the error.
+        example: The resource is not found.
+        type: string
+      title:
+        description: Title error
+        example: 404 Not found
+        type: string
+    required:
+    - description
+    - title
     type: object
   QueryRequest:
     properties:
@@ -354,6 +449,76 @@ definitions:
     - mode
     - target
     type: object
+  Recipe:
+    properties:
+      actions:
+        description: Actions.
+        items:
+          $ref: '#/definitions/RecipeAction'
+        type: array
+      parameters:
+        description: Parameters.
+        items:
+          $ref: '#/definitions/RecipeParameter'
+        type: array
+      resources:
+        description: Resources.
+        items:
+          $ref: '#/definitions/RecipeResource'
+        type: array
+    type: object
+  RecipeAction:
+    properties:
+      args:
+        description: Command arguments.
+        items:
+          description: Single command argument.
+          example: -al
+          type: string
+        type: array
+      cmd:
+        description: Command.
+        type: string
+    required:
+    - cmd
+    type: object
+  RecipeParameter:
+    properties:
+      destination:
+        description: Destination filename.
+        example: filebeat.yml
+        type: string
+      name:
+        description: Parameter name.
+        example: period
+        type: string
+      sep:
+        description: Separator between name and value.
+        example: '='
+        type: string
+      value:
+        description: Parameter new value.
+        example: 10s
+        type: string
+    required:
+    - destination
+    - name
+    - sep
+    - value
+    type: object
+  RecipeResource:
+    properties:
+      content:
+        description: Resource content.
+        type: string
+      destination:
+        description: Destination filename
+        example: filebeat.yml
+        type: string
+    required:
+    - content
+    - destination
+    type: object
   UnauthorizedSchema:
     properties:
       description:
@@ -374,10 +539,21 @@ definitions:
     type: object
   UpdateResponse:
     properties:
-      id:
-        description: id of the updated item.
-        example: apache
-        type: string
+      data:
+        additionalProperties:
+          description: Field value.
+          example: vCPPaXABjPI5oepgPuyz
+        description: Data of the updated item.
+        type: object
+      http-status-code:
+        description: HTTP Status Code
+        enum:
+        - !!python/object/apply:http.HTTPStatus
+          - 201
+        example: !!python/object/apply:http.HTTPStatus
+        - 200
+        format: int32
+        type: integer
       status:
         description: Status of the operation.
         enum:
@@ -385,12 +561,15 @@ definitions:
         - updated
         example: noop
         type: string
+    required:
+    - data
+    - status
     type: object
 info:
   title: ASTRID Context Broker API
   version: 0.0.2
 paths:
-  /catalog:
+  /catalog/:
     delete:
       description: Delete agents filtered by the query in the request body from the
         catalog.
@@ -497,7 +676,7 @@ paths:
       summary: Agent Update (Multiple)
       tags:
       - agent-catalog
-  /catalog/ebpf:
+  /catalog/ebpf/:
     delete:
       description: Delete agents filtered by the query in the request body from the
         catalog.
@@ -850,7 +1029,7 @@ paths:
       summary: Agent Update (Single)
       tags:
       - agent-catalog
-  /config/agent:
+  /config/agent/:
     delete:
       description: Remove the agent instances filtered by the query in the request
         body from the execution-environments.
@@ -1082,10 +1261,10 @@ paths:
       summary: Agent Instance Update (Single)
       tags:
       - agent-instance
-  /config/connection:
+  /config/connection/:
     delete:
-      description: Delete the connection between execution environments and network
-        links with the given `id` and filtered by the query in the request body.
+      description: Delete the connections between execution environments and network
+        links filtered by the query in the request body.
       parameters:
       - in: body
         name: payload
@@ -1094,8 +1273,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Connection between execution environments and network links
-            with the given `id` filtered by the query in the request body deleted.
+          description: Connections between execution environments and network links
+            filtered by the query in the request body deleted.
           schema:
             $ref: '#/definitions/DeleteResponse'
         '400':
@@ -1106,12 +1285,12 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Connection Delete (Single)
+      summary: Connection Delete (Multiple)
       tags:
       - connection
     get:
-      description: Get the connection between execution environments with the given
-        `id` and network links filtered by the query in the request body.
+      description: Get the list of connections between execution environments and
+        network links filtered by the query in the request body.
       parameters:
       - in: body
         name: payload
@@ -1120,8 +1299,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Connection between execution environments and network links
-            with the given `id` and filtered by the query in the request body.
+          description: List of connections between execution environments and network
+            links filtered by the query in the request body.
           schema:
             items:
               $ref: '#/definitions/Connection'
@@ -1134,12 +1313,12 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Connection Read (Single)
+      summary: Connection Read (Multiple)
       tags:
       - connection
     post:
-      description: Install a new connection between execution environments and network
-        links with the given `id`.
+      description: Install new connections between execution environments and network
+        links.
       parameters:
       - in: body
         name: payload
@@ -1164,12 +1343,12 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Connection Creation (Single)
+      summary: Connection Creation (Multiple)
       tags:
       - connection
     put:
-      description: Update the connection between execution environments and network
-        links with the given `id`.
+      description: Update the connections between execution environments and network
+        links.
       parameters:
       - in: body
         name: payload
@@ -1180,8 +1359,8 @@ paths:
           type: array
       responses:
         '200':
-          description: Connection between execution environments and network links
-            with the given `id` updated.
+          description: Connections updated between execution environments and network
+            links.
           schema:
             items:
               $ref: '#/definitions/UpdateResponse'
@@ -1190,7 +1369,7 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Connection Update (Single)
+      summary: Connection Update (Multiple)
       tags:
       - connection
   /config/connection/{id}:
@@ -1304,7 +1483,110 @@ paths:
       summary: Connection Update (Single)
       tags:
       - connection
-  /data:
+  /data/:
+    delete:
+      description: Delete data filtered by the query in the request body.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: Data filtered by the query in the request body deleted.
+          schema:
+            $ref: '#/definitions/DeleteResponse'
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Data Delete (Multiple)
+      tags:
+      - data
+    get:
+      description: Get the list of data filtered by the query in the request body.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/QueryRequest'
+      responses:
+        '200':
+          description: List of data filtered by the query in the request body.
+          schema:
+            items:
+              $ref: '#/definitions/Data'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Data Read (Multiple)
+      tags:
+      - data
+    post:
+      description: Insert new data.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/Data'
+          type: array
+      responses:
+        '200':
+          description: Data inserted.
+          schema:
+            items:
+              $ref: '#/definitions/CreateResponse'
+            type: array
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Data Insert (Multiple)
+      tags:
+      - data
+    put:
+      description: Update data.
+      parameters:
+      - in: body
+        name: payload
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/Data'
+          type: array
+      responses:
+        '200':
+          description: Data updated.
+          schema:
+            items:
+              $ref: '#/definitions/UpdateResponse'
+            type: array
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+      summary: Data Update (Multiple)
+      tags:
+      - data
+  /data/{id}:
     delete:
       description: Delete data with the given `id` and filtered by the query in the
         request body.
@@ -1427,15 +1709,11 @@ paths:
       summary: Data Update (Single)
       tags:
       - data
-  /config/exec-env:
+  /config/exec-env/:
     delete:
-      description: Delete the execution environment with the given `id` and filtered
-        by the query in the request body.
+      description: Delete execution environments filtered by the query in the request
+        body.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -1443,8 +1721,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Execution environment with the given `id` and filtered by the
-            query in the request body deleted.
+          description: Execution environments filtered by the query in the request
+            body deleted.
           schema:
             $ref: '#/definitions/DeleteResponse'
         '400':
@@ -1455,17 +1733,13 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Execution Environment Delete (Single)
+      summary: Execution Environment Delete (Multiple)
       tags:
       - exec-env
     get:
-      description: Get the execution environment with the given `id` and filtered
-        by the query in the request body.
+      description: Get the list of execution environments filtered by the query in
+        the request body.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -1473,8 +1747,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Execution environment with the given `id` and filtered by the
-            query in the request body.
+          description: List of execution environments filtered by the query in the
+            request body.
           schema:
             items:
               $ref: '#/definitions/ExecEnv'
@@ -1487,16 +1761,12 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Execution Environment Read (Single)
+      summary: Execution Environment Read (Multiple)
       tags:
       - exec-env
     post:
-      description: Create a new execution environment with the given `id`.
+      description: Create new execution environments.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -1506,7 +1776,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Execution environment with the given `id` created.
+          description: Execution environments created.
           schema:
             items:
               $ref: '#/definitions/CreateResponse'
@@ -1519,16 +1789,12 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Execution Environment Creation (Single)
+      summary: Execution Environment Creation (Multiple)
       tags:
       - exec-env
     put:
-      description: Update the execution environment with the given `id`.
+      description: Update execution environments.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -1538,7 +1804,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Execution environment with the given `id` updated.
+          description: Execution environments updated.
           schema:
             items:
               $ref: '#/definitions/UpdateResponse'
@@ -1547,7 +1813,7 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Execution Environment Update (Single)
+      summary: Execution Environment Update (Multiple)
       tags:
       - exec-env
   /config/exec-env/{id}:
@@ -1673,15 +1939,11 @@ paths:
       summary: Execution Environment Update (Single)
       tags:
       - exec-env
-  /config/exec-env-type:
+  /config/exec-env-type/:
     delete:
-      description: Delete the execution environment type with the given `id` and filtered
-        by the query in the request body.
+      description: Delete execution environment types filtered by the query in the
+        request body.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -1689,8 +1951,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Execution environment type with the given `id` and filtered
-            by the query in the request body deleted.
+          description: Execution environment types filtered by the query in the request
+            body deleted.
           schema:
             $ref: '#/definitions/DeleteResponse'
         '400':
@@ -1701,17 +1963,13 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Execution Environment Type Delete (Single)
+      summary: Execution Environment Type Delete (Multiple)
       tags:
       - exec-env-type
     get:
-      description: Get the execution environment type with the given `id` and filtered
-        by the query in the request body.
+      description: Get the list of execution environment types filtered by the query
+        in the request body.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -1719,8 +1977,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Execution environment type with the given `id` and filtered
-            by the query in the request body.
+          description: List of execution environment types filtered by the query in
+            the request body.
           schema:
             items:
               $ref: '#/definitions/ExecEnvType'
@@ -1733,16 +1991,12 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Execution Environment Type Read (Single)
+      summary: Execution Environment Type Read (Multiple)
       tags:
       - exec-env-type
     post:
-      description: Create new execution environment type with the given `id`.
+      description: Create new execution environment types.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -1752,7 +2006,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Execution environment type with the given `id` created.
+          description: Execution environment types created.
           schema:
             items:
               $ref: '#/definitions/CreateResponse'
@@ -1765,16 +2019,12 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Execution Environment Type Creation (Single)
+      summary: Execution Environment Type Creation (Multiple)
       tags:
       - exec-env-type
     put:
-      description: Update the execution environment type with the given `id`.
+      description: Update execution environment types.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -1784,7 +2034,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Execution environment type with the given `id` updated.
+          description: Execution environment types updated.
           schema:
             items:
               $ref: '#/definitions/UpdateResponse'
@@ -1793,7 +2043,7 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Execution Environment Type Update (Single)
+      summary: Execution Environment Type Update (Multiple)
       tags:
       - exec-env-type
   /config/exec-env-type/{id}:
@@ -1919,15 +2169,10 @@ paths:
       summary: Execution Environment Type Update (Single)
       tags:
       - exec-env-type
-  /config/networkslink:
+  /config/network-link/:
     delete:
-      description: Delete the network link with the given `id` and filtered by the
-        query in the request body.
+      description: Delete network links filtered by the query in the request body.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -1935,8 +2180,7 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Network link with the given `id` and filtered by the query
-            in the request body deleted.
+          description: Network links filtered by the query in the request body deleted.
           schema:
             $ref: '#/definitions/DeleteResponse'
         '400':
@@ -1947,17 +2191,13 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Network Link Delete (Single)
+      summary: Network Link Delete (Multiple)
       tags:
       - network-link
     get:
-      description: Get the network link with the given `id` and filtered by the query
-        in the request body.
+      description: Get the list of network links filtered by the query in the request
+        body.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -1965,8 +2205,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Network link with the given `id` and filtered by the query
-            in the request body.
+          description: List of network links filtered by the query in the request
+            body.
           schema:
             items:
               $ref: '#/definitions/NetworkLink'
@@ -1979,16 +2219,12 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Network Link Read (Single)
+      summary: Network Link Read (Multiple)
       tags:
       - network-link
     post:
-      description: Create a new network link with the given `id` .
+      description: Create new network links.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -1998,7 +2234,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Network link with the given `id` created.
+          description: Network links created.
           schema:
             items:
               $ref: '#/definitions/CreateResponse'
@@ -2011,16 +2247,12 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Network Link Creation (Single)
+      summary: Network Link Creation (Multiple)
       tags:
       - network-link
     put:
-      description: Update the network link with the given `id`.
+      description: Update network links.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -2030,7 +2262,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Network link with the given `id` updated.
+          description: Network links updated.
           schema:
             items:
               $ref: '#/definitions/UpdateResponse'
@@ -2039,7 +2271,7 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Network Link Update (Single)
+      summary: Network Link Update (Multiple)
       tags:
       - network-link
   /config/network-link/{id}:
@@ -2165,15 +2397,11 @@ paths:
       summary: Network Link Update (Single)
       tags:
       - network-link
-  /config/network-link-type:
+  /config/network-link-type/:
     delete:
-      description: Delete the network link type with the given `id` and filtered by
-        the query in the request body.
+      description: Delete network link types filtered by the query in the request
+        body.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -2181,8 +2409,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Network link type with the given `id` and filtered by the query
-            in the request body deleted.
+          description: Network link types filtered by the query in the request body
+            deleted.
           schema:
             $ref: '#/definitions/DeleteResponse'
         '400':
@@ -2193,17 +2421,13 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Network Link Type Delete (Single)
+      summary: Network Link Type Delete (Multiple)
       tags:
       - network-link-type
     get:
-      description: Get the network link type with the given `id` and filtered by the
-        query in the request body.
+      description: Get the list of network link types filtered by the query in the
+        request body.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -2211,8 +2435,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Network link type with the given `id` and filtered by the query
-            in the request body.
+          description: List of network link types filtered by the query in the request
+            body.
           schema:
             items:
               $ref: '#/definitions/NetworkLinkType'
@@ -2225,16 +2449,12 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Network Link Type Read (Single)
+      summary: Network Link Type Read (Multiple)
       tags:
       - network-link-type
     post:
-      description: Create a new network link type with the given `id` .
+      description: Create new network link types.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -2244,7 +2464,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Network link type with the given `id` created.
+          description: Network link types created.
           schema:
             items:
               $ref: '#/definitions/CreateResponse'
@@ -2257,16 +2477,12 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Network Link Type Creation (Single)
+      summary: Network Link Type Creation (Multiple)
       tags:
       - network-link-type
     put:
-      description: Update the network link type with the given `id`.
+      description: Update network link types.
       parameters:
-      - in: path
-        name: id
-        required: true
-        type: String
       - in: body
         name: payload
         required: true
@@ -2276,7 +2492,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Network link type with the given `id` updated.
+          description: Network link types updated.
           schema:
             items:
               $ref: '#/definitions/UpdateResponse'
@@ -2285,7 +2501,7 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/UnauthorizedSchema'
-      summary: Network Link Type Update (Single)
+      summary: Network Link Type Update (Multiple)
       tags:
       - network-link-type
   /config/network-link-type/{id}:
@@ -2411,6 +2627,29 @@ paths:
       summary: Network Link Type Update (Single)
       tags:
       - network-link-type
+  /pkg/{name}:
+    get:
+      description: Download the package
+      responses:
+        '200':
+          description: Download of the file completed.
+          schema:
+            format: byte
+            type: string
+        '400':
+          description: Bad request.
+          schema:
+            $ref: '#/definitions/BadRequestSchema'
+        '401':
+          description: Unauthorized.
+          schema:
+            $ref: '#/definitions/UnauthorizedSchema'
+        '404':
+          description: Not found.
+          schema:
+            $ref: '#/definitions/NotFoundSchema'
+      summary: Download the package
+      tags: package
 produces:
 - application/json
 swagger: '2.0'
@@ -2449,3 +2688,4 @@ tags:
   name: network-link-type
 - description: Represents a network link type.
   name: network-link-type
+- package

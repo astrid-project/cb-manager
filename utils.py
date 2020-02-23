@@ -19,8 +19,10 @@ def docstring_parameter(**kwrd_params):
     def decorator(self):
         for method in 'get', 'post', 'delete', 'put':
             base_mth = getattr(self, f'on_base_{method}')
-            setattr(self, f'on_{method}', copy_func(base_mth, f'on_{method}'))
-            mth = getattr(self, f'on_{method}')
+            mth = getattr(self, f'on_{method}', None)
+            if not callable(mth):
+                setattr(self, f'on_{method}', copy_func(base_mth, f'on_{method}'))
+                mth = getattr(self, f'on_{method}', None)
             with open(f'./api/{kwrd_params.get("docstring", "base")}/{method}.docstring', 'r') as file:
                 mth.__doc__ = file.read().format(**kwrd_params)
             module = importlib.import_module('schema')

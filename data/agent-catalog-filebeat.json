@@ -1,0 +1,108 @@
+{
+    "name": "filebeat",
+    "parameters": [
+        {
+            "name": "period",
+            "type": "string",
+            "recipe": {
+                "parameters": {
+                    "name": "backoff",
+                    "destination": "~/astrid-framework/env/filebeat/config/inputs/log.yml",
+                    "sep": ": ",
+                    "value": "{value}"
+                }
+            }
+        },
+        {
+            "name": "enabled",
+            "type": "boolean",
+            "recipe": {
+                "parameters": {
+                    "name": "enabled",
+                    "destination": "~/astrid-framework/env/filebeat/config/inputs/log.yml",
+                    "sep": ": ",
+                    "value": "{value}"
+                }
+            }
+        }
+    ],
+    "actions": [
+        {
+            "name": "install",
+            "recipe": {
+                "actions": [
+                    {
+                        "cmd": "mkdir",
+                        "args": [
+                            "-p",
+                            "~/astrid-framework/env/src"
+                        ]
+                    },
+                    {
+                        "cmd": "curl",
+                        "args": [
+                            "--user",
+                            "${USERNAME}:${PASSWORD}",
+                            "http://${IP}:${PORT}/pkg/filebeat.tar.gz",
+                            "--output",
+                            "~/astrid-framework/env/src/filebeat.tar.gz"
+                        ]
+                    },
+                    {
+                        "cmd": "tar",
+                        "args": [
+                            "-xzf",
+                            "~/astrid-framework/env/src/filebeat.tar.gz",
+                            "-C",
+                            "~/astrid-framework/env"
+                        ]
+                    },
+                    {
+                        "cmd": "rm",
+                        "args": [
+                            "~/astrid-framework/env/src/filebeat.tar.gz"
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "name": "uninstall",
+            "recipe": {
+                "actions": {
+                    "cmd": "rm",
+                    "args": [
+                        "-rf",
+                        "~/astrid-framework/env/filebeat"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "start",
+            "recipe": {
+                "actions": {
+                    "cmd": "~/astrid-framework/env/filebeat/filebeat",
+                    "args": [
+                        "-c",
+                        "~/astrid-framework/env/filebeat/config/filebeat.yml",
+                        "-e"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "stop",
+            "recipe": {
+                "actions": {
+                    "cmd": "killall",
+                    "args": [
+                        "-s",
+                        "SIGTERM",
+                        "filebeat"
+                    ]
+                }
+            }
+        }
+    ]
+}

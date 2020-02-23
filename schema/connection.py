@@ -5,6 +5,9 @@ class ConnectionSchema(Schema):
     """
     Represents an connection between execution environments and network links.
     """
-    id = fields.String(required=True, description='ID of connection.', example='connection-1')
-    exec_env_id = fields.String(required=True, description='ID of the connected execution environment', example='exec-env-1')
-    network_link_id = fields.String(required=True, description='ID of the connected network link', example='network-link-1')
+    id = fields.String(required=True, description='ID of connection.',
+                       example='aZ0aLlJ5Cq84Hsy3SyTW')
+    exec_env_id = fields.String(required=True, description='ID of the connected execution environment',
+                                example='1V4nbnfz981Mn95RPtTr')
+    network_link_id = fields.String(required=True, description='ID of the connected network link',
+                                    example='JAwfDEY7f2AtiEldMjPW')

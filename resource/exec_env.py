@@ -4,9 +4,9 @@ from utils import docstring_parameter
 
 
 class ExecEnvDocument(Document):
-    hostname = Text()
-    type_id = Text()
-    # started = Date() # TODO
+    hostname = Text(required=True)
+    type_id = Text(required=True)
+    #started = Date(required=True) # TODO Not work
 
     class Index:
         name = 'exec-env'
@@ -28,7 +28,7 @@ class ExecEnvDocument(Document):
 class ExecEnvResource(BaseResource):
     doc_cls = ExecEnvDocument
     doc_name = 'Execution Environment'
-    routes = '/config/exec-env', '/config/exec-env/{id}'
+    routes = '/config/exec-env/'
 
 
 @docstring_parameter(docstring='selected', schema='ExecEnvSchema', tag='exec-env',
@@ -47,4 +47,4 @@ class ExecEnvResource(BaseResource):
 class ExecEnvSelectedResource(BaseResource):
     doc_cls = ExecEnvDocument
     doc_name = 'Execution Environment'
-    routes = '/config/exec-env', '/config/exec-env/{id}'
+    routes = '/config/exec-env/{id}'

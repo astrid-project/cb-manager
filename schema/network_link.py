@@ -5,5 +5,7 @@ class NetworkLinkSchema(Schema):
     """
     Represents a network link.
     """
-    id = fields.String(required=True, description='ID of the network link.', example='network-link-1')
-    type_id = fields.String(required=True, description='ID of the network link type.', example='pnt2pnt')
+    id = fields.String(required=True, description='ID of the network link.',
+                       example='x4fgctkm4MXQOUHYjIag')
+    type_id = fields.String(required=True, description='ID of the network link type.',
+                            example='pnt2pnt')

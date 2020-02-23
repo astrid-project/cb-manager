@@ -4,7 +4,7 @@ from utils import docstring_parameter
 
 
 class NetworkLinkDocument(Document):
-    type_id = Text()
+    type_id = Text(required=True)
 
     class Index:
         name = 'network-link'
@@ -26,7 +26,7 @@ class NetworkLinkDocument(Document):
 class NetworkLinkResource(BaseResource):
     doc_cls = NetworkLinkDocument
     doc_name = 'Network Link'
-    routes = '/config/networkslink', '/config/network-link/{id}'
+    routes = '/config/network-link/'
 
 
 @docstring_parameter(docstring='selected', schema='NetworkLinkSchema', tag='network-link',
@@ -45,4 +45,4 @@ class NetworkLinkResource(BaseResource):
 class NetworkLinkSelectedResource(BaseResource):
     doc_cls = NetworkLinkDocument
     doc_name = 'Network Link'
-    routes = '/config/networkslink', '/config/network-link/{id}'
+    routes = '/config/network-link/{id}'

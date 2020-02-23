@@ -99,7 +99,8 @@ else:
         ExecEnvResource, ExecEnvSelectedResource,
         ExecEnvTypeResource, ExecEnvTypeSelectedResource,
         NetworkLinkResource, NetworkLinkSelectedResource,
-        NetworkLinkTypeResource, NetworkLinkTypeSelectedResource)
+        NetworkLinkTypeResource, NetworkLinkTypeSelectedResource,
+        PkgResource)
 
     tags = []
     for Resource in resource_set:
@@ -118,7 +119,7 @@ else:
         ],
     )
 
-    for schema in BadRequestSchema, UnauthorizedSchema:
+    for schema in BadRequestSchema, NotFoundSchema, UnauthorizedSchema:
         api_spec.components.schema(schema.__name__, schema=schema)
 
     elastic_connection()

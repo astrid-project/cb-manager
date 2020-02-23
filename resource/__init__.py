@@ -10,3 +10,5 @@ from .exec_env_type import ExecEnvTypeResource, ExecEnvTypeSelectedResource
 
 from .network_link import NetworkLinkResource, NetworkLinkSelectedResource
 from .network_link_type import NetworkLinkTypeResource, NetworkLinkTypeSelectedResource
+
+from .pkg import PkgResource

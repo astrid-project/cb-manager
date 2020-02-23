@@ -4,10 +4,10 @@ from utils import docstring_parameter
 
 
 class DataDocument(Document):
-    exec_env_id = Text()
-    agent_instance_id = Text()
-    timestamp_event = Date()
-    timestamp_agent = Date()
+    exec_env_id = Text() # TODO
+    agent_instance_id = Text() # TODO
+    timestamp_event = Date() # TODO
+    timestamp_agent = Date() # TODO
 
     class Index:
         name = 'data'
@@ -29,7 +29,7 @@ class DataDocument(Document):
 class DataResource(BaseResource):
     doc_cls = DataDocument
     doc_name = 'Data'
-    routes = '/data',
+    routes = '/data/',
 
 
 @docstring_parameter(docstring='selected', schema='DataSchema', tag='data',
@@ -48,4 +48,4 @@ class DataResource(BaseResource):
 class DataSelectedResource(BaseResource):
     doc_cls = DataDocument
     doc_name = 'Data'
-    routes = '/data',
+    routes = '/data/{id}',

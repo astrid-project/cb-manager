@@ -1,7 +1,11 @@
 import falcon
+from elasticsearch_dsl import Document
+from elasticsearch_dsl.utils import AttrList
+from http import HTTPStatus
 from query_parser import QueryParser
 import elasticsearch
 from utils import *
+
 
 class BaseResource(object):
     def __init__(self):
@@ -9,26 +13,29 @@ class BaseResource(object):
 
     def __init(self):
         try:
-            print(f'Info: start initialization index {self.doc_cls.Index.name}.')
+            print(
+                f'Info: start initialization index {self.doc_cls.Index.name}.')
             self.doc_cls.init()
         except:
-            print(f'Error: initialization index {self.doc_cls.Index.name} not possible.')
+            print(
+                f'Error: initialization index {self.doc_cls.Index.name} not possible.')
             print(f'Info: try again.')
             self.__init()
         else:
             print(f'Success: index {self.doc_cls.Index.name} initialized')
 
-
     def on_base_get(self, req, resp, id=None):
         try:
-            res = QueryParser(index=self.doc_cls.Index.name).parse(
+            response = QueryParser(index=self.doc_cls.Index.name).parse(
                 query=req.context.get('json', {}), id=id
             ).execute()
-            resp.media = [dict(item.to_dict(), id=item.meta.id)
-                               for item in res]
+            resp.media = [dict(hit.to_dict(), id=hit.meta.id)
+                          for hit in response]
         except elasticsearch.RequestError as req_error:
             raise falcon.HTTPBadRequest(
-                title=req_error.error, description=req_error.info)
+                title=req_error.error,
+                description=req_error.info
+            )
 
     def on_base_post(self, req, resp, id=None):
         res = []
@@ -36,89 +43,134 @@ class BaseResource(object):
         if id is not None:
             if type(query) is list:
                 raise falcon.HTTPBadRequest(
-                    title='id provided', description=f'Request can create only 1 new {self.doc_name}')
+                    title='id provided',
+                    description=f'Request can create only 1 new {self.doc_name}'
+                )
             single = True
         else:
             single = False
         for data in wrap(query):
             data_id = data.pop('id', None)
-            if data_id is None and not single:
+            if data_id is not None and single:
                 res.append({
                     'status': 'error',
-                    'title': 'Request not valid',
-                    'description': 'id property not found',
-                    'http-status-code': falcon.HTTP_NOT_FOUND
-                })
-            elif data_id is not None and single:
-                res.append({
-                    'id': data_id,
-                    'status': 'error',
-                    'title': 'Request not valid',
-                    'description': f'id={id} provided',
-                    'http-status-code': falcon.HTTP_CONFLICT
+                    'reason': f'Request not valid: two ids provided',
+                    'id': [data_id, id],
+                    'http-status-code': HTTPStatus.CONFLICT
                 })
             else:
                 try:
-                    self.doc_cls.get(id=data_id)
-                except elasticsearch.NotFoundError:
-                    res.append({'id': data_id, 'status': self.doc_cls(
-                        meta={'id': data_id}, **data).save()})
-                else:
+                    if data_id is not None:
+                        obj = self.doc_cls.get(id=data_id, ignore=404)
+                        meta = { 'id': data_id }
+                    else:
+                        obj = None
+                        meta = {}
+                    if obj is None:
+                        obj = self.doc_cls(meta=meta, **data)
+                        status = obj.save()
+                        res.append({
+                            'status': status,
+                            'data': { 'id': obj.meta.id, **obj.to_dict() },
+                            'http-status-code': HTTPStatus.CREATED
+                        })
+                    else:
+                        res.append({
+                            'status': 'error',
+                            'reason': f'{self.doc_name} with the given [id] already found',
+                            'id': obj.meta.id,
+                            'http-status-code': HTTPStatus.CONFLICT
+                        })
+                except:
                     res.append({
-                        'id': data_id,
                         'status': 'error',
-                        'title': f'{self.doc_name} already found',
-                        'description': f'id already present',
-                        'http-status-code': falcon.HTTP_CONFLICT
+                        'reason': f'Not possible create {self.doc_name} with the given [data]',
+                        'data': { 'id': id, **data },
+                        'http-status-code': HTTPStatus.UNPROCESSABLE_ENTITY
                     })
         resp.media = res
 
     def on_base_delete(self, req, resp, id=None):
         try:
-            resp.media = QueryParser(index=self.doc_cls.Index.name).parse(
-                query=req.context.get('json', {}), id=id).delete().to_dict()
+            res = []
+            response = QueryParser(index=self.doc_cls.Index.name).parse(
+                query=req.context.get('json', {}), id=id
+            ).execute()
+            for hit in response:
+                try:
+                    obj = self.doc_cls.get(id=hit.meta.id)
+                    data = obj.to_dict()
+                    obj.delete()
+                    res.append({
+                        'status': 'deleted',
+                        'data': { **data, 'id': hit.meta.id },
+                    })
+                except:
+                    res.append({
+                        'status': 'error',
+                        'reason': f'Not possible to delete element with the given [id]',
+                        'id': hit.meta.id,
+                        'http-status-code': HTTPStatus.CONFLICT
+                    })
+            resp.media = res
         except elasticsearch.RequestError as req_error:
             raise falcon.HTTPBadRequest(
-                title=req_error.error, description=req_error.info)
+                title=req_error.error,
+                description=req_error.info
+            )
 
     def on_base_put(self, req, resp, id=None):
-        res=[]
+        res = []
         query = req.context.get('json', [])
         if id is not None:
             if type(query) is list:
                 raise falcon.HTTPBadRequest(
-                    title='id provided', description=f'Request can create only 1 new {self.doc_name}')
+                    title='id provided',
+                    description=f'Request can create only 1 new {self.doc_name}'
+                )
             single = True
         else:
             single = False
         for data in wrap(query):
             data_id = data.pop('id', None)
+            data_add = {k: v for k, v in data.items() if k.startswith('+')}
+            data = {k: v for k, v in data.items() if not k.startswith('+')}
             if data_id is None and not single:
                 res.append({
                     'status': 'error',
-                    'title': 'Request not valid',
-                    'description': 'id property not found',
-                    'http-status-code': falcon.HTTP_NOT_FOUND
+                    'reason': 'Request not valid: id property not found',
+                    'http-status-code': HTTPStatus.NOT_FOUND
                 })
-                res_code = falcon.HTTP_NOT_FOUND
             elif data_id is not None and single:
                 res.append({
-                    'id': data_id,
                     'status': 'error',
-                    'title': 'Request not valid',
-                    'description': f'id={id} provided',
-                    'http-status-code': falcon.HTTP_CONFLICT
+                    'reason': f'Request not valid: twp ids provided',
+                    'id': [data_id, id],
+                    'http-status-code': HTTPStatus.CONFLICT
                 })
             else:
                 try:
-                    res.append(
-                        {'id': data_id, 'status': self.doc_cls.get(id=data_id).update(**data)})
+                    obj = self.doc_cls.get(id=data_id)
+                    for name, values in  data_add.items():
+                        for item in wrap(values):
+                            field = name.replace('+', '')
+                            o = getattr(obj, field)
+                            if not type(o) == AttrList:
+                                setattr(obj, field, wrap(o))
+                            getattr(obj, field).append(item)
+                    if len(data) > 0:
+                        status = obj.update(**data)
+                    else:
+                        status = obj.save()
+                    res.append({
+                        'data': { **obj.to_dict(), 'id': data_id },
+                        'status': status
+                    })
                 except elasticsearch.NotFoundError:
                     res.append({
-                        'id': data_id,
                         'status': 'error',
-                        'title': f'{self.doc_name} not found',
-                        'description': f'id not found',
-                        'http-status-code': falcon.HTTP_NOT_FOUND
+                        'reason': f'{self.doc_name} with the given [id] not found',
+                        'id': data_id,
+                        'http-status-code': HTTPStatus.NOT_FOUND
                     })
         resp.media = res

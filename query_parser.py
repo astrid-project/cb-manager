@@ -16,10 +16,14 @@ class QueryParser:
             self._limit(query)
         except elasticsearch.RequestError as req_error:
             raise falcon.HTTPBadRequest(
-                title=req_error.error, description=req_error.info)
+                title=req_error.error,
+                description=req_error.info
+            )
         except:
             raise falcon.HTTPBadRequest(
-                title='Not valid JSON', description='The request has a not valid JSON body.')
+                title='Not valid JSON',
+                description='The request has a not valid JSON body.'
+            )
         return self.s
 
     def _select(self, query):
@@ -50,7 +54,9 @@ class QueryParser:
                         q = Q('range', **{prop: {op: expr}})
                 else:
                     raise falcon.HTTPBadRequest(
-                        title='Request not valid', description=f'{op} clause with not valid/missing data')
+                        title='Request not valid',
+                        description=f'{op} clause with not valid/missing data'
+                    )
         if id is not None:
             q = q & Q('term', _id=id)
         return q
@@ -64,7 +70,9 @@ class QueryParser:
                 sort_list.append(prop if mode == 'asc' else f'-{prop}')
             else:
                 raise falcon.HTTPBadRequest(
-                    title='Request not valid', description=f'order with not valid/missing data')
+                    title='Request not valid',
+                    description=f'order with not valid/missing data'
+                )
         self.s = self.s.sort(*sort_list)
 
     def _limit(self, query):

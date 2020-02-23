@@ -4,8 +4,8 @@ from utils import docstring_parameter
 
 
 class ConnectionDocument(Document):
-    exec_env_id = Text()
-    network_link_id = Text()
+    exec_env_id = Text(required=True)
+    network_link_id = Text(required=True)
 
     class Index:
         name = 'connection'
@@ -27,7 +27,7 @@ class ConnectionDocument(Document):
 class ConnectionResource(BaseResource):
     doc_cls = ConnectionDocument
     doc_name = 'Connection'
-    routes = '/config/connection', '/config/connection/{id}'
+    routes = '/config/connection/',
 
 
 @docstring_parameter(dpcstring='selected', schema='ConnectionSchema', tag='connection',
@@ -46,4 +46,4 @@ class ConnectionResource(BaseResource):
 class ConnectionSelectedResource(BaseResource):
     doc_cls = ConnectionDocument
     doc_name = 'Connection'
-    routes = '/config/connection', '/config/connection/{id}'
+    routes = '/config/connection/{id}'

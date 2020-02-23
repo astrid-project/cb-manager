@@ -2,16 +2,48 @@ from .base import BaseResource
 from elasticsearch_dsl import Document, Text, Nested, InnerDoc, Boolean
 from utils import docstring_parameter
 
-class AgentParameterInnerDoc(InnerDoc):
-    name = Text()
-    type = Text()  # Possible values: integer, number, time-duration, string, choice, boolean, binary
+
+class AgentCatalogRecipeActionInnerDoc(InnerDoc):
+    cmd = Text(required=True)
+    args = Text()
+
+
+class AgentCatalogRecipeParameterInnerDoc(InnerDoc):
+    destination = Text(required=True)
+    name = Text(required=True)
+    sep = Text(required=True)
+    value = Text(required=True)
+
+
+class AgentCatalogRecipeResourceInnerDoc(InnerDoc):
+    destination = Text(required=True)
+    content = Text(required=True)
+
+
+class AgentCatalogRecipeInnerDoc(InnerDoc):
+    actions = Nested(AgentCatalogRecipeActionInnerDoc)
+    parameters = Nested(AgentCatalogRecipeParameterInnerDoc)
+    resources = Nested(AgentCatalogRecipeResourceInnerDoc)
+
+
+class AgentCatalogParameterInnerDoc(InnerDoc):
+    name = Text(required=True)
+    # Possible values: integer, number, time-duration, string, choice, boolean, binary
+    type = Text(required=True)
     list = Boolean()
     values = Text()
+    recipe = Nested(AgentCatalogRecipeInnerDoc, required=True)
+
+
+class AgentCatalogActionInnerDoc(InnerDoc):
+    name = Text(required=True)
+    recipe = Nested(AgentCatalogRecipeInnerDoc, required=True)
 
 
 class AgentCatalogDocument(Document):
-    name = Text()
-    parameters = Nested(AgentParameterInnerDoc)
+    name = Text(required=True)
+    parameters = Nested(AgentCatalogParameterInnerDoc, required=True)
+    actions = Nested(AgentCatalogActionInnerDoc, required=True)
 
     class Index:
         name = 'agent-catalog'
@@ -33,7 +65,7 @@ class AgentCatalogDocument(Document):
 class AgentCatalogResource(BaseResource):
     doc_cls = AgentCatalogDocument
     doc_name = 'Agent Catalog'
-    routes = '/catalog', '/catalog/ebpf'
+    routes = '/catalog/', '/catalog/ebpf/'
 
 
 @docstring_parameter(docstring='selected', schema='AgentCatalogSchema', tag='agent-catalog',
