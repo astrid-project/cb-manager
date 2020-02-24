@@ -5,6 +5,9 @@ class PkgResource(object):
     routes = '/pkg/{name}',
     tag = 'package'
 
+    def __init__(self, args): #TODO better dev
+        pass
+
     def on_get(self, req, resp, name):
         """
         Download the package.
@@ -20,13 +23,13 @@ class PkgResource(object):
                     format: byte
             400:
                 description: Bad request.
-                schema: BadRequestSchema
+                schema: HTTPErrorSchema
             401:
                 description: Unauthorized.
-                schema: UnauthorizedSchema
+                schema: HTTPErrorSchema
             404:
                 description: Not found.
-                schema: NotFoundSchema
+                schema: HTTPErrorSchema
         """
         resp.downloadable_as = name
         pkg = f'pkg/{name}'

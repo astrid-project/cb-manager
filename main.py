@@ -13,6 +13,7 @@ import argparse
 import falcon
 import hashlib
 import json
+import time
 import waitress
 
 
@@ -23,14 +24,18 @@ title = config_parser.get('info', 'title')
 description = config_parser.get('info', 'description')
 version = config_parser.get('info', 'version')
 
+cb_host = config_parser.get('context-broker', 'host')
 cb_port = config_parser.get('context-broker', 'port')
 
 auth_username = config_parser.get('auth', 'username')
 auth_password = config_parser.get('auth', 'password')
 
+hb_timeout = config_parser.get('hearthbeat', 'timeout')
+hb_period = config_parser.get('hearthbeat', 'period')
+
 es_endpoint = config_parser.get('elasticsearch', 'endpoint')
 es_timeout = config_parser.get('elasticsearch', 'timeout')
-
+es_retry_period = config_parser.get('elasticsearch', 'retry-period')
 
 print(f'{title} v{version}')
 
@@ -38,6 +43,8 @@ print(f'{title} v{version}')
 parser = argparse.ArgumentParser(
     prog='python3 {__FILENAME__}', description=f'{title}: {description}')
 
+parser.add_argument('--host', '-o', type=str,
+                    help='Hostname/IP of the REST Server', default=cb_host)
 parser.add_argument('--port', '-p', type=int,
                     help='TCP Port of the REST Server', default=cb_port)
 
@@ -46,10 +53,19 @@ parser.add_argument('--auth-username', '-u', type=str,
 parser.add_argument('--auth-password', '-a', type=str,
                     help='Authorized password', default=auth_password)
 
+
+parser.add_argument('--hb-timeout', '-b', type=float,
+                    help='Timeout (in seconds) for heartbeat with LCPs', default=hb_timeout)
+parser.add_argument('--hb-period', '-r', type=float,
+                    help='Period (in seconds) per the hearthbeat with the LCPs', default=hb_period)
+
+
 parser.add_argument('--es-endpoint', '-e', type=str,
                     help='Elasticsearch server hostname/IP:port', default=es_endpoint)
-parser.add_argument('--es-timeout', '-s', type=int,
-                    help='Timeout seconds for the connection to Elasticsearch', default=es_timeout)
+parser.add_argument('--es-timeout', '-s', type=float,
+                    help='Timeout (in seconds) for the connection to Elasticsearch', default=es_timeout)
+parser.add_argument('--es-retry_period', '-d', type=float,
+                    help='Period (in seconds) to retry the connection to Elasticsearch', default=es_retry_period)
 
 parser.add_argument('--write-config', '-w', help='Write options to config.ini',
                     action='store_true')
@@ -75,7 +91,8 @@ else:
             connections.create_connection(hosts=args.es_endpoint, timeout=args.es_timeout)
         except:
             print(f'Error: connection to Elasticsearch ({args.es_endpoint}) not possible.')
-            print(f'Info: try again.')
+            print(f'Info: try again in {args.es_retry_period} seconds.')
+            time.sleep(args.es_retry_period)
             elastic_connection()
         else:
             print(f'Success: connection to Elasticsearch ({args.es_endpoint}) established.')
@@ -119,13 +136,10 @@ else:
         ],
     )
 
-    for schema in BadRequestSchema, NotFoundSchema, UnauthorizedSchema:
-        api_spec.components.schema(schema.__name__, schema=schema)
-
     elastic_connection()
 
     for Resource in resource_set:
-        resource = Resource()
+        resource = Resource(args)
         for route in wrap(Resource.routes):
             api.add_route(route, resource)
             api_spec.path(resource=resource)
@@ -139,4 +153,4 @@ else:
 
     falcon_api_doc(api, config_path='./api/schema.json', url_prefix='/api/doc', title='API doc')
 
-    waitress.serve(api, host='0.0.0.0', port=args.port)
+    waitress.serve(api, host=args.host, port=args.port)

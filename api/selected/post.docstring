@@ -19,11 +19,14 @@ responses:
         description: {post_responses_200_description}
         schema:
             type: array
-            items: CreateResponseSchema
+            items:
+                oneOf:
+                - ResponseSchema
+                - ErrorSchema
     400:
         description: Bad request.
-        schema: BadRequestSchema
+        schema: HTTPErrorSchema
     401:
         description: Unauthorized.
-        schema: UnauthorizedSchema
+        schema: HTTPErrorSchema
 

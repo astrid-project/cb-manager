@@ -8,10 +8,8 @@ from utils import *
 
 
 class BaseResource(object):
-    def __init__(self):
-        self.__init()
-
-    def __init(self):
+    def __init__(self, args):
+        self.args = args
         try:
             print(
                 f'Info: start initialization index {self.doc_cls.Index.name}.')
@@ -56,7 +54,7 @@ class BaseResource(object):
                     'status': 'error',
                     'reason': f'Request not valid: two ids provided',
                     'id': [data_id, id],
-                    'http-status-code': HTTPStatus.CONFLICT
+                    'http_status_code': HTTPStatus.CONFLICT
                 })
             else:
                 try:
@@ -72,21 +70,21 @@ class BaseResource(object):
                         res.append({
                             'status': status,
                             'data': { 'id': obj.meta.id, **obj.to_dict() },
-                            'http-status-code': HTTPStatus.CREATED
+                            'http_status_code': HTTPStatus.CREATED
                         })
                     else:
                         res.append({
                             'status': 'error',
                             'reason': f'{self.doc_name} with the given [id] already found',
                             'id': obj.meta.id,
-                            'http-status-code': HTTPStatus.CONFLICT
+                            'http_status_code': HTTPStatus.CONFLICT
                         })
                 except:
                     res.append({
                         'status': 'error',
                         'reason': f'Not possible create {self.doc_name} with the given [data]',
                         'data': { 'id': id, **data },
-                        'http-status-code': HTTPStatus.UNPROCESSABLE_ENTITY
+                        'http_status_code': HTTPStatus.UNPROCESSABLE_ENTITY
                     })
         resp.media = res
 
@@ -104,13 +102,14 @@ class BaseResource(object):
                     res.append({
                         'status': 'deleted',
                         'data': { **data, 'id': hit.meta.id },
+                        'http_status_code': HTTPStatus.OK
                     })
                 except:
                     res.append({
                         'status': 'error',
                         'reason': f'Not possible to delete element with the given [id]',
                         'id': hit.meta.id,
-                        'http-status-code': HTTPStatus.CONFLICT
+                        'http_status_code': HTTPStatus.CONFLICT
                     })
             resp.media = res
         except elasticsearch.RequestError as req_error:
@@ -139,14 +138,14 @@ class BaseResource(object):
                 res.append({
                     'status': 'error',
                     'reason': 'Request not valid: id property not found',
-                    'http-status-code': HTTPStatus.NOT_FOUND
+                    'http_status_code': HTTPStatus.NOT_FOUND
                 })
             elif data_id is not None and single:
                 res.append({
                     'status': 'error',
-                    'reason': f'Request not valid: twp ids provided',
+                    'reason': f'Request not valid: two ids provided',
                     'id': [data_id, id],
-                    'http-status-code': HTTPStatus.CONFLICT
+                    'http_status_code': HTTPStatus.CONFLICT
                 })
             else:
                 try:
@@ -163,14 +162,15 @@ class BaseResource(object):
                     else:
                         status = obj.save()
                     res.append({
+                        'status': status,
                         'data': { **obj.to_dict(), 'id': data_id },
-                        'status': status
+                        'http_status_code': HTTPStatus.OK
                     })
                 except elasticsearch.NotFoundError:
                     res.append({
                         'status': 'error',
                         'reason': f'{self.doc_name} with the given [id] not found',
                         'id': data_id,
-                        'http-status-code': HTTPStatus.NOT_FOUND
+                        'http_status_code': HTTPStatus.NOT_FOUND
                     })
         resp.media = res

@@ -94,19 +94,25 @@
           "200": {
             "description": "Agents filtered by the query in the request body deleted from the catalog.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -140,13 +146,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -176,20 +182,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -219,14 +228,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -253,19 +265,25 @@
           "200": {
             "description": "Agents filtered by the query in the request body deleted from the catalog.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -299,13 +317,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -335,20 +353,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -378,14 +399,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -418,19 +442,25 @@
           "200": {
             "description": "Agent with the given `id` and filtered by the query in the request body deleted from the catalog.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -470,13 +500,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -512,20 +542,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -561,14 +594,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -601,19 +637,25 @@
           "200": {
             "description": "Agent with the given `id` and filtered by the query in the request body deleted from the catalog.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -653,13 +695,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -695,20 +737,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -744,14 +789,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -778,19 +826,25 @@
           "200": {
             "description": "Agent instances filtered by the query in the request body uninstalled.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -824,13 +878,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -860,20 +914,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -903,14 +960,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -943,19 +1003,25 @@
           "200": {
             "description": "Agent instance with the given `id` and filtered by the query in the request body uninstalled.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -995,13 +1061,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1037,20 +1103,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1086,14 +1155,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1120,19 +1192,25 @@
           "200": {
             "description": "Connections between execution environments and network links filtered by the query in the request body deleted.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1166,13 +1244,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1202,20 +1280,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1245,14 +1326,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1279,19 +1363,25 @@
           "200": {
             "description": "Connection between execution environments and network links with the given `id` filtered by the query in the request body deleted.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1325,13 +1415,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1361,20 +1451,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1404,14 +1497,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1438,19 +1534,25 @@
           "200": {
             "description": "Data filtered by the query in the request body deleted.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1484,13 +1586,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1520,20 +1622,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1563,14 +1668,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1603,19 +1711,25 @@
           "200": {
             "description": "Data with the given `id` and filtered by the query in the request body deleted.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1655,13 +1769,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1697,20 +1811,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1746,14 +1863,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1780,19 +1900,25 @@
           "200": {
             "description": "Execution environments filtered by the query in the request body deleted.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1826,13 +1952,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1862,20 +1988,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1905,14 +2034,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1945,19 +2077,25 @@
           "200": {
             "description": "Execution environment with the given `id` and filtered by the query in the request body deleted.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -1997,13 +2135,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2039,20 +2177,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2088,14 +2229,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2122,19 +2266,25 @@
           "200": {
             "description": "Execution environment types filtered by the query in the request body deleted.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2168,13 +2318,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2204,20 +2354,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2247,14 +2400,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2287,19 +2443,25 @@
           "200": {
             "description": "Execution environment type with the given `id` and filtered by the query in the request body deleted.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2339,13 +2501,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2381,20 +2543,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2430,14 +2595,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2464,19 +2632,25 @@
           "200": {
             "description": "Network links filtered by the query in the request body deleted.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2510,13 +2684,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2546,20 +2720,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2589,14 +2766,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2629,19 +2809,25 @@
           "200": {
             "description": "Network link with the given `id` and filtered by the query in the request body deleted.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2681,13 +2867,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2723,20 +2909,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2772,14 +2961,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2806,19 +2998,25 @@
           "200": {
             "description": "Network link types filtered by the query in the request body deleted.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2852,13 +3050,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2888,20 +3086,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2931,14 +3132,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -2971,19 +3175,25 @@
           "200": {
             "description": "Network link type with the given `id` and filtered by the query in the request body deleted.",
             "schema": {
-              "$ref": "#/definitions/DeleteResponse"
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
+              }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -3023,13 +3233,13 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -3065,20 +3275,23 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/CreateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -3114,14 +3327,17 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/UpdateResponse"
+                "oneOf": [
+                  "ResponseSchema",
+                  "ErrorSchema"
+                ]
               }
             }
           },
           "401": {
             "description": "Unauthorized",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -3143,19 +3359,19 @@
           "400": {
             "description": "Bad request.",
             "schema": {
-              "$ref": "#/definitions/BadRequestSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "401": {
             "description": "Unauthorized.",
             "schema": {
-              "$ref": "#/definitions/UnauthorizedSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           },
           "404": {
             "description": "Not found.",
             "schema": {
-              "$ref": "#/definitions/NotFoundSchema"
+              "$ref": "#/definitions/HTTPError"
             }
           }
         }
@@ -3168,108 +3384,22 @@
   },
   "swagger": "2.0",
   "definitions": {
-    "BadRequestSchema": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Human readable message that describes the error.",
-          "example": "Could not decode the request body, either because it was not valid JSON or because it was not encoded as UTF-8."
-        },
-        "title": {
-          "type": "string",
-          "description": "Title error",
-          "example": "400 Bad Request"
-        }
-      },
-      "required": [
-        "description",
-        "title"
-      ]
-    },
-    "NotFoundSchema": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Human readable message that describes the error.",
-          "example": "The resource is not found."
-        },
-        "title": {
-          "type": "string",
-          "description": "Title error",
-          "example": "404 Not found"
-        }
-      },
-      "required": [
-        "description",
-        "title"
-      ]
-    },
-    "UnauthorizedSchema": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string",
-          "enum": [
-            "Invalid Username/Password."
-          ],
-          "description": "Human readable message that describes the error.",
-          "example": "Invalid Username/Password."
-        },
-        "title": {
-          "type": "string",
-          "enum": [
-            "401 Unauthorized"
-          ],
-          "description": "Title error",
-          "example": "401 Unauthorized"
-        }
-      },
-      "required": [
-        "description",
-        "title"
-      ]
-    },
     "QueryRequestLimit": {
       "type": "object",
       "properties": {
-        "to": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Ended index of the items to return.",
-          "example": 5
-        },
         "from": {
           "type": "integer",
           "format": "int32",
           "description": "Started index of the items to return.",
           "example": 1
+        },
+        "to": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Ended index of the items to return.",
+          "example": 5
         }
       }
-    },
-    "QueryRequestOrder": {
-      "type": "object",
-      "properties": {
-        "mode": {
-          "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
-          "description": "Order mode.",
-          "example": "asc"
-        },
-        "target": {
-          "type": "string",
-          "description": "The field to compare.",
-          "example": "name"
-        }
-      },
-      "required": [
-        "mode",
-        "target"
-      ]
     },
     "QueryRequestFilter": {
       "type": "object",
@@ -3293,24 +3423,16 @@
     "QueryRequestClause": {
       "type": "object",
       "properties": {
-        "equal": {
-          "description": "The target field must be equal to the expr value.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/QueryRequestFilter"
-            }
-          ]
+        "or": {
+          "description": "At least the clause has to be satisfied.",
+          "example": "#TODO\n                            [\n                                {\n                                    \"equal\": {\n                                        \"target\": \"name\",\n                                        \"expr:\": \"apache\"\n                                        }\n                                    },\n                                    {\n                                    \"lte\": {\n                                        \"target\": \"timeout\",\n                                        \"expr\": 5\n                                    }\n                            ]",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryRequestClause"
+          }
         },
-        "lte": {
-          "description": "The target field must be lower or equal to the expr value.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/QueryRequestFilter"
-            }
-          ]
-        },
-        "reg-exp": {
-          "description": "The target field must be satisfy the regular expression in expr.",
+        "gt": {
+          "description": "The target field must be greater to the expr value.",
           "allOf": [
             {
               "$ref": "#/definitions/QueryRequestFilter"
@@ -3324,6 +3446,14 @@
           "items": {
             "$ref": "#/definitions/QueryRequestClause"
           }
+        },
+        "lte": {
+          "description": "The target field must be lower or equal to the expr value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestFilter"
+            }
+          ]
         },
         "gte": {
           "description": "The target field must be greater or equal to the expr value.",
@@ -3341,16 +3471,8 @@
             }
           ]
         },
-        "or": {
-          "description": "At least the clause has to be satisfied.",
-          "example": "#TODO\n                            [\n                                {\n                                    \"equal\": {\n                                        \"target\": \"name\",\n                                        \"expr:\": \"apache\"\n                                        }\n                                    },\n                                    {\n                                    \"lte\": {\n                                        \"target\": \"timeout\",\n                                        \"expr\": 5\n                                    }\n                            ]",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QueryRequestClause"
-          }
-        },
-        "gt": {
-          "description": "The target field must be greater to the expr value.",
+        "equal": {
+          "description": "The target field must be equal to the expr value.",
           "allOf": [
             {
               "$ref": "#/definitions/QueryRequestFilter"
@@ -3364,20 +3486,43 @@
               "$ref": "#/definitions/QueryRequestFilter"
             }
           ]
+        },
+        "reg_exp": {
+          "description": "The target field must be satisfy the regular expression in expr.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestFilter"
+            }
+          ]
         }
       }
+    },
+    "QueryRequestOrder": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "The field to compare.",
+          "example": "name"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "description": "Order mode.",
+          "example": "asc"
+        }
+      },
+      "required": [
+        "mode",
+        "target"
+      ]
     },
     "QueryRequest": {
       "type": "object",
       "properties": {
-        "limit": {
-          "description": "Limit the number of items to return.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/QueryRequestLimit"
-            }
-          ]
-        },
         "select": {
           "type": "array",
           "description": "Fields to return.",
@@ -3386,12 +3531,13 @@
             "type": "string"
           }
         },
-        "order": {
-          "description": "Order the filtered items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QueryRequestOrder"
-          }
+        "limit": {
+          "description": "Limit the number of items to return.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestLimit"
+            }
+          ]
         },
         "where": {
           "description": "Filter the items based on different conditions.",
@@ -3400,41 +3546,85 @@
               "$ref": "#/definitions/QueryRequestClause"
             }
           ]
+        },
+        "order": {
+          "description": "Order the filtered items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryRequestOrder"
+          }
         }
       }
     },
-    "DeleteResponse": {
+    "HTTPError": {
       "type": "object",
       "properties": {
-        "status": {
+        "title": {
           "type": "string",
-          "enum": [
-            "deleted"
-          ],
-          "description": "Status of the operation.",
-          "example": "deleted"
+          "description": "Title error",
+          "example": "400 Bad Request"
         },
-        "data": {
-          "type": "object",
-          "description": "Data of the delted item.",
-          "additionalProperties": {
-            "description": "Field value.",
-            "example": "vCPPaXABjPI5oepgPuyz"
-          }
-        },
-        "http-status-code": {
-          "type": "integer",
-          "format": "int32",
-          "enum": [
-            201
-          ],
-          "description": "HTTP Status Code",
-          "example": 200
+        "description": {
+          "type": "string",
+          "description": "Human readable message that describes the error.",
+          "example": "Could not decode the request body, either because it was not valid JSON or because it was not encoded as UTF-8."
         }
       },
       "required": [
-        "data",
-        "status"
+        "description",
+        "title"
+      ]
+    },
+    "RecipeParameter": {
+      "type": "object",
+      "properties": {
+        "sep": {
+          "type": "string",
+          "description": "Separator between name and value.",
+          "example": "="
+        },
+        "destination": {
+          "type": "string",
+          "description": "Destination filename.",
+          "example": "filebeat.yml"
+        },
+        "name": {
+          "type": "string",
+          "description": "Parameter name.",
+          "example": "period"
+        },
+        "value": {
+          "type": "string",
+          "description": "Parameter new value.",
+          "example": "10s"
+        }
+      },
+      "required": [
+        "destination",
+        "name",
+        "sep",
+        "value"
+      ]
+    },
+    "RecipeAction": {
+      "type": "object",
+      "properties": {
+        "args": {
+          "type": "array",
+          "description": "Command arguments.",
+          "items": {
+            "type": "string",
+            "description": "Single command argument.",
+            "example": "-al"
+          }
+        },
+        "cmd": {
+          "type": "string",
+          "description": "Command."
+        }
+      },
+      "required": [
+        "cmd"
       ]
     },
     "RecipeResource": {
@@ -3455,68 +3645,9 @@
         "destination"
       ]
     },
-    "RecipeParameter": {
-      "type": "object",
-      "properties": {
-        "destination": {
-          "type": "string",
-          "description": "Destination filename.",
-          "example": "filebeat.yml"
-        },
-        "name": {
-          "type": "string",
-          "description": "Parameter name.",
-          "example": "period"
-        },
-        "value": {
-          "type": "string",
-          "description": "Parameter new value.",
-          "example": "10s"
-        },
-        "sep": {
-          "type": "string",
-          "description": "Separator between name and value.",
-          "example": "="
-        }
-      },
-      "required": [
-        "destination",
-        "name",
-        "sep",
-        "value"
-      ]
-    },
-    "RecipeAction": {
-      "type": "object",
-      "properties": {
-        "cmd": {
-          "type": "string",
-          "description": "Command."
-        },
-        "args": {
-          "type": "array",
-          "description": "Command arguments.",
-          "items": {
-            "type": "string",
-            "description": "Single command argument.",
-            "example": "-al"
-          }
-        }
-      },
-      "required": [
-        "cmd"
-      ]
-    },
     "Recipe": {
       "type": "object",
       "properties": {
-        "resources": {
-          "description": "Resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecipeResource"
-          }
-        },
         "parameters": {
           "description": "Parameters.",
           "type": "array",
@@ -3530,39 +3661,33 @@
           "items": {
             "$ref": "#/definitions/RecipeAction"
           }
-        }
-      }
-    },
-    "AgentCatalogAction": {
-      "type": "object",
-      "properties": {
-        "recipe": {
-          "description": "Action recipe",
+        },
+        "resources": {
+          "description": "Resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Recipe"
+            "$ref": "#/definitions/RecipeResource"
           }
-        },
-        "name": {
-          "type": "string",
-          "enum": [
-            "start",
-            "stop",
-            "install",
-            "uninstall"
-          ],
-          "description": "Action name",
-          "example": "start"
         }
-      },
-      "required": [
-        "name",
-        "recipe"
-      ]
+      }
     },
     "AgentCatalogParameter": {
       "type": "object",
       "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "integer",
+            "number",
+            "time-duration",
+            "string",
+            "choice",
+            "boolean",
+            "binary"
+          ],
+          "description": "Parameter type.",
+          "example": "integer"
+        },
         "list": {
           "type": "boolean",
           "description": "Indicate if the parameter can have multiple values.",
@@ -3584,20 +3709,6 @@
           "description": "Parameter name",
           "example": "period"
         },
-        "type": {
-          "type": "string",
-          "enum": [
-            "integer",
-            "number",
-            "time-duration",
-            "string",
-            "choice",
-            "boolean",
-            "binary"
-          ],
-          "description": "Parameter type.",
-          "example": "integer"
-        },
         "recipe": {
           "description": "Parameter recipe",
           "type": "array",
@@ -3612,18 +3723,47 @@
         "type"
       ]
     },
-    "AgentCatalog": {
+    "AgentCatalogAction": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
+          "enum": [
+            "start",
+            "stop",
+            "install",
+            "uninstall"
+          ],
+          "description": "Action name",
+          "example": "start"
+        },
+        "recipe": {
+          "description": "Action recipe",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recipe"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "recipe"
+      ]
+    },
+    "AgentCatalog": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "description": "Parameter properties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentCatalogParameter"
+          }
+        },
+        "name": {
+          "type": "string",
           "description": "Agent name.",
           "example": "filebeat"
-        },
-        "id": {
-          "type": "string",
-          "description": "ID of the agent in the catalog.",
-          "example": "uyPMaXABjPI5oepgjezR"
         },
         "actions": {
           "description": "Action properties",
@@ -3632,12 +3772,10 @@
             "$ref": "#/definitions/AgentCatalogAction"
           }
         },
-        "parameters": {
-          "description": "Parameter properties",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentCatalogParameter"
-          }
+        "id": {
+          "type": "string",
+          "description": "ID of the agent in the catalog.",
+          "example": "uyPMaXABjPI5oepgjezR"
         }
       },
       "required": [
@@ -3645,75 +3783,6 @@
         "id",
         "name",
         "parameters"
-      ]
-    },
-    "CreateResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "created"
-          ],
-          "description": "Status of the operation.",
-          "example": "created"
-        },
-        "data": {
-          "type": "object",
-          "description": "Data of the created item.",
-          "additionalProperties": {
-            "description": "Field value.",
-            "example": "vCPPaXABjPI5oepgPuyz"
-          }
-        },
-        "http-status-code": {
-          "type": "integer",
-          "format": "int32",
-          "enum": [
-            201
-          ],
-          "description": "HTTP Status Code",
-          "example": 201
-        }
-      },
-      "required": [
-        "data",
-        "status"
-      ]
-    },
-    "UpdateResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "enum": [
-            "noop",
-            "updated"
-          ],
-          "description": "Status of the operation.",
-          "example": "noop"
-        },
-        "data": {
-          "type": "object",
-          "description": "Data of the updated item.",
-          "additionalProperties": {
-            "description": "Field value.",
-            "example": "vCPPaXABjPI5oepgPuyz"
-          }
-        },
-        "http-status-code": {
-          "type": "integer",
-          "format": "int32",
-          "enum": [
-            201
-          ],
-          "description": "HTTP Status Code",
-          "example": 200
-        }
-      },
-      "required": [
-        "data",
-        "status"
       ]
     },
     "AgentInstanceParameter": {
@@ -3750,11 +3819,6 @@
           "description": "ID of the agent in the catalog",
           "example": "23jqlaJVPCGa4C0o6ljn"
         },
-        "id": {
-          "type": "string",
-          "description": "ID of the agent instance installed in an execution environment.",
-          "example": "uyPMaXABjPI5oepgjezR"
-        },
         "exec_env_id": {
           "type": "string",
           "description": "ID of the execution environment where the agent instance is installed",
@@ -3768,6 +3832,11 @@
           ],
           "description": "Status of the agent instance",
           "example": "start"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the agent instance installed in an execution environment.",
+          "example": "uyPMaXABjPI5oepgjezR"
         }
       },
       "required": [
@@ -3785,15 +3854,15 @@
           "description": "ID of the connected network link",
           "example": "JAwfDEY7f2AtiEldMjPW"
         },
-        "id": {
-          "type": "string",
-          "description": "ID of connection.",
-          "example": "aZ0aLlJ5Cq84Hsy3SyTW"
-        },
         "exec_env_id": {
           "type": "string",
           "description": "ID of the connected execution environment",
           "example": "1V4nbnfz981Mn95RPtTr"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of connection.",
+          "example": "aZ0aLlJ5Cq84Hsy3SyTW"
         }
       },
       "required": [
@@ -3805,11 +3874,22 @@
     "Data": {
       "type": "object",
       "properties": {
+        "timestamp_event": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the event related to the collected data",
+          "example": "#TODO"
+        },
         "timestamp_agent": {
           "type": "string",
           "format": "date-time",
           "description": "Timestamp when the agent instance collected the data",
           "example": "#TODO"
+        },
+        "exec_env_id": {
+          "type": "string",
+          "description": "ID of the execution environment where the data was collected",
+          "example": "MUgzilTNtWbQEaPjBZyv"
         },
         "agent_instance_id": {
           "type": "string",
@@ -3820,17 +3900,6 @@
           "type": "string",
           "description": "ID of the data.",
           "example": "BXrHRn5RPU55Qh9JwMZn"
-        },
-        "exec_env_id": {
-          "type": "string",
-          "description": "ID of the execution environment where the data was collected",
-          "example": "MUgzilTNtWbQEaPjBZyv"
-        },
-        "timestamp_event": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp of the event related to the collected data",
-          "example": "#TODO"
         }
       },
       "required": [
@@ -3840,25 +3909,32 @@
     "ExecEnv": {
       "type": "object",
       "properties": {
-        "id": {
+        "type_id": {
           "type": "string",
-          "description": "ID of the execution environment.",
-          "example": "PiOIb3ABjPI5oepgse1C"
+          "description": "ID of the execution environment type.",
+          "example": "vm"
         },
         "hostname": {
           "type": "string",
           "description": "Hostname of the execution environment.",
           "example": "192.168.1.2"
         },
-        "type_id": {
+        "lcp_port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "TCP port number of LCPs in the execution environment.",
+          "example": 5000
+        },
+        "id": {
           "type": "string",
-          "description": "ID of the execution environment type.",
-          "example": "vm"
+          "description": "ID of the execution environment.",
+          "example": "PiOIb3ABjPI5oepgse1C"
         }
       },
       "required": [
         "hostname",
         "id",
+        "lcp_port",
         "type_id"
       ]
     },
@@ -3884,15 +3960,15 @@
     "NetworkLink": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "ID of the network link.",
-          "example": "x4fgctkm4MXQOUHYjIag"
-        },
         "type_id": {
           "type": "string",
           "description": "ID of the network link type.",
           "example": "pnt2pnt"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the network link.",
+          "example": "x4fgctkm4MXQOUHYjIag"
         }
       },
       "required": [

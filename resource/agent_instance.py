@@ -102,7 +102,7 @@ class AgentInstanceResource(BaseResource):
                             'type': 'parameter',
                             'status': 'error',
                             'reason': f'Parameter {param_name} unknown.',
-                            'http-status-code': HTTPStatus.NOT_FOUND
+                            'http_status_code': HTTPStatus.NOT_FOUND
                         })
                 if agent_instance is not None:
                     agent_instance.save()

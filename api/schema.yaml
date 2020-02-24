@@ -133,21 +133,6 @@ definitions:
     - name
     - value
     type: object
-  BadRequestSchema:
-    properties:
-      description:
-        description: Human readable message that describes the error.
-        example: Could not decode the request body, either because it was not valid
-          JSON or because it was not encoded as UTF-8.
-        type: string
-      title:
-        description: Title error
-        example: 400 Bad Request
-        type: string
-    required:
-    - description
-    - title
-    type: object
   Connection:
     properties:
       exec_env_id:
@@ -166,33 +151,6 @@ definitions:
     - exec_env_id
     - id
     - network_link_id
-    type: object
-  CreateResponse:
-    properties:
-      data:
-        additionalProperties:
-          description: Field value.
-          example: vCPPaXABjPI5oepgPuyz
-        description: Data of the created item.
-        type: object
-      http-status-code:
-        description: HTTP Status Code
-        enum:
-        - !!python/object/apply:http.HTTPStatus
-          - 201
-        example: !!python/object/apply:http.HTTPStatus
-        - 201
-        format: int32
-        type: integer
-      status:
-        description: Status of the operation.
-        enum:
-        - created
-        example: created
-        type: string
-    required:
-    - data
-    - status
     type: object
   Data:
     properties:
@@ -222,33 +180,6 @@ definitions:
     required:
     - id
     type: object
-  DeleteResponse:
-    properties:
-      data:
-        additionalProperties:
-          description: Field value.
-          example: vCPPaXABjPI5oepgPuyz
-        description: Data of the delted item.
-        type: object
-      http-status-code:
-        description: HTTP Status Code
-        enum:
-        - !!python/object/apply:http.HTTPStatus
-          - 201
-        example: !!python/object/apply:http.HTTPStatus
-        - 200
-        format: int32
-        type: integer
-      status:
-        description: Status of the operation.
-        enum:
-        - deleted
-        example: deleted
-        type: string
-    required:
-    - data
-    - status
-    type: object
   ExecEnv:
     properties:
       hostname:
@@ -259,6 +190,11 @@ definitions:
         description: ID of the execution environment.
         example: PiOIb3ABjPI5oepgse1C
         type: string
+      lcp_port:
+        description: TCP port number of LCPs in the execution environment.
+        example: 5000
+        format: int32
+        type: integer
       type_id:
         description: ID of the execution environment type.
         example: vm
@@ -266,6 +202,7 @@ definitions:
     required:
     - hostname
     - id
+    - lcp_port
     - type_id
     type: object
   ExecEnvType:
@@ -281,6 +218,21 @@ definitions:
     required:
     - id
     - name
+    type: object
+  HTTPError:
+    properties:
+      description:
+        description: Human readable message that describes the error.
+        example: Could not decode the request body, either because it was not valid
+          JSON or because it was not encoded as UTF-8.
+        type: string
+      title:
+        description: Title error
+        example: 400 Bad Request
+        type: string
+    required:
+    - description
+    - title
     type: object
   NetworkLink:
     properties:
@@ -309,20 +261,6 @@ definitions:
     required:
     - id
     - name
-    type: object
-  NotFoundSchema:
-    properties:
-      description:
-        description: Human readable message that describes the error.
-        example: The resource is not found.
-        type: string
-      title:
-        description: Title error
-        example: 404 Not found
-        type: string
-    required:
-    - description
-    - title
     type: object
   QueryRequest:
     properties:
@@ -400,7 +338,7 @@ definitions:
         items:
           $ref: '#/definitions/QueryRequestClause'
         type: array
-      reg-exp:
+      reg_exp:
         allOf:
         - $ref: '#/definitions/QueryRequestFilter'
         description: The target field must be satisfy the regular expression in expr.
@@ -519,52 +457,6 @@ definitions:
     - content
     - destination
     type: object
-  UnauthorizedSchema:
-    properties:
-      description:
-        description: Human readable message that describes the error.
-        enum:
-        - Invalid Username/Password.
-        example: Invalid Username/Password.
-        type: string
-      title:
-        description: Title error
-        enum:
-        - 401 Unauthorized
-        example: 401 Unauthorized
-        type: string
-    required:
-    - description
-    - title
-    type: object
-  UpdateResponse:
-    properties:
-      data:
-        additionalProperties:
-          description: Field value.
-          example: vCPPaXABjPI5oepgPuyz
-        description: Data of the updated item.
-        type: object
-      http-status-code:
-        description: HTTP Status Code
-        enum:
-        - !!python/object/apply:http.HTTPStatus
-          - 201
-        example: !!python/object/apply:http.HTTPStatus
-        - 200
-        format: int32
-        type: integer
-      status:
-        description: Status of the operation.
-        enum:
-        - noop
-        - updated
-        example: noop
-        type: string
-    required:
-    - data
-    - status
-    type: object
 info:
   title: ASTRID Context Broker API
   version: 0.0.2
@@ -584,15 +476,19 @@ paths:
           description: Agents filtered by the query in the request body deleted from
             the catalog.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Delete (Multiple)
       tags:
       - agent-catalog
@@ -616,11 +512,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Read (Multiple)
       tags:
       - agent-catalog
@@ -639,16 +535,18 @@ paths:
           description: Agents inserted in the catalog.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Creation (Multiple)
       tags:
       - agent-catalog
@@ -667,12 +565,14 @@ paths:
           description: Agents updated in the catalog.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Update (Multiple)
       tags:
       - agent-catalog
@@ -691,15 +591,19 @@ paths:
           description: Agents filtered by the query in the request body deleted from
             the catalog.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Delete (Multiple)
       tags:
       - agent-catalog
@@ -723,11 +627,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Read (Multiple)
       tags:
       - agent-catalog
@@ -746,16 +650,18 @@ paths:
           description: Agents inserted in the catalog.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Creation (Multiple)
       tags:
       - agent-catalog
@@ -774,12 +680,14 @@ paths:
           description: Agents updated in the catalog.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Update (Multiple)
       tags:
       - agent-catalog
@@ -802,15 +710,19 @@ paths:
           description: Agent with the given `id` and filtered by the query in the
             request body deleted from the catalog.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Delete (Single)
       tags:
       - agent-catalog
@@ -838,11 +750,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Read (Single)
       tags:
       - agent-catalog
@@ -865,16 +777,18 @@ paths:
           description: Agent with the given `id` inserted in the catalog.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Creation (Single)
       tags:
       - agent-catalog
@@ -897,12 +811,14 @@ paths:
           description: Agent with the given `id` updated in the catalog.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Update (Single)
       tags:
       - agent-catalog
@@ -925,15 +841,19 @@ paths:
           description: Agent with the given `id` and filtered by the query in the
             request body deleted from the catalog.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Delete (Single)
       tags:
       - agent-catalog
@@ -961,11 +881,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Read (Single)
       tags:
       - agent-catalog
@@ -988,16 +908,18 @@ paths:
           description: Agent with the given `id` inserted in the catalog.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Creation (Single)
       tags:
       - agent-catalog
@@ -1020,12 +942,14 @@ paths:
           description: Agent with the given `id` updated in the catalog.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Update (Single)
       tags:
       - agent-catalog
@@ -1043,15 +967,19 @@ paths:
         '200':
           description: Agent instances filtered by the query in the request body uninstalled.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Instance Uninstall (Multiple)
       tags:
       - agent-instance
@@ -1075,11 +1003,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Instance Read (Multiple)
       tags:
       - agent-instance
@@ -1098,16 +1026,18 @@ paths:
           description: Agent instances installed in the execution environments.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Instance Install (Multiple)
       tags:
       - agent-instance
@@ -1126,12 +1056,14 @@ paths:
           description: Agent instances updated.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Instance Update (Multiple)
       tags:
       - agent-instance
@@ -1154,15 +1086,19 @@ paths:
           description: Agent instance with the given `id` and filtered by the query
             in the request body uninstalled.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Instance Uninstall (Single)
       tags:
       - agent-instance
@@ -1190,11 +1126,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Instance Read (Single)
       tags:
       - agent-instance
@@ -1219,16 +1155,18 @@ paths:
             environments.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Instance Install (Single)
       tags:
       - agent-instance
@@ -1252,12 +1190,14 @@ paths:
           description: Agent instance with the given `id` updated.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Agent Instance Update (Single)
       tags:
       - agent-instance
@@ -1276,15 +1216,19 @@ paths:
           description: Connections between execution environments and network links
             filtered by the query in the request body deleted.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Connection Delete (Multiple)
       tags:
       - connection
@@ -1308,11 +1252,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Connection Read (Multiple)
       tags:
       - connection
@@ -1333,16 +1277,18 @@ paths:
             links.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Connection Creation (Multiple)
       tags:
       - connection
@@ -1363,12 +1309,14 @@ paths:
             links.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Connection Update (Multiple)
       tags:
       - connection
@@ -1387,15 +1335,19 @@ paths:
           description: Connection between execution environments and network links
             with the given `id` filtered by the query in the request body deleted.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Connection Delete (Single)
       tags:
       - connection
@@ -1419,11 +1371,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Connection Read (Single)
       tags:
       - connection
@@ -1444,16 +1396,18 @@ paths:
             links.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Connection Creation (Single)
       tags:
       - connection
@@ -1474,12 +1428,14 @@ paths:
             with the given `id` updated.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Connection Update (Single)
       tags:
       - connection
@@ -1496,15 +1452,19 @@ paths:
         '200':
           description: Data filtered by the query in the request body deleted.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Data Delete (Multiple)
       tags:
       - data
@@ -1526,11 +1486,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Data Read (Multiple)
       tags:
       - data
@@ -1549,16 +1509,18 @@ paths:
           description: Data inserted.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Data Insert (Multiple)
       tags:
       - data
@@ -1577,12 +1539,14 @@ paths:
           description: Data updated.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Data Update (Multiple)
       tags:
       - data
@@ -1605,15 +1569,19 @@ paths:
           description: Data with the given `id` and filtered by the query in the request
             body deleted.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Data Delete (Single)
       tags:
       - data
@@ -1641,11 +1609,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Data Read (Single)
       tags:
       - data
@@ -1668,16 +1636,18 @@ paths:
           description: Data with the given `id` inserted.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Data Insert (Single)
       tags:
       - data
@@ -1700,12 +1670,14 @@ paths:
           description: Data with the given `id` updated.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Data Update (Single)
       tags:
       - data
@@ -1724,15 +1696,19 @@ paths:
           description: Execution environments filtered by the query in the request
             body deleted.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Delete (Multiple)
       tags:
       - exec-env
@@ -1756,11 +1732,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Read (Multiple)
       tags:
       - exec-env
@@ -1779,16 +1755,18 @@ paths:
           description: Execution environments created.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Creation (Multiple)
       tags:
       - exec-env
@@ -1807,12 +1785,14 @@ paths:
           description: Execution environments updated.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Update (Multiple)
       tags:
       - exec-env
@@ -1835,15 +1815,19 @@ paths:
           description: Execution environment with the given `id` and filtered by the
             query in the request body deleted.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Delete (Single)
       tags:
       - exec-env
@@ -1871,11 +1855,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Read (Single)
       tags:
       - exec-env
@@ -1898,16 +1882,18 @@ paths:
           description: Execution environment with the given `id` created.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Creation (Single)
       tags:
       - exec-env
@@ -1930,12 +1916,14 @@ paths:
           description: Execution environment with the given `id` updated.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Update (Single)
       tags:
       - exec-env
@@ -1954,15 +1942,19 @@ paths:
           description: Execution environment types filtered by the query in the request
             body deleted.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Type Delete (Multiple)
       tags:
       - exec-env-type
@@ -1986,11 +1978,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Type Read (Multiple)
       tags:
       - exec-env-type
@@ -2009,16 +2001,18 @@ paths:
           description: Execution environment types created.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Type Creation (Multiple)
       tags:
       - exec-env-type
@@ -2037,12 +2031,14 @@ paths:
           description: Execution environment types updated.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Type Update (Multiple)
       tags:
       - exec-env-type
@@ -2065,15 +2061,19 @@ paths:
           description: Execution environment type with the given `id` and filtered
             by the query in the request body deleted.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Type Delete (Single)
       tags:
       - exec-env-type
@@ -2101,11 +2101,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Type Read (Single)
       tags:
       - exec-env-type
@@ -2128,16 +2128,18 @@ paths:
           description: Execution environment type with the given `id` created.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Type Creation (Single)
       tags:
       - exec-env-type
@@ -2160,12 +2162,14 @@ paths:
           description: Execution environment type with the given `id` updated.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Execution Environment Type Update (Single)
       tags:
       - exec-env-type
@@ -2182,15 +2186,19 @@ paths:
         '200':
           description: Network links filtered by the query in the request body deleted.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Delete (Multiple)
       tags:
       - network-link
@@ -2214,11 +2222,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Read (Multiple)
       tags:
       - network-link
@@ -2237,16 +2245,18 @@ paths:
           description: Network links created.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Creation (Multiple)
       tags:
       - network-link
@@ -2265,12 +2275,14 @@ paths:
           description: Network links updated.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Update (Multiple)
       tags:
       - network-link
@@ -2293,15 +2305,19 @@ paths:
           description: Network link with the given `id` and filtered by the query
             in the request body deleted.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Delete (Single)
       tags:
       - network-link
@@ -2329,11 +2345,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Read (Single)
       tags:
       - network-link
@@ -2356,16 +2372,18 @@ paths:
           description: Network link with the given `id` created.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Creation (Single)
       tags:
       - network-link
@@ -2388,12 +2406,14 @@ paths:
           description: Network link with the given `id` updated.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Update (Single)
       tags:
       - network-link
@@ -2412,15 +2432,19 @@ paths:
           description: Network link types filtered by the query in the request body
             deleted.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Type Delete (Multiple)
       tags:
       - network-link-type
@@ -2444,11 +2468,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Type Read (Multiple)
       tags:
       - network-link-type
@@ -2467,16 +2491,18 @@ paths:
           description: Network link types created.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Type Creation (Multiple)
       tags:
       - network-link-type
@@ -2495,12 +2521,14 @@ paths:
           description: Network link types updated.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Type Update (Multiple)
       tags:
       - network-link-type
@@ -2523,15 +2551,19 @@ paths:
           description: Network link type with the given `id` and filtered by the query
             in the request body deleted.
           schema:
-            $ref: '#/definitions/DeleteResponse'
+            items:
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
+            type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Type Delete (Single)
       tags:
       - network-link-type
@@ -2559,11 +2591,11 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Type Read (Single)
       tags:
       - network-link-type
@@ -2586,16 +2618,18 @@ paths:
           description: Network link type with the given `id` created.
           schema:
             items:
-              $ref: '#/definitions/CreateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Type Creation (Single)
       tags:
       - network-link-type
@@ -2618,12 +2652,14 @@ paths:
           description: Network link type with the given `id` updated.
           schema:
             items:
-              $ref: '#/definitions/UpdateResponse'
+              oneOf:
+              - ResponseSchema
+              - ErrorSchema
             type: array
         '401':
           description: Unauthorized
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Network Link Type Update (Single)
       tags:
       - network-link-type
@@ -2639,15 +2675,15 @@ paths:
         '400':
           description: Bad request.
           schema:
-            $ref: '#/definitions/BadRequestSchema'
+            $ref: '#/definitions/HTTPError'
         '401':
           description: Unauthorized.
           schema:
-            $ref: '#/definitions/UnauthorizedSchema'
+            $ref: '#/definitions/HTTPError'
         '404':
           description: Not found.
           schema:
-            $ref: '#/definitions/NotFoundSchema'
+            $ref: '#/definitions/HTTPError'
       summary: Download the package
       tags: package
 produces:

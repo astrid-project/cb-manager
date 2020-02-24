@@ -15,10 +15,15 @@ tags: [{tag}]
 responses:
     200:
         description: {delete_responses_200_description}
-        schema: DeleteResponseSchema
+        schema:
+            type: array
+            items:
+                oneOf:
+                - ResponseSchema
+                - ErrorSchema
     400:
         description: Bad request.
-        schema: BadRequestSchema
+        schema: HTTPErrorSchema
     401:
         description: Unauthorized.
-        schema: UnauthorizedSchema
+        schema: HTTPErrorSchema

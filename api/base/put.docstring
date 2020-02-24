@@ -15,7 +15,10 @@ responses:
         description: {put_responses_200_description}
         schema:
             type: array
-            items: UpdateResponseSchema
+            items:
+                oneOf:
+                - ResponseSchema
+                - ErrorSchema
     401:
         description: Unauthorized
-        schema: UnauthorizedSchema
+        schema: HTTPErrorSchema

@@ -50,7 +50,7 @@ class QueryRequestClauseSchema(Schema):
     lt = fields.Nested(QueryRequestFilterSchema, description='The target field must be lower than the expr value.')
     gt = fields.Nested(QueryRequestFilterSchema, description='The target field must be greater to the expr value.')
     equal = fields.Nested(QueryRequestFilterSchema, description='The target field must be equal to the expr value.')
-    reg_exp = fields.Nested(QueryRequestFilterSchema, data_key='reg-exp',
+    reg_exp = fields.Nested(QueryRequestFilterSchema,
                             description='The target field must be satisfy the regular expression in expr.')
 
 
