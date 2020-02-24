@@ -1,18 +1,31 @@
 from .base import BaseResource
-from elasticsearch_dsl import Document, Text, Date, Integer
+
+from datetime import datetime, timedelta
+from elasticsearch_dsl import Date, Document, InnerDoc, Integer, Nested, Text
 from http import HTTPStatus
 from requests.auth import HTTPBasicAuth
 from utils import docstring_parameter
+
 import falcon
+import hashlib
 import requests
 import threading
+import utils
+
+
+class LCPDocument(InnerDoc):
+    port = Integer(required=True)
+    username = Text()
+    password = Text()
+    cb_password = Text()
+    cb_expiration = Date()
+    last_heartbeat = Date()
 
 
 class ExecEnvDocument(Document):
     hostname = Text(required=True)
-    lcp_port = Integer(required=True)
+    lcp = Nested(LCPDocument, required=True)
     type_id = Text(required=True)
-    #started = Date(required=True) # TODO Not work
 
     class Index:
         name = 'exec-env'
@@ -48,19 +61,30 @@ class ExecEnvResource(BaseResource):
         res = s.execute()
         for exec_env in res:
             try:
-                res = requests.post(f'http://{exec_env.hostname}:{exec_env.lcp_port}/status',
-                                    auth=HTTPBasicAuth('lcp', 'astrid'),
+                lcp = exec_env.lcp
+                lcp_cb_password = utils.generate_password()
+                lcp.cb_password = utils.hash(lcp_cb_password)
+                lcp.cb_expiration = utils.get_timestamp(datetime.now() + timedelta(seconds=self.args.hb_period))
+                res = requests.post(f'http://{exec_env.hostname}:{lcp.port}/status',
                                     timeout=self.args.hb_timeout,
-                                    json={ 'id': exec_env.meta.id })
-            except:
-                exec_env.update(last_heartbeat=None)
+                                    json={ 'id': exec_env.meta.id, 'cb_password': lcp_cb_password })
+            except Exception as e:
+                lcp.last_heartbeat = None
+                exec_env.save()
             else:
                 try:
                     if res.status_code == HTTPStatus.OK:
                         data = res.json()
-                        exec_env.update(last_heartbeat=data.get('last_hearthbeat', None))
+                        lcp.username = data.get('username', None)
+                        lcp.password = data.get('password', None)
+                        lcp.last_heartbeat = data.get('last_hearthbeat', None)
+                        exec_env.save()
+                    else:
+                        lcp.last_heartbeat = None
+                        exec_env.save()
                 except:
-                    exec_env.update(last_heartbeat=None)
+                    lcp.last_heartbeat = None
+                    exec_env.save()
         t = threading.Timer(self.args.hb_period, self.heartbeat)
         t.daemon = True
         t.start()

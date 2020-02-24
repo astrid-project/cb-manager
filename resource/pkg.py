@@ -1,12 +1,11 @@
+from .base import AbstractResource
+
 import falcon
 import os
 
-class PkgResource(object):
+class PkgResource(AbstractResource):
     routes = '/pkg/{name}',
     tag = 'package'
-
-    def __init__(self, args): #TODO better dev
-        pass
 
     def on_get(self, req, resp, name):
         """

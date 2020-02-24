@@ -14,7 +14,7 @@ class QueryRequestClauseSchema(Schema):
     Represents a clause to filter a item based on various conditions.
     """
     _and = fields.Nested('self', data_key='and', many=True,
-                         description='All the clause has to be satisfied.', example="""#TODO
+                         description='All the clause has to be satisfied.', example="""
                             [
                                 {
                                     "equal": {
@@ -29,7 +29,7 @@ class QueryRequestClauseSchema(Schema):
                                     }
                             ]""")
     _or = fields.Nested('self', data_key='or', many=True,
-                       description='At least the clause has to be satisfied.', example="""#TODO
+                       description='At least the clause has to be satisfied.', example="""
                             [
                                 {
                                     "equal": {

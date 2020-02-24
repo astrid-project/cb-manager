@@ -1,5 +1,6 @@
 from .base import BaseResource
-from elasticsearch_dsl import Document, Text, Nested, InnerDoc, Boolean
+
+from elasticsearch_dsl import Boolean, Document, InnerDoc, Nested, Text
 from utils import docstring_parameter
 
 

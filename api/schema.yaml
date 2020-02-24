@@ -169,12 +169,12 @@ definitions:
         type: string
       timestamp_agent:
         description: Timestamp when the agent instance collected the data
-        example: '#TODO'
+        example: 2019_02_14 15:23:30
         format: date-time
         type: string
       timestamp_event:
         description: Timestamp of the event related to the collected data
-        example: '#TODO'
+        example: 2019_02_14 15:23:30
         format: date-time
         type: string
     required:
@@ -190,11 +190,10 @@ definitions:
         description: ID of the execution environment.
         example: PiOIb3ABjPI5oepgse1C
         type: string
-      lcp_port:
-        description: TCP port number of LCPs in the execution environment.
-        example: 5000
-        format: int32
-        type: integer
+      lcp:
+        allOf:
+        - $ref: '#/definitions/LCP'
+        description: Data related to the LCP
       type_id:
         description: ID of the execution environment type.
         example: vm
@@ -202,7 +201,7 @@ definitions:
     required:
     - hostname
     - id
-    - lcp_port
+    - lcp
     - type_id
     type: object
   ExecEnvType:
@@ -233,6 +232,42 @@ definitions:
     required:
     - description
     - title
+    type: object
+  LCP:
+    properties:
+      cb_expiration:
+        description: Datetime until the authentication with the CB is valid.
+        example: 2019_02_14 15:23:30
+        format: date-time
+        type: string
+      cb_password:
+        description: Hashed password assigned to LCP to connect with the CB.
+        example: 22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5
+        type: string
+      last_hearbeat:
+        description: Timestamp of the last hearbeat between the LCP and CB.
+        example: 2019_02_14 15:23:30
+        format: date-time
+        type: string
+      password:
+        description: Password to connect from the CB to the LCP.
+        example: 22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5
+        type: string
+      port:
+        description: TCP port number of LCPs in the execution environment.
+        example: 5000
+        format: int32
+        type: integer
+      username:
+        description: Username to connect from the CB to the LCP.
+        example: 22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5
+        type: string
+    required:
+    - cb_expiration
+    - cb_password
+    - password
+    - port
+    - username
     type: object
   NetworkLink:
     properties:
@@ -288,15 +323,15 @@ definitions:
     properties:
       and:
         description: All the clause has to be satisfied.
-        example: "#TODO\n                            [\n                         \
-          \       {\n                                    \"equal\": {\n          \
-          \                              \"target\": \"name\",\n                 \
-          \                       \"expr:\": \"apache\"\n                        \
-          \                }\n                                    },\n           \
-          \                         {\n                                    \"lte\"\
-          : {\n                                        \"target\": \"timeout\",\n\
-          \                                        \"expr\": 5\n                 \
-          \                   }\n                            ]"
+        example: "\n                            [\n                              \
+          \  {\n                                    \"equal\": {\n               \
+          \                         \"target\": \"name\",\n                      \
+          \                  \"expr:\": \"apache\"\n                             \
+          \           }\n                                    },\n                \
+          \                    {\n                                    \"lte\": {\n\
+          \                                        \"target\": \"timeout\",\n    \
+          \                                    \"expr\": 5\n                     \
+          \               }\n                            ]"
         items:
           $ref: '#/definitions/QueryRequestClause'
         type: array
@@ -326,15 +361,15 @@ definitions:
         description: The clause has to be not satisfied.
       or:
         description: At least the clause has to be satisfied.
-        example: "#TODO\n                            [\n                         \
-          \       {\n                                    \"equal\": {\n          \
-          \                              \"target\": \"name\",\n                 \
-          \                       \"expr:\": \"apache\"\n                        \
-          \                }\n                                    },\n           \
-          \                         {\n                                    \"lte\"\
-          : {\n                                        \"target\": \"timeout\",\n\
-          \                                        \"expr\": 5\n                 \
-          \                   }\n                            ]"
+        example: "\n                            [\n                              \
+          \  {\n                                    \"equal\": {\n               \
+          \                         \"target\": \"name\",\n                      \
+          \                  \"expr:\": \"apache\"\n                             \
+          \           }\n                                    },\n                \
+          \                    {\n                                    \"lte\": {\n\
+          \                                        \"target\": \"timeout\",\n    \
+          \                                    \"expr\": 5\n                     \
+          \               }\n                            ]"
         items:
           $ref: '#/definitions/QueryRequestClause'
         type: array

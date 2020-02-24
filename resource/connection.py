@@ -1,4 +1,5 @@
 from .base import BaseResource
+
 from elasticsearch_dsl import Document, Text
 from utils import docstring_parameter
 

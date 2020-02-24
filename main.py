@@ -2,18 +2,19 @@ from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 from configparser import ConfigParser
 from elasticsearch_dsl import connections
-from falcon_auth import FalconAuthMiddleware, BasicAuthBackend
 from falcon_apispec import FalconPlugin
+from falcon_auth import FalconAuthMiddleware, BasicAuthBackend
 from falcon_marshmallow import Marshmallow
 from resource import *
 from schema import *
 from swagger_ui import falcon_api_doc
-from utils import *
+
 import argparse
 import falcon
 import hashlib
 import json
 import time
+import utils
 import waitress
 
 
@@ -27,15 +28,17 @@ version = config_parser.get('info', 'version')
 cb_host = config_parser.get('context-broker', 'host')
 cb_port = config_parser.get('context-broker', 'port')
 
-auth_username = config_parser.get('auth', 'username')
-auth_password = config_parser.get('auth', 'password')
-
 hb_timeout = config_parser.get('hearthbeat', 'timeout')
 hb_period = config_parser.get('hearthbeat', 'period')
 
 es_endpoint = config_parser.get('elasticsearch', 'endpoint')
 es_timeout = config_parser.get('elasticsearch', 'timeout')
 es_retry_period = config_parser.get('elasticsearch', 'retry-period')
+
+dev_debug = config_parser.get('dev', 'debug')
+dev_username = config_parser.get('dev', 'username')
+dev_password = config_parser.get('dev', 'password')
+
 
 print(f'{title} v{version}')
 
@@ -48,28 +51,27 @@ parser.add_argument('--host', '-o', type=str,
 parser.add_argument('--port', '-p', type=int,
                     help='TCP Port of the REST Server', default=cb_port)
 
-parser.add_argument('--auth-username', '-u', type=str,
-                    help='Authorized username', default=auth_username)
-parser.add_argument('--auth-password', '-a', type=str,
-                    help='Authorized password', default=auth_password)
-
-
 parser.add_argument('--hb-timeout', '-b', type=float,
                     help='Timeout (in seconds) for heartbeat with LCPs', default=hb_timeout)
 parser.add_argument('--hb-period', '-r', type=float,
                     help='Period (in seconds) per the hearthbeat with the LCPs', default=hb_period)
 
-
 parser.add_argument('--es-endpoint', '-e', type=str,
                     help='Elasticsearch server hostname/IP:port', default=es_endpoint)
 parser.add_argument('--es-timeout', '-s', type=float,
                     help='Timeout (in seconds) for the connection to Elasticsearch', default=es_timeout)
-parser.add_argument('--es-retry_period', '-d', type=float,
+parser.add_argument('--es-retry_period', '-y', type=float,
                     help='Period (in seconds) to retry the connection to Elasticsearch', default=es_retry_period)
+
+parser.add_argument('--dev-debug', '-d', help='Enable debug',
+                    action='store_true')
+parser.add_argument('--dev-username', '-u', type=str,
+                    help='Authorized username', default=dev_username)
+parser.add_argument('--dev-password', '-a', type=str,
+                    help='Authorized password', default=dev_password)
 
 parser.add_argument('--write-config', '-w', help='Write options to config.ini',
                     action='store_true')
-
 parser.add_argument('--version', '-v', help='Show version',
                     action='store_const', const=version)
 
@@ -85,6 +87,8 @@ if args.write_config:
 if args.version is not None:
     print(args.version)
 else:
+    args.dev_debug = args.dev_debug or dev_debug
+
     def elastic_connection():
         try:
             print(f'Info: start connection to Elasticsearch ({args.es_endpoint}).')
@@ -99,7 +103,11 @@ else:
 
 
     def auth(username, password):
-        if username == args.auth_username and hashlib.sha224(password.encode('utf-8')).hexdigest() == args.auth_password:
+        auth_data = [(args.dev_username, args.dev_password)]
+        exec_env = ExecEnvDocument.get(id=username, ignore=404)
+        if exec_env is not None and exec_env.lcp.last_heartbeat is not None:
+            auth_data.append((exec_env.meta.id, exec_env.lcp.cb_password))
+        if (username, utils.hash(password)) in auth_data:
             return {'username': username}
         else:
             False
@@ -140,7 +148,7 @@ else:
 
     for Resource in resource_set:
         resource = Resource(args)
-        for route in wrap(Resource.routes):
+        for route in utils.wrap(Resource.routes):
             api.add_route(route, resource)
             api_spec.path(resource=resource)
             print(f'Success: {route} endpoint configured.')

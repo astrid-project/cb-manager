@@ -1,15 +1,21 @@
-import falcon
 from elasticsearch_dsl import Document
 from elasticsearch_dsl.utils import AttrList
 from http import HTTPStatus
 from query_parser import QueryParser
+
 import elasticsearch
-from utils import *
+import falcon
+import utils
 
 
-class BaseResource(object):
+class AbstractResource(object):
     def __init__(self, args):
         self.args = args
+
+
+class BaseResource(AbstractResource):
+    def __init__(self, args):
+        super(BaseResource, self).__init__(args)
         try:
             print(
                 f'Info: start initialization index {self.doc_cls.Index.name}.')
@@ -47,7 +53,7 @@ class BaseResource(object):
             single = True
         else:
             single = False
-        for data in wrap(query):
+        for data in utils.wrap(query):
             data_id = data.pop('id', None)
             if data_id is not None and single:
                 res.append({
@@ -79,7 +85,8 @@ class BaseResource(object):
                             'id': obj.meta.id,
                             'http_status_code': HTTPStatus.CONFLICT
                         })
-                except:
+                except Exception as e:
+                    print(data, e)
                     res.append({
                         'status': 'error',
                         'reason': f'Not possible create {self.doc_name} with the given [data]',
@@ -130,7 +137,7 @@ class BaseResource(object):
             single = True
         else:
             single = False
-        for data in wrap(query):
+        for data in utils.wrap(query):
             data_id = data.pop('id', None)
             data_add = {k: v for k, v in data.items() if k.startswith('+')}
             data = {k: v for k, v in data.items() if not k.startswith('+')}
@@ -151,11 +158,11 @@ class BaseResource(object):
                 try:
                     obj = self.doc_cls.get(id=data_id)
                     for name, values in  data_add.items():
-                        for item in wrap(values):
+                        for item in utils.wrap(values):
                             field = name.replace('+', '')
                             o = getattr(obj, field)
                             if not type(o) == AttrList:
-                                setattr(obj, field, wrap(o))
+                                setattr(obj, field, utils.wrap(o))
                             getattr(obj, field).append(item)
                     if len(data) > 0:
                         status = obj.update(**data)

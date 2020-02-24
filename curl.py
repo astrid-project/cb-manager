@@ -11,10 +11,12 @@ title = config_parser.get('info', 'title')
 description = config_parser.get('info', 'description')
 version = config_parser.get('info', 'version')
 
-ip = 'localhost'
-port = config_parser.get('context-broker', 'port')
-username = config_parser.get('auth', 'username')
-password = 'astrid'
+cb_host = config_parser.get('context-broker', 'host')
+cb_port = config_parser.get('context-broker', 'port')
+
+dev_username = config_parser.get('dev', 'username')
+dev_password = 'astrid'
+
 timeout = 20
 method = 'get'
 path = ''
@@ -23,12 +25,14 @@ data = ''
 parser = argparse.ArgumentParser(
     prog=f'python3 curl.py', description=f'Custom curl for {title} version {version}')
 
-parser.add_argument('--ip', '-i', type=str, help='IP', default=ip)
-parser.add_argument('--port', '-o', type=int, help='Port', default=port)
+parser.add_argument('--host', '-i', type=str, help='Hostname/IP', default=cb_host)
+parser.add_argument('--port', '-o', type=int, help='Port', default=cb_port)
+
 parser.add_argument('--username', '-u', type=str,
-                    help='Authorized username', default=username)
+                    help='Authorized username', default=dev_username)
 parser.add_argument('--password', '-p', type=str,
-                    help='Authorized password', default=password)
+                    help='Authorized password', default=dev_password)
+
 parser.add_argument('--timeout', '-t', type=float,
                     help='Timeout', default=timeout)
 parser.add_argument('--method', '-m', type=str, help='Method', default=method)

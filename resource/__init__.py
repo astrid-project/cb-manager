@@ -5,7 +5,7 @@ from .connection import ConnectionResource, ConnectionSelectedResource
 
 from .data import DataResource, DataSelectedResource
 
-from .exec_env import ExecEnvResource, ExecEnvSelectedResource
+from .exec_env import ExecEnvResource, ExecEnvSelectedResource, ExecEnvDocument
 from .exec_env_type import ExecEnvTypeResource, ExecEnvTypeSelectedResource
 
 from .network_link import NetworkLinkResource, NetworkLinkSelectedResource

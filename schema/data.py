@@ -12,6 +12,6 @@ class DataSchema(Schema):
     agent_instance_id = fields.String(description='ID of the agent instance in the execution environment that collected the data',
                                       example='EHiirlGzEiU29VTdovTo')
     timestamp_event = fields.DateTime(description='Timestamp of the event related to the collected data',
-                                      example='#TODO')
+                                      example='2019_02_14 15:23:30')
     timestamp_agent = fields.DateTime(description='Timestamp when the agent instance collected the data',
-                                      example='#TODO')
+                                      example='2019_02_14 15:23:30')

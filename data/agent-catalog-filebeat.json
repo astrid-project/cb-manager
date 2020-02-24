@@ -43,7 +43,7 @@
                         "args": [
                             "--user",
                             "${USERNAME}:${PASSWORD}",
-                            "http://${IP}:${PORT}/pkg/filebeat.tar.gz",
+                            "http://${HOST}:${PORT}/pkg/filebeat.tar.gz",
                             "--output",
                             "~/astrid-framework/env/src/filebeat.tar.gz"
                         ]

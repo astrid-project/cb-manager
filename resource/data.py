@@ -1,13 +1,14 @@
 from .base import BaseResource
-from elasticsearch_dsl import Document, Text, Date
+
+from elasticsearch_dsl import Date, Document, Text
 from utils import docstring_parameter
 
 
 class DataDocument(Document):
-    exec_env_id = Text() # TODO
-    agent_instance_id = Text() # TODO
-    timestamp_event = Date() # TODO
-    timestamp_agent = Date() # TODO
+    exec_env_id = Text()
+    agent_instance_id = Text()
+    timestamp_event = Date()
+    timestamp_agent = Date()
 
     class Index:
         name = 'data'

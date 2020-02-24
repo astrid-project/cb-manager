@@ -1,14 +1,16 @@
-from .base import BaseResource
 from .agent_catalog import AgentCatalogDocument
+from .base import BaseResource
 from .exec_env import ExecEnvDocument
-from elasticsearch_dsl import Document, InnerDoc, Text, Nested, Boolean
+from elasticsearch_dsl import Boolean, Document, InnerDoc, Nested, Text
 from http import HTTPStatus
 from requests.auth import HTTPBasicAuth
 from string import Template
-from utils import docstring_parameter, wrap
+from utils import docstring_parameter
+
 import falcon
 import json
 import requests
+import utils
 
 
 class AgentInstanceParameterInnerDoc(InnerDoc):
@@ -44,28 +46,29 @@ class AgentInstanceResource(BaseResource):
     doc_name = 'Agent Instance'
     routes = '/config/agent/',
 
-    def resolve(self, recipe):
+    def resolve(self, recipe, lcp):
         t = Template(json.dumps(recipe.to_dict()))
-        return json.loads(t.substitute(USERNAME='cb', PASSWORD='astrid', IP='127.0.0.1', PORT=5000))
+        return json.loads(t.substitute(USERNAME=lcp.username, PASSWORD=lcp.password,
+                                       HOST=self.args.host, PORT=self.args.port))
 
     def execute_action(self, name, agent_catalog, exec_env):
         action = list(filter(lambda x: x.name == name, agent_catalog.actions))
         if len(action) == 1:
             action = action[0]
             ret = requests.post(f'http://{exec_env.hostname}:4000/config',
-                        auth=HTTPBasicAuth('lcp', 'astrid'),
-                        json=self.resolve(action.recipe))
+                        auth=HTTPBasicAuth(exec_env.lcp.username, exec_env.lcp.password),
+                        json=self.resolve(action.recipe, lcp=exec_env.lcp))
             return ret.json()
         return None
 
     def has_error(self, data):
         error = False
-        for result in wrap(data['results']):
+        for result in utils.wrap(data['results']):
             error = error or result.get('error', False)
         return error
 
     def operations(self, req, resp, match_status, action):
-        for query, res in list(zip(wrap(req.context.get('json', [])), resp.media)):
+        for query, res in list(zip(utils.wrap(req.context.get('json', [])), resp.media)):
             if res.get('status', None) == match_status:
                 res_data = res.get('data')
                 try:
@@ -88,13 +91,13 @@ class AgentInstanceResource(BaseResource):
                         if agent_instance is not None:
                             agent_instance.status = status if not self.has_error(status_data) else 'stop'
                         res['operations'].append(status_data)
-                for param in wrap(query.get('parameters', [])):
+                for param in utils.wrap(query.get('parameters', [])):
                     param_name = param.get('name', None)
                     param_catalog = list(filter(lambda x: x.name == param_name, agent_catalog.parameters))
                     if len(param_catalog) == 1:
                         param_catalog = param_catalog[0]
                         ret = requests.post(f'http://{exec_env.hostname}:4000/config',
-                            auth=HTTPBasicAuth('lcp', 'astrid'),
+                            auth=HTTPBasicAuth(exec_env.lcp.username, exec_env.lcp.password),
                             json=self.resolve(param_catalog.recipe))
                         res['operations'].append(ret.json())
                     else:

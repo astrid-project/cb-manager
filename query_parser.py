@@ -1,7 +1,8 @@
+from elasticsearch_dsl import Q, Search
+
 import falcon
 import elasticsearch
-from elasticsearch_dsl import Search, Q
-from utils import fix_target
+import utils
 
 
 class QueryParser:
@@ -41,7 +42,7 @@ class QueryParser:
             elif op == 'not':
                 q = ~self._where(clause)
             else:
-                prop = fix_target(clause.get('target', None))
+                prop = utils.fix_target(clause.get('target', None))
                 expr = clause.get('expr', None)
                 if prop is not None and expr is not None:
                     if op == 'equal':
