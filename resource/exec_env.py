@@ -1,5 +1,6 @@
 from .base import BaseResource
 
+from args import Args
 from datetime import datetime, timedelta
 from elasticsearch_dsl import Date, Document, InnerDoc, Integer, Nested, Text
 from http import HTTPStatus
@@ -49,8 +50,8 @@ class ExecEnvResource(BaseResource):
     doc_name = 'Execution Environment'
     routes = '/config/exec-env/'
 
-    def __init__(self, args):
-        super().__init__(args)
+    def __init__(self):
+        super()
         self.heartbeat()
 
     def heartbeat(self):
@@ -64,11 +65,15 @@ class ExecEnvResource(BaseResource):
                 lcp = exec_env.lcp
                 lcp_cb_password = utils.generate_password()
                 lcp.cb_password = utils.hash(lcp_cb_password)
-                lcp.cb_expiration = utils.get_timestamp(datetime.now() + timedelta(seconds=self.args.hb_period))
+                lcp.cb_expiration = utils.get_timestamp(datetime.now() + timedelta(seconds=Args.db.hb_period))
+                auth = { 'username': lcp.username, 'password': lcp.password } if lcp.last_heartbeat else {}
                 res = requests.post(f'http://{exec_env.hostname}:{lcp.port}/status',
-                                    timeout=self.args.hb_timeout,
-                                    json={ 'id': exec_env.meta.id, 'cb_password': lcp_cb_password })
+                                    timeout=Args.db.hb_timeout,
+                                    json={ 'id': exec_env.meta.id, **auth,
+                                           'cb_password': lcp_cb_password,
+                                           'cb_expiration': lcp.cb_expiration })
             except Exception as e:
+                self.log.debug(e)
                 lcp.last_heartbeat = None
                 exec_env.save()
             else:
@@ -82,10 +87,11 @@ class ExecEnvResource(BaseResource):
                     else:
                         lcp.last_heartbeat = None
                         exec_env.save()
-                except:
+                except Exception as e:
+                    self.log.debug(e)
                     lcp.last_heartbeat = None
                     exec_env.save()
-        t = threading.Timer(self.args.hb_period, self.heartbeat)
+        t = threading.Timer(Args.db.hb_period, self.heartbeat)
         t.daemon = True
         t.start()
 

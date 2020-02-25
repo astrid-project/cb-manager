@@ -1,6 +1,7 @@
 from elasticsearch_dsl import Document
 from elasticsearch_dsl.utils import AttrList
 from http import HTTPStatus
+from log import Log
 from query_parser import QueryParser
 
 import elasticsearch
@@ -8,25 +9,19 @@ import falcon
 import utils
 
 
-class AbstractResource(object):
-    def __init__(self, args):
-        self.args = args
-
-
-class BaseResource(AbstractResource):
-    def __init__(self, args):
-        super(BaseResource, self).__init__(args)
+class BaseResource(object):
+    def __init__(self):
+        self.log = Log.get(self.doc_cls.Index.name)
         try:
-            print(
-                f'Info: start initialization index {self.doc_cls.Index.name}.')
+            self.log.info(f'start initialization index {self.doc_cls.Index.name}')
             self.doc_cls.init()
-        except:
-            print(
-                f'Error: initialization index {self.doc_cls.Index.name} not possible.')
-            print(f'Info: try again.')
+        except Exception as e:
+            self.log.debug(e)
+            self.log.error(f'initialization index {self.doc_cls.Index.name} not possible')
+            self.log.info('try again')
             self.__init()
         else:
-            print(f'Success: index {self.doc_cls.Index.name} initialized')
+            self.log.success(f'index {self.doc_cls.Index.name} initialized')
 
     def on_base_get(self, req, resp, id=None):
         try:
@@ -86,7 +81,7 @@ class BaseResource(AbstractResource):
                             'http_status_code': HTTPStatus.CONFLICT
                         })
                 except Exception as e:
-                    print(data, e)
+                    self.log.debug(e)
                     res.append({
                         'status': 'error',
                         'reason': f'Not possible create {self.doc_name} with the given [data]',
@@ -111,7 +106,8 @@ class BaseResource(AbstractResource):
                         'data': { **data, 'id': hit.meta.id },
                         'http_status_code': HTTPStatus.OK
                     })
-                except:
+                except Exception as e:
+                    self.log.debug(e)
                     res.append({
                         'status': 'error',
                         'reason': f'Not possible to delete element with the given [id]',
@@ -173,7 +169,8 @@ class BaseResource(AbstractResource):
                         'data': { **obj.to_dict(), 'id': data_id },
                         'http_status_code': HTTPStatus.OK
                     })
-                except elasticsearch.NotFoundError:
+                except elasticsearch.NotFoundError as not_found_error:
+                    self.log.debug(not_found_error)
                     res.append({
                         'status': 'error',
                         'reason': f'{self.doc_name} with the given [id] not found',

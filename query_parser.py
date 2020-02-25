@@ -1,4 +1,5 @@
 from elasticsearch_dsl import Q, Search
+from log import Log
 
 import falcon
 import elasticsearch
@@ -20,7 +21,8 @@ class QueryParser:
                 title=req_error.error,
                 description=req_error.info
             )
-        except:
+        except Exception as e:
+            Log.get('query-parser').debug(e)
             raise falcon.HTTPBadRequest(
                 title='Not valid JSON',
                 description='The request has a not valid JSON body.'

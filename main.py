@@ -1,3 +1,4 @@
+from args import Args
 from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
 from configparser import ConfigParser
@@ -5,6 +6,7 @@ from elasticsearch_dsl import connections
 from falcon_apispec import FalconPlugin
 from falcon_auth import FalconAuthMiddleware, BasicAuthBackend
 from falcon_marshmallow import Marshmallow
+from log import Log
 from resource import *
 from schema import *
 from swagger_ui import falcon_api_doc
@@ -35,9 +37,10 @@ es_endpoint = config_parser.get('elasticsearch', 'endpoint')
 es_timeout = config_parser.get('elasticsearch', 'timeout')
 es_retry_period = config_parser.get('elasticsearch', 'retry-period')
 
-dev_debug = config_parser.get('dev', 'debug')
 dev_username = config_parser.get('dev', 'username')
 dev_password = config_parser.get('dev', 'password')
+
+log_level = config_parser.get('log', 'level')
 
 
 print(f'{title} v{version}')
@@ -63,47 +66,49 @@ parser.add_argument('--es-timeout', '-s', type=float,
 parser.add_argument('--es-retry_period', '-y', type=float,
                     help='Period (in seconds) to retry the connection to Elasticsearch', default=es_retry_period)
 
-parser.add_argument('--dev-debug', '-d', help='Enable debug',
-                    action='store_true')
 parser.add_argument('--dev-username', '-u', type=str,
                     help='Authorized username', default=dev_username)
 parser.add_argument('--dev-password', '-a', type=str,
                     help='Authorized password', default=dev_password)
+
+parser.add_argument('--log-level', '-l', choices=Log.get_levels(),
+                    help='Log level', default=log_level)
 
 parser.add_argument('--write-config', '-w', help='Write options to config.ini',
                     action='store_true')
 parser.add_argument('--version', '-v', help='Show version',
                     action='store_const', const=version)
 
-args = parser.parse_args()
+Args.db = parser.parse_args()
 
-if args.write_config:
-    config_parser.set('context-broker', 'port', args.port)
-    config_parser.set('elasticsearch', 'endpoint', args.es_endpoint)
-    config_parser.set('elasticsearch', 'timeout', args.es_timeout)
+log = Log.get('main')
+
+if Args.db.write_config:
+    config_parser.set('context-broker', 'port', Args.db.port)
+    config_parser.set('elasticsearch', 'endpoint', Args.db.es_endpoint)
+    config_parser.set('elasticsearch', 'timeout', Args.db.es_timeout)
     with open('config.ini', 'w') as f:
             config_parser.write(f)
 
-if args.version is not None:
-    print(args.version)
+if Args.db.version is not None:
+    print(Args.db.version)
 else:
-    args.dev_debug = args.dev_debug or dev_debug
-
     def elastic_connection():
         try:
-            print(f'Info: start connection to Elasticsearch ({args.es_endpoint}).')
-            connections.create_connection(hosts=args.es_endpoint, timeout=args.es_timeout)
-        except:
-            print(f'Error: connection to Elasticsearch ({args.es_endpoint}) not possible.')
-            print(f'Info: try again in {args.es_retry_period} seconds.')
-            time.sleep(args.es_retry_period)
+            log.info(f'start connection to Elasticsearch ({Args.db.es_endpoint})')
+            connections.create_connection(hosts=Args.db.es_endpoint, timeout=Args.db.es_timeout)
+        except Exception as e:
+            log.debug(e)
+            log.error(f'connection to Elasticsearch ({Args.db.es_endpoint}) not possible')
+            log.error(f'try again in {Args.db.es_retry_period} seconds')
+            time.sleep(Args.db.es_retry_period)
             elastic_connection()
         else:
-            print(f'Success: connection to Elasticsearch ({args.es_endpoint}) established.')
+            log.success(f'connection to Elasticsearch ({Args.db.es_endpoint}) established')
 
 
     def auth(username, password):
-        auth_data = [(args.dev_username, args.dev_password)]
+        auth_data = [(Args.db.dev_username, Args.db.dev_password)]
         exec_env = ExecEnvDocument.get(id=username, ignore=404)
         if exec_env is not None and exec_env.lcp.last_heartbeat is not None:
             auth_data.append((exec_env.meta.id, exec_env.lcp.cb_password))
@@ -147,11 +152,11 @@ else:
     elastic_connection()
 
     for Resource in resource_set:
-        resource = Resource(args)
+        resource = Resource()
         for route in utils.wrap(Resource.routes):
             api.add_route(route, resource)
             api_spec.path(resource=resource)
-            print(f'Success: {route} endpoint configured.')
+            log.success(f'{route} endpoint configured')
 
     with open('./api/schema.yaml', 'w') as file:
         file.write(api_spec.to_yaml())
@@ -161,4 +166,4 @@ else:
 
     falcon_api_doc(api, config_path='./api/schema.json', url_prefix='/api/doc', title='API doc')
 
-    waitress.serve(api, host=args.host, port=args.port)
+    waitress.serve(api, host=Args.db.host, port=Args.db.port)

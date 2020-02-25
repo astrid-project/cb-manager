@@ -1,9 +1,7 @@
-from .base import AbstractResource
-
 import falcon
 import os
 
-class PkgResource(AbstractResource):
+class PkgResource(object):
     routes = '/pkg/{name}',
     tag = 'package'
 
@@ -35,7 +33,8 @@ class PkgResource(AbstractResource):
         if os.path.exists(pkg):
             try:
                 resp.stream = open(pkg, 'rb')
-            except:
+            except Exception as e:
+                self.log.debug(e)
                 raise falcon.HTTPBadRequest(
                     title="Package error",
                     description="Not possible to download the package."

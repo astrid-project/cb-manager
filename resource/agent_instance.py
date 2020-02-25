@@ -1,6 +1,8 @@
 from .agent_catalog import AgentCatalogDocument
 from .base import BaseResource
 from .exec_env import ExecEnvDocument
+
+from args import Args
 from elasticsearch_dsl import Boolean, Document, InnerDoc, Nested, Text
 from http import HTTPStatus
 from requests.auth import HTTPBasicAuth
@@ -49,7 +51,7 @@ class AgentInstanceResource(BaseResource):
     def resolve(self, recipe, lcp):
         t = Template(json.dumps(recipe.to_dict()))
         return json.loads(t.substitute(USERNAME=lcp.username, PASSWORD=lcp.password,
-                                       HOST=self.args.host, PORT=self.args.port))
+                                       HOST=Args.db.host, PORT=Args.db.port))
 
     def execute_action(self, name, agent_catalog, exec_env):
         action = list(filter(lambda x: x.name == name, agent_catalog.actions))
@@ -73,7 +75,8 @@ class AgentInstanceResource(BaseResource):
                 res_data = res.get('data')
                 try:
                     agent_instance = AgentInstanceDocument.get(id=res_data.get('id', None))
-                except:
+                except Exception as e:
+                    self.log.debug(e)
                     agent_instance = None
                 agent_catalog = AgentCatalogDocument.get(id=res_data.get('agent_catalog_id', None))
                 exec_env = ExecEnvDocument.get(id=res_data.get('exec_env_id', None))
