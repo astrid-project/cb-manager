@@ -1,12 +1,17 @@
+from configparser import ConfigParser
+config_parser = ConfigParser()
+config_parser.read('config.ini')
+
+from log import Log
+Log.set_levels(config_parser.items('log'))
+
 from args import Args
 from apispec import APISpec
 from apispec.ext.marshmallow import MarshmallowPlugin
-from configparser import ConfigParser
 from elasticsearch_dsl import connections
 from falcon_apispec import FalconPlugin
 from falcon_auth import FalconAuthMiddleware, BasicAuthBackend
 from falcon_marshmallow import Marshmallow
-from log import Log
 from resource import *
 from schema import *
 from swagger_ui import falcon_api_doc
@@ -19,9 +24,6 @@ import time
 import utils
 import waitress
 
-
-config_parser = ConfigParser()
-config_parser.read('config.ini')
 
 title = config_parser.get('info', 'title')
 description = config_parser.get('info', 'description')

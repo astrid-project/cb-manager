@@ -99,7 +99,7 @@ class AgentInstanceResource(BaseResource):
                     param_catalog = list(filter(lambda x: x.name == param_name, agent_catalog.parameters))
                     if len(param_catalog) == 1:
                         param_catalog = param_catalog[0]
-                        ret = requests.post(f'http://{exec_env.hostname}:4000/config',
+                        ret = requests.post(f'http://{exec_env.lcp.host}:{exec_env.lcp.port}/config',
                             auth=HTTPBasicAuth(exec_env.lcp.username, exec_env.lcp.password),
                             json=self.resolve(param_catalog.recipe))
                         res['operations'].append(ret.json())

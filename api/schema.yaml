@@ -254,7 +254,7 @@ definitions:
         example: 22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5
         type: string
       port:
-        description: TCP port number of LCPs in the execution environment.
+        description: TCP port number of LCP in the execution environment.
         example: 5000
         format: int32
         type: integer
@@ -263,11 +263,7 @@ definitions:
         example: 22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5
         type: string
     required:
-    - cb_expiration
-    - cb_password
-    - password
     - port
-    - username
     type: object
   NetworkLink:
     properties:

@@ -4,6 +4,8 @@
         "LCPs",
         "datetime",
         "filebeat",
-        "kwrd"
+        "kwrd",
+        "strftime",
+        "strptime"
     ]
 }
