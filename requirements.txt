@@ -6,6 +6,7 @@ falcon
 falcon-apispec
 falcon-auth
 falcon-marshmallow
+requests
 swagger-ui-py
 verboselogs
 waitress
