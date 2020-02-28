@@ -1,3 +1,4 @@
+from args import Args
 from elasticsearch_dsl import Document
 from elasticsearch_dsl.utils import AttrList
 from http import HTTPStatus
