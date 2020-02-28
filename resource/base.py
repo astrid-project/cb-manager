@@ -6,22 +6,27 @@ from query_parser import QueryParser
 
 import elasticsearch
 import falcon
+import time
 import utils
 
 
 class BaseResource(object):
     def __init__(self):
         self.log = Log.get(self.doc_cls.Index.name)
-        try:
-            self.log.info(f'start initialization index {self.doc_cls.Index.name}')
-            self.doc_cls.init()
-        except Exception as e:
-            self.log.debug(e)
-            self.log.error(f'initialization index {self.doc_cls.Index.name} not possible')
-            self.log.info('try again')
-            self.__init()
-        else:
-            self.log.success(f'index {self.doc_cls.Index.name} initialized')
+        error_es_initialization = True
+        while error_es_initialization:
+            try:
+                self.log.info(f'start initialization index {self.doc_cls.Index.name}')
+                self.doc_cls.init()
+            except Exception as e:
+                self.log.debug(e)
+                self.log.error(f'initialization index {self.doc_cls.Index.name} not possible')
+                self.log.info(f'waiting for {Args.cb.elasticsearch_retry_period} second and try again')
+                time.sleep(Args.cb.elasticsearch_retry_period)
+                self.__init__()
+            else:
+                self.log.success(f'index {self.doc_cls.Index.name} initialized')
+                error_es_initialization = False
 
     def on_base_get(self, req, resp, id=None):
         try:
