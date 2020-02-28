@@ -5,7 +5,9 @@
         "datetime",
         "filebeat",
         "kwrd",
+        "quantulum",
         "strftime",
-        "strptime"
+        "strptime",
+        "ureg"
     ]
 }

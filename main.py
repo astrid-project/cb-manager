@@ -56,17 +56,17 @@ parser.add_argument('--host', '-o', type=str,
 parser.add_argument('--port', '-p', type=int,
                     help='TCP Port of the REST Server', default=cb_port)
 
-parser.add_argument('--hb-timeout', '-b', type=float,
-                    help='Timeout (in seconds) for heartbeat with LCPs', default=hb_timeout)
-parser.add_argument('--hb-period', '-r', type=float,
-                    help='Period (in seconds) per the hearthbeat with the LCPs', default=hb_period)
+parser.add_argument('--hb-timeout', '-b', type=str,
+                    help='Timeout (with unit, e.g.: 10s) for heartbeat with LCPs', default=hb_timeout)
+parser.add_argument('--hb-period', '-r', type=str,
+                    help='Period (with unit, e.g.: 1min) per the hearthbeat with the LCPs', default=hb_period)
 
 parser.add_argument('--es-endpoint', '-e', type=str,
                     help='Elasticsearch server hostname/IP:port', default=es_endpoint)
-parser.add_argument('--es-timeout', '-s', type=float,
-                    help='Timeout (in seconds) for the connection to Elasticsearch', default=es_timeout)
-parser.add_argument('--es-retry_period', '-y', type=float,
-                    help='Period (in seconds) to retry the connection to Elasticsearch', default=es_retry_period)
+parser.add_argument('--es-timeout', '-s', type=str,
+                    help='Timeout (with unit, e.g.: 10s) for the connection to Elasticsearch', default=es_timeout)
+parser.add_argument('--es-retry_period', '-y', type=str,
+                    help='Period (with unit, e.g.: 1min) to retry the connection to Elasticsearch', default=es_retry_period)
 
 parser.add_argument('--dev-username', '-u', type=str,
                     help='Authorized username', default=dev_username)
@@ -82,6 +82,8 @@ parser.add_argument('--version', '-v', help='Show version',
                     action='store_const', const=version)
 
 Args.db = parser.parse_args()
+for param in 'hb_timeout', 'hb_period', 'es_timeout', 'es_retry_period':
+    setattr(Args.db, param, utils.get_seconds(getattr(Args.db, param)))
 
 log = Log.get('main')
 

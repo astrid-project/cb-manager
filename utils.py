@@ -1,6 +1,7 @@
 from args import Args
 from colorama import Fore, Style
 from datetime import datetime
+from pint import UnitRegistry
 
 import hashlib
 import importlib
@@ -58,6 +59,21 @@ def generate_password():
     :returns: random password
     """
     return hash(str(uuid.uuid1()))
+
+
+ureg = UnitRegistry()
+Q_ = ureg.Quantity
+
+def get_seconds(text, to_int=False):
+    """
+    Parse the text to get the equivalent number of seconds (e.g., 1min => 60).
+
+    :params text: input time in human format, e.g.: 1m
+    :params to_int: convert to int the result
+    :returns: number of seconds
+    """
+    n = (Q_(text).to(ureg.second)).magnitude
+    return int(n) if to_int else n
 
 
 def str_to_datetime(date_time_str, format='%Y/%m/%d %H:%M:%S'):

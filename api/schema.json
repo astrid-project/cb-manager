@@ -3384,46 +3384,6 @@
   },
   "swagger": "2.0",
   "definitions": {
-    "QueryRequestOrder": {
-      "type": "object",
-      "properties": {
-        "mode": {
-          "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
-          "description": "Order mode.",
-          "example": "asc"
-        },
-        "target": {
-          "type": "string",
-          "description": "The field to compare.",
-          "example": "name"
-        }
-      },
-      "required": [
-        "mode",
-        "target"
-      ]
-    },
-    "QueryRequestLimit": {
-      "type": "object",
-      "properties": {
-        "from": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Started index of the items to return.",
-          "example": 1
-        },
-        "to": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Ended index of the items to return.",
-          "example": 5
-        }
-      }
-    },
     "QueryRequestFilter": {
       "type": "object",
       "properties": {
@@ -3446,14 +3406,6 @@
     "QueryRequestClause": {
       "type": "object",
       "properties": {
-        "gte": {
-          "description": "The target field must be greater or equal to the expr value.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/QueryRequestFilter"
-            }
-          ]
-        },
         "equal": {
           "description": "The target field must be equal to the expr value.",
           "allOf": [
@@ -3462,13 +3414,29 @@
             }
           ]
         },
-        "reg_exp": {
-          "description": "The target field must be satisfy the regular expression in expr.",
+        "or": {
+          "description": "At least the clause has to be satisfied.",
+          "example": "\n                            [\n                                {\n                                    \"equal\": {\n                                        \"target\": \"name\",\n                                        \"expr:\": \"apache\"\n                                        }\n                                    },\n                                    {\n                                    \"lte\": {\n                                        \"target\": \"timeout\",\n                                        \"expr\": 5\n                                    }\n                            ]",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryRequestClause"
+          }
+        },
+        "lte": {
+          "description": "The target field must be lower or equal to the expr value.",
           "allOf": [
             {
               "$ref": "#/definitions/QueryRequestFilter"
             }
           ]
+        },
+        "and": {
+          "description": "All the clause has to be satisfied.",
+          "example": "\n                            [\n                                {\n                                    \"equal\": {\n                                        \"target\": \"name\",\n                                        \"expr:\": \"apache\"\n                                        }\n                                    },\n                                    {\n                                    \"lte\": {\n                                        \"target\": \"timeout\",\n                                        \"expr\": 5\n                                    }\n                            ]",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryRequestClause"
+          }
         },
         "gt": {
           "description": "The target field must be greater to the expr value.",
@@ -3486,13 +3454,13 @@
             }
           ]
         },
-        "and": {
-          "description": "All the clause has to be satisfied.",
-          "example": "\n                            [\n                                {\n                                    \"equal\": {\n                                        \"target\": \"name\",\n                                        \"expr:\": \"apache\"\n                                        }\n                                    },\n                                    {\n                                    \"lte\": {\n                                        \"target\": \"timeout\",\n                                        \"expr\": 5\n                                    }\n                            ]",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QueryRequestClause"
-          }
+        "gte": {
+          "description": "The target field must be greater or equal to the expr value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestFilter"
+            }
+          ]
         },
         "lt": {
           "description": "The target field must be lower than the expr value.",
@@ -3502,23 +3470,55 @@
             }
           ]
         },
-        "lte": {
-          "description": "The target field must be lower or equal to the expr value.",
+        "reg_exp": {
+          "description": "The target field must be satisfy the regular expression in expr.",
           "allOf": [
             {
               "$ref": "#/definitions/QueryRequestFilter"
             }
           ]
-        },
-        "or": {
-          "description": "At least the clause has to be satisfied.",
-          "example": "\n                            [\n                                {\n                                    \"equal\": {\n                                        \"target\": \"name\",\n                                        \"expr:\": \"apache\"\n                                        }\n                                    },\n                                    {\n                                    \"lte\": {\n                                        \"target\": \"timeout\",\n                                        \"expr\": 5\n                                    }\n                            ]",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QueryRequestClause"
-          }
         }
       }
+    },
+    "QueryRequestLimit": {
+      "type": "object",
+      "properties": {
+        "to": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Ended index of the items to return.",
+          "example": 5
+        },
+        "from": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Started index of the items to return.",
+          "example": 1
+        }
+      }
+    },
+    "QueryRequestOrder": {
+      "type": "object",
+      "properties": {
+        "target": {
+          "type": "string",
+          "description": "The field to compare.",
+          "example": "name"
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "description": "Order mode.",
+          "example": "asc"
+        }
+      },
+      "required": [
+        "mode",
+        "target"
+      ]
     },
     "QueryRequest": {
       "type": "object",
@@ -3531,12 +3531,13 @@
             "type": "string"
           }
         },
-        "order": {
-          "description": "Order the filtered items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QueryRequestOrder"
-          }
+        "where": {
+          "description": "Filter the items based on different conditions.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestClause"
+            }
+          ]
         },
         "limit": {
           "description": "Limit the number of items to return.",
@@ -3546,13 +3547,12 @@
             }
           ]
         },
-        "where": {
-          "description": "Filter the items based on different conditions.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/QueryRequestClause"
-            }
-          ]
+        "order": {
+          "description": "Order the filtered items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryRequestOrder"
+          }
         }
       }
     },
@@ -3575,49 +3575,28 @@
         "title"
       ]
     },
-    "RecipeAction": {
-      "type": "object",
-      "properties": {
-        "cmd": {
-          "type": "string",
-          "description": "Command."
-        },
-        "args": {
-          "type": "array",
-          "description": "Command arguments.",
-          "items": {
-            "type": "string",
-            "description": "Single command argument.",
-            "example": "-al"
-          }
-        }
-      },
-      "required": [
-        "cmd"
-      ]
-    },
     "RecipeParameter": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Parameter name.",
+          "example": "period"
+        },
         "destination": {
           "type": "string",
           "description": "Destination filename.",
           "example": "filebeat.yml"
-        },
-        "sep": {
-          "type": "string",
-          "description": "Separator between name and value.",
-          "example": "="
         },
         "value": {
           "type": "string",
           "description": "Parameter new value.",
           "example": "10s"
         },
-        "name": {
+        "sep": {
           "type": "string",
-          "description": "Parameter name.",
-          "example": "period"
+          "description": "Separator between name and value.",
+          "example": "="
         }
       },
       "required": [
@@ -3645,16 +3624,30 @@
         "destination"
       ]
     },
+    "RecipeAction": {
+      "type": "object",
+      "properties": {
+        "args": {
+          "type": "array",
+          "description": "Command arguments.",
+          "items": {
+            "type": "string",
+            "description": "Single command argument.",
+            "example": "-al"
+          }
+        },
+        "cmd": {
+          "type": "string",
+          "description": "Command."
+        }
+      },
+      "required": [
+        "cmd"
+      ]
+    },
     "Recipe": {
       "type": "object",
       "properties": {
-        "actions": {
-          "description": "Actions.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RecipeAction"
-          }
-        },
         "parameters": {
           "description": "Parameters.",
           "type": "array",
@@ -3668,35 +3661,15 @@
           "items": {
             "$ref": "#/definitions/RecipeResource"
           }
-        }
-      }
-    },
-    "AgentCatalogAction": {
-      "type": "object",
-      "properties": {
-        "recipe": {
-          "description": "Action recipe",
+        },
+        "actions": {
+          "description": "Actions.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Recipe"
+            "$ref": "#/definitions/RecipeAction"
           }
-        },
-        "name": {
-          "type": "string",
-          "enum": [
-            "start",
-            "stop",
-            "install",
-            "uninstall"
-          ],
-          "description": "Action name",
-          "example": "start"
         }
-      },
-      "required": [
-        "name",
-        "recipe"
-      ]
+      }
     },
     "AgentCatalogParameter": {
       "type": "object",
@@ -3705,6 +3678,22 @@
           "type": "boolean",
           "description": "Indicate if the parameter can have multiple values.",
           "example": true
+        },
+        "values": {
+          "type": "array",
+          "description": "Possible values if the parameter type is choice.",
+          "items": {
+            "type": "string",
+            "example": [
+              "mysql",
+              "http"
+            ]
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Parameter name",
+          "example": "period"
         },
         "recipe": {
           "description": "Parameter recipe",
@@ -3726,22 +3715,6 @@
           ],
           "description": "Parameter type.",
           "example": "integer"
-        },
-        "values": {
-          "type": "array",
-          "description": "Possible values if the parameter type is choice.",
-          "items": {
-            "type": "string",
-            "example": [
-              "mysql",
-              "http"
-            ]
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "Parameter name",
-          "example": "period"
         }
       },
       "required": [
@@ -3750,9 +3723,48 @@
         "type"
       ]
     },
+    "AgentCatalogAction": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "start",
+            "stop",
+            "install",
+            "uninstall"
+          ],
+          "description": "Action name",
+          "example": "start"
+        },
+        "recipe": {
+          "description": "Action recipe",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recipe"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "recipe"
+      ]
+    },
     "AgentCatalog": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Agent name.",
+          "example": "filebeat"
+        },
+        "parameters": {
+          "description": "Parameter properties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentCatalogParameter"
+          }
+        },
         "actions": {
           "description": "Action properties",
           "type": "array",
@@ -3764,18 +3776,6 @@
           "type": "string",
           "description": "ID of the agent in the catalog.",
           "example": "uyPMaXABjPI5oepgjezR"
-        },
-        "parameters": {
-          "description": "Parameter properties",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentCatalogParameter"
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "Agent name.",
-          "example": "filebeat"
         }
       },
       "required": [
@@ -3788,15 +3788,15 @@
     "AgentInstanceParameter": {
       "type": "object",
       "properties": {
-        "value": {
-          "type": "string",
-          "description": "Paremeter value",
-          "example": "10s"
-        },
         "name": {
           "type": "string",
           "description": "Parameter name",
           "example": "period"
+        },
+        "value": {
+          "type": "string",
+          "description": "Paremeter value",
+          "example": "10s"
         }
       },
       "required": [
@@ -3807,13 +3807,6 @@
     "AgentInstance": {
       "type": "object",
       "properties": {
-        "parameters": {
-          "description": "List of agent instance parameters",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentInstanceParameter"
-          }
-        },
         "status": {
           "type": "string",
           "enum": [
@@ -3823,20 +3816,27 @@
           "description": "Status of the agent instance",
           "example": "start"
         },
-        "id": {
+        "parameters": {
+          "description": "List of agent instance parameters",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentInstanceParameter"
+          }
+        },
+        "agent_catalog_id": {
           "type": "string",
-          "description": "ID of the agent instance installed in an execution environment.",
-          "example": "uyPMaXABjPI5oepgjezR"
+          "description": "ID of the agent in the catalog",
+          "example": "23jqlaJVPCGa4C0o6ljn"
         },
         "exec_env_id": {
           "type": "string",
           "description": "ID of the execution environment where the agent instance is installed",
           "example": "0xUosnMTCgO5FgVZLbQs"
         },
-        "agent_catalog_id": {
+        "id": {
           "type": "string",
-          "description": "ID of the agent in the catalog",
-          "example": "23jqlaJVPCGa4C0o6ljn"
+          "description": "ID of the agent instance installed in an execution environment.",
+          "example": "uyPMaXABjPI5oepgjezR"
         }
       },
       "required": [
@@ -3849,11 +3849,6 @@
     "Connection": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "ID of connection.",
-          "example": "aZ0aLlJ5Cq84Hsy3SyTW"
-        },
         "exec_env_id": {
           "type": "string",
           "description": "ID of the connected execution environment",
@@ -3863,6 +3858,11 @@
           "type": "string",
           "description": "ID of the connected network link",
           "example": "JAwfDEY7f2AtiEldMjPW"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of connection.",
+          "example": "aZ0aLlJ5Cq84Hsy3SyTW"
         }
       },
       "required": [
@@ -3879,27 +3879,27 @@
           "description": "ID of the agent instance in the execution environment that collected the data",
           "example": "EHiirlGzEiU29VTdovTo"
         },
-        "id": {
-          "type": "string",
-          "description": "ID of the data.",
-          "example": "BXrHRn5RPU55Qh9JwMZn"
-        },
-        "exec_env_id": {
-          "type": "string",
-          "description": "ID of the execution environment where the data was collected",
-          "example": "MUgzilTNtWbQEaPjBZyv"
-        },
         "timestamp_event": {
           "type": "string",
           "format": "date-time",
           "description": "Timestamp of the event related to the collected data",
           "example": "2019_02_14 15:23:30"
         },
+        "exec_env_id": {
+          "type": "string",
+          "description": "ID of the execution environment where the data was collected",
+          "example": "MUgzilTNtWbQEaPjBZyv"
+        },
         "timestamp_agent": {
           "type": "string",
           "format": "date-time",
           "description": "Timestamp when the agent instance collected the data",
           "example": "2019_02_14 15:23:30"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the data.",
+          "example": "BXrHRn5RPU55Qh9JwMZn"
         }
       },
       "required": [
@@ -3909,16 +3909,27 @@
     "LCP": {
       "type": "object",
       "properties": {
-        "username": {
-          "type": "string",
-          "description": "Username to connect from the CB to the LCP.",
-          "example": "22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5"
-        },
         "port": {
           "type": "integer",
           "format": "int32",
           "description": "TCP port number of LCP in the execution environment.",
           "example": 5000
+        },
+        "username": {
+          "type": "string",
+          "description": "Username to connect from the CB to the LCP.",
+          "example": "22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5"
+        },
+        "cb_expiration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Datetime until the authentication with the CB is valid.",
+          "example": "2019_02_14 15:23:30"
+        },
+        "password": {
+          "type": "string",
+          "description": "Password to connect from the CB to the LCP.",
+          "example": "22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5"
         },
         "last_hearbeat": {
           "type": "string",
@@ -3930,17 +3941,6 @@
           "type": "string",
           "description": "Hashed password assigned to LCP to connect with the CB.",
           "example": "22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5"
-        },
-        "password": {
-          "type": "string",
-          "description": "Password to connect from the CB to the LCP.",
-          "example": "22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5"
-        },
-        "cb_expiration": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Datetime until the authentication with the CB is valid.",
-          "example": "2019_02_14 15:23:30"
         }
       },
       "required": [
@@ -3950,20 +3950,10 @@
     "ExecEnv": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "ID of the execution environment.",
-          "example": "PiOIb3ABjPI5oepgse1C"
-        },
         "type_id": {
           "type": "string",
           "description": "ID of the execution environment type.",
           "example": "vm"
-        },
-        "hostname": {
-          "type": "string",
-          "description": "Hostname of the execution environment.",
-          "example": "192.168.1.2"
         },
         "lcp": {
           "description": "Data related to the LCP",
@@ -3972,6 +3962,16 @@
               "$ref": "#/definitions/LCP"
             }
           ]
+        },
+        "hostname": {
+          "type": "string",
+          "description": "Hostname of the execution environment.",
+          "example": "192.168.1.2"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the execution environment.",
+          "example": "PiOIb3ABjPI5oepgse1C"
         }
       },
       "required": [
@@ -3984,15 +3984,15 @@
     "ExecEnvType": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "ID of the execution environment type.",
-          "example": "vm"
-        },
         "name": {
           "type": "string",
           "description": "Name of the execution environment.",
           "example": "Virtual Machine"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the execution environment type.",
+          "example": "vm"
         }
       },
       "required": [
@@ -4003,15 +4003,15 @@
     "NetworkLink": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "ID of the network link.",
-          "example": "x4fgctkm4MXQOUHYjIag"
-        },
         "type_id": {
           "type": "string",
           "description": "ID of the network link type.",
           "example": "pnt2pnt"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the network link.",
+          "example": "x4fgctkm4MXQOUHYjIag"
         }
       },
       "required": [
@@ -4022,15 +4022,15 @@
     "NetworkLinkType": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "ID of the network link type.",
-          "example": "pnt2pnt"
-        },
         "name": {
           "type": "string",
           "description": "Name of the network link type.",
           "example": "Point to point"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of the network link type.",
+          "example": "pnt2pnt"
         }
       },
       "required": [

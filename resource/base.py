@@ -22,8 +22,8 @@ class BaseResource(object):
             except Exception as e:
                 self.log.debug(e)
                 self.log.error(f'initialization index {self.doc_cls.Index.name} not possible')
-                self.log.info(f'waiting for {Args.db.elasticsearch_retry_period} seconds and try again')
-                time.sleep(Args.db.elasticsearch_retry_period)
+                self.log.info(f'waiting for {Args.db.es_retry_period} seconds and try again')
+                time.sleep(Args.db.es_retry_period)
                 self.__init__()
             else:
                 self.log.success(f'index {self.doc_cls.Index.name} initialized')
