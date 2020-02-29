@@ -24,7 +24,7 @@ dev_password = 'astrid'
 
 log_level = config_parser.get('log', 'level')
 
-timeout = 20
+timeout = "20s"
 method = 'get'
 path = ''
 data = ''
@@ -43,13 +43,13 @@ parser.add_argument('--password', '-p', type=str,
 parser.add_argument('--log-level', '-l', choices=Log.get_levels(),
                     help='Log level', default=log_level)
 
-parser.add_argument('--timeout', '-t', type=float,
+parser.add_argument('--timeout', '-t', type=str,
                     help='Timeout', default=timeout)
 parser.add_argument('--method', '-m', type=str, help='Method', default=method)
 parser.add_argument('--path', '-a', type=str, help='Path', default=path)
 parser.add_argument('--data', '-d', type=str, help='Request data', default=data)
 
-Args.db = parser.parse_args()
+Args.set(parser.parse_args(), convert_to_seconds=('timeout'))
 
 log = Log.get('curl')
 

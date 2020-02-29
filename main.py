@@ -81,9 +81,8 @@ parser.add_argument('--write-config', '-w', help='Write options to config.ini',
 parser.add_argument('--version', '-v', help='Show version',
                     action='store_const', const=version)
 
-Args.db = parser.parse_args()
-for param in 'hb_timeout', 'hb_period', 'es_timeout', 'es_retry_period':
-    setattr(Args.db, param, utils.get_seconds(getattr(Args.db, param)))
+Args.set(parser.parse_args(),
+         convert_to_seconds=('hb_timeout', 'hb_period', 'es_timeout', 'es_retry_period'))
 
 log = Log.get('main')
 
