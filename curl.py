@@ -28,6 +28,7 @@ timeout = "20s"
 method = 'get'
 path = ''
 data = ''
+data_from_filename = None
 
 parser = argparse.ArgumentParser(
     prog=f'python3 curl.py', description=f'Custom curl for {title} version {version}')
@@ -47,19 +48,28 @@ parser.add_argument('--timeout', '-t', type=str,
                     help='Timeout', default=timeout)
 parser.add_argument('--method', '-m', type=str, help='Method', default=method)
 parser.add_argument('--path', '-a', type=str, help='Path', default=path)
-parser.add_argument('--data', '-d', type=str, help='Request data', default=data)
+
+parser_data = parser.add_mutually_exclusive_group()
+parser_data.add_argument('--data', '-d', type=str, help='Request data', default=data)
+parser_data.add_argument('--data-from-file', '-f', type=str, help='Request data from filename', default=data_from_filename)
 
 Args.set(parser.parse_args(), convert_to_seconds=('timeout'))
 
 log = Log.get('curl')
 
 try:
+    if Args.db.data_from_file is not None:
+        with open(Args.db.data_from_file) as file:
+            Args.db.data = file.read()
     res = getattr(requests, method)(f'http://{Args.db.ip}:{Args.db.port}/{Args.db.path}',
                        auth=HTTPBasicAuth(Args.db.username, Args.db.password),
                        timeout=Args.db.timeout, json=json.loads(Args.db.data))
 except ValueError as ve:
     log.debug(ve)
-    log.error('not JSON valid data')
+    log.error(f'not JSON valid data: {Args.db.data}')
+except IOError as ioe:
+    log.debug(ioe)
+    log.error(f'data from file {Args.db.data_from_file} not readable')
 except Exception as e:
     log.debug(e)
     log.error(f'connection to {Args.db.ip}:{Args.db.port} not possible')
