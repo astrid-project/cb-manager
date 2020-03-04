@@ -1,0 +1,29 @@
+{delete_description}
+---
+summary: {delete_summary}
+description: {delete_description}
+parameters:
+    - name: id
+      required: true
+      in: path
+      type: String
+    - name: payload
+      required: true
+      in: body
+      schema: QueryRequestSchema
+tags: [{tag}]
+responses:
+    200:
+        description: {delete_responses_200_description}
+        schema:
+            type: array
+            items:
+                oneOf:
+                - ResponseSchema
+                - ErrorSchema
+    400:
+        description: Bad request.
+        schema: HTTPErrorSchema
+    401:
+        description: Unauthorized.
+        schema: HTTPErrorSchema
