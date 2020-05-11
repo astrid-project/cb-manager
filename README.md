@@ -187,8 +187,8 @@ POST            | /data/sql      | Returns the collected data filtered by 
 2. Clone the repository.
 
   ```bash
-  git clone https://gitlab.com/guard-repositories/cp-manager.git
-  cd cp-manager
+  git clone https://gitlab.com/guard-repositories/cb-manager.git
+  cd cb-manager
   ```
 
 3. Install the dependencies.
