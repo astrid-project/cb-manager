@@ -20,7 +20,7 @@ cb_host = config_parser.get('context-broker', 'host')
 cb_port = config_parser.get('context-broker', 'port')
 
 dev_username = config_parser.get('dev', 'username')
-dev_password = 'astrid'
+dev_password = 'guard'
 
 log_level = config_parser.get('log', 'level')
 
