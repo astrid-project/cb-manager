@@ -189,7 +189,7 @@ POST            | /data/sql      | Returns the collected data filtered by 
 2. Clone the repository.
 
   ```bash
-  git clone https://gitlab.com/guard-repositories/wp2/context-broker-apis.git
+  git clone https://gitlab.com/guard-repositories/context-broker-apis.git
   cd context-broker-apis
   ```
 
