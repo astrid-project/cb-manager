@@ -489,7 +489,7 @@ definitions:
     - destination
     type: object
 info:
-  title: GUARD Context Broker API
+  title: Context Broker Manager
   version: 0.0.2
 paths:
   /catalog/:
