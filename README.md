@@ -20,6 +20,7 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
     - [Catalog](#catalog)
     - [Data Collection](#data-collection)
       - [Full Query](#full-query)
+  - [Guide](#guide)
   - [Installation](#installation)
   - [Usage](#usage)
     - [Display help](#display-help)
@@ -176,6 +177,10 @@ GET             | /data    | Returns the collected data selected by the quer
 POST            | /data/dsl      | Returns the collected data filtered by the query in the request body using the [Elastic DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html) syntax.
 POST            | /data/graph-ql | Returns the collected data filtered by the query in the request body using the [GraphQL](https://graphql.org) syntax.
 POST            | /data/sql      | Returns the collected data filtered by the query in the request body using the [SQL](https://www.w3schools.com/sql/sql_syntax.asp) syntax.
+
+## Guide
+
+See the [Swagger Schema](swagger.yml) and the relative [documentation](<!-- TODO -->) for more details about the REST endpoints and relative formats and requirements of request and response.
 
 ## Installation
 
