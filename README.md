@@ -1,6 +1,6 @@
 % cspell:ignore execenv
 
-# Context Broker APIs
+# Context Broker Manager
 
 APIs to interact with the ``Context Broker``'s database. Through a **REST** Interface, it exposes data and events stored in the internal storage system in a structured way. It provides uniform access to the capabilities of monitoring agents.
 
@@ -8,7 +8,7 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
 
 ## Table of Contents
 
-- [Context Broker APIs](#context-broker-apis)
+- [Context Broker Manager](#context-broker-manager)
   - [Table of Contents](#table-of-contents)
 - [Terminologies](#terminologies)
 - [Data Model](#data-model)
@@ -189,8 +189,8 @@ POST            | /data/sql      | Returns the collected data filtered by 
 2. Clone the repository.
 
   ```bash
-  git clone https://gitlab.com/guard-repositories/context-broker-apis.git
-  cd context-broker-apis
+  git clone https://gitlab.com/guard-repositories/cp-manager.git
+  cd cp-manager
   ```
 
 3. Install the dependencies.
