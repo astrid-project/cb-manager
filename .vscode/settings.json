@@ -1,9 +1,16 @@
 {
     "cSpell.words": [
+        "Envs",
+        "HOBA",
+        "Kibana",
         "LCP",
         "LCPs",
+        "LDAP",
+        "Polycube",
+        "RBAC",
         "chdir",
         "datetime",
+        "execenv",
         "filebeat",
         "kwrd",
         "quantulum",

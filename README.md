@@ -1,5 +1,3 @@
-% cspell:ignore execenv
-
 # Context Broker Manager
 
 APIs to interact with the ``Context Broker``'s database. Through a **REST** Interface, it exposes data and events stored in the internal storage system in a structured way. It provides uniform access to the capabilities of monitoring agents.
@@ -10,8 +8,8 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
 
 - [Context Broker Manager](#context-broker-manager)
   - [Table of Contents](#table-of-contents)
-- [Terminologies](#terminologies)
-- [Data Model](#data-model)
+  - [Terminologies](#terminologies)
+  - [Data Model](#data-model)
   - [Methods](#methods)
     - [ExecEnv](#execenv)
     - [ExecEnv type](#execenv-type)
@@ -22,17 +20,17 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
     - [Catalog](#catalog)
     - [Data Collection](#data-collection)
       - [Full Query](#full-query)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Display help](#display-help)
-  - [Production environment](#production-environment)
-  - [Debug enabled in Development environment](#debug-enabled-in-development-environment)
-- [Extra](#extra)
-- [References](#references)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Display help](#display-help)
+    - [Production environment](#production-environment)
+    - [Debug enabled in Development environment](#debug-enabled-in-development-environment)
+  - [Extra](#extra)
+  - [References](#references)
 
 ---
 
-# Terminologies
+## Terminologies
 
 **Term**     | **Meaning**
 :----------: | ---------------------
@@ -46,7 +44,7 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
 *eBPF*       | extended BPF
 *ELK*        | Elastic - LogStash - Kibana
 *ExecEnv*    | Execution Environment
-*gRPC*       | 	Google RPC
+*gRPC*       | Google RPC
 *HOBA*       | HTTP Origin-Bound Authentication
 *HTTP*       | Hyper Text Transfer Protocol
 *ID*         | Identification
@@ -56,14 +54,14 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
 *RBAC*       | Role-Based Access Control
 *regex*      | regular expression
 *RFC*        | Request For Comments
-*RPC*	       | Remote Procedure Call
+*RPC*        | Remote Procedure Call
 *SCM*        | Security Context Model
 *SLA*        | Service Level Agreements
-*SQL*	       | Structured Query Language
-*VNF*	       | Virtual Network Function
+*SQL*        | Structured Query Language
+*VNF*        | Virtual Network Function
 *YANG*       | Yet Another Next Generation
 
-# Data Model
+## Data Model
 
 ![Data Model](data_model.png)
 
@@ -179,7 +177,7 @@ POST            | /data/dsl      | Returns the collected data filtered by 
 POST            | /data/graph-ql | Returns the collected data filtered by the query in the request body using the [GraphQL](https://graphql.org) syntax.
 POST            | /data/sql      | Returns the collected data filtered by the query in the request body using the [SQL](https://www.w3schools.com/sql/sql_syntax.asp) syntax.
 
-# Installation
+## Installation
 
 1. Prerequisite
 
@@ -199,31 +197,31 @@ POST            | /data/sql      | Returns the collected data filtered by 
   pip3 install -r requirements.txt
   ```
 
-# Usage
+## Usage
 
-## Display help
+### Display help
 
 ```bash
 python3 main.py -h
 ```
 
-## Production environment
+### Production environment
 
 ```bash
 python3 main.py -n production
 ```
 
-## Debug enabled in Development environment
+### Debug enabled in Development environment
 
 ```bash
 python3 main.py --debug -n development
 ```
 
-# Extra
+## Extra
 
 See the **Issues** for *features* in development.
 
-# References
+## References
 
 [^1]: In the dash-case (also referred as *hyphen-case* or *kebab-case*) format all the letters are lower-case, the punctuation is not allowed and the words are separated by single dash (or hyphen: -). Example: *exec-env*.
 
@@ -235,8 +233,8 @@ See the **Issues** for *features* in development.
 
 [^5]: In Elasticsearch, each document is identified by a unique id. For obvious reasons, in the description of the following indices, we omit the description of all the id fields.
 
-[^6]: "Getting started with Beats,"[Online]. Available: https://www.elastic.co/guide/en/beats/libbeat/current/getting-started.html
+[^6]: "Getting started with Beats,"[Online]. Available: [https://www.elastic.co/guide/en/beats/libbeat/current/getting-started.html].
 
-[^7]: "Polycube. eBPF/XDP-based software framework for fast network services running in the Linux kernel," [Online]. Available: https://github.com/polycube-network/polycube.
+[^7]: "Polycube. eBPF/XDP-based software framework for fast network services running in the Linux kernel," [Online]. Available: [https://github.com/polycube-network/polycube].
 
-[^8]: With nested index, we refer to index that are embedded inside your parent one, https://www.elastic.co/blog/managing-relations-inside-elasticsearch.
+[^8]: With nested index, we refer to index that are embedded inside your parent one, [https://www.elastic.co/blog/managing-relations-inside-elasticsearch].

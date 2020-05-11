@@ -6,6 +6,7 @@
 	],
 	"settings": {
 		"workbench.colorTheme": "Abyss",
-		"files.insertFinalNewline": true
+		"files.insertFinalNewline": true,
+		"editor.wordWrap": "on"
 	}
 }
