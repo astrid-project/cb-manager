@@ -183,21 +183,21 @@ POST            | /data/sql      | Returns the collected data filtered by 
 
 1. Prerequisite
 
-- python3
-- pip3
+   - python3
+   - pip3
 
 2. Clone the repository.
 
-```bash
-git clone https://gitlab.com/guard-repositories/wp2/context-broker-apis.git
-cd context-broker-apis
-```
+  ```bash
+  git clone https://gitlab.com/guard-repositories/wp2/context-broker-apis.git
+  cd context-broker-apis
+  ```
 
 3. Install the dependencies.
 
-```bash
-pip3 install -r requirements.txt
-```
+  ```bash
+  pip3 install -r requirements.txt
+  ```
 
 # Usage
 
