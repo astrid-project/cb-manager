@@ -8,7 +8,6 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
 
 - [Context Broker Manager](#context-broker-manager)
   - [Table of Contents](#table-of-contents)
-- [- References](#ul-lireferencesli-ul)
   - [Terminologies](#terminologies)
   - [Data Model](#data-model)
   - [Methods](#methods)
@@ -29,24 +28,6 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
     - [Debug enabled in Development environment](#debug-enabled-in-development-environment)
   - [Extra](#extra)
   - [References](#references)
-<<<<<<< HEAD
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Display help](#display-help)
-  - [Production environment](#production-environment)
-  - [Debug enabled in Development environment](#debug-enabled-in-development-environment)
-- [Extra](#extra)
-- [References](#references)
-=======
-  - [Guide](#guide)
-  - [Installation](#installation)
-  - [Usage](#usage)
-    - [Display help](#display-help)
-    - [Production environment](#production-environment)
-    - [Debug enabled in Development environment](#debug-enabled-in-development-environment)
-  - [Extra](#extra)
-  - [References](#references)
->>>>>>> 0291ea275fba5671216d38f7b24ec7d22e755d63
 
 ---
 
