@@ -1,13 +1,12 @@
 {
     "name": "filebeat",
-    "parameters": [
-        {
+    "parameters": [{
             "name": "period",
             "type": "string",
             "recipe": {
                 "parameters": {
                     "name": "backoff",
-                    "destination": "~/astrid-framework/env/filebeat/config/inputs/log.yml",
+                    "destination": "~/guard-framework/env/filebeat/config/inputs/log.yml",
                     "sep": ": ",
                     "value": "{value}"
                 }
@@ -19,23 +18,21 @@
             "recipe": {
                 "parameters": {
                     "name": "enabled",
-                    "destination": "~/astrid-framework/env/filebeat/config/inputs/log.yml",
+                    "destination": "~/guard-framework/env/filebeat/config/inputs/log.yml",
                     "sep": ": ",
                     "value": "{value}"
                 }
             }
         }
     ],
-    "actions": [
-        {
+    "actions": [{
             "name": "install",
             "recipe": {
-                "actions": [
-                    {
+                "actions": [{
                         "cmd": "mkdir",
                         "args": [
                             "-p",
-                            "~/astrid-framework/env/src"
+                            "~/guard-framework/env/src"
                         ]
                     },
                     {
@@ -45,22 +42,22 @@
                             "${USERNAME}:${PASSWORD}",
                             "http://${HOST}:${PORT}/pkg/filebeat.tar.gz",
                             "--output",
-                            "~/astrid-framework/env/src/filebeat.tar.gz"
+                            "~/guard-framework/env/src/filebeat.tar.gz"
                         ]
                     },
                     {
                         "cmd": "tar",
                         "args": [
                             "-xzf",
-                            "~/astrid-framework/env/src/filebeat.tar.gz",
+                            "~/guard-framework/env/src/filebeat.tar.gz",
                             "-C",
-                            "~/astrid-framework/env"
+                            "~/guard-framework/env"
                         ]
                     },
                     {
                         "cmd": "rm",
                         "args": [
-                            "~/astrid-framework/env/src/filebeat.tar.gz"
+                            "~/guard-framework/env/src/filebeat.tar.gz"
                         ]
                     }
                 ]
@@ -73,7 +70,7 @@
                     "cmd": "rm",
                     "args": [
                         "-rf",
-                        "~/astrid-framework/env/filebeat"
+                        "~/guard-framework/env/filebeat"
                     ]
                 }
             }
@@ -82,10 +79,10 @@
             "name": "start",
             "recipe": {
                 "actions": {
-                    "cmd": "~/astrid-framework/env/filebeat/filebeat",
+                    "cmd": "~/guard-framework/env/filebeat/filebeat",
                     "args": [
                         "-c",
-                        "~/astrid-framework/env/filebeat/config/filebeat.yml",
+                        "~/guard-framework/env/filebeat/config/filebeat.yml",
                         "-e"
                     ]
                 }
