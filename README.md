@@ -93,7 +93,7 @@ The network links are defined with the relative index where it is indicate the t
 
 In addition, the data model allow to see the status of the connections between the ExecEnvs. The *connection* index couples the ExecEnv and the network link to which it belongs. This index should contains all the information regarding the network link and the ExecEnv as, for example, the IP address (version 4 and/or 6) or if the link is encrypted and how (which method, etc.).
 
-The *software* index contains the installed software with relative properties. Each software record is referred to a specific ExecEnv that indicate where the software is installed. This part is out of scope of the GUARD project context and, for this reason, it is this highlighted with a dashed box. The API implementation does not consider this index. Nervelessness, it represents a typical solution for various common cases. The proposed data model allows the customization with the integration of additional entities in very simple way.
+The *software* index contains the installed software with relative properties. Each software record is referred to a specific ExecEnv that indicate where the software is installed. This part is out of scope of the ASTRID project context and, for this reason, it is this highlighted with a dashed box. The API implementation does not consider this index. Nervelessness, it represents a typical solution for various common cases. The proposed data model allows the customization with the integration of additional entities in very simple way.
 
 ## Methods
 
