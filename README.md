@@ -1,6 +1,4 @@
-% cspell:ignore execenv
-
-# Context Broker APIs
+# Context Broker Manager
 
 APIs to interact with the ``Context Broker``'s database. Through a **REST** Interface, it exposes data and events stored in the internal storage system in a structured way. It provides uniform access to the capabilities of monitoring agents.
 
@@ -8,7 +6,7 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
 
 ## Table of Contents
 
-- [Context Broker APIs](#context-broker-apis)
+- [Context Broker Manager](#context-broker-manager)
   - [Table of Contents](#table-of-contents)
 - [Terminologies](#terminologies)
 - [Data Model](#data-model)
@@ -22,8 +20,8 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
     - [Catalog](#catalog)
     - [Data Collection](#data-collection)
       - [Full Query](#full-query)
-- [Installation](#installation)
-- [Usage](#usage)
+  - [Installation](#installation)
+  - [Usage](#usage)
   - [Display help](#display-help)
   - [Production environment](#production-environment)
   - [Debug enabled in Development environment](#debug-enabled-in-development-environment)
@@ -179,7 +177,7 @@ POST            | /data/dsl      | Returns the collected data filtered by 
 POST            | /data/graph-ql | Returns the collected data filtered by the query in the request body using the [GraphQL](https://graphql.org) syntax.
 POST            | /data/sql      | Returns the collected data filtered by the query in the request body using the [SQL](https://www.w3schools.com/sql/sql_syntax.asp) syntax.
 
-# Installation
+## Installation
 
 1. Prerequisite
 
@@ -189,8 +187,8 @@ POST            | /data/sql      | Returns the collected data filtered by 
 2. Clone the repository.
 
 ```bash
-git clone https://gitlab.com/astrid-repositories/wp2/context-broker-apis.git
-cd context-broker-apis
+git clone https://gitlab.com/astrid-repositories/cb-manager.git
+cd cb-manager
 ```
 
 3. Install the dependencies.
@@ -199,7 +197,7 @@ cd context-broker-apis
 pip3 install -r requirements.txt
 ```
 
-# Usage
+## Usage
 
 ## Display help
 
