@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
-from log import Log
 from reader.config import ConfigReader
-from utils import get_seconds
+from utils.log import Log
+from utils.time import get_seconds
 
 
 class ArgReader:

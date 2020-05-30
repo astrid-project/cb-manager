@@ -12,7 +12,7 @@ class AgentCatalogParameterInnerDoc(InnerDoc):
     # Possible values: integer, number, time-duration, string, choice, boolean, binary
     type = Text(required=True)
     list = Boolean()
-    values = Text() # when choice = type
+    values = Text() # when type = choice
     example = Text()
     description = Text()
     config = Nested(AgentCatalogParameterConfigInnerDoc)

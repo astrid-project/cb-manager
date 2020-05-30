@@ -10,6 +10,12 @@ from resource.connection.selected import ConnectionSelectedResource
 from resource.data import DataResource
 from resource.data.selected import DataSelectedResource
 
+from resource.ebpf_program.catalog import eBPFProgramCatalogResource
+from resource.ebpf_program.catalog.selected import eBPFProgramCatalogSelectedResource
+
+from resource.ebpf_program.instance import eBPFProgramInstanceResource
+from resource.ebpf_program.instance.selected import eBPFProgramInstanceSelectedResource
+
 from resource.exec_env import ExecEnvResource
 from resource.exec_env.selected import ExecEnvSelectedResource
 
@@ -22,8 +28,8 @@ from resource.network_link.selected import NetworkLinkSelectedResource
 from resource.network_link.type import NetworkLinkTypeResource
 from resource.network_link.type.selected import NetworkLinkTypeSelectedResource
 
-from log import Log
-from utils import wrap
+from utils.log import Log
+from utils.sequence import wrap
 
 
 db = (
@@ -31,6 +37,8 @@ db = (
     AgentInstanceResource, AgentInstanceSelectedResource,
     ConnectionResource, ConnectionSelectedResource,
     DataResource, DataSelectedResource,
+    eBPFProgramCatalogResource, eBPFProgramCatalogSelectedResource,
+    eBPFProgramInstanceResource, eBPFProgramInstanceSelectedResource,
     ExecEnvResource, ExecEnvSelectedResource,
     ExecEnvTypeResource, ExecEnvTypeSelectedResource,
     NetworkLinkResource, NetworkLinkSelectedResource,

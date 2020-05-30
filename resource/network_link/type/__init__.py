@@ -1,27 +1,27 @@
 from document.network_link.type import NetworkLinkTypeDocument
 from resource.base import BaseResource
 from schema.network_link.type import NetworkLinkTypeSchema
-from utils import swagger
+from docstring import docstring
 
 
-@swagger(method='get',
+@docstring(method='get',
          sum='Network Link Type Read (Multiple)',
          desc='Get the list of network link types filtered by the query in the request body.',
          resp='List of network link types filtered by the query in the request body.')
-@swagger(method='post',
+@docstring(method='post',
          sum='Network Link Type Creation (Multiple)',
          desc='Create new network link types.',
          resp='Network link types created.')
-@swagger(method='delete',
+@docstring(method='delete',
          sum='Network Link Type Delete (Multiple)',
          desc='Delete network link types filtered by the query in the request body.',
          resp='Network link types filtered by the query in the request body deleted.')
-@swagger(method='put',
+@docstring(method='put',
          sum='Network Link Type Update (Multiple)',
          desc='Update network link types.',
          resp='Network link types updated.')
 class NetworkLinkTypeResource(BaseResource):
     doc_cls = NetworkLinkTypeDocument
     doc_name = 'Network Link Type'
-    routes = '/config/network-link-type/'
+    routes = '/type/network-link/'
     schema_cls =NetworkLinkTypeSchema

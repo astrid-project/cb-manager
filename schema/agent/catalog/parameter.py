@@ -2,7 +2,6 @@ from marshmallow import Schema
 from marshmallow.fields import Boolean, List, Nested, String
 
 
-# TODO
 class AgentCatalogParameterConfigSchema(Schema):
     """
     Agent parameter configuration.
@@ -31,4 +30,3 @@ class AgentCatalogParameterSchema(Schema):
                     required=True,
                     many=True,
                     description='Parameter recipe')
-

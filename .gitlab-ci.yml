@@ -1,0 +1,5 @@
+image: "astrid/python3"
+
+cb-manager:
+  script:
+    - python3 main.py

@@ -16,17 +16,18 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
       - [Network link](#network-link)
       - [Network link type](#network-link-type)
       - [Connection](#connection)
-    - [Agent Instance](#agent-instance)
-    - [Catalog](#catalog)
+    - [Agent](#agent)
+      - [Catalog](#catalog)
+      - [Instance](#instance)
+    - [eBPF Program](#ebpf-program)
+      - [Catalog](#catalog-1)
+      - [Instance](#instance-1)
     - [Data Collection](#data-collection)
       - [Full Query](#full-query)
   - [Guide](#guide)
   - [Installation](#installation)
   - [Usage](#usage)
     - [Display help](#display-help)
-    - [Production environment](#production-environment)
-    - [Debug enabled in Development environment](#debug-enabled-in-development-environment)
-  - [Extra](#extra)
   - [References](#references)
 
 ---
@@ -99,84 +100,132 @@ The *software* index contains the installed software with relative properties. E
 
 ### ExecEnv
 
-**HTTP Method** | **Path**                | **Action**
-:-------------: | ----------------------- | ----------------------------------
-GET             | /config/exec-env        | Returns the ExecEnvs selected by the query in the request body (or all it the request body is empty).
-POST            | /config/exec-env        | Create a new ExecEnv.
-PUT             | /config/exec-env/{*id*} | Update the ExecEnv with id = {*id*}.
-DELETE          | /config/exec-env        | Delete the ExecEnvs selected by the query in the request body (or nothing it the request body is empty).
+**HTTP Method** | **Path**         | **Action**
+:-------------: | ---------------- | ----------------------------------
+GET             | /exec-env        | Returns the ExecEnvs selected by the query in the request body
+                                     (or all it the request body is empty).
+POST            | /exec-env        | Create one or more new ExecEnvs.
+PUT             | /exec-env        | Update one or more existing ExecEnvs.
+PUT             | /exec-env/{*id*} | Update the ExecEnv with id = {*id*}.
+DELETE          | /exec-env        | Delete the ExecEnvs selected by the query in the request body
+                                     (or nothing it the request body is empty).
 
 ### ExecEnv type
 
-**HTTP Method** | **Path**                     | **Action**
-:-------------: | ---------------------------- | --------------------------------------
-GET             | /config/exec-env-type        | Returns the ExecEnv types selected by the query in the request body (or all it the request body is empty).
-POST            | /config/exec-env-type        | Create a new ExecEnv type.
-PUT             | /config/exec-env-type/{*id*} | Update the ExecEnv with id = {*id*}.
-DELETE          | /config/exec-env-type        | Delete the ExecEnv types selected by the query in the request body (or nothing it the request body is empty).
+**HTTP Method** | **Path**              | **Action**
+:-------------: | --------------------- | --------------------------------------
+GET             | /type/exec-env        | Returns the ExecEnv types selected by the query in the request body
+                                          (or all it the request body is empty).
+POST            | /type/exec-env        | Create one or more new ExecEnv types
+PUT             | /type/exec-env        | Update one or more existing ExecEnv types.
+PUT             | /type/exec-env/{*id*} | Update the ExecEnv type with id = {*id*}.
+DELETE          | /type/exec-env        | Delete the ExecEnv types selected by the query in the request body
+                                          (or nothing it the request body is empty).
 
 #### Network link
 
-**HTTP Method** | **Path**                    | **Action**
-:-------------: | --------------------------- | ----------------------------------------
-GET             | /config/network-link        | Returns the network links selected by the query in the request body (or all it the request body is empty).
-POST            | /config/network-link        | Create a new network link.
-PUT             | /config/network-link/{*id*} | Update the network link with id = {*id*}.
-DELETE          | /config/network-link        | Delete the network links selected by the query in the request body (or nothing it the request body is empty).
+**HTTP Method** | **Path**             | **Action**
+:-------------: | -------------------- | ----------------------------------------
+GET             | /network-link        | Returns the network links selected by the query in the request body
+                                         (or all it the request body is empty).
+POST            | /network-link        | Create one or more new network links.
+PUT             | /network-link        | Update one or more existing network links.
+PUT             | /network-link/{*id*} | Update the network link with id = {*id*}.
+DELETE          | /network-link        | Delete the network links selected by the query in the request body
+                                         (or nothing it the request body is empty).
 
 #### Network link type
 
-**HTTP Method** | **Path**                         | **Action**
-:-------------: | -------------------------------- | ---------------------------------------------
-GET             | /config/network-link-type        | Returns the network link types selected by the query in the request body (or all it the request body is empty).
-POST            | /config/network-link-type        | Create a new network link type.
-PUT             | /config/network-link-type/{*id*} | Update the network link type with id = {*id*}.
-DELETE          | /config/network-link-type        | Delete the network link types selected by the query in the request body (or nothing it the request body is empty).
+**HTTP Method** | **Path**                  | **Action**
+:-------------: | ------------------------- | ---------------------------------------------
+GET             | /type/network-link        | Returns the network link types selected by the query in the request body
+                                              (or all it the request body is empty).
+POST            | /type/network-link        | Create one or more new network link types.
+PUT            | /type/network-link         | Update one or more existing network link types.
+PUT             | /type/network-link/{*id*} | Update the network link type with id = {*id*}.
+DELETE          | /type/network-link        | Delete the network link types selected by the query in the request body
+                                              (or nothing it the request body is empty).
 
 #### Connection
 
-**HTTP Method** | **Path**                  | **Action**
-:-------------: | ------------------------- | ---------------------------------------------------------------------------
-GET             | /config/connection        | Returns the connections selected by the query in the request body (or all it the request body is empty).
-POST            | /config/connection        | Create a new connection.
-PUT             | /config/connection/{*id*} | Update the connection with id = {*id*}.
-DELETE          | /config/connection        | Delete the connections selected by the query in the request body (or nothing it the request body is empty).
+**HTTP Method** | **Path**           | **Action**
+:-------------: | ------------------ | ---------------------------------------------------------------------------
+GET             | /connection        | Returns the connections selected by the query in the request body
+                                       (or all it the request body is empty).
+POST            | /connection        | Create one or more new connections.
+PUT             | /connection        | Update one or more existing connections.
+PUT             | /connection/{*id*} | Update the connection with id = {*id*}.
+DELETE          | /connection        | Delete the connections selected by the query in the request body
+                                       (or nothing it the request body is empty).
 
-### Agent Instance
+### Agent
 
-**HTTP Method** | **Path*              | **Action**
-:-------------: | -------------------- | ----------------------------------
-GET             | /config/agent        | Returns the agent instances selected by the query in the request body (or all it the request body is empty)..
-POST            | /config/agent        | Set a new instance in the ExecEnv with the specified initial configuration.
-PUT             | /config/agent/{*id*} | Update the agent instance with id = {id}.
-DELETE          | /config/agent        | Delete the agent instances selected by the query in the request body (or nothing it the request body is empty).
-
-### Catalog
+#### Catalog
 
 **HTTP Method** | **Path*              | **Action**
 :-------------: | -------------------- | ----------------------------------
-GET             | /catalog             | Returns the agents in catalog selected by the query in the request body (or all it the request body is empty).
-GET             | /catalog/ebpf        | Returns the eBPF cubes in catalog selected by the query in the request body (or all it the request body is empty).
-POST            | /catalog             | Create a new agent in catalog.
-POST            | /catalog/ebpf        | Create a new eBPF cube in catalog.
+GET             | /catalog/agent       | Returns the agents in catalog selected by the query in the request body
+                                         (or all it the request body is empty).
+POST            | /catalog             | Create one or more new agent in catalog.
 PUT             | /catalog/{*id*}      | Update the agent in catalog with id = {id}.
-PUT             | /catalog/ebpf/{*id*} | Update the eBPF cube in catalog with id = {id}.
-DELETE          | /catalog             | Delete the agents in catalog selected by the query in the request body (or nothing it the request body is empty).
-DELETE          | /catalog/ebpf        | Delete the eBPF cubes in catalog selected by the query in the request body (or nothing it the request body is empty).
+DELETE          | /catalog             | Delete the agents in catalog selected by the query in the request body
+                                         (or nothing it the request body is empty).
+
+#### Instance
+
+**HTTP Method** | **Path*                | **Action**
+:-------------: | ---------------------- | ----------------------------------
+GET             | /instance/agent        | Returns the agent instances selected by the query in the request body
+                                           (or all it the request body is empty).
+POST            | /instance/agent        | Create one or more new instances in the ExecEnv
+                                           with the specified initial configurations.
+PUT             | /instance/agent        | Update the configurations of one or more existing instances in the ExecEnv.
+PUT             | /instance/agent/{*id*} | Update the configuration of the agent instance with id = {id}.
+DELETE          | /instance/agent        | Delete the agent instances selected by the query in the request body
+                                           (or nothing it the request body is empty).
+
+### eBPF Program
+
+#### Catalog
+
+GET             | /catalog/ebpf-program        | Returns the eBPF programs in catalog selected by the query in the
+                                                 request body (or all it the request body is empty).
+POST            | /catalog/ebpf-program        | Create one or more new eBPF programs in catalog.
+POST            | /catalog/ebpf-program        | Update one or more new eBPF programs in catalog.
+PUT             | /catalog/ebpf-program/{*id*} | Update the eBPF program in catalog with id = {id}.
+DELETE          | /catalog/ebpf-program        | Delete the eBPF program in catalog selected by the query in the request body
+                                                 (or nothing it the request body is empty).
+
+#### Instance
+
+**HTTP Method** | **Path*                       | **Action**
+:-------------: | ----------------------------- | ----------------------------------
+GET             | /instance/ebpf-program        | Returns the agent instances selected by the query in the request body
+                                                  (or all it the request body is empty).
+POST            | /instance/ebpf-program        | Create one or more new instances in the ExecEnv
+                                                  with the specified initial configurations.
+PUT             | /instance/ebpf-program        | Update the configurations of one or more existing instances in the ExecEnv.
+PUT             | /instance/ebpf-program/{*id*} | Update the configuration of the agent instance with id = {id}.
+DELETE          | /instance/ebpf-program        | Delete the agent instances selected by the query in the request body
+                                                  (or nothing it the request body is empty).
 
 ### Data Collection
 
 **HTTP Method** | **Path** | **Action**
 :-------------: | -------- | -----------
-GET             | /data    | Returns the collected data selected by the query in the request body (or all it the request body is empty).
+GET             | /data    | Returns the collected data selected by the query in the request body
+                             (or all it the request body is empty).
 
 #### Full Query
 
 **HTTP Method** | **Path**       | **Action**
 :-------------: | -------------- | ---------------------------------------------------------------------------------------------------|
-POST            | /data/dsl      | Returns the collected data filtered by the query in the request body using the [Elastic DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html) syntax.
-POST            | /data/graph-ql | Returns the collected data filtered by the query in the request body using the [GraphQL](https://graphql.org) syntax.
-POST            | /data/sql      | Returns the collected data filtered by the query in the request body using the [SQL](https://www.w3schools.com/sql/sql_syntax.asp) syntax.
+POST            | /data/dsl      | Returns the collected data filtered by the query in the request body using the
+                                   [Elastic DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html) syntax.
+POST            | /data/graph-ql | Returns the collected data filtered by the query in the request body using the
+                                   [GraphQL](https://graphql.org) syntax.
+POST            | /data/sql      | Returns the collected data filtered by the query in the request body using the
+                                   [SQL](https://www.w3schools.com/sql/sql_syntax.asp) syntax.
 
 ## Guide
 
@@ -191,12 +240,12 @@ See the [Swagger Schema](api/swagger.yaml, api/swagger.json) and the relative [d
 
 2. Clone the repository.
 
-```bash
-git clone https://gitlab.com/astrid-repositories/cb-manager.git
-cd cb-manager
-```
+  ```bash
+  git clone https://gitlab.com/astrid-repositories/cb-manager.git
+  cd cb-manager
+  ```
 
-3. Install the dependencies.
+3. Install the dependencies (optional).
 
   ```bash
   pip3 install -r requirements.txt
@@ -209,22 +258,6 @@ cd cb-manager
 ```bash
 python3 main.py -h
 ```
-
-### Production environment
-
-```bash
-python3 main.py -n production
-```
-
-### Debug enabled in Development environment
-
-```bash
-python3 main.py --debug -n development
-```
-
-## Extra
-
-See the **Issues** for *features* in development.
 
 ## References
 

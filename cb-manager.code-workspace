@@ -9,6 +9,7 @@
 		"files.insertFinalNewline": true,
 		"editor.wordWrap": "on",
 		"cSpell.words": [
+			"UNPROCESSABLE",
 			"cubebeat",
 			"metricbeat",
 			"synflood"
