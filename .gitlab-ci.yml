@@ -1,7 +1,6 @@
-image: "astridproject:python3"
-
 stages:
   - build
+  - run
 
 code_quality:
   stage: build
@@ -32,5 +31,7 @@ code_quality:
       - $CODE_QUALITY_DISABLED
 
 cb-manager:
+  image: "astridproject:python3"
+  stage: build
   script:
     - python3 main.py
