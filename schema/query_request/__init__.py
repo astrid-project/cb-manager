@@ -9,13 +9,11 @@ class QueryRequestSchema(Schema):
     """
     Query request to filter the items.
     """
-    select = List(String(),
-                  description='Fields to return.',
-                  example='[id, name]')
-    where = Nested(QueryRequestClauseSchema,
-                   description='Filter the items based on different conditions.')
-    order = Nested(QueryRequestOrderSchema,
-                   many=True,
-                   description='Order the filtered items.')
-    limit = Nested(QueryRequestLimitSchema,
-                   description='Limit the number of items to return.')
+
+    select = String(description='Fields to return.', many=True, example='id')
+
+    where = Nested(QueryRequestClauseSchema, description='Filter the items based on different conditions.')
+
+    order = Nested(QueryRequestOrderSchema, many=True, description='Order the filtered items.')
+
+    limit = Nested(QueryRequestLimitSchema, description='Limit the number of items to return.')

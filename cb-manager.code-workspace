@@ -13,6 +13,7 @@
 			"cubebeat",
 			"metricbeat",
 			"synflood"
-		]
+		],
+		"editor.wrappingIndent": "deepIndent"
 	}
 }

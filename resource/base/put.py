@@ -18,13 +18,12 @@ def on_base_put(self, req, resp, id=None):
     for req_data_item in wrap(req_data):
         req_data_item_id = req_data_item.pop('id', None)
         if req_data_item_id is None and not single_item:
-            resp_data.append(dict(status='error',
-                                  reason='Request not valid: id property not found',
+            resp_data.append(dict(status='error', error=True,
+                                  description='Request not valid: id property not found',
                                   http_status_code=HTTPStatus.NOT_FOUND))
         elif req_data_item_id is not None and single_item:
-            resp_data.append(dict(status='error',
-                                  reason=f'Request not valid: two ids provided',
-                                  id=[req_data_item_id, id],
+            resp_data.append(dict(status='error', description='Request not valid: two ids provided',
+                                  data=dict(id=dict(item=req_data_item_id, parameter=id)),
                                   http_status_code=HTTPStatus.CONFLICT))
         else:
             try:
@@ -44,7 +43,11 @@ def on_base_put(self, req, resp, id=None):
                         status_req_data_item = obj.update(**subset_req_data_item)
                         if status_req_data_item == 'updated':
                             status_item = status_req_data_item
-                    resp_data_item = dict(status=status_item,
+                    if status_item == 'updated':
+                        desc_item = f'{self.doc_name} with the given [id] correctly updated.'
+                    else:
+                        desc_item = f'{self.doc_name} with the given [id] not updated.'
+                    resp_data_item = dict(status=status_item, descripion=desc_item,
                                           data=dict(**obj.to_dict(), id=req_data_item_id),
                                           http_status_code=HTTPStatus.OK)
                     resp_data.append(resp_data_item)
@@ -53,8 +56,7 @@ def on_base_put(self, req, resp, id=None):
                         lcp_handler(req=req_data_item, resp=resp_data_item)
             except NotFoundError as not_found_err:
                 self.log.error(f'Exception: {not_found_err}')
-                resp_data.append(dict(status='error',
-                                      reason=f'{self.doc_name} with the given [id] not found',
-                                      id=req_data_item_id,
-                                      http_status_code=HTTPStatus.NOT_FOUND))
+                resp_data.append(dict(status='error', error=True,
+                                      description=f'{self.doc_name} with the given [id] not found',
+                                      data=dict(id=req_data_item_id), http_status_code=HTTPStatus.NOT_FOUND))
     resp.media = resp_data

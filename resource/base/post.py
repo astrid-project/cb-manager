@@ -16,9 +16,9 @@ def on_base_post(self, req, resp, id=None, lcp_handler=None):
     for req_data_item in wrap(req_data):
         req_data_item_id = req_data_item.pop('id', None)
         if req_data_item_id is not None and single_item:
-            resp_data.append(dict(status='error',
-                                  reason=f'Request not valid: two ids provided',
-                                  id=[req_data_item_id, id],
+            resp_data.append(dict(status='error', error=True,
+                                  description=f'Request not valid: two ids provided',
+                                  data=dict(id=dict(item=req_data_item_id, parameter=id)),
                                   http_status_code=HTTPStatus.CONFLICT))
         else:
             try:
@@ -30,8 +30,9 @@ def on_base_post(self, req, resp, id=None, lcp_handler=None):
                     meta = {}
                 if obj is None:
                     obj = self.doc_cls(meta=meta, **req_data_item)
-                    status_item = obj.save()
-                    resp_data_item = dict(status=status_item,
+                    obj.save()
+                    resp_data_item = dict(status='created',
+                                          description='f{self.doc_name} with the given [id] correctly created.',
                                           data=dict(id=obj.meta.id, **obj.to_dict()),
                                           http_status_code=HTTPStatus.CREATED)
                     resp_data.append(resp_data_item)
@@ -39,13 +40,13 @@ def on_base_post(self, req, resp, id=None, lcp_handler=None):
                     if lcp_handler:
                         lcp_handler(req=req_data_item, resp=resp_data_item)
                 else:
-                    resp_data.append(dict(status='error',
-                                          reason=f'{self.doc_name} with the given [id] already found',
-                                          od=obj.meta.id, http_status_code=HTTPStatus.CONFLICT))
+                    resp_data.append(dict(status='error', error=True,
+                                          description=f'{self.doc_name} with the given [id] already found',
+                                          data=dict(id=obj.meta.id), http_status_code=HTTPStatus.CONFLICT))
             except Exception as exception:
                 self.log.error(f'Exception: {exception}')
-                resp_data.append(dict(status='error',
-                                      reason=f'Not possible create {self.doc_name} with the given [data]',
+                resp_data.append(dict(status='error', error=True,
+                                      description=f'Not possible create {self.doc_name} with the given [data]',
                                       data=dict(id=id, **req_data_item),
                                       http_status_code=HTTPStatus.UNPROCESSABLE_ENTITY))
     resp.media = resp_data

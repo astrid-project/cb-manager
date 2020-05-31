@@ -3,6 +3,7 @@ from document.exec_env import ExecEnvDocument
 from requests import delete as delete_req
 from requests.auth import HTTPBasicAuth
 from resource.base.lcp.retrieve import from_doc
+from utils.log import Log
 
 
 def lcp_delete(req, resp):
@@ -24,7 +25,13 @@ def lcp_delete(req, resp):
                               auth=HTTPBasicAuth(exec_env.lcp.username, exec_env.lcp.password),
                               json=dict(id=ebpf_program_catalog.meta.id))
         if resp_req.content:
-            resp_lcp.append(resp_req.json())
+            try:
+                resp_lcp.append(resp_req.json())
+            except Exception as exception:
+                Log.get('ebpf-program-instance-lcp').error(f'Exception: {exception}')
+                res_lcp.append(dict(status='error', error=True, description='Response data not valid.',
+                                    data=dict(response=resp_lcp.content),
+                                    http_status_code=resp_req.status_code))
         else:
-            resp_lcp.append(dict(error=True,
-                                 reason='Unknown'))
+            resp_lcp.append(dict(status='error', error=True, description='Request not executed.',
+                                 http_status_code=resp_req.status_code))

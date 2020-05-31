@@ -2,6 +2,7 @@ from http import HTTPStatus
 from requests import post as post_req
 from requests.auth import HTTPBasicAuth
 from resource.base.lcp.retrieve import from_catalog
+from utils.log import Log
 
 
 def action(catalog, id, exec_env, resp_lcp):
@@ -16,9 +17,16 @@ def action(catalog, id, exec_env, resp_lcp):
                         auth=HTTPBasicAuth(exec_env.lcp.username, exec_env.lcp.password),
                         json=dict(actions=action.config.to_dict()))
             if resp_req.content:
-                resp_lcp.append(resp_req.json())
+                try:
+                    resp_lcp.append(resp_req.json())
+                except Exception as exception:
+                    Log.get('agent-instance-execute-action').error(f'Exception: {exception}')
+                    res_lcp.append(dict(status='error', error=True, description='Response data not valid.',
+                                        data=dict(response=resp_lcp.content),
+                                        http_status_code=resp_req.status_code))
             else:
-                resp_lcp.append(dict(status='error', reason='Unknown'))
+                resp_lcp.append(dict(status='error', error=True, description='Request not executed.',
+                                     http_status_code=resp_req.status_code))
 
 
 def parameters(catalog, data, exec_env, resp_lcp):
@@ -34,6 +42,13 @@ def parameters(catalog, data, exec_env, resp_lcp):
                                 json=dict(parameters=dict(**param.config.to_dict(),
                                                           value=param_data['value'])))
             if resp_req.content:
-                resp_lcp.append(resp_req.json())
+                try:
+                    resp_lcp.append(resp_req.json())
+                except Exception as exception:
+                    Log.get('agent-instance-execute-parameter').error(f'Exception: {exception}')
+                    resp_lcp.append(dict(status='error', error=True, description='Response data not valid.',
+                                         data=dict(response=resp_lcp.content),
+                                         http_status_code=resp_req.status_code))
             else:
-                res_lcp.append(dict(status='error', reason='Unknown'))
+                resp_lcp.append(dict(status='error', error=True, description='Request not executed.',
+                                     http_status_code=resp_req.status_code))

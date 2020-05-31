@@ -24,4 +24,4 @@ class NetworkLinkSelectedResource(BaseResource):
     doc_cls = NetworkLinkDocument
     doc_name = 'Network Link'
     routes = '/network-link/{id}'
-    schema_cls =NetworkLinkSchema
+    schema_cls = NetworkLinkSchema

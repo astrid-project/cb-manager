@@ -20,7 +20,7 @@ class eBPFProgramCatalogMetricInnerDoc(InnerDoc):
 
 class eBPFProgramConfigCatalogInnerDoc(InnerDoc):
     code = Text(required=True)
-    metrics = Nested(eBPFProgramCatalogMetricInnerDoc, required=True)
+    metrics = Nested(eBPFProgramCatalogMetricInnerDoc)
 
 
 class eBPFProgramParameterCatalogInnerDoc(InnerDoc):
@@ -37,7 +37,8 @@ class eBPFProgramCatalogDocument(Document):
     # id already defined by Elasticsearch
     description = Text()
     config = Nested(eBPFProgramConfigCatalogInnerDoc, required=True)
-    parameters = Nested(eBPFProgramParameterCatalogInnerDoc, required=True)
+    parameters = Nested(eBPFProgramParameterCatalogInnerDoc)
 
     class Index:
+        # TODO add docstring.
         name = 'ebpf-program-catalog'

@@ -24,4 +24,4 @@ class NetworkLinkResource(BaseResource):
     doc_cls = NetworkLinkDocument
     doc_name = 'Network Link'
     routes = '/network-link/'
-    schema_cls =NetworkLinkSchema
+    schema_cls = NetworkLinkSchema

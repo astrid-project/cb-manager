@@ -3,6 +3,7 @@ from document.exec_env import ExecEnvDocument
 from requests import put as put_req
 from requests.auth import HTTPBasicAuth
 from resource.base.lcp.retrieve import from_doc
+from utils.log import Log
 
 
 def lcp_put(req, resp):
@@ -26,7 +27,13 @@ def lcp_put(req, resp):
                                      interface=resp_data.get('interface', None),
                                      **ebpf_program_catalog.config.to_dict()))
         if resp_req.content:
-            resp_lcp.append(resp_req.json())
+            try:
+                resp_lcp.append(resp_req.json())
+            except Exception as exception:
+                Log.get('ebpf-program-instance-lcp').error(f'Exception: {exception}')
+                res_lcp.append(dict(status='error', error=True, description='Response data not valid.',
+                                    data=dict(response=resp_lcp.content),
+                                    http_status_code=resp_req.status_code))
         else:
-            resp_lcp.append(dict(error=True,
-                                 reason='Unknown'))
+            resp_lcp.append(dict(status='error', error=True, description='Request not executed.',
+                                 http_status_code=resp_req.status_code))
