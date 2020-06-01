@@ -16,6 +16,8 @@ class LCPDocument(InnerDoc):
 class ExecEnvDocument(Document):
     # id already defined by Elasticsearch
 
+    description = Text()
+
     hostname = Text(required=True)
 
     lcp = Nested(LCPDocument, required=True)

@@ -12,9 +12,9 @@ class eBPFProgramCatalogSchema(Schema):
     id = String(required=True, dump_only=True, description='Id of the eBPF program in the catalog.',
                 example='packet-capture')
 
-    description = String(description='Description of eBPF program.',
-                         example='Transparent service to capture packets flowing through the interface it is attached to, apply filters and obtain capture in .pcap format.')
-
     config = Nested(eBPFProgramConfigCatalogSchema, required=True, many=False)
 
     parameters = Nested(eBPFProgramParameterCatalogSchema, many=True)
+
+    description = String(description='Description of eBPF program.',
+                         example='Transparent service to capture packets flowing through the interface it is attached to, apply filters and obtain capture in .pcap format.')

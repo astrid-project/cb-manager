@@ -9,6 +9,8 @@ class AgentCatalogActionConfigSchema(Schema):
 
     cmd = String(many=True, description='Action command.', example='service filebeat start')
 
+    description = String(description='Short descripton of the agent action command',
+                         example='Set the working directory.')
 
 class AgentCatalogActionSchema(Schema):
     """
@@ -17,5 +19,8 @@ class AgentCatalogActionSchema(Schema):
 
     id = String(required=True, dump_only=True, enum=['start', 'stop', 'restart'], description='Action name',
                 example='start')
+
+    description = String(description='Short descripton of the agent actions.s',
+                         example='Start the execution.')
 
     config = Nested(AgentCatalogActionConfigSchema, required=True, many=True, description='Action config.')

@@ -21,9 +21,9 @@ def action(catalog, id, exec_env, resp_lcp):
                     resp_lcp.append(resp_req.json())
                 except Exception as exception:
                     Log.get('agent-instance-execute-action').error(f'Exception: {exception}')
-                    res_lcp.append(dict(status='error', error=True, description='Response data not valid.',
-                                        data=dict(response=resp_lcp.content),
-                                        http_status_code=resp_req.status_code))
+                    resp_lcp.append(dict(status='error', error=True, description='Response data not valid.',
+                                         data=dict(response=resp_lcp.content),
+                                         http_status_code=resp_req.status_code))
             else:
                 resp_lcp.append(dict(status='error', error=True, description='Request not executed.',
                                      http_status_code=resp_req.status_code))

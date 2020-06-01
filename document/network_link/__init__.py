@@ -8,6 +8,8 @@ class NetworkLinkDocument(Document):
 
     # id already defined by Elasticsearch
 
+    description = Text()
+
     type_id = Text(required=True)
 
     class Index:

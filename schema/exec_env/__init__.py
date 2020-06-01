@@ -1,5 +1,5 @@
 from marshmallow import Schema
-from marshmallow.fields import DateTime, Integer, Nested, Pluck, String
+from marshmallow.fields import DateTime, Integer, Nested, String
 from schema.exec_env.type import ExecEnvTypeSchema
 
 
@@ -32,5 +32,7 @@ class ExecEnvSchema(Schema):
 
     lcp = Nested(LCPSchema, required=True, description='Data related to the LCP.')
 
-    type_id = Pluck(ExecEnvTypeSchema, 'id', required=True,
-                    description='Id of the execution environment type.', example='vm')
+    type_id = String(required=True, description='Id of the execution environment type.', example='vm')
+
+    description = String(description='Short description of the execution environment,',
+                         example='Apache HTTP Web Server.')

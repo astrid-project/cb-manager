@@ -28,6 +28,7 @@ class AgentCatalogActionConfigInnerDoc(InnerDoc):
     """
     Agent action configuration.
     """
+    description = Text()
     cmd = Text(required=True)
 
 
@@ -35,6 +36,7 @@ class AgentCatalogActionInnerDoc(InnerDoc):
     """
     Agent action.
     """
+    description = Text()
     config = Nested(AgentCatalogActionConfigInnerDoc, required=True)
 
 
@@ -45,6 +47,7 @@ class AgentCatalogDocument(Document):
     # id already defined by Elasticsearch
     parameters = Nested(AgentCatalogParameterInnerDoc, required=True)
     actions = Nested(AgentCatalogActionInnerDoc, required=True)
+    description = Text()
 
     class Index:
         # TODO add docstring.

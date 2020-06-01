@@ -8,6 +8,10 @@ definitions:
         items:
           $ref: '#/definitions/AgentCatalogAction'
         type: array
+      description:
+        description: Short description of the agent.
+        example: Collect system metrics from execution environments.
+        type: string
       id:
         description: ID of the agent in the catalog.
         example: filebeat
@@ -23,16 +27,6 @@ definitions:
     - id
     - parameters
     type: object
-  AgentCatalog1:
-    properties:
-      id:
-        description: ID of the agent in the catalog.
-        example: filebeat
-        readOnly: true
-        type: string
-    required:
-    - id
-    type: object
   AgentCatalogAction:
     properties:
       config:
@@ -40,6 +34,10 @@ definitions:
         items:
           $ref: '#/definitions/AgentCatalogActionConfig'
         type: array
+      description:
+        description: Short descripton of the agent actions.s
+        example: Start the execution.
+        type: string
       id:
         description: Action name
         enum:
@@ -58,6 +56,10 @@ definitions:
       cmd:
         description: Action command.
         example: service filebeat start
+        type: string
+      description:
+        description: Short descripton of the agent action command
+        example: Set the working directory.
         type: string
     type: object
   AgentCatalogParameter:
@@ -131,15 +133,13 @@ definitions:
   AgentInstance:
     properties:
       agent_catalog_id:
-        allOf:
-        - $ref: '#/definitions/AgentCatalog1'
         description: Id of the agent in the catalog.
         example: filebeat
+        type: string
       exec_env_id:
-        allOf:
-        - $ref: '#/definitions/ExecEnv'
         description: Id of the execution environment where the agent instance is installed.
         example: apache
+        type: string
       id:
         description: Id of the agent instance installed in an execution environment.
         example: filebeat@apache
@@ -164,16 +164,6 @@ definitions:
     - id
     - status
     type: object
-  AgentInstance1:
-    properties:
-      id:
-        description: Id of the agent instance installed in an execution environment.
-        example: filebeat@apache
-        readOnly: true
-        type: string
-    required:
-    - id
-    type: object
   AgentInstanceParameter:
     properties:
       id:
@@ -196,20 +186,18 @@ definitions:
         example: Added to this network for debug purposes.
         type: string
       exec_env_id:
-        allOf:
-        - $ref: '#/definitions/ExecEnv'
         description: Id of the connected execution environment.
         example: apache
+        type: string
       id:
         description: Id of connection.
         example: conn-1
         readOnly: true
         type: string
       network_link_id:
-        allOf:
-        - $ref: '#/definitions/NetworkLink'
         description: Id of the connected network link.
         example: net-link-1
+        type: string
     required:
     - exec_env_id
     - id
@@ -218,17 +206,16 @@ definitions:
   Data:
     properties:
       agent_instance_id:
-        allOf:
-        - $ref: '#/definitions/AgentInstance1'
         description: "ID of the agent instance in the execution environment\n    \
-          \                                         that collected the data"
+          \                                          that collected the data"
         example: filebeat@apache
+        type: string
       ebpf_program_instance_id:
-        allOf:
-        - $ref: '#/definitions/eBPFProgramInstance'
-        description: "ID of the eBPF program instance in the execution environment\n\
-          \                                             that collected the data"
+        description: "ID of the eBPF program instance in the execution\n         \
+          \                                            environment that collected\
+          \ the data"
         example: packet-capture@apache
+        type: string
       id:
         description: Id of the data.
         example: BXrHRn5RPU55Qh9JwMZn
@@ -249,16 +236,10 @@ definitions:
     type: object
   ExecEnv:
     properties:
-      id:
-        description: Id of the execution environment.
-        example: apache
-        readOnly: true
+      description:
+        description: Short description of the execution environment,
+        example: Apache HTTP Web Server.
         type: string
-    required:
-    - id
-    type: object
-  ExecEnv1:
-    properties:
       hostname:
         description: Hostname of the execution environment.
         example: 192.168.1.2
@@ -273,10 +254,9 @@ definitions:
         - $ref: '#/definitions/LCP'
         description: Data related to the LCP.
       type_id:
-        allOf:
-        - $ref: '#/definitions/ExecEnvType'
         description: Id of the execution environment type.
         example: vm
+        type: string
     required:
     - hostname
     - id
@@ -284,16 +264,6 @@ definitions:
     - type_id
     type: object
   ExecEnvType:
-    properties:
-      id:
-        description: ID of the execution environment type.
-        example: vm
-        readOnly: true
-        type: string
-    required:
-    - id
-    type: object
-  ExecEnvType1:
     properties:
       description:
         description: Short description of the type.
@@ -362,41 +332,24 @@ definitions:
     type: object
   NetworkLink:
     properties:
-      id:
-        description: ID of the network link.
-        example: net-link-1
-        readOnly: true
+      description:
+        description: Short description of the network link,
+        example: Allow communication between front-end and back-end services.
         type: string
-    required:
-    - id
-    type: object
-  NetworkLink1:
-    properties:
       id:
         description: ID of the network link.
         example: net-link-1
         readOnly: true
         type: string
       type_id:
-        allOf:
-        - $ref: '#/definitions/NetworkLinkType'
         description: Id of the network link type.
         example: pnt2pnt
+        type: string
     required:
     - id
     - type_id
     type: object
   NetworkLinkType:
-    properties:
-      id:
-        description: Id of the network link type.
-        example: pnt2pnt
-        readOnly: true
-        type: string
-    required:
-    - id
-    type: object
-  NetworkLinkType1:
     properties:
       description:
         description: Short description of the network link type,
@@ -542,16 +495,6 @@ definitions:
     - config
     - id
     type: object
-  eBPFProgramCatalog1:
-    properties:
-      id:
-        description: Id of the eBPF program in the catalog.
-        example: packet-capture
-        readOnly: true
-        type: string
-    required:
-    - id
-    type: object
   eBPFProgramCatalogMetric:
     properties:
       map-name:
@@ -617,27 +560,19 @@ definitions:
     type: object
   eBPFProgramInstance:
     properties:
-      id:
-        description: Id of the eBPF program installed in an execution environment.
-        example: packet-capture@apache
-        readOnly: true
+      description:
+        description: Short description of the agent installed in the execution environment.
+        example: Collect system metrics from Apache HTTP Web Server.
         type: string
-    required:
-    - id
-    type: object
-  eBPFProgramInstance1:
-    properties:
       ebpf_program_catalog_id:
-        allOf:
-        - $ref: '#/definitions/eBPFProgramCatalog1'
         description: Id of the agent in the catalog.
         example: packet-capture
+        type: string
       exec_env_id:
-        allOf:
-        - $ref: '#/definitions/ExecEnv'
-        description: Id of the execution environment where the eBPF program instance
-          is installed
+        description: "Id of the execution environment where the eBPF program\n   \
+          \                                                    instance is installed"
         example: apache
+        type: string
       id:
         description: Id of the eBPF program installed in an execution environment.
         example: packet-capture@apache
@@ -693,7 +628,7 @@ definitions:
     type: object
 info:
   title: Context Broker Manager
-  version: d87e1f8d1775083572ba0d76cff1766f55bbf309@master
+  version: dc56f8ee284b9dc2ee9cba500175b76e6b17df3c@master
 paths:
   /catalog/agent/:
     delete:
@@ -1944,7 +1879,7 @@ paths:
             filtered by the query in the request body.
           schema:
             items:
-              $ref: '#/definitions/eBPFProgramInstance1'
+              $ref: '#/definitions/eBPFProgramInstance'
             type: array
         '400':
           description: Bad request.
@@ -1965,7 +1900,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/eBPFProgramInstance1'
+            $ref: '#/definitions/eBPFProgramInstance'
           type: array
       responses:
         '200':
@@ -1995,7 +1930,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/eBPFProgramInstance1'
+            $ref: '#/definitions/eBPFProgramInstance'
           type: array
       responses:
         '200':
@@ -2067,7 +2002,7 @@ paths:
             execution-environment filtered by the query in the request body.
           schema:
             items:
-              $ref: '#/definitions/eBPFProgramInstance1'
+              $ref: '#/definitions/eBPFProgramInstance'
             type: array
         '400':
           description: Bad request.
@@ -2093,7 +2028,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/eBPFProgramInstance1'
+            $ref: '#/definitions/eBPFProgramInstance'
           type: array
       responses:
         '200':
@@ -2129,7 +2064,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/eBPFProgramInstance1'
+            $ref: '#/definitions/eBPFProgramInstance'
           type: array
       responses:
         '200':
@@ -2193,7 +2128,7 @@ paths:
             request body.
           schema:
             items:
-              $ref: '#/definitions/ExecEnv1'
+              $ref: '#/definitions/ExecEnv'
             type: array
         '400':
           description: Bad request.
@@ -2214,7 +2149,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/ExecEnv1'
+            $ref: '#/definitions/ExecEnv'
           type: array
       responses:
         '200':
@@ -2244,7 +2179,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/ExecEnv1'
+            $ref: '#/definitions/ExecEnv'
           type: array
       responses:
         '200':
@@ -2316,7 +2251,7 @@ paths:
             query in the request body.
           schema:
             items:
-              $ref: '#/definitions/ExecEnv1'
+              $ref: '#/definitions/ExecEnv'
             type: array
         '400':
           description: Bad request.
@@ -2341,7 +2276,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/ExecEnv1'
+            $ref: '#/definitions/ExecEnv'
           type: array
       responses:
         '200':
@@ -2375,7 +2310,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/ExecEnv1'
+            $ref: '#/definitions/ExecEnv'
           type: array
       responses:
         '200':
@@ -2439,7 +2374,7 @@ paths:
             the request body.
           schema:
             items:
-              $ref: '#/definitions/ExecEnvType1'
+              $ref: '#/definitions/ExecEnvType'
             type: array
         '400':
           description: Bad request.
@@ -2460,7 +2395,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/ExecEnvType1'
+            $ref: '#/definitions/ExecEnvType'
           type: array
       responses:
         '200':
@@ -2490,7 +2425,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/ExecEnvType1'
+            $ref: '#/definitions/ExecEnvType'
           type: array
       responses:
         '200':
@@ -2562,7 +2497,7 @@ paths:
             by the query in the request body.
           schema:
             items:
-              $ref: '#/definitions/ExecEnvType1'
+              $ref: '#/definitions/ExecEnvType'
             type: array
         '400':
           description: Bad request.
@@ -2587,7 +2522,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/ExecEnvType1'
+            $ref: '#/definitions/ExecEnvType'
           type: array
       responses:
         '200':
@@ -2621,7 +2556,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/ExecEnvType1'
+            $ref: '#/definitions/ExecEnvType'
           type: array
       responses:
         '200':
@@ -2683,7 +2618,7 @@ paths:
             body.
           schema:
             items:
-              $ref: '#/definitions/NetworkLink1'
+              $ref: '#/definitions/NetworkLink'
             type: array
         '400':
           description: Bad request.
@@ -2704,7 +2639,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/NetworkLink1'
+            $ref: '#/definitions/NetworkLink'
           type: array
       responses:
         '200':
@@ -2734,7 +2669,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/NetworkLink1'
+            $ref: '#/definitions/NetworkLink'
           type: array
       responses:
         '200':
@@ -2806,7 +2741,7 @@ paths:
             in the request body.
           schema:
             items:
-              $ref: '#/definitions/NetworkLink1'
+              $ref: '#/definitions/NetworkLink'
             type: array
         '400':
           description: Bad request.
@@ -2831,7 +2766,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/NetworkLink1'
+            $ref: '#/definitions/NetworkLink'
           type: array
       responses:
         '200':
@@ -2865,7 +2800,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/NetworkLink1'
+            $ref: '#/definitions/NetworkLink'
           type: array
       responses:
         '200':
@@ -2929,7 +2864,7 @@ paths:
             body.
           schema:
             items:
-              $ref: '#/definitions/NetworkLinkType1'
+              $ref: '#/definitions/NetworkLinkType'
             type: array
         '400':
           description: Bad request.
@@ -2950,7 +2885,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/NetworkLinkType1'
+            $ref: '#/definitions/NetworkLinkType'
           type: array
       responses:
         '200':
@@ -2980,7 +2915,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/NetworkLinkType1'
+            $ref: '#/definitions/NetworkLinkType'
           type: array
       responses:
         '200':
@@ -3052,7 +2987,7 @@ paths:
             in the request body.
           schema:
             items:
-              $ref: '#/definitions/NetworkLinkType1'
+              $ref: '#/definitions/NetworkLinkType'
             type: array
         '400':
           description: Bad request.
@@ -3077,7 +3012,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/NetworkLinkType1'
+            $ref: '#/definitions/NetworkLinkType'
           type: array
       responses:
         '200':
@@ -3111,7 +3046,7 @@ paths:
         required: true
         schema:
           items:
-            $ref: '#/definitions/NetworkLinkType1'
+            $ref: '#/definitions/NetworkLinkType'
           type: array
       responses:
         '200':

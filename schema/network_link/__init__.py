@@ -1,5 +1,5 @@
 from marshmallow import Schema
-from marshmallow.fields import Pluck, String
+from marshmallow.fields import String
 from schema.network_link.type import NetworkLinkTypeSchema
 
 
@@ -12,5 +12,9 @@ class NetworkLinkSchema(Schema):
                 description='ID of the network link.',
                 example='net-link-1')
 
-    type_id = Pluck(NetworkLinkTypeSchema, 'id', required=True,
-                    description='Id of the network link type.', example='pnt2pnt')
+    type_id = String(required=True,
+                     description='Id of the network link type.',
+                     example='pnt2pnt')
+
+    description = String(description='Short description of the network link,',
+                         example='Allow communication between front-end and back-end services.')

@@ -1,5 +1,5 @@
 from marshmallow import Schema
-from marshmallow.fields import Nested, Pluck, String
+from marshmallow.fields import Nested, Nested, String
 from schema.agent.catalog import AgentCatalogSchema
 from schema.exec_env import ExecEnvSchema
 
@@ -23,10 +23,9 @@ class AgentInstanceSchema(Schema):
                 description='Id of the agent instance installed in an execution environment.',
                 example='filebeat@apache')
 
-    agent_catalog_id = Pluck(AgentCatalogSchema, 'id', required=True,
-                             description='Id of the agent in the catalog.', example='filebeat')
+    agent_catalog_id = String(required=True, description='Id of the agent in the catalog.', example='filebeat')
 
-    exec_env_id = Pluck(ExecEnvSchema, 'id', required=True,
+    exec_env_id = String(required=True,
                          description='Id of the execution environment where the agent instance is installed.',
                          example='apache')
 
