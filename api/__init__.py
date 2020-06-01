@@ -3,7 +3,7 @@ from falcon import API
 from falcon_auth import FalconAuthMiddleware, BasicAuthBackend
 from falcon_marshmallow import Marshmallow
 from resource import routes
-from schema.http_error import HTTPErrorSchema
+from schema.response import HTTPErrorSchema
 from schema.query_request import QueryRequestSchema
 from swagger_ui import falcon_api_doc
 from utils.auth import auth

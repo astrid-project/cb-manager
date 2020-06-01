@@ -32,7 +32,7 @@ def on_base_post(self, req, resp, id=None, lcp_handler=None):
                     obj = self.doc_cls(meta=meta, **req_data_item)
                     obj.save()
                     resp_data_item = dict(status='created',
-                                          description='f{self.doc_name} with the given [id] correctly created.',
+                                          description=f'{self.doc_name} with the given [id] correctly created.',
                                           data=dict(id=obj.meta.id, **obj.to_dict()),
                                           http_status_code=HTTPStatus.CREATED)
                     resp_data.append(resp_data_item)

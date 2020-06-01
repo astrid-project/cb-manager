@@ -1,36 +1,21 @@
-from resource.agent.catalog import AgentCatalogResource
-from resource.agent.catalog.selected import AgentCatalogSelectedResource
+from resource.agent.catalog import AgentCatalogResource, AgentCatalogSelectedResource
+from resource.agent.instance import AgentInstanceResource, AgentInstanceSelectedResource
 
-from resource.agent.instance import AgentInstanceResource
-from resource.agent.instance.selected import AgentInstanceSelectedResource
+from resource.connection import ConnectionResource, ConnectionSelectedResource
 
-from resource.connection import ConnectionResource
-from resource.connection.selected import ConnectionSelectedResource
+from resource.data import DataResource, DataSelectedResource
 
-from resource.data import DataResource
-from resource.data.selected import DataSelectedResource
+from resource.ebpf_program.catalog import eBPFProgramCatalogResource, eBPFProgramCatalogSelectedResource
+from resource.ebpf_program.instance import eBPFProgramInstanceResource, eBPFProgramInstanceSelectedResource
 
-from resource.ebpf_program.catalog import eBPFProgramCatalogResource
-from resource.ebpf_program.catalog.selected import eBPFProgramCatalogSelectedResource
+from resource.exec_env import ExecEnvResource, ExecEnvSelectedResource
+from resource.exec_env.type import ExecEnvTypeResource, ExecEnvTypeSelectedResource
 
-from resource.ebpf_program.instance import eBPFProgramInstanceResource
-from resource.ebpf_program.instance.selected import eBPFProgramInstanceSelectedResource
-
-from resource.exec_env import ExecEnvResource
-from resource.exec_env.selected import ExecEnvSelectedResource
-
-from resource.exec_env.type import ExecEnvTypeResource
-from resource.exec_env.type.selected import ExecEnvTypeSelectedResource
-
-from resource.network_link import NetworkLinkResource
-from resource.network_link.selected import NetworkLinkSelectedResource
-
-from resource.network_link.type import NetworkLinkTypeResource
-from resource.network_link.type.selected import NetworkLinkTypeSelectedResource
+from resource.network_link import NetworkLinkResource, NetworkLinkSelectedResource
+from resource.network_link.type import NetworkLinkTypeResource, NetworkLinkTypeSelectedResource
 
 from utils.log import Log
 from utils.sequence import wrap
-
 
 db = (
     AgentCatalogResource, AgentCatalogSelectedResource,
