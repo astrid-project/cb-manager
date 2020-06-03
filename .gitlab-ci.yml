@@ -20,3 +20,12 @@ code_quality:
         - "**/*.py"
         - "**/*.ini"
         - "**/*.sh"
+
+spotbugs-sast:
+  script:
+    - /analyzer run -compile=false
+  variables:
+    MAVEN_REPO_PATH: ./.m2/repository
+  artifacts:
+    reports:
+      sast: gl-sast-report.json
