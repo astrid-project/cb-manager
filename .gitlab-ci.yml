@@ -12,6 +12,7 @@ docker-build:
 
 include:
   - template: Code-Quality.gitlab-ci.yml
+  - template: SAST.gitlab-ci.yml
 
 code_quality:
   rules:
