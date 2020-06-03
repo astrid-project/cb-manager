@@ -21,7 +21,7 @@ class AgentInstanceSchema(Schema):
                            description='Id of the agent in the catalog.')
     exec_env_id = Str(required=True, example='apache',
                       description='Id of the execution environment where the agent instance is installed.')
-    status = Str(required=True, example='start', description='Status of the agent instance',
-                 enum=['start', 'stop', 'restart'])
+    status = Str(required=True, example='started', description='Status of the agent instance',
+                 enum=['started', 'stopped', 'unknown'])
     parameters = Nested(AgentInstanceParameterSchema, many=True,
                         description='List of agent instance parameters.')

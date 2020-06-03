@@ -2,6 +2,7 @@
     "cSpell.words": [
         "chdir",
         "cubebeat",
+        "cmds",
         "datetime",
         "envs",
         "execenv",
@@ -20,6 +21,7 @@
         "strftime",
         "strptime",
         "synflood",
+        "toolz",
         "unprocessable",
         "ureg"
     ]

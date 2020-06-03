@@ -3,7 +3,6 @@ from elasticsearch_dsl import Boolean, Document, InnerDoc, Nested, Text
 
 class AgentCatalogParameterConfigInnerDoc(InnerDoc):
     """Agent parameter configuration."""
-    #FIXME description?
     schema = Text(required=True)
     source = Text(required=True)
     path = Text(required=True)
@@ -22,13 +21,14 @@ class AgentCatalogParameterInnerDoc(InnerDoc):
 
 class AgentCatalogActionConfigInnerDoc(InnerDoc):
     """Agent action configuration."""
-    description = Text()
     cmd = Text(required=True)
+    args = Text()
 
 
 class AgentCatalogActionInnerDoc(InnerDoc):
     """Agent action."""
     description = Text()
+    status = Text()
     config = Nested(AgentCatalogActionConfigInnerDoc, required=True)
 
 
@@ -36,8 +36,8 @@ class AgentCatalogDocument(Document):
     """Represents an agent in the catalog."""
     # id already defined by Elasticsearch
     description = Text()
-    parameters = Nested(AgentCatalogParameterInnerDoc, required=True)
-    actions = Nested(AgentCatalogActionInnerDoc, required=True)
+    parameters = Nested(AgentCatalogParameterInnerDoc)
+    actions = Nested(AgentCatalogActionInnerDoc)
 
     class Index:
         """Elasticsearch configuration."""

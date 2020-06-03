@@ -1,3 +1,4 @@
+from copy import deepcopy
 from falcon.errors import HTTPBadRequest
 from http import HTTPStatus
 from utils.sequence import wrap
@@ -29,6 +30,12 @@ def on_base_post(self, req, resp, id=None, lcp_handler=None):
                     obj = None
                     meta = {}
                 if obj is None:
+                    req_data_lcp = deepcopy(req_data_item)
+                    for ignore_field in self.ignore_fields:
+                        try:
+                            req_data_item.pop(ignore_field)
+                            self.log.info(f'field {ignore_field} in the request ignored when update {self.doc_name}')
+                        except: pass
                     obj = self.doc_cls(meta=meta, **req_data_item)
                     obj.save()
                     resp_data_item = dict(status='created',
@@ -38,7 +45,7 @@ def on_base_post(self, req, resp, id=None, lcp_handler=None):
                     resp_data.append(resp_data_item)
                     lcp_handler = self.lcp_handler.get('post', None)
                     if lcp_handler:
-                        lcp_handler(req=req_data_item, resp=resp_data_item)
+                        lcp_handler(instance=obj, req=req_data_lcp, resp=resp_data_item)
                 else:
                     resp_data.append(dict(status='error', error=True,
                                           description=f'{self.doc_name} with the given [id] already found',
@@ -47,6 +54,6 @@ def on_base_post(self, req, resp, id=None, lcp_handler=None):
                 self.log.error(f'Exception: {exception}')
                 resp_data.append(dict(status='error', error=True,
                                       description=f'Not possible create {self.doc_name} with the given [data]',
-                                      data=dict(id=id, **req_data_item),
+                                      exception=str(exception), data=dict(id=req_data_item_id, **req_data_item),
                                       http_status_code=HTTPStatus.UNPROCESSABLE_ENTITY))
     resp.media = resp_data

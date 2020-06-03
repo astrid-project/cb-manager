@@ -24,10 +24,12 @@ from docstring import docstring
 class AgentInstanceResource(BaseResource):
     doc_cls = AgentInstanceDocument
     doc_name = 'Agent Instance'
-    routes = '/instance/agent/',
+    routes = '/instance/agent/'
     schema_cls = AgentInstanceSchema
     lcp_handler = dict(post=lcp_post, put=lcp_put)
     nested_fields = ['parameters']
+    readonly_fields = ['status']
+    ignore_fields = ['actions']
 
 
 @docstring(method='get', sum='Agent Instance Read (Single)',
@@ -48,7 +50,9 @@ class AgentInstanceResource(BaseResource):
 class AgentInstanceSelectedResource(BaseResource):
     doc_cls = AgentInstanceDocument
     doc_name = 'Agent Instance'
-    routes = '/instance/agent/{id}',
+    routes = '/instance/agent/{id}'
     schema_cls = AgentInstanceSchema
     lcp_handler = dict(post=lcp_post, put=lcp_put)
     nested_fields = ['parameters']
+    readonly_fields = ['status']
+    ignore_fields = ['actions']

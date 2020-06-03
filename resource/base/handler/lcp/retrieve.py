@@ -8,7 +8,7 @@ def from_doc(document, id, name, resp_lcp):
     except Exception as exception:
         Log.get('lcp').error(f'Exception: {exception}')
         resp_lcp.append(dict(status='error', error=True, description=f'{name} {id} unknown.',
-                             http_status_code=HTTPStatus.NOT_FOUND))
+                             exception=str(exception), http_status_code=HTTPStatus.NOT_FOUND))
         return None
 
 

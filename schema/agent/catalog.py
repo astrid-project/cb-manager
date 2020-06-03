@@ -4,7 +4,6 @@ from marshmallow.fields import Bool, Nested, Str
 
 class AgentCatalogParameterConfigSchema(Schema):
     """Agent parameter configuration."""
-    # FIXME description?
     schema = Str(required=True, enum=['yaml', 'json', 'properties'],
                  description='Schema of the parameter file', example='yaml')
     source = Str(required=True, description='Path of the source parameter file',
@@ -32,10 +31,8 @@ class AgentCatalogParameterSchema(Schema):
 
 class AgentCatalogActionConfigSchema(Schema):
     """Agent action configuration."""
-    description = Str(description='Short description of the agent action command',
-                      example='Set the working directory.')
-    cmd = Str(many=True, description='Action command.',
-              example='service filebeat start')
+    cmd = Str(required=True, description='Action command.', example='service filebeat start')
+    args = Str(many=True, description='Action command argument', example='-v')
 
 
 class AgentCatalogActionSchema(Schema):
@@ -44,6 +41,8 @@ class AgentCatalogActionSchema(Schema):
              example='start')
     description = Str(description='Short descripton of the agent actions.',
                       example='Start the execution.')
+    status = Str(enum=['started', 'stopped', 'unknown'], example='started', default=None,
+                 description='Update the status the of the agent-instance if the command is executed correctly.')
     config = Nested(AgentCatalogActionConfigSchema, required=True,
                     many=True, description='Action config.')
 
@@ -54,7 +53,6 @@ class AgentCatalogSchema(Schema):
              description='Id of the agent in the catalog.')
     description = Str(description='Short description of the agent.',
                       example='Collect system metrics from execution environments.')
-    parameters = Nested(AgentCatalogParameterSchema, required=True, many=True,
+    parameters = Nested(AgentCatalogParameterSchema, many=True,
                         description='Parameter properties.')
-    actions = Nested(AgentCatalogActionSchema, required=True,
-                     many=True, description='Action properties.')
+    actions = Nested(AgentCatalogActionSchema, many=True, description='Action properties.')

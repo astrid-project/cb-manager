@@ -11,6 +11,7 @@ class ResponseSchema(Schema):
                  description='Indicate the presence of an error')
     description = Str(required=True, example='Request not valid: two ids provided.',
                       description='Human readable message that describes the status of the operation.')
+    exception = Str(description='Message of the occurred exception.', example='Value required.')
     data = Dict(required=True, description='Data of the item.',
                 keys=Str(required=True, description='Field name.', example='id'),
                 values=Raw(required=True, description='Field value.', example='apache'))

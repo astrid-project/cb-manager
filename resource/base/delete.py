@@ -25,7 +25,8 @@ def on_base_delete(self, req, resp, id=None, lcp_handler=None):
                 self.log.error(f'Exception: {exception}')
                 resp_data.append(dict(status='error', error=True,
                                       description='Not possible to delete element with the given [id]',
-                                      data=dict(id=hit.meta.id), http_status_code=HTTPStatus.CONFLICT))
+                                      exception=str(exception), data=dict(id=hit.meta.id),
+                                      http_status_code=HTTPStatus.CONFLICT))
         resp.media = resp_data
     except RequestError as req_err:
         raise HTTPBadRequest(title=req_err.error, description=req_err.info)

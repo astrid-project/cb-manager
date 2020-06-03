@@ -17,7 +17,7 @@ from docstring import docstring
 class DataResource(BaseResource):
     doc_cls = DataDocument
     doc_name = 'Data'
-    routes = '/data/',
+    routes = '/data/'
     schema_cls = DataSchema
 
 
@@ -34,5 +34,5 @@ class DataResource(BaseResource):
 class DataSelectedResource(BaseResource):
     doc_cls = DataDocument
     doc_name = 'Data'
-    routes = '/data/{id}',
+    routes = '/data/{id}'
     schema_cls = DataSchema

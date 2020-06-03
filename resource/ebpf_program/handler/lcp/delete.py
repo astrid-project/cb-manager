@@ -30,7 +30,7 @@ def lcp_delete(req, resp):
             except Exception as exception:
                 Log.get('ebpf-program-instance-lcp').error(f'Exception: {exception}')
                 resp_lcp.append(dict(status='error', error=True, description='Response data not valid.',
-                                     data=dict(response=resp_lcp.content),
+                                     exception=str(exception), data=dict(response=resp_lcp.content),
                                      http_status_code=resp_req.status_code))
         else:
             resp_lcp.append(dict(status='error', error=True, description='Request not executed.',

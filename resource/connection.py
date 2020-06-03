@@ -23,7 +23,7 @@ from docstring import docstring
 class ConnectionResource(BaseResource):
     doc_cls = ConnectionDocument
     doc_name = 'Connection'
-    routes = '/connection/',
+    routes = '/connection/'
     schema_cls = ConnectionSchema
 
 

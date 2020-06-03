@@ -6,6 +6,8 @@ from utils.log import Log
 class BaseResource(object):
     lcp_handler = {}
     nested_fields = []
+    readonly_fields = []
+    ignore_fields = []
 
     def __init__(self):
         self.log = Log.get(self.doc_cls.Index.name)

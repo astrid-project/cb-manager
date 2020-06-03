@@ -10,6 +10,7 @@ gitpython
 pint
 requests
 swagger-ui-py
+toolz
 verboselogs
 waitress
 werkzeug

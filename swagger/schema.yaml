@@ -23,9 +23,7 @@ definitions:
           $ref: '#/definitions/AgentCatalogParameter'
         type: array
     required:
-    - actions
     - id
-    - parameters
     type: object
   AgentCatalogAction:
     properties:
@@ -47,20 +45,31 @@ definitions:
         example: start
         readOnly: true
         type: string
+      status:
+        description: Update the status the of the agent-instance if the command is
+          executed correctly.
+        enum:
+        - started
+        - stopped
+        - unknown
+        example: started
+        type: string
     required:
     - config
     - id
     type: object
   AgentCatalogActionConfig:
     properties:
+      args:
+        description: Action command argument
+        example: -v
+        type: string
       cmd:
         description: Action command.
         example: service filebeat start
         type: string
-      description:
-        description: Short description of the agent action command
-        example: Set the working directory.
-        type: string
+    required:
+    - cmd
     type: object
   AgentCatalogParameter:
     properties:
@@ -156,10 +165,10 @@ definitions:
       status:
         description: Status of the agent instance
         enum:
-        - start
-        - stop
-        - restart
-        example: start
+        - started
+        - stopped
+        - unknown
+        example: started
         type: string
     required:
     - agent_catalog_id
@@ -631,7 +640,7 @@ definitions:
     type: object
 info:
   title: Context Broker Manager
-  version: 9e8533142647391729b88ba634fd05a4c7713e0c@master
+  version: 74380d53bc07b788a5d2d59a40216dc482c5cb7c@master
 paths:
   /catalog/agent/:
     delete:

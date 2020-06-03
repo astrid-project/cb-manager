@@ -25,7 +25,7 @@ from docstring import docstring
 class eBPFProgramInstanceResource(BaseResource):
     doc_cls = eBPFProgramInstanceDocument
     doc_name = 'eBPF Program'
-    routes = '/instance/ebpf-program/',
+    routes = '/instance/ebpf-program/'
     schema_cls = eBPFProgramInstanceSchema
     lcp_handler = dict(post=lcp_post, put=lcp_put, delete=lcp_delete)
     nested_fields = ['parameters']
@@ -50,7 +50,7 @@ class eBPFProgramInstanceResource(BaseResource):
 class eBPFProgramInstanceSelectedResource(BaseResource):
     doc_cls = eBPFProgramInstanceDocument
     doc_name = 'eBPF Program Instance'
-    routes = '/instance/ebpf-program/{id}',
+    routes = '/instance/ebpf-program/{id}'
     schema_cls = eBPFProgramInstanceSchema
     lcp_handler = dict(post=lcp_post, put=lcp_put, delete=lcp_delete)
     nested_fields = ['parameters']
