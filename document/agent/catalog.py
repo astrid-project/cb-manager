@@ -23,6 +23,7 @@ class AgentCatalogActionConfigInnerDoc(InnerDoc):
     """Agent action configuration."""
     cmd = Text(required=True)
     args = Text()
+    daemon = Text()
 
 
 class AgentCatalogActionInnerDoc(InnerDoc):

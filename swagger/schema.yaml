@@ -68,6 +68,10 @@ definitions:
         description: Action command.
         example: service filebeat start
         type: string
+      daemon:
+        description: Key used to execute the command as daemon.
+        example: firewall
+        type: string
     required:
     - cmd
     type: object
@@ -640,7 +644,7 @@ definitions:
     type: object
 info:
   title: Context Broker Manager
-  version: f3885983d026698b0ab5a63a1c84c22e0bc853f6@master
+  version: 66b4b9f56f5a6da83f7eace32c4b03d678660a92@master
 paths:
   /catalog/agent/:
     delete:

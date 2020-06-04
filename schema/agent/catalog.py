@@ -33,6 +33,7 @@ class AgentCatalogActionConfigSchema(Schema):
     """Agent action configuration."""
     cmd = Str(required=True, description='Action command.', example='service filebeat start')
     args = Str(many=True, description='Action command argument', example='-v')
+    daemon = Str(description='Key used to execute the command as daemon.', example='firewall')
 
 
 class AgentCatalogActionSchema(Schema):
