@@ -4,13 +4,37 @@ The execution environment represents the remove service.
 When the service is deployed by the the orchestrator, it is necessary to insert related info to the Context Broker.
 
 - [Execution Environment](#execution-environment)
-  - [Creation](#creation)
+  - [Schema](#schema)
+    - [LCP Schema](#lcp-schema)
+  - [Create](#create)
   - [Read](#read)
   - [Update](#update)
   - [Delete](#delete)
-  - [References](#references)
 
-## Creation
+## Schema
+
+Field         | Type   | Required | Readonly | Example
+--------------|--------|----------|----------|--------
+`id`          | String | True     | True     | mysql-server
+`description` | Text   | False    | False    | Open-source relational database management system (RDBMS).
+`hostname`    | String | True     | False    | 10.0.0.1
+`lcp`         | LCP    | required | False
+`type_id`     | String | True     | False    | vm
+
+### LCP Schema
+
+Field            | Type    | Required | Readonly | Example
+-----------------|---------|----------|----------|--------
+`port`           | Integer | True     | False    | 4000
+`username`       | String  | False    | True     |
+`password`       | String  | False    | True     |
+`cb_password`    | String  | False    | True     |
+`cb_expiration`  | Date    | False    | True     |
+`last_heartbeat` | Date    | False    | True     |
+
+It is not possible to update readonly fields.
+
+## Create
 
 To create a new Execution Environment use the following REST call:
 
@@ -20,7 +44,8 @@ with the request body (in JSON format):
 
 ```json
 {
-    id: "{name-service}",
+    "id": "{name-service}",
+    "description": "{human-readable-description}",
     "type_id": "{id-exec-env-type}",
     "hostname":"{ip-address}",
     "lcp": {
@@ -30,7 +55,8 @@ with the request body (in JSON format):
 ```
 
 Replace the data with the correct values, for example `name-service` with `apache`.
-The `type_id` should be one of those stored in `exec-env-type` index.
+The `id` is auto generated if missing in the request body.
+The `type_id` should be one of those stored in [`exec-env-type`](exec-env-type.md) index.
 It is possible to add additional data specific for this execution environment.
 
 If the creation is correctly executed the response is:
@@ -42,6 +68,7 @@ If the creation is correctly executed the response is:
         "description": "Execution Environment with the given [id] correctly created.",
         "data": {
             "id": "{name-service}",
+            "description": "{human-readable-description}",
             "type_id": "{id-exec-env-type}",
             "hostname": "{ip-address}",
             "lcp": {
@@ -69,7 +96,7 @@ Otherwise, if, for example, an execution environment with the given id is alread
 ]
 ```
 
-If some data is missing (for example hostname), the response could be:
+If some data is missing (for example `hostname`), the response could be:
 
 ```json
 [
@@ -80,6 +107,7 @@ If some data is missing (for example hostname), the response could be:
         "exception": "{'hostname': [ValidationException('Value required for this field.')]}",
         "data": {
             "id": "{name-service}",
+            "description": "{human-readable-description}",
             "type_id": "{id-exec-env-type}",
             "lcp": {
                 "port": 4001
@@ -139,7 +167,7 @@ A possible response is:
         "description": "Execution Environment with the given [id] correctly updated.",
         "data": {
             "id": "{name-service}",
-            "hostname": "{new-ip-address}"
+            "hostname": "{ip-address}"
         },
         "http_status_code": 200
     }
@@ -161,9 +189,6 @@ Instead, if the are not changes the response is:
     }
 ]
 ```
-
-
-The execution-environment model has not readonly fields[^1].
 
 ## Delete
 
@@ -192,12 +217,13 @@ This is a possible response:
         "status": "deleted",
         "description": "Execution Environment with the given [id] correctly deleted.",
         "data": {
+            "id": "{name-service}",
+            "description": "{human-readable-description}",
             "type_id": "{id-exec-env-type}",
             "hostname": "{ip-address}",
             "lcp": {
                 "port": {lcp-port}
             },
-            "id": "{name-service}"
         },
         "http_status_code": 200
     }
@@ -205,7 +231,3 @@ This is a possible response:
 ```
 
 NOTE: Without request body, it removes **all** the execution environments.
-
-## References
-
-[^1] It is not possible to update readonly fields.
