@@ -1,3 +1,16 @@
+from toolz import valmap
+
+
+def format(elements, data):
+    def frmt(val):
+        return val.format(**data)
+
+    def element_map(element):
+        return valmap(frmt, element)
+
+    return list(map(element_map, wrap(elements)))
+
+
 def subset(elements, *keys, negation=False):
     def match(element):
         if negation:

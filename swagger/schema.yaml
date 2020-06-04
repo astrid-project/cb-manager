@@ -640,13 +640,17 @@ definitions:
     type: object
 info:
   title: Context Broker Manager
-  version: 74380d53bc07b788a5d2d59a40216dc482c5cb7c@master
+  version: f3885983d026698b0ab5a63a1c84c22e0bc853f6@master
 paths:
   /catalog/agent/:
     delete:
-      description: Delete agents filtered by the query in the request body from the
-        catalog.
+      description: Delete the agent with the given `id` and filtered by the query
+        in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -654,8 +658,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Agents filtered by the query in the request body deleted from
-            the catalog.
+          description: Agent with the given `id` and filtered by the query in the
+            request body deleted from the catalog.
           schema:
             items:
               oneOf:
@@ -670,13 +674,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Agent Delete (Multiple)
+      summary: Agent Delete (Single)
       tags:
       - agent-catalog
     get:
-      description: Get the list of agents in the catalog filtered by the query in
-        the request body.
+      description: Get the agent in the catalog with the given `id` and filtered by
+        the query in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -684,8 +692,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: List of agents in the catalog filtered by the query in the
-            request body.
+          description: Agent in the catalog with the given `id` and filtered by the
+            query in the request body.
           schema:
             items:
               $ref: '#/definitions/AgentCatalog'
@@ -698,12 +706,16 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Agent Read (Multiple)
+      summary: Agent Read (Single)
       tags:
       - agent-catalog
     post:
-      description: Add new agents to the catalog
+      description: Add a new agent in the catalog with the given `id`.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -713,7 +725,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Agents inserted in the catalog.
+          description: Add a new agent in the catalog with the given `id`.
           schema:
             items:
               oneOf:
@@ -728,12 +740,16 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Agent Creation (Multiple)
+      summary: Agent Creation (Single)
       tags:
       - agent-catalog
     put:
-      description: Update agents in the catalog.
+      description: Update the agent in the catalog with the given `id`
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -743,7 +759,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Agents updated in the catalog.
+          description: Agent with the given `id` updated in the catalog.
           schema:
             items:
               oneOf:
@@ -754,10 +770,10 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Agent Update (Multiple)
+      summary: Agent Update (Single)
       tags:
       - agent-catalog
-  /catalog/{id}:
+  /catalog/agent/{id}:
     delete:
       description: Delete the agent with the given `id` and filtered by the query
         in the request body.
@@ -890,9 +906,13 @@ paths:
       - agent-catalog
   /instance/agent/:
     delete:
-      description: Remove the agent instances filtered by the query in the request
-        body from the execution-environments.
+      description: Remove the agent instance with the given `id` and filtered by the
+        query in the request body from the execution-environments.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -900,7 +920,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Agent instances filtered by the query in the request body uninstalled.
+          description: Agent instance with the given `id` and filtered by the query
+            in the request body deleted.
           schema:
             items:
               oneOf:
@@ -915,13 +936,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Agent Instance Deletetion (Multiple)
+      summary: Agent Instance Deletion (Single)
       tags:
       - agent-instance
     get:
-      description: Get the list of agent instances installed in the execution-environments
+      description: Get the agent instance with the given `id` installed in the execution-environments
         filtered by the query in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -929,7 +954,7 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: List of agent instances installed in the execution-environment
+          description: Agent instance with the given `id` installed in the execution-environment
             filtered by the query in the request body.
           schema:
             items:
@@ -943,12 +968,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Agent Instance Read (Multiple)
+      summary: Agent Instance Read (Single)
       tags:
       - agent-instance
     post:
-      description: Create new agent instances in the execution-environments.
+      description: Install a new agent instance in the execution-environments with
+        the given `id` .
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -958,7 +988,8 @@ paths:
           type: array
       responses:
         '200':
-          description: Agent instances installed in the execution environments.
+          description: Install a new agent instance in the execution-environments
+            with the given `id` .
           schema:
             items:
               oneOf:
@@ -973,12 +1004,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Agent Instance Creation (Multiple)
+      summary: Agent Instance Creation (Single)
       tags:
       - agent-instance
     put:
-      description: Update the agent instances in the execution-environments.
+      description: Update the agent instance in the execution-environments with the
+        given `id` .
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -988,7 +1024,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Agent instances updated.
+          description: Agent instance with the given `id` updated.
           schema:
             items:
               oneOf:
@@ -999,7 +1035,7 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Agent Instance Update (Multiple)
+      summary: Agent Instance Update (Single)
       tags:
       - agent-instance
   /instance/agent/{id}:
@@ -1138,9 +1174,13 @@ paths:
       - agent-instance
   /connection/:
     delete:
-      description: Delete the connections between execution environments and network
-        links filtered by the query in the request body.
+      description: Delete the connection between execution environments and network
+        links with the given `id` and filtered by the query in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1148,8 +1188,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Connections between execution environments and network links
-            filtered by the query in the request body deleted.
+          description: Connection between execution environments and network links
+            with the given `id` filtered by the query in the request body deleted.
           schema:
             items:
               oneOf:
@@ -1164,13 +1204,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Connection Delete (Multiple)
+      summary: Connection Delete (Single)
       tags:
       - connection
     get:
-      description: Get the list of connections between execution environments and
-        network links filtered by the query in the request body.
+      description: Get the connection between execution environments with the given
+        `id` and network links filtered by the query in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1178,8 +1222,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: List of connections between execution environments and network
-            links filtered by the query in the request body.
+          description: Connection between execution environments and network links
+            with the given `id` and filtered by the query in the request body.
           schema:
             items:
               $ref: '#/definitions/Connection'
@@ -1192,13 +1236,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Connection Read (Multiple)
+      summary: Connection Read (Single)
       tags:
       - connection
     put:
-      description: Install new connections between execution environments and network
-        links.
+      description: Update the connection between execution environments and network
+        links with the given `id`
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1208,8 +1256,8 @@ paths:
           type: array
       responses:
         '200':
-          description: Connections created between execution environments and network
-            links.
+          description: Connection between execution environments and network links
+            with the given `id` updated.
           schema:
             items:
               oneOf:
@@ -1220,7 +1268,7 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Connection Creation (Multiple)
+      summary: Connection Update (Single)
       tags:
       - connection
   /connection/{id}:
@@ -1360,8 +1408,13 @@ paths:
       - connection
   /data/:
     delete:
-      description: Delete data filtered by the query in the request body.
+      description: Delete data with the given `id` and filtered by the query in the
+        request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1369,7 +1422,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Data filtered by the query in the request body deleted.
+          description: Data with the given `id` and filtered by the query in the request
+            body deleted.
           schema:
             items:
               oneOf:
@@ -1384,12 +1438,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Data Delete (Multiple)
+      summary: Data Delete (Single)
       tags:
       - data
     get:
-      description: Get the list of data filtered by the query in the request body.
+      description: Get the data with the given `id` and filtered by the query in the
+        request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1397,7 +1456,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: List of data filtered by the query in the request body.
+          description: Data with the given `id` and filtered by the query in the request
+            body.
           schema:
             items:
               $ref: '#/definitions/Data'
@@ -1410,12 +1470,16 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Data Read (Multiple)
+      summary: Data Read (Single)
       tags:
       - data
     post:
-      description: Insert new data.
+      description: Insert new data with the given `id`.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1425,7 +1489,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Data inserted.
+          description: Insert new data with the given `id`.
           schema:
             items:
               oneOf:
@@ -1440,12 +1504,16 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Data Insert (Multiple)
+      summary: Data Insert (Single)
       tags:
       - data
     put:
-      description: Update data.
+      description: Update data with the given `id`.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1455,7 +1523,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Data updated.
+          description: Data with the given `id` updated.
           schema:
             items:
               oneOf:
@@ -1466,7 +1534,7 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Data Update (Multiple)
+      summary: Data Update (Single)
       tags:
       - data
   /data/{id}:
@@ -1602,9 +1670,13 @@ paths:
       - data
   /catalog/ebpf-program/:
     delete:
-      description: Delete eBPF Programs filtered by the query in the request body
-        from the catalog.
+      description: Delete the eBPF program with the given `id` and filtered by the
+        query in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1612,8 +1684,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: eBPF programs filtered by the query in the request body deleted
-            from the catalog.
+          description: eBPF Program with the given `id` and filtered by the query
+            in the request body deleted from the catalog.
           schema:
             items:
               oneOf:
@@ -1628,13 +1700,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: eBPF Program Delete (Multiple)
+      summary: eBPF Program Delete (Single)
       tags:
       - ebpf-program-catalog
     get:
-      description: Get the list of eBPF programs in the catalog filtered by the query
-        in the request body.
+      description: Get the eBPF program in the catalog with the given `id` and filtered
+        by the query in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1642,8 +1718,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: List of eBPF programs in the catalog filtered by the query
-            in the request body.
+          description: eBPF Program in the catalog with the given `id` and filtered
+            by the query in the request body.
           schema:
             items:
               $ref: '#/definitions/eBPFProgramCatalog'
@@ -1656,12 +1732,16 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: eBPF Program Read (Multiple)
+      summary: eBPF Program Read (Single)
       tags:
       - ebpf-program-catalog
     post:
-      description: Add new eBPF programs to the catalog
+      description: Add a new eBPF program in the catalog with the given `id`.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1671,7 +1751,7 @@ paths:
           type: array
       responses:
         '200':
-          description: eBPF programs inserted in the catalog.
+          description: Add a new eBPF program in the catalog with the given `id`.
           schema:
             items:
               oneOf:
@@ -1686,12 +1766,16 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: eBPF Program Creation (Multiple)
+      summary: eBPF Program Creation (Single)
       tags:
       - ebpf-program-catalog
     put:
-      description: Update eBPF programs in the catalog.
+      description: Update the eBPF program in the catalog with the given `id`
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1701,7 +1785,7 @@ paths:
           type: array
       responses:
         '200':
-          description: eBPF programs updated in the catalog.
+          description: eBPF Program with the given `id` updated in the catalog.
           schema:
             items:
               oneOf:
@@ -1712,7 +1796,7 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: eBPF Program Update (Multiple)
+      summary: eBPF Program Update (Single)
       tags:
       - ebpf-program-catalog
   /catalog/ebpf-program/{id}:
@@ -1848,9 +1932,13 @@ paths:
       - ebpf-program-catalog
   /instance/ebpf-program/:
     delete:
-      description: Remove the eBPF program instances filtered by the query in the
-        request body from the execution-environments.
+      description: Remove the eBPF Program instance with the given `id` and filtered
+        by the query in the request body from the execution-environments.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1858,7 +1946,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: eBPF programs filtered by the query in the request body uninstalled.
+          description: eBPF program instance with the given `id` and filtered by the
+            query in the request body deleted.
           schema:
             items:
               oneOf:
@@ -1873,13 +1962,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: eBPF Program Uninstall (Multiple)
+      summary: eBPF Program Instance Deletion (Single)
       tags:
       - ebpf-program-instance
     get:
-      description: Get the list of eBPF program instances installed in the execution-environments
-        filtered by the query in the request body.
+      description: Get the eBPF Program instance with the given `id` installed in
+        the execution-environments filtered by the query in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1887,8 +1980,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: List of eBPF program instances installed in the execution-environment
-            filtered by the query in the request body.
+          description: eBPF program instance with the given `id` installed in the
+            execution-environment filtered by the query in the request body.
           schema:
             items:
               $ref: '#/definitions/eBPFProgramInstance'
@@ -1901,12 +1994,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: eBPF Program Read (Multiple)
+      summary: eBPF Program Instance Read (Single)
       tags:
       - ebpf-program-instance
     post:
-      description: Install new eBPF program instances in the execution-environments.
+      description: Install a new eBPF Program instance in the execution-environments
+        with the given `id` .
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1916,7 +2014,8 @@ paths:
           type: array
       responses:
         '200':
-          description: eBPF program installed in the execution environments.
+          description: Install a new eBPF Program instance in the execution-environments
+            with the given `id` .
           schema:
             items:
               oneOf:
@@ -1931,12 +2030,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: eBPF Program Install (Multiple)
+      summary: eBPF Program Instance Creation (Single)
       tags:
       - ebpf-program-instance
     put:
-      description: Update the eBPF program instances in the execution-environments.
+      description: Update the eBPF Program instance in the execution-environments
+        with the given `id` .
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -1946,7 +2050,7 @@ paths:
           type: array
       responses:
         '200':
-          description: eBPF programs updated.
+          description: eBPF Program instance with the given `id` updated.
           schema:
             items:
               oneOf:
@@ -1957,7 +2061,7 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: eBPF Program Update (Multiple)
+      summary: eBPF Program Instance Update (Single)
       tags:
       - ebpf-program-instance
   /instance/ebpf-program/{id}:
@@ -2096,9 +2200,13 @@ paths:
       - ebpf-program-instance
   /exec-env/:
     delete:
-      description: Delete execution environments filtered by the query in the request
-        body.
+      description: Delete the execution environment with the given `id` and filtered
+        by the query in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -2106,8 +2214,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Execution environments filtered by the query in the request
-            body deleted.
+          description: Execution environment with the given `id` and filtered by the
+            query in the request body deleted.
           schema:
             items:
               oneOf:
@@ -2122,13 +2230,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Execution Environment Delete (Multiple)
+      summary: Execution Environment Delete (Single)
       tags:
       - exec-env
     get:
-      description: Get the list of execution environments filtered by the query in
-        the request body.
+      description: Get the execution environment with the given `id` and filtered
+        by the query in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -2136,8 +2248,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: List of execution environments filtered by the query in the
-            request body.
+          description: Execution environment with the given `id` and filtered by the
+            query in the request body.
           schema:
             items:
               $ref: '#/definitions/ExecEnv'
@@ -2150,12 +2262,16 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Execution Environment Read (Multiple)
+      summary: Execution Environment Read (Single)
       tags:
       - exec-env
     post:
-      description: Create new execution environments.
+      description: Create a new execution environment with the given `id`.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -2165,7 +2281,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Execution environments created.
+          description: Create a new execution environment with the given `id`.
           schema:
             items:
               oneOf:
@@ -2180,12 +2296,16 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Execution Environment Creation (Multiple)
+      summary: Execution Environment Creation (Single)
       tags:
       - exec-env
     put:
-      description: Update execution environments.
+      description: Update the execution environment with the given `id`.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -2195,7 +2315,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Execution environments updated.
+          description: Execution environment with the given `id` updated.
           schema:
             items:
               oneOf:
@@ -2206,7 +2326,7 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Execution Environment Update (Multiple)
+      summary: Execution Environment Update (Single)
       tags:
       - exec-env
   /exec-env/{id}:
@@ -2342,9 +2462,13 @@ paths:
       - exec-env
   /type/exec-env/:
     delete:
-      description: Delete execution environment types filtered by the query in the
-        request body.
+      description: Delete the execution environment type with the given `id` and filtered
+        by the query in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -2352,8 +2476,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Execution environment types filtered by the query in the request
-            body deleted.
+          description: Execution environment type with the given `id` and filtered
+            by the query in the request body deleted.
           schema:
             items:
               oneOf:
@@ -2368,13 +2492,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Execution Environment Type Delete (Multiple)
+      summary: Execution Environment Type Delete (Single)
       tags:
       - exec-env-type
     get:
-      description: Get the list of execution environment types filtered by the query
-        in the request body.
+      description: Get the execution environment type with the given `id` and filtered
+        by the query in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -2382,8 +2510,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: List of execution environment types filtered by the query in
-            the request body.
+          description: Execution environment type with the given `id` and filtered
+            by the query in the request body.
           schema:
             items:
               $ref: '#/definitions/ExecEnvType'
@@ -2396,12 +2524,16 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Execution Environment Type Read (Multiple)
+      summary: Execution Environment Type Read (Single)
       tags:
       - exec-env-type
     post:
-      description: Create new execution environment types.
+      description: Create new execution environment type with the given `id`.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -2411,7 +2543,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Execution environment types created.
+          description: Create new execution environment type with the given `id`.
           schema:
             items:
               oneOf:
@@ -2426,12 +2558,16 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Execution Environment Type Creation (Multiple)
+      summary: Execution Environment Type Creation (Single)
       tags:
       - exec-env-type
     put:
-      description: Update execution environment types.
+      description: Update the execution environment type with the given `id`.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -2441,7 +2577,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Execution environment types updated.
+          description: Execution environment type with the given `id` updated.
           schema:
             items:
               oneOf:
@@ -2452,7 +2588,7 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Execution Environment Type Update (Multiple)
+      summary: Execution Environment Type Update (Single)
       tags:
       - exec-env-type
   /exec-env-type/{id}:
@@ -2588,8 +2724,13 @@ paths:
       - exec-env-type
   /network-link/:
     delete:
-      description: Delete network links filtered by the query in the request body.
+      description: Delete the network link with the given `id` and filtered by the
+        query in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -2597,7 +2738,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: Network links filtered by the query in the request body deleted.
+          description: Network link with the given `id` and filtered by the query
+            in the request body deleted.
           schema:
             items:
               oneOf:
@@ -2612,13 +2754,17 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Network Link Delete (Multiple)
+      summary: Network Link Delete (Single)
       tags:
       - network-link
     get:
-      description: Get the list of network links filtered by the query in the request
-        body.
+      description: Get the network link with the given `id` and filtered by the query
+        in the request body.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -2626,8 +2772,8 @@ paths:
           $ref: '#/definitions/QueryRequest'
       responses:
         '200':
-          description: List of network links filtered by the query in the request
-            body.
+          description: Network link with the given `id` and filtered by the query
+            in the request body.
           schema:
             items:
               $ref: '#/definitions/NetworkLink'
@@ -2640,12 +2786,16 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Network Link Read (Multiple)
+      summary: Network Link Read (Single)
       tags:
       - network-link
     post:
-      description: Create new network links.
+      description: Create a new network link with the given `id` .
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -2655,7 +2805,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Network links created.
+          description: Create a new network link with the given `id` .
           schema:
             items:
               oneOf:
@@ -2670,12 +2820,16 @@ paths:
           description: Unauthorized.
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Network Link Creation (Multiple)
+      summary: Network Link Creation (Single)
       tags:
       - network-link
     put:
-      description: Update network links.
+      description: Update the network link with the given `id`.
       parameters:
+      - in: path
+        name: id
+        required: true
+        type: String
       - in: body
         name: payload
         required: true
@@ -2685,7 +2839,7 @@ paths:
           type: array
       responses:
         '200':
-          description: Network links updated.
+          description: Network link with the given `id` updated.
           schema:
             items:
               oneOf:
@@ -2696,7 +2850,7 @@ paths:
           description: Unauthorized
           schema:
             $ref: '#/definitions/HTTPError'
-      summary: Network Link Update (Multiple)
+      summary: Network Link Update (Single)
       tags:
       - network-link
   /network-link/{id}:

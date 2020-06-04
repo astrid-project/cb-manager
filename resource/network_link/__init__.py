@@ -33,8 +33,5 @@ class NetworkLinkResource(BaseResource):
 @docstring(method='put', sum='Network Link Update (Single)',
            desc='Update the network link with the given `id`.',
            resp='Network link with the given `id` updated.')
-class NetworkLinkSelectedResource(BaseResource):
-    doc_cls = NetworkLinkDocument
-    doc_name = 'Network Link'
+class NetworkLinkSelectedResource(NetworkLinkResource):
     routes = '/network-link/{id}'
-    schema_cls = NetworkLinkSchema

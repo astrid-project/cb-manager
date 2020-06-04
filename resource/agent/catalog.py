@@ -33,8 +33,5 @@ class AgentCatalogResource(BaseResource):
 @docstring(method='put', sum='Agent Update (Single)',
            desc='Update the agent in the catalog with the given `id`',
            resp='Agent with the given `id` updated in the catalog.')
-class AgentCatalogSelectedResource(BaseResource):
-    doc_cls = AgentCatalogDocument
-    doc_name = 'Agent Catalog'
-    routes = '/catalog/{id}'
-    schema_cls = AgentCatalogSchema
+class AgentCatalogSelectedResource(AgentCatalogResource):
+    routes = '/catalog/agent/{id}'

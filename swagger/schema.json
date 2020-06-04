@@ -90,9 +90,15 @@
   "paths": {
     "/catalog/agent/": {
       "delete": {
-        "summary": "Agent Delete (Multiple)",
-        "description": "Delete agents filtered by the query in the request body from the catalog.",
+        "summary": "Agent Delete (Single)",
+        "description": "Delete the agent with the given `id` and filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -107,7 +113,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agents filtered by the query in the request body deleted from the catalog.",
+            "description": "Agent with the given `id` and filtered by the query in the request body deleted from the catalog.",
             "schema": {
               "type": "array",
               "items": {
@@ -133,9 +139,15 @@
         }
       },
       "get": {
-        "summary": "Agent Read (Multiple)",
-        "description": "Get the list of agents in the catalog filtered by the query in the request body.",
+        "summary": "Agent Read (Single)",
+        "description": "Get the agent in the catalog with the given `id` and filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -150,7 +162,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of agents in the catalog filtered by the query in the request body.",
+            "description": "Agent in the catalog with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -173,9 +185,15 @@
         }
       },
       "post": {
-        "summary": "Agent Creation (Multiple)",
-        "description": "Add new agents to the catalog",
+        "summary": "Agent Creation (Single)",
+        "description": "Add a new agent in the catalog with the given `id`.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -193,7 +211,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agents inserted in the catalog.",
+            "description": "Add a new agent in the catalog with the given `id`.",
             "schema": {
               "type": "array",
               "items": {
@@ -219,9 +237,15 @@
         }
       },
       "put": {
-        "summary": "Agent Update (Multiple)",
-        "description": "Update agents in the catalog.",
+        "summary": "Agent Update (Single)",
+        "description": "Update the agent in the catalog with the given `id`",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -239,7 +263,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agents updated in the catalog.",
+            "description": "Agent with the given `id` updated in the catalog.",
             "schema": {
               "type": "array",
               "items": {
@@ -259,7 +283,7 @@
         }
       }
     },
-    "/catalog/{id}": {
+    "/catalog/agent/{id}": {
       "delete": {
         "summary": "Agent Delete (Single)",
         "description": "Delete the agent with the given `id` and filtered by the query in the request body.",
@@ -456,9 +480,15 @@
     },
     "/instance/agent/": {
       "delete": {
-        "summary": "Agent Instance Deletetion (Multiple)",
-        "description": "Remove the agent instances filtered by the query in the request body from the execution-environments.",
+        "summary": "Agent Instance Deletion (Single)",
+        "description": "Remove the agent instance with the given `id` and filtered by the query in the request body from the execution-environments.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -473,7 +503,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agent instances filtered by the query in the request body uninstalled.",
+            "description": "Agent instance with the given `id` and filtered by the query in the request body deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -499,9 +529,15 @@
         }
       },
       "get": {
-        "summary": "Agent Instance Read (Multiple)",
-        "description": "Get the list of agent instances installed in the execution-environments filtered by the query in the request body.",
+        "summary": "Agent Instance Read (Single)",
+        "description": "Get the agent instance with the given `id` installed in the execution-environments filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -516,7 +552,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of agent instances installed in the execution-environment filtered by the query in the request body.",
+            "description": "Agent instance with the given `id` installed in the execution-environment filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -539,9 +575,15 @@
         }
       },
       "post": {
-        "summary": "Agent Instance Creation (Multiple)",
-        "description": "Create new agent instances in the execution-environments.",
+        "summary": "Agent Instance Creation (Single)",
+        "description": "Install a new agent instance in the execution-environments with the given `id` .",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -559,7 +601,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agent instances installed in the execution environments.",
+            "description": "Install a new agent instance in the execution-environments with the given `id` .",
             "schema": {
               "type": "array",
               "items": {
@@ -585,9 +627,15 @@
         }
       },
       "put": {
-        "summary": "Agent Instance Update (Multiple)",
-        "description": "Update the agent instances in the execution-environments.",
+        "summary": "Agent Instance Update (Single)",
+        "description": "Update the agent instance in the execution-environments with the given `id` .",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -605,7 +653,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agent instances updated.",
+            "description": "Agent instance with the given `id` updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -822,9 +870,15 @@
     },
     "/connection/": {
       "delete": {
-        "summary": "Connection Delete (Multiple)",
-        "description": "Delete the connections between execution environments and network links filtered by the query in the request body.",
+        "summary": "Connection Delete (Single)",
+        "description": "Delete the connection between execution environments and network links with the given `id` and filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -839,7 +893,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Connections between execution environments and network links filtered by the query in the request body deleted.",
+            "description": "Connection between execution environments and network links with the given `id` filtered by the query in the request body deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -865,9 +919,15 @@
         }
       },
       "get": {
-        "summary": "Connection Read (Multiple)",
-        "description": "Get the list of connections between execution environments and network links filtered by the query in the request body.",
+        "summary": "Connection Read (Single)",
+        "description": "Get the connection between execution environments with the given `id` and network links filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -882,7 +942,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of connections between execution environments and network links filtered by the query in the request body.",
+            "description": "Connection between execution environments and network links with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -905,9 +965,15 @@
         }
       },
       "put": {
-        "summary": "Connection Creation (Multiple)",
-        "description": "Install new connections between execution environments and network links.",
+        "summary": "Connection Update (Single)",
+        "description": "Update the connection between execution environments and network links with the given `id`",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -925,7 +991,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Connections created between execution environments and network links.",
+            "description": "Connection between execution environments and network links with the given `id` updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -1142,9 +1208,15 @@
     },
     "/data/": {
       "delete": {
-        "summary": "Data Delete (Multiple)",
-        "description": "Delete data filtered by the query in the request body.",
+        "summary": "Data Delete (Single)",
+        "description": "Delete data with the given `id` and filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -1159,7 +1231,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Data filtered by the query in the request body deleted.",
+            "description": "Data with the given `id` and filtered by the query in the request body deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -1185,9 +1257,15 @@
         }
       },
       "get": {
-        "summary": "Data Read (Multiple)",
-        "description": "Get the list of data filtered by the query in the request body.",
+        "summary": "Data Read (Single)",
+        "description": "Get the data with the given `id` and filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -1202,7 +1280,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of data filtered by the query in the request body.",
+            "description": "Data with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -1225,9 +1303,15 @@
         }
       },
       "post": {
-        "summary": "Data Insert (Multiple)",
-        "description": "Insert new data.",
+        "summary": "Data Insert (Single)",
+        "description": "Insert new data with the given `id`.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -1245,7 +1329,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Data inserted.",
+            "description": "Insert new data with the given `id`.",
             "schema": {
               "type": "array",
               "items": {
@@ -1271,9 +1355,15 @@
         }
       },
       "put": {
-        "summary": "Data Update (Multiple)",
-        "description": "Update data.",
+        "summary": "Data Update (Single)",
+        "description": "Update data with the given `id`.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -1291,7 +1381,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Data updated.",
+            "description": "Data with the given `id` updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -1508,9 +1598,15 @@
     },
     "/catalog/ebpf-program/": {
       "delete": {
-        "summary": "eBPF Program Delete (Multiple)",
-        "description": "Delete eBPF Programs filtered by the query in the request body from the catalog.",
+        "summary": "eBPF Program Delete (Single)",
+        "description": "Delete the eBPF program with the given `id` and filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -1525,7 +1621,7 @@
         ],
         "responses": {
           "200": {
-            "description": "eBPF programs filtered by the query in the request body deleted from the catalog.",
+            "description": "eBPF Program with the given `id` and filtered by the query in the request body deleted from the catalog.",
             "schema": {
               "type": "array",
               "items": {
@@ -1551,9 +1647,15 @@
         }
       },
       "get": {
-        "summary": "eBPF Program Read (Multiple)",
-        "description": "Get the list of eBPF programs in the catalog filtered by the query in the request body.",
+        "summary": "eBPF Program Read (Single)",
+        "description": "Get the eBPF program in the catalog with the given `id` and filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -1568,7 +1670,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of eBPF programs in the catalog filtered by the query in the request body.",
+            "description": "eBPF Program in the catalog with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -1591,9 +1693,15 @@
         }
       },
       "post": {
-        "summary": "eBPF Program Creation (Multiple)",
-        "description": "Add new eBPF programs to the catalog",
+        "summary": "eBPF Program Creation (Single)",
+        "description": "Add a new eBPF program in the catalog with the given `id`.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -1611,7 +1719,7 @@
         ],
         "responses": {
           "200": {
-            "description": "eBPF programs inserted in the catalog.",
+            "description": "Add a new eBPF program in the catalog with the given `id`.",
             "schema": {
               "type": "array",
               "items": {
@@ -1637,9 +1745,15 @@
         }
       },
       "put": {
-        "summary": "eBPF Program Update (Multiple)",
-        "description": "Update eBPF programs in the catalog.",
+        "summary": "eBPF Program Update (Single)",
+        "description": "Update the eBPF program in the catalog with the given `id`",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -1657,7 +1771,7 @@
         ],
         "responses": {
           "200": {
-            "description": "eBPF programs updated in the catalog.",
+            "description": "eBPF Program with the given `id` updated in the catalog.",
             "schema": {
               "type": "array",
               "items": {
@@ -1874,9 +1988,15 @@
     },
     "/instance/ebpf-program/": {
       "delete": {
-        "summary": "eBPF Program Uninstall (Multiple)",
-        "description": "Remove the eBPF program instances filtered by the query in the request body from the execution-environments.",
+        "summary": "eBPF Program Instance Deletion (Single)",
+        "description": "Remove the eBPF Program instance with the given `id` and filtered by the query in the request body from the execution-environments.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -1891,7 +2011,7 @@
         ],
         "responses": {
           "200": {
-            "description": "eBPF programs filtered by the query in the request body uninstalled.",
+            "description": "eBPF program instance with the given `id` and filtered by the query in the request body deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -1917,9 +2037,15 @@
         }
       },
       "get": {
-        "summary": "eBPF Program Read (Multiple)",
-        "description": "Get the list of eBPF program instances installed in the execution-environments filtered by the query in the request body.",
+        "summary": "eBPF Program Instance Read (Single)",
+        "description": "Get the eBPF Program instance with the given `id` installed in the execution-environments filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -1934,7 +2060,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of eBPF program instances installed in the execution-environment filtered by the query in the request body.",
+            "description": "eBPF program instance with the given `id` installed in the execution-environment filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -1957,9 +2083,15 @@
         }
       },
       "post": {
-        "summary": "eBPF Program Install (Multiple)",
-        "description": "Install new eBPF program instances in the execution-environments.",
+        "summary": "eBPF Program Instance Creation (Single)",
+        "description": "Install a new eBPF Program instance in the execution-environments with the given `id` .",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -1977,7 +2109,7 @@
         ],
         "responses": {
           "200": {
-            "description": "eBPF program installed in the execution environments.",
+            "description": "Install a new eBPF Program instance in the execution-environments with the given `id` .",
             "schema": {
               "type": "array",
               "items": {
@@ -2003,9 +2135,15 @@
         }
       },
       "put": {
-        "summary": "eBPF Program Update (Multiple)",
-        "description": "Update the eBPF program instances in the execution-environments.",
+        "summary": "eBPF Program Instance Update (Single)",
+        "description": "Update the eBPF Program instance in the execution-environments with the given `id` .",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -2023,7 +2161,7 @@
         ],
         "responses": {
           "200": {
-            "description": "eBPF programs updated.",
+            "description": "eBPF Program instance with the given `id` updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -2240,9 +2378,15 @@
     },
     "/exec-env/": {
       "delete": {
-        "summary": "Execution Environment Delete (Multiple)",
-        "description": "Delete execution environments filtered by the query in the request body.",
+        "summary": "Execution Environment Delete (Single)",
+        "description": "Delete the execution environment with the given `id` and filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -2257,7 +2401,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environments filtered by the query in the request body deleted.",
+            "description": "Execution environment with the given `id` and filtered by the query in the request body deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -2283,9 +2427,15 @@
         }
       },
       "get": {
-        "summary": "Execution Environment Read (Multiple)",
-        "description": "Get the list of execution environments filtered by the query in the request body.",
+        "summary": "Execution Environment Read (Single)",
+        "description": "Get the execution environment with the given `id` and filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -2300,7 +2450,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of execution environments filtered by the query in the request body.",
+            "description": "Execution environment with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -2323,9 +2473,15 @@
         }
       },
       "post": {
-        "summary": "Execution Environment Creation (Multiple)",
-        "description": "Create new execution environments.",
+        "summary": "Execution Environment Creation (Single)",
+        "description": "Create a new execution environment with the given `id`.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -2343,7 +2499,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environments created.",
+            "description": "Create a new execution environment with the given `id`.",
             "schema": {
               "type": "array",
               "items": {
@@ -2369,9 +2525,15 @@
         }
       },
       "put": {
-        "summary": "Execution Environment Update (Multiple)",
-        "description": "Update execution environments.",
+        "summary": "Execution Environment Update (Single)",
+        "description": "Update the execution environment with the given `id`.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -2389,7 +2551,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environments updated.",
+            "description": "Execution environment with the given `id` updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -2606,9 +2768,15 @@
     },
     "/type/exec-env/": {
       "delete": {
-        "summary": "Execution Environment Type Delete (Multiple)",
-        "description": "Delete execution environment types filtered by the query in the request body.",
+        "summary": "Execution Environment Type Delete (Single)",
+        "description": "Delete the execution environment type with the given `id` and filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -2623,7 +2791,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environment types filtered by the query in the request body deleted.",
+            "description": "Execution environment type with the given `id` and filtered by the query in the request body deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -2649,9 +2817,15 @@
         }
       },
       "get": {
-        "summary": "Execution Environment Type Read (Multiple)",
-        "description": "Get the list of execution environment types filtered by the query in the request body.",
+        "summary": "Execution Environment Type Read (Single)",
+        "description": "Get the execution environment type with the given `id` and filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -2666,7 +2840,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of execution environment types filtered by the query in the request body.",
+            "description": "Execution environment type with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -2689,9 +2863,15 @@
         }
       },
       "post": {
-        "summary": "Execution Environment Type Creation (Multiple)",
-        "description": "Create new execution environment types.",
+        "summary": "Execution Environment Type Creation (Single)",
+        "description": "Create new execution environment type with the given `id`.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -2709,7 +2889,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environment types created.",
+            "description": "Create new execution environment type with the given `id`.",
             "schema": {
               "type": "array",
               "items": {
@@ -2735,9 +2915,15 @@
         }
       },
       "put": {
-        "summary": "Execution Environment Type Update (Multiple)",
-        "description": "Update execution environment types.",
+        "summary": "Execution Environment Type Update (Single)",
+        "description": "Update the execution environment type with the given `id`.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -2755,7 +2941,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environment types updated.",
+            "description": "Execution environment type with the given `id` updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -2972,9 +3158,15 @@
     },
     "/network-link/": {
       "delete": {
-        "summary": "Network Link Delete (Multiple)",
-        "description": "Delete network links filtered by the query in the request body.",
+        "summary": "Network Link Delete (Single)",
+        "description": "Delete the network link with the given `id` and filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -2989,7 +3181,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Network links filtered by the query in the request body deleted.",
+            "description": "Network link with the given `id` and filtered by the query in the request body deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -3015,9 +3207,15 @@
         }
       },
       "get": {
-        "summary": "Network Link Read (Multiple)",
-        "description": "Get the list of network links filtered by the query in the request body.",
+        "summary": "Network Link Read (Single)",
+        "description": "Get the network link with the given `id` and filtered by the query in the request body.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "in": "body",
             "required": true,
@@ -3032,7 +3230,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of network links filtered by the query in the request body.",
+            "description": "Network link with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -3055,9 +3253,15 @@
         }
       },
       "post": {
-        "summary": "Network Link Creation (Multiple)",
-        "description": "Create new network links.",
+        "summary": "Network Link Creation (Single)",
+        "description": "Create a new network link with the given `id` .",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -3075,7 +3279,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Network links created.",
+            "description": "Create a new network link with the given `id` .",
             "schema": {
               "type": "array",
               "items": {
@@ -3101,9 +3305,15 @@
         }
       },
       "put": {
-        "summary": "Network Link Update (Multiple)",
-        "description": "Update network links.",
+        "summary": "Network Link Update (Single)",
+        "description": "Update the network link with the given `id`.",
         "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
           {
             "name": "payload",
             "required": true,
@@ -3121,7 +3331,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Network links updated.",
+            "description": "Network link with the given `id` updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -3705,10 +3915,27 @@
   },
   "info": {
     "title": "Context Broker Manager",
-    "version": "74380d53bc07b788a5d2d59a40216dc482c5cb7c@master"
+    "version": "f3885983d026698b0ab5a63a1c84c22e0bc853f6@master"
   },
   "swagger": "2.0",
   "definitions": {
+    "QueryRequestLimit": {
+      "type": "object",
+      "properties": {
+        "to": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "Ended index of the items to return."
+        },
+        "from": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Started index of the items to return."
+        }
+      }
+    },
     "QueryRequestFilter": {
       "type": "object",
       "properties": {
@@ -3731,8 +3958,8 @@
     "QueryRequestClause": {
       "type": "object",
       "properties": {
-        "lt": {
-          "description": "The target field must be lower than the expr value.",
+        "equals": {
+          "description": "The target field must be equal to the expr value.",
           "allOf": [
             {
               "$ref": "#/definitions/QueryRequestFilter"
@@ -3747,27 +3974,26 @@
             }
           ]
         },
-        "gt": {
-          "description": "The target field must be greater to the expr value.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/QueryRequestFilter"
-            }
-          ]
-        },
-        "reg_exp": {
-          "description": "The target field must be satisfy the regular expression in expr.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/QueryRequestFilter"
-            }
-          ]
-        },
         "not": {
           "description": "The clause has to be not satisfied.",
           "allOf": [
             {
               "$ref": "#/definitions/QueryRequestClause"
+            }
+          ]
+        },
+        "or": {
+          "description": "At least the clause has to be satisfied.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryRequestClause"
+          }
+        },
+        "gt": {
+          "description": "The target field must be greater to the expr value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestFilter"
             }
           ]
         },
@@ -3778,15 +4004,8 @@
             "$ref": "#/definitions/QueryRequestClause"
           }
         },
-        "or": {
-          "description": "At least the clause has to be satisfied.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QueryRequestClause"
-          }
-        },
-        "equals": {
-          "description": "The target field must be equal to the expr value.",
+        "reg_exp": {
+          "description": "The target field must be satisfy the regular expression in expr.",
           "allOf": [
             {
               "$ref": "#/definitions/QueryRequestFilter"
@@ -3800,12 +4019,25 @@
               "$ref": "#/definitions/QueryRequestFilter"
             }
           ]
+        },
+        "lt": {
+          "description": "The target field must be lower than the expr value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestFilter"
+            }
+          ]
         }
       }
     },
     "QueryRequestOrder": {
       "type": "object",
       "properties": {
+        "target": {
+          "type": "string",
+          "example": "name",
+          "description": "The field to compare."
+        },
         "mode": {
           "type": "string",
           "enum": [
@@ -3814,11 +4046,6 @@
           ],
           "description": "Order mode.",
           "example": "desc"
-        },
-        "target": {
-          "type": "string",
-          "example": "name",
-          "description": "The field to compare."
         }
       },
       "required": [
@@ -3826,26 +4053,22 @@
         "target"
       ]
     },
-    "QueryRequestLimit": {
-      "type": "object",
-      "properties": {
-        "from": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1,
-          "description": "Started index of the items to return."
-        },
-        "to": {
-          "type": "integer",
-          "format": "int32",
-          "example": 5,
-          "description": "Ended index of the items to return."
-        }
-      }
-    },
     "QueryRequest": {
       "type": "object",
       "properties": {
+        "limit": {
+          "description": "Limit the number of items to return.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/QueryRequestLimit"
+            }
+          ]
+        },
+        "select": {
+          "type": "string",
+          "description": "Fields to return.",
+          "example": "id"
+        },
         "where": {
           "description": "Filter the items based on different conditions.",
           "allOf": [
@@ -3860,19 +4083,6 @@
           "items": {
             "$ref": "#/definitions/QueryRequestOrder"
           }
-        },
-        "select": {
-          "type": "string",
-          "description": "Fields to return.",
-          "example": "id"
-        },
-        "limit": {
-          "description": "Limit the number of items to return.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/QueryRequestLimit"
-            }
-          ]
         }
       }
     },
@@ -3898,15 +4108,15 @@
     "AgentCatalogActionConfig": {
       "type": "object",
       "properties": {
-        "args": {
-          "type": "string",
-          "description": "Action command argument",
-          "example": "-v"
-        },
         "cmd": {
           "type": "string",
           "description": "Action command.",
           "example": "service filebeat start"
+        },
+        "args": {
+          "type": "string",
+          "description": "Action command argument",
+          "example": "-v"
         }
       },
       "required": [
@@ -3916,18 +4126,6 @@
     "AgentCatalogAction": {
       "type": "object",
       "properties": {
-        "config": {
-          "description": "Action config.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentCatalogActionConfig"
-          }
-        },
-        "description": {
-          "type": "string",
-          "description": "Short descripton of the agent actions.",
-          "example": "Start the execution."
-        },
         "status": {
           "type": "string",
           "enum": [
@@ -3937,6 +4135,11 @@
           ],
           "example": "started",
           "description": "Update the status the of the agent-instance if the command is executed correctly."
+        },
+        "description": {
+          "type": "string",
+          "description": "Short descripton of the agent actions.",
+          "example": "Start the execution."
         },
         "id": {
           "type": "string",
@@ -3948,6 +4151,13 @@
           ],
           "description": "Action name",
           "example": "start"
+        },
+        "config": {
+          "description": "Action config.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentCatalogActionConfig"
+          }
         }
       },
       "required": [
@@ -3958,6 +4168,11 @@
     "AgentCatalogParameterConfig": {
       "type": "object",
       "properties": {
+        "source": {
+          "type": "string",
+          "description": "Path of the source parameter file",
+          "example": "/usr/share/filebeat/filebeat.yml"
+        },
         "schema": {
           "type": "string",
           "enum": [
@@ -3967,11 +4182,6 @@
           ],
           "description": "Schema of the parameter file",
           "example": "yaml"
-        },
-        "source": {
-          "type": "string",
-          "description": "Path of the source parameter file",
-          "example": "/usr/share/filebeat/filebeat.yml"
         },
         "path": {
           "type": "string",
@@ -3988,10 +4198,18 @@
     "AgentCatalogParameter": {
       "type": "object",
       "properties": {
-        "example": {
+        "description": {
           "type": "string",
-          "description": "Example of parameter value.",
-          "example": "10s"
+          "example": "Enable the agent.",
+          "description": "Short description of the parameter."
+        },
+        "config": {
+          "description": "Parameter configuration.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AgentCatalogParameterConfig"
+            }
+          ]
         },
         "type": {
           "type": "string",
@@ -4007,34 +4225,26 @@
             "binary"
           ]
         },
-        "list": {
-          "type": "boolean",
-          "description": "Indicate if the parameter can have multiple values.",
-          "example": true
-        },
-        "config": {
-          "description": "Parameter configuration.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/AgentCatalogParameterConfig"
-            }
-          ]
-        },
-        "values": {
-          "type": "string",
-          "example": "mysql",
-          "description": "Possible values if the parameter type is choice."
-        },
         "id": {
           "type": "string",
           "readOnly": true,
           "description": "Parameter id.",
           "example": "log-period"
         },
-        "description": {
+        "values": {
           "type": "string",
-          "example": "Enable the agent.",
-          "description": "Short description of the parameter."
+          "example": "mysql",
+          "description": "Possible values if the parameter type is choice."
+        },
+        "example": {
+          "type": "string",
+          "description": "Example of parameter value.",
+          "example": "10s"
+        },
+        "list": {
+          "type": "boolean",
+          "description": "Indicate if the parameter can have multiple values.",
+          "example": true
         }
       },
       "required": [
@@ -4053,13 +4263,6 @@
             "$ref": "#/definitions/AgentCatalogAction"
           }
         },
-        "parameters": {
-          "description": "Parameter properties.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentCatalogParameter"
-          }
-        },
         "description": {
           "type": "string",
           "description": "Short description of the agent.",
@@ -4070,6 +4273,13 @@
           "readOnly": true,
           "example": "filebeat",
           "description": "Id of the agent in the catalog."
+        },
+        "parameters": {
+          "description": "Parameter properties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentCatalogParameter"
+          }
         }
       },
       "required": [
@@ -4079,16 +4289,16 @@
     "AgentInstanceParameter": {
       "type": "object",
       "properties": {
-        "value": {
-          "type": "string",
-          "description": "Paremeter value.",
-          "example": "10s"
-        },
         "id": {
           "type": "string",
           "readOnly": true,
           "description": "Parameter id.",
           "example": "period"
+        },
+        "value": {
+          "type": "string",
+          "description": "Paremeter value.",
+          "example": "10s"
         }
       },
       "required": [
@@ -4099,15 +4309,26 @@
     "AgentInstance": {
       "type": "object",
       "properties": {
-        "agent_catalog_id": {
+        "description": {
           "type": "string",
-          "example": "filebeat",
-          "description": "Id of the agent in the catalog."
+          "description": "Short description of the agent installed in the execution environment.",
+          "example": "Collect system metrics from execution environments."
         },
         "exec_env_id": {
           "type": "string",
           "example": "apache",
           "description": "Id of the execution environment where the agent instance is installed."
+        },
+        "agent_catalog_id": {
+          "type": "string",
+          "example": "filebeat",
+          "description": "Id of the agent in the catalog."
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "example": "filebeat@apache",
+          "description": "Id of the agent instance installed in an execution environment."
         },
         "status": {
           "type": "string",
@@ -4119,23 +4340,12 @@
             "unknown"
           ]
         },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "example": "filebeat@apache",
-          "description": "Id of the agent instance installed in an execution environment."
-        },
         "parameters": {
           "description": "List of agent instance parameters.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AgentInstanceParameter"
           }
-        },
-        "description": {
-          "type": "string",
-          "description": "Short description of the agent installed in the execution environment.",
-          "example": "Collect system metrics from execution environments."
         }
       },
       "required": [
@@ -4148,26 +4358,26 @@
     "Connection": {
       "type": "object",
       "properties": {
-        "network_link_id": {
+        "description": {
           "type": "string",
-          "example": "net-link-1",
-          "description": "Id of the connected network link."
+          "description": "Short description of the connection.",
+          "example": "Added to this network for debug purposes."
         },
         "exec_env_id": {
           "type": "string",
           "description": "Id of the connected execution environment.",
           "example": "apache"
         },
-        "description": {
-          "type": "string",
-          "description": "Short description of the connection.",
-          "example": "Added to this network for debug purposes."
-        },
         "id": {
           "type": "string",
           "readOnly": true,
           "example": "conn-1",
           "description": "Id of connection."
+        },
+        "network_link_id": {
+          "type": "string",
+          "example": "net-link-1",
+          "description": "Id of the connected network link."
         }
       },
       "required": [
@@ -4179,33 +4389,33 @@
     "Data": {
       "type": "object",
       "properties": {
-        "timestamp_agent": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp when the agent instance collected the data",
-          "example": "2019_02_14 15:23:30"
-        },
-        "ebpf_program_instance_id": {
-          "type": "string",
-          "description": "Id of the eBPF program instance in the execution\n                                                  environment that collected the data",
-          "example": "packet-capture@apache"
-        },
-        "agent_instance_id": {
-          "type": "string",
-          "description": "Id of the agent instance in the execution environment\n                                              that collected the data",
-          "example": "filebeat@apache"
-        },
         "timestamp_event": {
           "type": "string",
           "format": "date-time",
           "description": "Timestamp of the event related to the collected data",
           "example": "2019_02_14 15:23:30"
         },
+        "agent_instance_id": {
+          "type": "string",
+          "description": "Id of the agent instance in the execution environment\n                                              that collected the data",
+          "example": "filebeat@apache"
+        },
+        "ebpf_program_instance_id": {
+          "type": "string",
+          "description": "Id of the eBPF program instance in the execution\n                                                  environment that collected the data",
+          "example": "packet-capture@apache"
+        },
         "id": {
           "type": "string",
           "readOnly": true,
           "description": "Id of the data.",
           "example": "BXrHRn5RPU55Qh9JwMZn"
+        },
+        "timestamp_agent": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the agent instance collected the data",
+          "example": "2019_02_14 15:23:30"
         }
       },
       "required": [
@@ -4215,10 +4425,10 @@
     "eBPFProgramParameterCatalog": {
       "type": "object",
       "properties": {
-        "example": {
+        "description": {
           "type": "string",
-          "description": "Example of parameter value.",
-          "example": "eno0"
+          "description": "Short description of the parameter.",
+          "example": "Network Interface to attach."
         },
         "type": {
           "type": "string",
@@ -4234,10 +4444,11 @@
             "binary"
           ]
         },
-        "list": {
-          "type": "boolean",
-          "description": "Indicate if the parameter can have multiple values.",
-          "example": true
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Parameter id.",
+          "example": "interface"
         },
         "values": {
           "type": "array",
@@ -4250,16 +4461,15 @@
             ]
           }
         },
-        "id": {
+        "example": {
           "type": "string",
-          "readOnly": true,
-          "description": "Parameter id.",
-          "example": "interface"
+          "description": "Example of parameter value.",
+          "example": "eno0"
         },
-        "description": {
-          "type": "string",
-          "description": "Short description of the parameter.",
-          "example": "Network Interface to attach."
+        "list": {
+          "type": "boolean",
+          "description": "Indicate if the parameter can have multiple values.",
+          "example": true
         }
       },
       "required": [
@@ -4270,15 +4480,15 @@
     "eBPFProgramCatalogOpenMetricsMetadataLabel": {
       "type": "object",
       "properties": {
-        "value": {
-          "type": "string",
-          "description": "Label value.",
-          "example": "UDP"
-        },
         "name": {
           "type": "string",
           "description": "Label name.",
           "example": "IP_PROTO"
+        },
+        "value": {
+          "type": "string",
+          "description": "Label value.",
+          "example": "UDP"
         }
       },
       "required": [
@@ -4294,11 +4504,6 @@
           "description": "Metric help.",
           "example": "This metric represents the number of packets that has traveled trough this probe."
         },
-        "type": {
-          "type": "string",
-          "description": "Metric type.",
-          "example": "counter"
-        },
         "labels": {
           "description": "Labels of Open Metrics Metadata.",
           "allOf": [
@@ -4306,6 +4511,11 @@
               "$ref": "#/definitions/eBPFProgramCatalogOpenMetricsMetadataLabel"
             }
           ]
+        },
+        "type": {
+          "type": "string",
+          "description": "Metric type.",
+          "example": "counter"
         }
       },
       "required": [
@@ -4315,6 +4525,11 @@
     "eBPFProgramCatalogMetric": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Metric name.",
+          "example": "packets_total"
+        },
         "map-name": {
           "type": "string",
           "description": "Mapping value in the code.",
@@ -4327,11 +4542,6 @@
               "$ref": "#/definitions/eBPFProgramCatalogOpenMetricsMetadata"
             }
           ]
-        },
-        "name": {
-          "type": "string",
-          "description": "Metric name.",
-          "example": "packets_total"
         }
       },
       "required": [
@@ -4342,16 +4552,16 @@
     "eBPFProgramConfigCatalog": {
       "type": "object",
       "properties": {
+        "code": {
+          "type": "string",
+          "description": "Code the eBPF program."
+        },
         "metrics": {
           "description": "eBPF program metrics.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/eBPFProgramCatalogMetric"
           }
-        },
-        "code": {
-          "type": "string",
-          "description": "Code the eBPF program."
         }
       },
       "required": [
@@ -4361,15 +4571,6 @@
     "eBPFProgramCatalog": {
       "type": "object",
       "properties": {
-        "parameters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/eBPFProgramParameterCatalog"
-          }
-        },
-        "config": {
-          "$ref": "#/definitions/eBPFProgramConfigCatalog"
-        },
         "description": {
           "type": "string",
           "description": "Description of eBPF program.",
@@ -4380,6 +4581,15 @@
           "readOnly": true,
           "description": "Id of the eBPF program in the catalog.",
           "example": "packet-capture"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/eBPFProgramParameterCatalog"
+          }
+        },
+        "config": {
+          "$ref": "#/definitions/eBPFProgramConfigCatalog"
         }
       },
       "required": [
@@ -4390,26 +4600,26 @@
     "eBPFProgramInstance": {
       "type": "object",
       "properties": {
-        "exec_env_id": {
-          "type": "string",
-          "description": "Id of the execution environment where the eBPF program\n                                                    instance is installed",
-          "example": "apache"
-        },
         "ebpf_program_catalog_id": {
           "type": "string",
           "description": "Id of the agent in the catalog.",
           "example": "packet-capture"
         },
-        "description": {
+        "exec_env_id": {
           "type": "string",
-          "description": "Short description of the agent installed in the execution environment.",
-          "example": "Collect system metrics from Apache HTTP Web Server."
+          "description": "Id of the execution environment where the eBPF program\n                                                    instance is installed",
+          "example": "apache"
         },
         "id": {
           "type": "string",
           "readOnly": true,
           "example": "packet-capture@apache",
           "description": "Id of the eBPF program installed in an execution environment."
+        },
+        "description": {
+          "type": "string",
+          "description": "Short description of the agent installed in the execution environment.",
+          "example": "Collect system metrics from Apache HTTP Web Server."
         }
       },
       "required": [
@@ -4421,26 +4631,27 @@
     "LCP": {
       "type": "object",
       "properties": {
-        "port": {
-          "type": "integer",
-          "format": "int32",
-          "description": "TCP port number of LCP in the execution environment.",
-          "example": 5000
-        },
         "last_hearbeat": {
           "type": "string",
           "format": "date-time",
           "description": "Timestamp of the last hearbeat between the LCP and CB.",
           "example": "2019_02_14 15:23:30"
         },
+        "cb_expiration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Datetime until the authentication with the CB is valid.",
+          "example": "2019_02_14 15:23:30"
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "TCP port number of LCP in the execution environment.",
+          "example": 5000
+        },
         "password": {
           "type": "string",
           "description": "Password to connect from the CB to the LCP.",
-          "example": "22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5"
-        },
-        "username": {
-          "type": "string",
-          "description": "Username to connect from the CB to the LCP.",
           "example": "22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5"
         },
         "cb_password": {
@@ -4448,11 +4659,10 @@
           "description": "Hashed password assigned to LCP to connect with the CB.",
           "example": "22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5"
         },
-        "cb_expiration": {
+        "username": {
           "type": "string",
-          "format": "date-time",
-          "description": "Datetime until the authentication with the CB is valid.",
-          "example": "2019_02_14 15:23:30"
+          "description": "Username to connect from the CB to the LCP.",
+          "example": "22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5"
         }
       },
       "required": [
@@ -4462,10 +4672,10 @@
     "ExecEnv": {
       "type": "object",
       "properties": {
-        "type_id": {
+        "description": {
           "type": "string",
-          "example": "vm",
-          "description": "Id of the execution environment type."
+          "description": "Short description of the execution environment,",
+          "example": "Apache HTTP Web Server."
         },
         "id": {
           "type": "string",
@@ -4478,11 +4688,6 @@
           "example": "192.168.1.2",
           "description": "Hostname of the execution environment."
         },
-        "description": {
-          "type": "string",
-          "description": "Short description of the execution environment,",
-          "example": "Apache HTTP Web Server."
-        },
         "lcp": {
           "description": "Data related to the LCP.",
           "allOf": [
@@ -4490,6 +4695,11 @@
               "$ref": "#/definitions/LCP"
             }
           ]
+        },
+        "type_id": {
+          "type": "string",
+          "example": "vm",
+          "description": "Id of the execution environment type."
         }
       },
       "required": [
@@ -4527,15 +4737,15 @@
     "NetworkLink": {
       "type": "object",
       "properties": {
-        "type_id": {
-          "type": "string",
-          "description": "Id of the network link type.",
-          "example": "pnt2pnt"
-        },
         "description": {
           "type": "string",
           "description": "Short description of the network link,",
           "example": "Allow communication between front-end and back-end services."
+        },
+        "type_id": {
+          "type": "string",
+          "description": "Id of the network link type.",
+          "example": "pnt2pnt"
         },
         "id": {
           "type": "string",

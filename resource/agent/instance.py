@@ -28,7 +28,7 @@ class AgentInstanceResource(BaseResource):
     schema_cls = AgentInstanceSchema
     lcp_handler = dict(post=lcp_post, put=lcp_put)
     nested_fields = ['parameters']
-    readonly_fields = ['status']
+    readonly_fields = ['agent_catalog_id', 'exec_env_id', 'status']
     ignore_fields = ['actions']
 
 
@@ -47,12 +47,5 @@ class AgentInstanceResource(BaseResource):
 @docstring(method='put', sum='Agent Instance Update (Single)',
            desc='Update the agent instance in the execution-environments with the given `id` .',
            resp='Agent instance with the given `id` updated.')
-class AgentInstanceSelectedResource(BaseResource):
-    doc_cls = AgentInstanceDocument
-    doc_name = 'Agent Instance'
+class AgentInstanceSelectedResource(AgentInstanceResource):
     routes = '/instance/agent/{id}'
-    schema_cls = AgentInstanceSchema
-    lcp_handler = dict(post=lcp_post, put=lcp_put)
-    nested_fields = ['parameters']
-    readonly_fields = ['status']
-    ignore_fields = ['actions']

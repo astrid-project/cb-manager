@@ -29,6 +29,7 @@ class eBPFProgramInstanceResource(BaseResource):
     schema_cls = eBPFProgramInstanceSchema
     lcp_handler = dict(post=lcp_post, put=lcp_put, delete=lcp_delete)
     nested_fields = ['parameters']
+    readonly_fields = ['ebpf_program_catalog_id', 'exec_env_id']
 
 
 @docstring(method='get', sum='eBPF Program Instance Read (Single)',
@@ -47,10 +48,5 @@ class eBPFProgramInstanceResource(BaseResource):
 @docstring(method='put', sum='eBPF Program Instance Update (Single)',
            desc='Update the eBPF Program instance in the execution-environments with the given `id` .',
            resp='eBPF Program instance with the given `id` updated.')
-class eBPFProgramInstanceSelectedResource(BaseResource):
-    doc_cls = eBPFProgramInstanceDocument
-    doc_name = 'eBPF Program Instance'
+class eBPFProgramInstanceSelectedResource(eBPFProgramInstanceResource):
     routes = '/instance/ebpf-program/{id}'
-    schema_cls = eBPFProgramInstanceSchema
-    lcp_handler = dict(post=lcp_post, put=lcp_put, delete=lcp_delete)
-    nested_fields = ['parameters']

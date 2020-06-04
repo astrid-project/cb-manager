@@ -34,8 +34,5 @@ class ExecEnvResource(BaseResource):
 @docstring(method='put', sum='Execution Environment Update (Single)',
            desc='Update the execution environment with the given `id`.',
            resp='Execution environment with the given `id` updated.')
-class ExecEnvSelectedResource(BaseResource):
-    doc_cls = ExecEnvDocument
-    doc_name = 'Execution Environment'
+class ExecEnvSelectedResource(ExecEnvResource):
     routes = '/exec-env/{id}'
-    schema_cls = ExecEnvSchema

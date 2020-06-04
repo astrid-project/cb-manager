@@ -5,7 +5,7 @@ from marshmallow.fields import Str
 class NetworkLinkSchema(Schema):
     """Represents a network link."""
     id = Str(required=True, dump_only=True, example='net-link-1',
-             description='Id of the network link.')
+             description='Id of the network link.', readonly=True)
     description = Str(description='Short description of the network link,',
                       example='Allow communication between front-end and back-end services.')
     type_id = Str(required=True,
@@ -15,7 +15,7 @@ class NetworkLinkSchema(Schema):
 
 class NetworkLinkTypeSchema(Schema):
     """Represents a network link type."""
-    id = Str(required=True, dump_only=True, example='pnt2pnt',
+    id = Str(required=True, dump_only=True, example='pnt2pnt', readonly=True,
              description='Id of the network link type.')
     name = Str(required=True, description='Name of the network link type.',
                example='Point to point')

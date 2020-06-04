@@ -25,6 +25,7 @@ class ConnectionResource(BaseResource):
     doc_name = 'Connection'
     routes = '/connection/'
     schema_cls = ConnectionSchema
+    readonly_fields = ['exec_env_id', 'network_link_id']
 
 
 @docstring(method='get', sum='Connection Read (Single)',
@@ -43,8 +44,5 @@ class ConnectionResource(BaseResource):
 @docstring(method='put', sum='Connection Update (Single)',
            desc='Update the connection between execution environments and network links with the given `id`',
            resp='Connection between execution environments and network links with the given `id` updated.')
-class ConnectionSelectedResource(BaseResource):
-    doc_cls = ConnectionDocument
-    doc_name = 'Connection'
+class ConnectionSelectedResource(ConnectionResource):
     routes = '/connection/{id}'
-    schema_cls = ConnectionSchema

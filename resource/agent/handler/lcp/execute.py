@@ -2,9 +2,8 @@ from http import HTTPStatus
 from requests import post as post_req
 from requests.auth import HTTPBasicAuth
 from resource.base.handler.lcp.retrieve import from_catalog
-from toolz import valmap
 from utils.log import Log
-from utils.sequence import wrap
+from utils.sequence import format as format_seq
 
 
 def actions(instance, catalog, data, exec_env, resp_lcp):
@@ -12,8 +11,7 @@ def actions(instance, catalog, data, exec_env, resp_lcp):
         action = from_catalog(catalog=catalog, id=action_data.get('id', None),
                               type='action', label='action', resp_lcp=resp_lcp)
         if action:
-            action_config = list(map(lambda x: valmap(
-                lambda v: v.format(**action_data), x), wrap(action.config.to_dict())))
+            action_config = format_seq(action.config.to_dict(), data=action_data)
             print(action_config)
             username, password = exec_env.lcp.username, exec_env.lcp.password
             resp_req = post_req(f'http://{exec_env.hostname}:{exec_env.lcp.port}/config',

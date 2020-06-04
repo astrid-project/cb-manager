@@ -19,6 +19,7 @@ class DataResource(BaseResource):
     doc_name = 'Data'
     routes = '/data/'
     schema_cls = DataSchema
+    readonly_fields = ['agent_instance_id', 'ebpf_program_instance_id', 'timestamp_event', 'timestamp_agent']
 
 
 @docstring(method='get', sum='Data Read (Single)',
@@ -31,8 +32,5 @@ class DataResource(BaseResource):
            resp='Data with the given `id` and filtered by the query in the request body deleted.')
 @docstring(method='put', sum='Data Update (Single)',
            desc='Update data with the given `id`.', resp='Data with the given `id` updated.')
-class DataSelectedResource(BaseResource):
-    doc_cls = DataDocument
-    doc_name = 'Data'
+class DataSelectedResource(DataResource):
     routes = '/data/{id}'
-    schema_cls = DataSchema

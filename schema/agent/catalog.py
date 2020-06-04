@@ -14,7 +14,7 @@ class AgentCatalogParameterConfigSchema(Schema):
 
 class AgentCatalogParameterSchema(Schema):
     """Agent parameter."""
-    id = Str(required=True, dump_only=True,
+    id = Str(required=True, dump_only=True, readonly=True,
              description='Parameter id.', example='log-period')
     description = Str(example='Enable the agent.',
                       description='Short description of the parameter.', )
@@ -38,7 +38,7 @@ class AgentCatalogActionConfigSchema(Schema):
 class AgentCatalogActionSchema(Schema):
     """Agent action."""
     id = Str(required=True, dump_only=True, enum=['start', 'stop', 'restart'], description='Action name',
-             example='start')
+             example='start', readonly=True)
     description = Str(description='Short descripton of the agent actions.',
                       example='Start the execution.')
     status = Str(enum=['started', 'stopped', 'unknown'], example='started', default=None,
@@ -49,7 +49,7 @@ class AgentCatalogActionSchema(Schema):
 
 class AgentCatalogSchema(Schema):
     """Represents an agent in the catalog."""
-    id = Str(required=True, dump_only=True, example='filebeat',
+    id = Str(required=True, dump_only=True, example='filebeat', readonly=True,
              description='Id of the agent in the catalog.')
     description = Str(description='Short description of the agent.',
                       example='Collect system metrics from execution environments.')

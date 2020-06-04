@@ -21,7 +21,7 @@ class LCPSchema(Schema):
 class ExecEnvSchema(Schema):
     """Represents an execution environment."""
     id = Str(required=True, dump_only=True, example='apache',
-             description='Id of the execution environment.')
+             description='Id of the execution environment.', readonly=True)
     hostname = Str(required=True, example='192.168.1.2',
                    description='Hostname of the execution environment.')
     lcp = Nested(LCPSchema, required=True,
@@ -35,7 +35,7 @@ class ExecEnvSchema(Schema):
 class ExecEnvTypeSchema(Schema):
     """Represents an execution environment type."""
     id = Str(required=True, dump_only=True, example='vm',
-             description='Id of the execution environment type.')
+             description='Id of the execution environment type.', readonly=True)
     name = Str(required=True, description='Name of the execution environment.',
                example='Virtual Machine')
     description = Str(example='Linux container.',

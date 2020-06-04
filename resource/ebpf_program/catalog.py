@@ -37,8 +37,5 @@ class eBPFProgramCatalogResource(BaseResource):
 @docstring(method='put', sum='eBPF Program Update (Single)',
            desc='Update the eBPF program in the catalog with the given `id`',
            resp='eBPF Program with the given `id` updated in the catalog.')
-class eBPFProgramCatalogSelectedResource(BaseResource):
-    doc_cls = eBPFProgramCatalogDocument
-    doc_name = 'eBPF Program Catalog'
+class eBPFProgramCatalogSelectedResource(eBPFProgramCatalogResource):
     routes = '/catalog/ebpf-program/{id}'
-    schema_cls = eBPFProgramCatalogSchema

@@ -4,7 +4,7 @@ from marshmallow.fields import Bool, List, Nested, Str
 
 class eBPFProgramCatalogOpenMetricsMetadataLabelSchema(Schema):
     """eBPF program Open Metrics metadata label."""
-    name = Str(required=True, description='Label name.', example='IP_PROTO')
+    name = Str(required=True, description='Label name.', example='IP_PROTO', readonly=True)
     value = Str(required=True, description='Label value.', example='UDP')
 
 
@@ -20,7 +20,7 @@ class eBPFProgramCatalogOpenMetricsMetadataSchema(Schema):
 class eBPFProgramCatalogMetricSchema(Schema):
     """eBPF program metric."""
     name = Str(required=True, description='Metric name.',
-               example='packets_total')
+               example='packets_total', readonly=True)
     map_name = Str(data_key='map-name', required=True, description='Mapping value in the code.',
                    example='PKT_COUNTER')
     open_metrics_metadata = Nested(eBPFProgramCatalogOpenMetricsMetadataSchema,
@@ -36,7 +36,7 @@ class eBPFProgramConfigCatalogSchema(Schema):
 
 class eBPFProgramParameterCatalogSchema(Schema):
     """eBPF program configuration."""
-    id = Str(required=True, dump_only=True,
+    id = Str(required=True, dump_only=True, readonly=True,
              description='Parameter id.', example='interface')
     description = Str(description='Short description of the parameter.',
                       example='Network Interface to attach.')
@@ -52,7 +52,7 @@ class eBPFProgramParameterCatalogSchema(Schema):
 class eBPFProgramCatalogSchema(Schema):
     """Represents an eBPF program in the catalog."""
     id = Str(required=True, dump_only=True, description='Id of the eBPF program in the catalog.',
-             example='packet-capture')
+             example='packet-capture', readonly=True)
     description = Str(description='Description of eBPF program.',
                       example='Transparent service to capture packets flowing through the interface it is attached to, apply filters and obtain capture in .pcap format.')
     config = Nested(eBPFProgramConfigCatalogSchema, required=True, many=False)
