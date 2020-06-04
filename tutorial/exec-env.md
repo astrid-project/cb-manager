@@ -1,0 +1,211 @@
+# Execution Environment
+
+The execution environment represents the remove service.
+When the service is deployed by the the orchestrator, it is necessary to insert related info to the Context Broker.
+
+- [Execution Environment](#execution-environment)
+  - [Creation](#creation)
+  - [Read](#read)
+  - [Update](#update)
+  - [Delete](#delete)
+  - [References](#references)
+
+## Creation
+
+To create a new Execution Environment use the following REST call:
+
+**POST** /_exec-env_
+
+with the request body (in JSON format):
+
+```json
+{
+    id: "{name-service}",
+    "type_id": "{id-exec-env-type}",
+    "hostname":"{ip-address}",
+    "lcp": {
+        "port" {lcp-port}
+    }
+}
+```
+
+Replace the data with the correct values, for example `name-service` with `apache`.
+The `type_id` should be one of those stored in `exec-env-type` index.
+It is possible to add additional data specific for this execution environment.
+
+If the creation is correctly executed the response is:
+
+```json
+[
+    {
+        "status": "created",
+        "description": "Execution Environment with the given [id] correctly created.",
+        "data": {
+            "id": "{name-service}",
+            "type_id": "{id-exec-env-type}",
+            "hostname": "{ip-address}",
+            "lcp": {
+                "port": {lcp-port}
+            }
+        },
+        "http_status_code": 201
+    }
+]
+```
+
+Otherwise, if, for example, an execution environment with the given id is already found, this is the response:
+
+```json
+[
+    {
+        "status": "error",
+        "error": true,
+        "description": "Execution Environment with the given [id] already found",
+        "data": {
+            "id": "{name-service}"
+        },
+        "http_status_code": 409
+    }
+]
+```
+
+If some data is missing (for example hostname), the response could be:
+
+```json
+[
+    {
+        "status": "error",
+        "error": true,
+        "description": "Not possible create Execution Environment with the given [data]",
+        "exception": "{'hostname': [ValidationException('Value required for this field.')]}",
+        "data": {
+            "id": "{name-service}",
+            "type_id": "{id-exec-env-type}",
+            "lcp": {
+                "port": 4001
+            }
+        },
+        "http_status_code": 422
+    }
+]
+```
+
+## Read
+
+To get the list of execution environment:
+
+**GET** /_exec-env_
+
+The response includes all the execution environments created.
+
+It is possible to filter the results using the following request body:
+
+```json
+{
+    "select": ["hostname"],
+    "where": {
+        "equals": {
+            "target:" "id",
+            "expr": "{name-service}"
+        }
+    }
+}
+```
+
+In this way, it will be returned only the `hostname` of all the execution environments with `id` = "_`{name-service}`_"
+
+## Update
+
+To update an execution environment, use:
+
+**PUT** /_exec-env_
+
+```json
+{
+    id: "{name-service}",
+    "hostname":"{new-ip-address}",
+}
+```
+
+This example set the new `hostname` for execution environment with `id` = "_`{name-service}`_".
+Also during the update it is possible to add additional data for the specific execution environment.
+
+A possible response is:
+
+```json
+[
+    {
+        "status": "updated",
+        "description": "Execution Environment with the given [id] correctly updated.",
+        "data": {
+            "id": "{name-service}",
+            "hostname": "{new-ip-address}"
+        },
+        "http_status_code": 200
+    }
+]
+```
+
+Instead, if the are not changes the response is:
+
+```json
+[
+    {
+        "status": "noop",
+        "description": "Execution Environment with the given [id] not updated.",
+        "data": {
+            "id": "{name-service}",
+            "hostname": "{new-ip-address}"
+        },
+        "http_status_code": 200
+    }
+]
+```
+
+
+The execution-environment model has not readonly fields[^1].
+
+## Delete
+
+To delete an execution environment, use:
+
+**DELETE** /_exec-env_
+
+```json
+{
+    "where": {
+        "equals": {
+            "target:" "id",
+            "expr": "{name-service}"
+        }
+    }
+}
+```
+
+This request removes the execution environment with `id` = "_`{name-service}`_".
+
+This is a possible response:
+
+```json
+[
+    {
+        "status": "deleted",
+        "description": "Execution Environment with the given [id] correctly deleted.",
+        "data": {
+            "type_id": "{id-exec-env-type}",
+            "hostname": "{ip-address}",
+            "lcp": {
+                "port": {lcp-port}
+            },
+            "id": "{name-service}"
+        },
+        "http_status_code": 200
+    }
+]
+```
+
+NOTE: Without request body, it removes **all** the execution environments.
+
+## References
+
+[^1] It is not possible to update readonly fields.

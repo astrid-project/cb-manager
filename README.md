@@ -26,6 +26,7 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
       - [Full Query](#full-query)
   - [Guide](#guide)
   - [Installation](#installation)
+  - [Configuration](#configuration)
   - [Usage](#usage)
     - [Display help](#display-help)
   - [References](#references)
@@ -250,6 +251,22 @@ See the [Swagger Schema](api/swagger.yaml, api/swagger.json) and the relative [d
   ```bash
   pip3 install -r requirements.txt
   ```
+
+## Configuration
+
+The configurations are stored in the [config.ini](config.ini) file.
+
+Section             | Setting   | Default value   | Note
+--------------------|-----------|-----------------|---------------------------
+context-broker | host      | 0.0.0.0         | IP address to accept requests.
+context-broker | port      | 5000            | TCP port to accept requests.
+auth                | max-ttl   | 10min           | Maximum TTL of the authorization with the CB-Manager.
+polycube            | host      | localhost       | IP address to contact the polycube installation.
+polycube            | port      | 9000            | Port address to contact the polycube installation.
+polycube            | timeout   | 20s             | Timeout for the connection to polycube.
+dev                 | username  | lcp             | Username for HTTP authentication (for developer use).
+dev                 | password  |                 | Password for HTTP authentication (for developer use).
+
 
 ## Usage
 

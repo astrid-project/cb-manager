@@ -15,7 +15,7 @@ def on_base_delete(self, req, resp, id=None, lcp_handler=None):
                 data = obj.to_dict()
                 obj.delete()
                 resp_data_item = dict(status='deleted',
-                                      description='Element with the given [id] correctly deleted.',
+                                      description='{self.doc_name} with the given [id] correctly deleted.',
                                       data=dict(**data, id=hit.meta.id), http_status_code=HTTPStatus.OK)
                 lcp_handler = self.lcp_handler.get('delete', None)
                 if lcp_handler:

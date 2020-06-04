@@ -65,7 +65,7 @@ def on_base_put(self, req, resp, id=None):
                             desc_item = f'{self.doc_name} with the given [id] correctly updated.'
                         else:
                             desc_item = f'{self.doc_name} with the given [id] not updated.'
-                        resp_data_item = dict(status=status_item, descripion=desc_item,
+                        resp_data_item = dict(status=status_item, description=desc_item,
                                             data=dict(**obj.to_dict(), id=req_data_item_id),
                                             http_status_code=HTTPStatus.OK)
                         resp_data.append(resp_data_item)
