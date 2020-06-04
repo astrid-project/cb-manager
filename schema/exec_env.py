@@ -24,10 +24,10 @@ class ExecEnvSchema(Schema):
              description='Id of the execution environment.', readonly=True)
     hostname = Str(required=True, example='192.168.1.2',
                    description='Hostname of the execution environment.')
-    lcp = Nested(LCPSchema, required=True,
-                 description='Data related to the LCP.')
     type_id = Str(required=True, example='vm',
                   description='Id of the execution environment type.')
+    lcp = Nested(LCPSchema, required=True,
+                 description='Data related to the LCP.')
     description = Str(description='Short description of the execution environment,',
                       example='Apache HTTP Web Server.')
 

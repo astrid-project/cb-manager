@@ -1,8 +1,9 @@
-# Network Link
+# Data
 
-Represents a network link that connect two or more [execution environment](exec-env.md).
+This index stores all the incoming data from the [execution environments](exec-env.md) collected
+by the [agent](agent-instance.md) or [eBPF](ebpf-program-instance.md) instance installed on them.
 
-- [Network Link](#network-link)
+- [Data](#data)
   - [Schema](#schema)
   - [Create](#create)
   - [Read](#read)
@@ -11,11 +12,13 @@ Represents a network link that connect two or more [execution environment](exec-
 
 ## Schema
 
-Field         | Type   | Required | Readonly | Example
---------------|--------|----------|----------|--------
-`id`          | String | True     | True     | eth0
-`type_id`     | String | True     | False    | pnt2pnt
-`description` | Text   | False    | False    | To connect HTTP and DB Servers.
+Field                      | Type   | Required | Readonly | Example
+---------------------------|--------|----------|----------|--------
+`id`                       | String | True     | True     | dsalkasdioi232382yieyqwuiy
+`agent_instance_id`        | String | False    | True     | filebeat
+`ebpf_program_instance_id` | String | False    | True     | synflood@mysql-server
+`timestamp_event`          | Date   | False    | True     | 2020/06/04 09:22:09
+`timestamp_agent`          | Date   | False    | True     | 2020/06/04 09:22:19
 
 It is not possible to update readonly fields.
 
@@ -30,8 +33,7 @@ with the request body (in JSON format):
 ```json
 {
     "id": "{name-network-link}",
-    "type_id": "{id-network-link-type}",
-    "description":"{human-readable-description}"
+    "agent_instance_id": "{id-agent-instance}",
 }
 ```
 

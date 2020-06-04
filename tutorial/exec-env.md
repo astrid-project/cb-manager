@@ -16,10 +16,10 @@ When the service is deployed by the the orchestrator, it is necessary to insert 
 Field         | Type   | Required | Readonly | Example
 --------------|--------|----------|----------|--------
 `id`          | String | True     | True     | mysql-server
-`description` | Text   | False    | False    | Open-source relational database management system (RDBMS).
 `hostname`    | String | True     | False    | 10.0.0.1
-`lcp`         | LCP    | required | False
 `type_id`     | String | True     | False    | vm
+`lcp`         | LCP    | required | False    |
+`description` | Text   | False    | False    | Open-source relational database management system (RDBMS).
 
 ### LCP Schema
 
@@ -80,7 +80,7 @@ If the creation is correctly executed the response is:
 ]
 ```
 
-Otherwise, if, for example, an execution environment with the given id is already found, this is the response:
+Otherwise, if, for example, an execution environment with the given `id` is already found, this is the response:
 
 ```json
 [
@@ -96,14 +96,14 @@ Otherwise, if, for example, an execution environment with the given id is alread
 ]
 ```
 
-If some data is missing (for example `hostname`), the response could be:
+If some required data is missing (for example `hostname`), the response could be:
 
 ```json
 [
     {
         "status": "error",
         "error": true,
-        "description": "Not possible create Execution Environment with the given [data]",
+        "description": "Not possible to create a Execution Environment with the given [data]",
         "exception": "{'hostname': [ValidationException('Value required for this field.')]}",
         "data": {
             "id": "{name-service}",

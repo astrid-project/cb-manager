@@ -644,7 +644,7 @@ definitions:
     type: object
 info:
   title: Context Broker Manager
-  version: 952732d1e5e64830d93f629ef045ec901dfcb486@master
+  version: 80a141ae87a966db487cca386dc9211c3f5fce1d@master
 paths:
   /catalog/agent/:
     delete:

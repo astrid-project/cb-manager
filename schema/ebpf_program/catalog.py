@@ -38,14 +38,14 @@ class eBPFProgramParameterCatalogSchema(Schema):
     """eBPF program configuration."""
     id = Str(required=True, dump_only=True, readonly=True,
              description='Parameter id.', example='interface')
-    description = Str(description='Short description of the parameter.',
-                      example='Network Interface to attach.')
     type = Str(required=True, description='Parameter type.', example='integer',
                enum=['integer', 'number', 'time-duration', 'string', 'choice', 'boolean', 'binary'])
     list = Bool(default=False, description='Indicate if the parameter can have multiple values.',
                 example=True)
     values = List(Str(example=['yes', 'no']),
                   description='Possible values if the parameter type is choice.')
+    description = Str(description='Short description of the parameter.',
+                      example='Network Interface to attach.')
     example = Str(description='Example of parameter value.', example='eno0')
 
 
@@ -53,7 +53,7 @@ class eBPFProgramCatalogSchema(Schema):
     """Represents an eBPF program in the catalog."""
     id = Str(required=True, dump_only=True, description='Id of the eBPF program in the catalog.',
              example='packet-capture', readonly=True)
-    description = Str(description='Description of eBPF program.',
-                      example='Transparent service to capture packets flowing through the interface it is attached to, apply filters and obtain capture in .pcap format.')
     config = Nested(eBPFProgramConfigCatalogSchema, required=True, many=False)
     parameters = Nested(eBPFProgramParameterCatalogSchema, many=True)
+    description = Str(description='Description of eBPF program.',
+                      example='Transparent service to capture packets flowing through the interface it is attached to, apply filters and obtain capture in .pcap format.')

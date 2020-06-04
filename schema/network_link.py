@@ -6,11 +6,10 @@ class NetworkLinkSchema(Schema):
     """Represents a network link."""
     id = Str(required=True, dump_only=True, example='net-link-1',
              description='Id of the network link.', readonly=True)
+    type_id = Str(required=True, description='Id of the network link type.',
+                  example='pnt2pnt')
     description = Str(description='Short description of the network link,',
                       example='Allow communication between front-end and back-end services.')
-    type_id = Str(required=True,
-                  description='Id of the network link type.',
-                  example='pnt2pnt')
 
 
 class NetworkLinkTypeSchema(Schema):

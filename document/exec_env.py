@@ -14,10 +14,10 @@ class LCPDocument(InnerDoc):
 class ExecEnvDocument(Document):
     """Represents an execution environment."""
     # id already defined by Elasticsearch
-    description = Text()
     hostname = Text(required=True)
-    lcp = Nested(LCPDocument, required=True)
     type_id = Text(required=True)
+    lcp = Nested(LCPDocument, required=True)
+    description = Text()
 
     class Index:
         """Elasticsearch configuration."""

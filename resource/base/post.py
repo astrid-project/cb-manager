@@ -54,7 +54,7 @@ def on_base_post(self, req, resp, id=None):
             except Exception as exception:
                 self.log.error(f'Exception: {exception}')
                 resp_data.append(dict(status='error', error=True,
-                                      description=f'Not possible create {self.doc_name} with the given [data]',
+                                      description=f'Not possible to create a {self.doc_name} with the given [data]',
                                       exception=str(exception), data=dict(id=req_data_item_id, **req_data_item),
                                       http_status_code=HTTPStatus.UNPROCESSABLE_ENTITY))
     resp.media = resp_data

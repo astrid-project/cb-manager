@@ -1,7 +1,7 @@
 # Execution Environment Type
 
-Describes the type of the execution environment including additional info.
-Each [execution environment](exec-env.md) belongs to a specific type that is referred with the [`type_id`](exec-env.md#create) field.
+Describes the type of the [execution environment](exec-env.md) including additional info.
+Each execution environment belongs to a specific type that is referred with the [`type_id`](exec-env.md#create) field.
 
 - [Execution Environment Type](#execution-environment-type)
   - [Schema](#schema)
@@ -23,7 +23,7 @@ It is not possible to update readonly fields.
 
 ## Create
 
-To create a new Execution Environment Type use the following REST call:
+To create a new execution environment type use the following REST call:
 
 **POST** /_type_/_exec-env_
 
@@ -57,7 +57,7 @@ If the creation is correctly executed the response is:
 ]
 ```
 
-Otherwise, if, for example, an execution environment type with the given id is already found, this is the response:
+Otherwise, if, for example, an execution environment type with the given `id` is already found, this is the response:
 
 ```json
 [
@@ -73,14 +73,14 @@ Otherwise, if, for example, an execution environment type with the given id is a
 ]
 ```
 
-If some data is missing (for example `name`), the response could be:
+If some required data is missing (for example `name`), the response could be:
 
 ```json
 [
     {
         "status": "error",
         "error": true,
-        "description": "Not possible create Execution Environment with the given [data]",
+        "description": "Not possible to create a Execution Environment Type with the given [data]",
         "exception": "{'name': [ValidationException('Value required for this field.')]}",
         "data": {
             "id": "{name-type}",
@@ -92,7 +92,7 @@ If some data is missing (for example `name`), the response could be:
 
 ## Read
 
-To get the list of execution environment:
+To get the list of execution environment types:
 
 **GET** /_type_/_exec-env_
 
@@ -112,7 +112,7 @@ It is possible to filter the results using the following request body:
 }
 ```
 
-In this way, it will be returned only the `name` of all the execution environment types with `id` = "_`{name-type}`_"
+In this way, it will be returned only the `name` of the execution environment type with `id` = "_`{name-type}`_"
 
 ## Update
 
@@ -127,7 +127,7 @@ To update an execution environment type, use:
 }
 ```
 
-This example set the new `name` for execution environment type with `id` = "_`{name-type}`_".
+This example set the new `name` for the execution environment type with `id` = "_`{name-type}`_".
 Also during the update it is possible to add additional data for the specific execution environment type.
 
 A possible response is:

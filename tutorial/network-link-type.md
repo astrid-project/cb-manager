@@ -24,7 +24,7 @@ It is not possible to update readonly fields.
 
 ## Create
 
-To create a new Network Link Type use the following REST call:
+To create a new network link type use the following REST call:
 
 **POST** /_type_/_network-link_
 
@@ -41,7 +41,7 @@ with the request body (in JSON format):
 Replace the data with the correct values, for example `id`, and `name` with `vm`
 and `Virtual Machine`, respectively.
 The `id` is auto generated if missing in the request body.
-It is possible to add additional data specific for this Network Link type.
+It is possible to add additional data specific for this network link type.
 
 If the creation is correctly executed the response is:
 
@@ -59,7 +59,7 @@ If the creation is correctly executed the response is:
 ]
 ```
 
-Otherwise, if, for example, an Network Link type with the given id is already found, this is the response:
+Otherwise, if, for example, a network link type with the given `id` is already found, this is the response:
 
 ```json
 [
@@ -75,14 +75,14 @@ Otherwise, if, for example, an Network Link type with the given id is already fo
 ]
 ```
 
-If some data is missing (for example `name`), the response could be:
+If some required data is missing (for example `name`), the response could be:
 
 ```json
 [
     {
         "status": "error",
         "error": true,
-        "description": "Not possible create Network Link with the given [data]",
+        "description": "Not possible to create a Network Link with the given [data]",
         "exception": "{'name': [ValidationException('Value required for this field.')]}",
         "data": {
             "id": "{name-type}",
@@ -94,11 +94,11 @@ If some data is missing (for example `name`), the response could be:
 
 ## Read
 
-To get the list of Network Link:
+To get the list of network Link types:
 
 **GET** /_type_/_network-link_
 
-The response includes all the Network Link types created.
+The response includes all the network link types created.
 
 It is possible to filter the results using the following request body:
 
@@ -114,11 +114,11 @@ It is possible to filter the results using the following request body:
 }
 ```
 
-In this way, it will be returned only the `name` of all the Network Link types with `id` = "_`{name-type}`_"
+In this way, it will be returned only the `name` of all the network link types with `id` = "_`{name-type}`_"
 
 ## Update
 
-To update an Network Link type, use:
+To update a network Link type, use:
 
 **PUT** /_type_/_network-link_
 
@@ -129,8 +129,8 @@ To update an Network Link type, use:
 }
 ```
 
-This example set the new `name` for Network Link type with `id` = "_`{name-type}`_".
-Also during the update it is possible to add additional data for the specific Network Link type.
+This example set the new `name` for the network link type with `id` = "_`{name-type}`_".
+Also during the update it is possible to add additional data for the specific network link type.
 
 A possible response is:
 
@@ -166,7 +166,7 @@ Instead, if the are not changes the response is:
 
 ## Delete
 
-To delete an Network Link type, use:
+To delete a network link type, use:
 
 **DELETE** /_type_/_network-link_
 
@@ -181,7 +181,7 @@ To delete an Network Link type, use:
 }
 ```
 
-This request removes the Network Link type with `id` = "_`{name-type}`_".
+This request removes the network link type with `id` = "_`{name-type}`_".
 
 This is a possible response:
 
@@ -200,7 +200,7 @@ This is a possible response:
 ]
 ```
 
-NOTE: Without request body, it removes **all** the Network Links.
+NOTE: Without request body, it removes **all** the network links.
 
 ## Loaded data
 

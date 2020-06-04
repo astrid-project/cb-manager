@@ -11,12 +11,12 @@ class AgentCatalogParameterConfigInnerDoc(InnerDoc):
 class AgentCatalogParameterInnerDoc(InnerDoc):
     """Agent parameter."""
     id = Text(required=True)
-    description = Text()
     type = Text(required=True) # possible values: integer, number, time-duration, string, choice, boolean, binary
+    config = Nested(AgentCatalogParameterConfigInnerDoc, required=True)
     list = Boolean()
     values = Text() # when type = choice
+    description = Text()
     example = Text()
-    config = Nested(AgentCatalogParameterConfigInnerDoc, required=True)
 
 
 class AgentCatalogActionConfigInnerDoc(InnerDoc):
@@ -28,17 +28,17 @@ class AgentCatalogActionConfigInnerDoc(InnerDoc):
 
 class AgentCatalogActionInnerDoc(InnerDoc):
     """Agent action."""
-    description = Text()
-    status = Text()
     config = Nested(AgentCatalogActionConfigInnerDoc, required=True)
+    status = Text()
+    description = Text()
 
 
 class AgentCatalogDocument(Document):
     """Represents an agent in the catalog."""
     # id already defined by Elasticsearch
-    description = Text()
-    parameters = Nested(AgentCatalogParameterInnerDoc)
     actions = Nested(AgentCatalogActionInnerDoc)
+    parameters = Nested(AgentCatalogParameterInnerDoc)
+    description = Text()
 
     class Index:
         """Elasticsearch configuration."""

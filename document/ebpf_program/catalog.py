@@ -30,19 +30,19 @@ class eBPFProgramConfigCatalogInnerDoc(InnerDoc):
 class eBPFProgramParameterCatalogInnerDoc(InnerDoc):
     """eBPF program parameter."""
     id = Text(required=True)
-    description = Text()
     type = Text(required=True) # possible values: integer, number, string, choice, boolean
     list = Boolean()
     values = Text() # when type = choice
+    description = Text()
     example = Text()
 
 
 class eBPFProgramCatalogDocument(Document):
     """Represents an eBPF program in the catalog."""
     # id already defined by Elasticsearch
-    description = Text()
     config = Nested(eBPFProgramConfigCatalogInnerDoc, required=True)
     parameters = Nested(eBPFProgramParameterCatalogInnerDoc)
+    description = Text()
 
     class Index:
         """Elasticsearch configuration."""
