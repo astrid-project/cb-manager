@@ -2,8 +2,7 @@ import types
 
 
 def copy_func(func, name=None):
-    """
-    Copy function with a new name.
+    """Copy function with a new name.
 
     :param func: function to copy
     :param name: new name

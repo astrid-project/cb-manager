@@ -4,7 +4,7 @@ from http import HTTPStatus
 from utils.sequence import wrap
 
 
-def on_base_post(self, req, resp, id=None, lcp_handler=None):
+def on_base_post(self, req, resp, id=None):
     resp_data = []
     req_data = req.context.get('json', [])
     if id is not None:
@@ -17,8 +17,7 @@ def on_base_post(self, req, resp, id=None, lcp_handler=None):
     for req_data_item in wrap(req_data):
         req_data_item_id = req_data_item.pop('id', None)
         if req_data_item_id is not None and single_item:
-            resp_data.append(dict(status='error', error=True,
-                                  description=f'Request not valid: two ids provided',
+            resp_data.append(dict(status='error', error=True, description=f'Request not valid: two ids provided',
                                   data=dict(id=dict(item=req_data_item_id, parameter=id)),
                                   http_status_code=HTTPStatus.CONFLICT))
         else:
@@ -34,18 +33,20 @@ def on_base_post(self, req, resp, id=None, lcp_handler=None):
                     for ignore_field in self.ignore_fields:
                         try:
                             req_data_item.pop(ignore_field)
-                            self.log.info(f'field {ignore_field} in the request ignored when update {self.doc_name}')
-                        except: pass
+                            self.log.info(
+                                f'field {ignore_field} in the request ignored when update {self.doc_name}')
+                        except:
+                            pass
                     obj = self.doc_cls(meta=meta, **req_data_item)
                     obj.save()
                     resp_data_item = dict(status='created',
                                           description=f'{self.doc_name} with the given [id] correctly created.',
-                                          data=dict(id=obj.meta.id, **obj.to_dict()),
-                                          http_status_code=HTTPStatus.CREATED)
+                                          data=dict(id=obj.meta.id, **obj.to_dict()), http_status_code=HTTPStatus.CREATED)
                     resp_data.append(resp_data_item)
                     lcp_handler = self.lcp_handler.get('post', None)
                     if lcp_handler:
-                        lcp_handler(instance=obj, req=req_data_lcp, resp=resp_data_item)
+                        lcp_handler(instance=obj, req=req_data_lcp,
+                                    resp=resp_data_item)
                 else:
                     resp_data.append(dict(status='error', error=True,
                                           description=f'{self.doc_name} with the given [id] already found',

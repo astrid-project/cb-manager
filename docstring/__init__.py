@@ -2,8 +2,7 @@ from docstring.copy_func import copy_func
 
 
 def docstring(**kwrd_params):
-    """
-    Generate automatic docstring for the class with a decorator.
+    """Generate automatic docstring for the class with a decorator.
 
     :returns: decorator
     """

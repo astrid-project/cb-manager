@@ -4,7 +4,7 @@ from requests.auth import HTTPBasicAuth
 from resource.base.handler.lcp.retrieve import from_catalog
 from toolz import valmap
 from utils.log import Log
-from utils.sequence import wrap
+from utils.sequence import expand, wrap
 
 
 def prepare(type, catalog, data, filter, resp_lcp):
@@ -29,7 +29,7 @@ def filter_action(action, data):
 
 
 def filter_parameters(parameter, data):
-    return dict(**parameter, value=data.get('value', None))
+    return expand(parameter, value=data.get('value', None))
 
 
 def execute(instance, catalog, req, exec_env, resp_lcp):
