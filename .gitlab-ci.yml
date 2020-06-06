@@ -10,22 +10,36 @@ docker-build:
         - "**/*.yaml"
         - "**/*.docstring"
 
-include:
-  - template: Code-Quality.gitlab-ci.yml
-  - template: SAST.gitlab-ci.yml
-
-code_quality:
+.quality:
+  stage: test
+  allow_failure: true
   rules:
     - changes:
         - "**/*.py"
         - "**/*.ini"
         - "**/*.sh"
 
-spotbugs-sast:
-  script:
-    - /analyzer run -compile=false
+code_quality:
+  extends: quality
+  image: docker:stable
+  services:
+    - docker:stable-dind
   variables:
-    MAVEN_REPO_PATH: ./.m2/repository
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+  script:
+    - docker info
+    - docker run
+       --env CODECLIMATE_DEBUG=1
+       --env CODECLIMATE_CODE="$PWD"
+       --volume "$PWD":/code
+       --volume /var/run/docker.sock:/var/run/docker.sock
+       --volume /tmp/cc:/tmp/cc
+       codeclimate/codeclimate:0.85.2 analyze -f html > report.html
   artifacts:
-    reports:
-      sast: gl-sast-report.json
+    paths: [report.html]
+    expire_in: 10 weeks
+  dependencies: []
+  except:
+    variables:
+      - $CODE_QUALITY_DISABLED
