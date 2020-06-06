@@ -12,34 +12,41 @@ by the [agent](agent-instance.md) or [eBPF](ebpf-program-instance.md) instance i
 
 ## Schema
 
-Field                      | Type   | Required | Readonly | Example
----------------------------|--------|----------|----------|--------
-`id`                       | String | True     | True     | dsalkasdioi232382yieyqwuiy
-`agent_instance_id`        | String | False    | True     | filebeat
-`ebpf_program_instance_id` | String | False    | True     | synflood@mysql-server
-`timestamp_event`          | Date   | False    | True     | 2020/06/04 09:22:09
-`timestamp_agent`          | Date   | False    | True     | 2020/06/04 09:22:19
+| Field                      | Type   | Required | Readonly | Example                    |
+| -------------------------- | ------ | -------- | -------- | -------------------------- |
+| `id`                       | String | True     | True     | dsalkasdioi232382yieyqwuiy |
+| `agent_instance_id`        | String | False    | True     | filebeat@mysql-server      |
+| `ebpf_program_instance_id` | String | False    | True     | synflood@mysql-server      |
+| `timestamp_event`          | Date   | False    | True     | 2020/06/04 09:22:09        |
+| `timestamp_agent`          | Date   | False    | True     | 2020/06/04 09:22:19        |
 
-It is not possible to update readonly fields.
+Note:
+
+- It is not possible to update readonly fields.
+- `id` is required but it is auto-generated if not provided. It is recommended to provide a friendly for simplify the retrieve of
+  connected date in other indices.
+- `agent_instance_id` should be one of those stored in [`agent-instance`](agent-instance.md) index.
+- `ebpf_program_instance_id` should be one of those stored in [`ebpf-program-instance`](ebpf-program-instance.md) index.
 
 ## Create
 
-To create a new network link use the following REST call:
+To create a new data use the following REST call:
 
-**POST** /_network-link_
+**POST** /_data_
 
 with the request body (in JSON format):
 
 ```json
 {
-    "id": "{name-network-link}",
-    "agent_instance_id": "{id-agent-instance}",
+    "id": "{data_name}",
+    "agent_instance_id": "{agent_instance_id}",
+    "timestamp_event": "{timestamp_event}",
+    "timestamp_agent": "{timestamp_agent}",
 }
 ```
 
-Replace the data with the correct values, for example `name-network-link` with `eth0`.
-The `type_id` should be one of those stored in [`network-link-type`](network-link-type.md) index.
-It is possible to add additional data specific for this network link.
+Replace the data with the correct values, for example `agent_instance_id` with `filebeat@mysql-server`.
+It is possible to add additional data.
 
 If the creation is correctly executed the response is:
 
@@ -47,58 +54,40 @@ If the creation is correctly executed the response is:
 [
     {
         "status": "created",
-        "description": "Network Link with the given [id] correctly created.",
+        "description": "Data with the given [id] correctly created.",
         "data": {
-            "id": "{name-network-link}",
-            "type_id": "{id-network-link-type}",
-            "description": "{human-readable-description}"
+            "id": "{data_name}",
+            ...
         },
         "http_status_code": 201
     }
 ]
 ```
 
-Otherwise, if, for example, a network link with the given `id` is already found, this is the response:
+Otherwise, if, for example, a data with the given `id` is already found, this is the response:
 
 ```json
 [
     {
         "status": "error",
         "error": true,
-        "description": "Network link with the given [id] already found",
+        "description": "Data with the given [id] already found",
         "data": {
-            "id": "{name-network-link}"
+            "id": "{data_name}",
+            ...
         },
         "http_status_code": 409
     }
 ]
 ```
 
-If some required data is missing (for example `type_id`), the response could be:
-
-```json
-[
-    {
-        "status": "error",
-        "error": true,
-        "description": "Not possible to create a Network Link with the given [data]",
-        "exception": "{'type_id': [ValidationException('Value required for this field.')]}",
-        "data": {
-            "id": "{name-network-link}",
-            "description": "{human-readable-description}"
-        },
-        "http_status_code": 422
-    }
-]
-```
-
 ## Read
 
-To get the list of network links:
+To get the list of data:
 
-**GET** /_network-link_
+**GET** /_data_
 
-The response includes all the network links created.
+The response includes all the data created.
 
 It is possible to filter the results using the following request body:
 
@@ -108,29 +97,28 @@ It is possible to filter the results using the following request body:
     "where": {
         "equals": {
             "target:" "id",
-            "expr": "{name-network-link}"
+            "expr": "{data_name}"
         }
     }
 }
 ```
 
-In this way, it will be returned only the `type_id` of the network link with `id` = "_`{name-network-link}`_".
+In this way, it will be returned only the `type_id` of the data with `id` = "_`{data_name}`_".
 
 ## Update
 
-To update a network link, use:
+To update a data, use:
 
-**PUT** /_network_link_
+**PUT** /_data_
 
 ```json
 {
-    id: "{name-network-link}",
-    "type_id":"{new-id-network-link-type}",
+    "id": "{data_name}",
+    "source":"{ip_address}",
 }
 ```
 
-This example set the new `type_id` for the network link with `id` = "_`{name-network-link}`_".
-Also during the update it is possible to add additional data for the specific network link.
+This example add a new field `source` for the data with `id` = "_`{data_name}`_".
 
 A possible response is:
 
@@ -138,10 +126,10 @@ A possible response is:
 [
     {
         "status": "updated",
-        "description": "Network Link with the given [id] correctly updated.",
+        "description": "Data with the given [id] correctly updated.",
         "data": {
-            "id": "{name-network-link}",
-            "type_id":"{new-id-network-link-type}"
+            "id": "{data_name}",
+            ...
         },
         "http_status_code": 200
     }
@@ -154,10 +142,10 @@ Instead, if the are not changes the response is:
 [
     {
         "status": "noop",
-        "description": "Network Link with the given [id] not updated.",
+        "description": "Data with the given [id] not updated.",
         "data": {
-            "id": "{name-connection}",
-            "hostname": "{id-network-link-type}"
+            "id": "{data_name}",
+            ...
         },
         "http_status_code": 200
     }
@@ -166,22 +154,22 @@ Instead, if the are not changes the response is:
 
 ## Delete
 
-To delete a network link, use:
+To delete a data, use:
 
-**DELETE** /_network-link_
+**DELETE** /_data_
 
 ```json
 {
     "where": {
         "equals": {
             "target:" "id",
-            "expr": "{name-network-link}"
+            "expr": "{data_name}"
         }
     }
 }
 ```
 
-This request removes the network link with `id` = "_`{name-network-link}`_".
+This request removes the data with `id` = "_`{data_name}`_".
 
 This is a possible response:
 
@@ -189,15 +177,14 @@ This is a possible response:
 [
     {
         "status": "deleted",
-        "description": "Network with the given [id] correctly deleted.",
+        "description": "Data with the given [id] correctly deleted.",
         "data": {
-            "id": "{name-network-link}",
-            "type_id": "{id-network-link-type}",
-            "description": "{human-readable-description}"
+            "id": "{data_name}",
+            ...
         },
         "http_status_code": 200
     }
 ]
 ```
 
-NOTE: Without request body, it removes **all** the nework links\.
+NOTE: Without request body, it removes **all** the data.

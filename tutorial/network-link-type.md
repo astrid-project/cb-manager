@@ -14,13 +14,17 @@ with the [`type_id`](network-link.md#create) field.
 
 ## Schema
 
-Field         | Type   | Required | Readonly | Example
---------------|--------|----------|----------|--------
-`id`          | String | True     | True     | pnt2pnt
-`name`        | String | True     | False    | Point to Point
-`description` | Text   | False    | False    | Communications connection between two communication endpoints or nodes.
+| Field         | Type   | Required | Readonly | Example                                                                 |
+| ------------- | ------ | -------- | -------- | ----------------------------------------------------------------------- |
+| `id`          | String | True     | True     | pnt2pnt                                                                 |
+| `name`        | String | True     | False    | Point to Point                                                          |
+| `description` | String | False    | False    | Communications connection between two communication endpoints or nodes. |
 
-It is not possible to update readonly fields.
+Note:
+
+- It is not possible to update readonly fields.
+- `id` is required but it is auto-generated if not provided. It is recommended to provide a friendly for simplify the retrieve of
+  connected date in other indices.
 
 ## Create
 
@@ -32,15 +36,13 @@ with the request body (in JSON format):
 
 ```json
 {
-    "id": "{name-type}",
-    "description": "{human-readable-description}"
-    "name": "{formal-name}"
+    "id": "{type_name}",
+    "description": "{human_readable_description}"
+    "name": "{formal_name}"
 }
 ```
 
-Replace the data with the correct values, for example `id`, and `name` with `vm`
-and `Virtual Machine`, respectively.
-The `id` is auto generated if missing in the request body.
+Replace the data with the correct values, for example `id` with `p2p.
 It is possible to add additional data specific for this network link type.
 
 If the creation is correctly executed the response is:
@@ -51,8 +53,8 @@ If the creation is correctly executed the response is:
         "status": "created",
         "description": "Network Link Type with the given [id] correctly created.",
         "data": {
-            "id": "{name-type}",
-            "name": "{forma-name}"
+            "id": "{type_name}",
+            ...
         },
         "http_status_code": 201
     }
@@ -68,7 +70,8 @@ Otherwise, if, for example, a network link type with the given `id` is already f
         "error": true,
         "description": "Network Link Type with the given [id] already found",
         "data": {
-            "id": "{name-type}"
+            "id": "{type_name}",
+            ...
         },
         "http_status_code": 409
     }
@@ -85,7 +88,8 @@ If some required data is missing (for example `name`), the response could be:
         "description": "Not possible to create a Network Link with the given [data]",
         "exception": "{'name': [ValidationException('Value required for this field.')]}",
         "data": {
-            "id": "{name-type}",
+            "id": "{type_name}",
+            ...
         },
         "http_status_code": 422
     }
@@ -108,13 +112,13 @@ It is possible to filter the results using the following request body:
     "where": {
         "equals": {
             "target:" "id",
-            "expr": "{name-type}"
+            "expr": "{type_name}"
         }
     }
 }
 ```
 
-In this way, it will be returned only the `name` of all the network link types with `id` = "_`{name-type}`_"
+In this way, it will be returned only the `name` of all the network link types with `id` = "_`{type_name}`_"
 
 ## Update
 
@@ -124,12 +128,12 @@ To update a network Link type, use:
 
 ```json
 {
-    id: "{name-type}",
-    "name":"{new-formal-name}",
+    "id": "{type_name}",
+    "name":"{new_formal_name}",
 }
 ```
 
-This example set the new `name` for the network link type with `id` = "_`{name-type}`_".
+This example set the new `name` for the network link type with `id` = "_`{type_name}`_".
 Also during the update it is possible to add additional data for the specific network link type.
 
 A possible response is:
@@ -140,8 +144,8 @@ A possible response is:
         "status": "updated",
         "description": "Network Link Type with the given [id] correctly updated.",
         "data": {
-            "id": "{name-type}",
-            "name": "{new-formal-name}"
+            "id": "{type_name}",
+            ...
         },
         "http_status_code": 200
     }
@@ -156,8 +160,8 @@ Instead, if the are not changes the response is:
         "status": "noop",
         "description": "Network Link Type with the given [id] not updated.",
         "data": {
-            "id": "{name-type}",
-            "name": "{formal-name}"
+            "id": "{type_name}",
+            ...
         },
         "http_status_code": 200
     }
@@ -175,13 +179,13 @@ To delete a network link type, use:
     "where": {
         "equals": {
             "target:" "id",
-            "expr": "{name-type}"
+            "expr": "{type_name}"
         }
     }
 }
 ```
 
-This request removes the network link type with `id` = "_`{name-type}`_".
+This request removes the network link type with `id` = "_`{type_name}`_".
 
 This is a possible response:
 
@@ -191,9 +195,8 @@ This is a possible response:
         "status": "deleted",
         "description": "Network Link Type with the given [id] correctly deleted.",
         "data": {
-            "id": "{name-type}",
-            "description": "{human-readable-description}",
-            "name": "{formal-name}",
+            "id": "{type_name}",
+            ...
         },
         "http_status_code": 200
     }
@@ -204,7 +207,7 @@ NOTE: Without request body, it removes **all** the network links.
 
 ## Loaded data
 
-For the demo, this data are already available:
+For the demo, this data is already available:
 
 Response of **GET** /_type_/_network-link_
 

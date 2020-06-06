@@ -30,3 +30,17 @@
    4. [Update](network-link-type.md#update)
    5. [Delete](network-link-type.md#delete)
    6. [Loaded data](network-link-type.md#loaded-data)
+
+5. [Connection](connection.md)
+   1. [Schema](connection.md#schema)
+   2. [Create](connection.md#create)
+   3. [Read](connection.md#read)
+   4. [Update](connection.md#update)
+   5. [Delete](connection.md#delete)
+
+6. [Data](data.md)
+   1. [Schema](data.md#schema)
+   2. [Create](data.md#create)
+   3. [Read](data.md#read)
+   4. [Update](data.md#update)
+   5. [Delete](data.md#delete)

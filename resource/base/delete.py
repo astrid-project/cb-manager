@@ -1,4 +1,5 @@
-from elasticsearch import RequestError
+from elasticsearch import RequestError, NotFoundError
+
 from falcon.errors import HTTPBadRequest
 from http import HTTPStatus
 from reader.query import QueryReader
@@ -14,20 +15,25 @@ def on_base_delete(self, req, resp, id=None):
             data = {}
             try:
                 obj = self.doc_cls.get(id=hit.meta.id)
-                data = obj.to_dict()
+                data = dict(id=hit.meta.id)
                 obj.delete()
                 resp_data_item = dict(status='deleted',
                                       description='{self.doc_name} with the given [id] correctly deleted.',
-                                      data=expand(data, id=hit.meta.id), http_status_code=HTTPStatus.OK)
+                                      data=expand(obj.to_dict(), **data), http_status_code=HTTPStatus.OK)
                 lcp_handler = self.lcp_handler.get('delete', None)
                 if lcp_handler:
                     lcp_handler(req=hit, resp=resp_data_item)
                 resp_data.append(resp_data_item)
+            except NotFoundError as not_found_err: # TODO maybe it is useless
+                self.log.error(f'Exception: {not_found_err}')
+                resp_data.append(dict(status='error', error=True,
+                                    description=f'{self.doc_name} with the given [id] not found',
+                                    data=data, http_status_code=HTTPStatus.NOT_FOUND))
             except Exception as exception:
                 self.log.error(f'Exception: {exception}')
                 resp_data.append(dict(status='error', error=True,
-                                      description='Not possible to delete element with the given [id]',
-                                      exception=str(exception), data=expand(data, id=hit.meta.id),
+                                      description=f'Not possible to delete the {self.doc_name} with the given [id]',
+                                      exception=str(exception), data=data,
                                       http_status_code=HTTPStatus.CONFLICT))
         resp.media = resp_data
     except RequestError as req_err:

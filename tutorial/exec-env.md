@@ -13,26 +13,31 @@ When the service is deployed by the the orchestrator, it is necessary to insert 
 
 ## Schema
 
-Field         | Type   | Required | Readonly | Example
---------------|--------|----------|----------|--------
-`id`          | String | True     | True     | mysql-server
-`hostname`    | String | True     | False    | 10.0.0.1
-`type_id`     | String | True     | False    | vm
-`lcp`         | LCP    | required | False    |
-`description` | Text   | False    | False    | Open-source relational database management system (RDBMS).
+| Field         | Type   | Required | Readonly | Example                                                    |
+| ------------- | ------ | -------- | -------- | ---------------------------------------------------------- |
+| `id`          | String | True     | True     | mysql-server                                               |
+| `hostname`    | String | True     | False    | 10.0.0.1                                                   |
+| `type_id`     | String | True     | False    | vm                                                         |
+| `lcp`         | LCP    | True     | False    |
+| `description` | String | False    | False    | Open-source relational database management system (RDBMS). |
 
 ### LCP Schema
 
-Field            | Type    | Required | Readonly | Example
------------------|---------|----------|----------|--------
-`port`           | Integer | True     | False    | 4000
-`username`       | String  | False    | True     |
-`password`       | String  | False    | True     |
-`cb_password`    | String  | False    | True     |
-`cb_expiration`  | Date    | False    | True     |
-`last_heartbeat` | Date    | False    | True     |
+| Field            | Type    | Required | Readonly | Example |
+| ---------------- | ------- | -------- | -------- | ------- |
+| `port`           | Integer | True     | False    | 4000    |
+| `username`       | String  | False    | True     |         |
+| `password`       | String  | False    | True     |         |
+| `cb_password`    | String  | False    | True     |         |
+| `cb_expiration`  | Date    | False    | True     |         |
+| `last_heartbeat` | Date    | False    | True     |         |
 
-It is not possible to update readonly fields.
+Note:
+
+- It is not possible to update readonly fields.
+- `id` is required but it is auto-generated if not provided. It is recommended to provide a friendly for simplify the retrieve of
+  connected date in other indices.
+- `type_id` should be one of those stored in [`exec-env-type`](exec-env-type.md) index.
 
 ## Create
 
@@ -44,19 +49,17 @@ with the request body (in JSON format):
 
 ```json
 {
-    "id": "{name-service}",
-    "description": "{human-readable-description}",
-    "type_id": "{id-exec-env-type}",
-    "hostname":"{ip-address}",
+    "id": "{service_name}",
+    "description": "{human_readable_description}",
+    "type_id": "{idexec_env_type_id}",
+    "hostname":"{ip_address}",
     "lcp": {
-        "port" {lcp-port}
+        "port" {lcp_port}
     }
 }
 ```
 
-Replace the data with the correct values, for example `name-service` with `apache`.
-The `id` is auto generated if missing in the request body.
-The `type_id` should be one of those stored in [`exec-env-type`](exec-env-type.md) index.
+Replace the data with the correct values, for example `service_name` with `apache`.
 It is possible to add additional data specific for this execution environment.
 
 If the creation is correctly executed the response is:
@@ -67,13 +70,8 @@ If the creation is correctly executed the response is:
         "status": "created",
         "description": "Execution Environment with the given [id] correctly created.",
         "data": {
-            "id": "{name-service}",
-            "description": "{human-readable-description}",
-            "type_id": "{id-exec-env-type}",
-            "hostname": "{ip-address}",
-            "lcp": {
-                "port": {lcp-port}
-            }
+            "id": "{service_name}",
+            ...
         },
         "http_status_code": 201
     }
@@ -89,7 +87,8 @@ Otherwise, if, for example, an execution environment with the given `id` is alre
         "error": true,
         "description": "Execution Environment with the given [id] already found",
         "data": {
-            "id": "{name-service}"
+            "id": "{service_name}",
+            ...
         },
         "http_status_code": 409
     }
@@ -106,12 +105,8 @@ If some required data is missing (for example `hostname`), the response could be
         "description": "Not possible to create a Execution Environment with the given [data]",
         "exception": "{'hostname': [ValidationException('Value required for this field.')]}",
         "data": {
-            "id": "{name-service}",
-            "description": "{human-readable-description}",
-            "type_id": "{id-exec-env-type}",
-            "lcp": {
-                "port": 4001
-            }
+            "id": "{service_name}",
+            ...
         },
         "http_status_code": 422
     }
@@ -134,13 +129,13 @@ It is possible to filter the results using the following request body:
     "where": {
         "equals": {
             "target:" "id",
-            "expr": "{name-service}"
+            "expr": "{service_name}"
         }
     }
 }
 ```
 
-In this way, it will be returned only the `hostname` of all the execution environments with `id` = "_`{name-service}`_"
+In this way, it will be returned only the `hostname` of all the execution environments with `id` = "_`{service_name}`_"
 
 ## Update
 
@@ -150,12 +145,12 @@ To update an execution environment, use:
 
 ```json
 {
-    id: "{name-service}",
-    "hostname":"{new-ip-address}",
+    "id": "{service_name}",
+    "hostname":"{new_ip_address}",
 }
 ```
 
-This example set the new `hostname` for execution environment with `id` = "_`{name-service}`_".
+This example set the new `hostname` for execution environment with `id` = "_`{service_name}`_".
 Also during the update it is possible to add additional data for the specific execution environment.
 
 A possible response is:
@@ -166,8 +161,8 @@ A possible response is:
         "status": "updated",
         "description": "Execution Environment with the given [id] correctly updated.",
         "data": {
-            "id": "{name-service}",
-            "hostname": "{ip-address}"
+            "id": "{service_name}",
+            ...
         },
         "http_status_code": 200
     }
@@ -182,8 +177,8 @@ Instead, if the are not changes the response is:
         "status": "noop",
         "description": "Execution Environment with the given [id] not updated.",
         "data": {
-            "id": "{name-service}",
-            "hostname": "{new-ip-address}"
+            "id": "{service_name}",
+            ...
         },
         "http_status_code": 200
     }
@@ -201,13 +196,13 @@ To delete an execution environment, use:
     "where": {
         "equals": {
             "target:" "id",
-            "expr": "{name-service}"
+            "expr": "{service_name}"
         }
     }
 }
 ```
 
-This request removes the execution environment with `id` = "_`{name-service}`_".
+This request removes the execution environment with `id` = "_`{service_name}`_".
 
 This is a possible response:
 
@@ -217,13 +212,8 @@ This is a possible response:
         "status": "deleted",
         "description": "Execution Environment with the given [id] correctly deleted.",
         "data": {
-            "id": "{name-service}",
-            "description": "{human-readable-description}",
-            "type_id": "{id-exec-env-type}",
-            "hostname": "{ip-address}",
-            "lcp": {
-                "port": {lcp-port}
-            },
+            "id": "{service_name}",
+            ,,,
         },
         "http_status_code": 200
     }

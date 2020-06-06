@@ -29,7 +29,7 @@ class eBPFProgramCatalogMetricSchema(Schema):
 
 class eBPFProgramConfigCatalogSchema(Schema):
     """eBPF program configuration."""
-    code = Str(required=True, description='Code the eBPF program.')
+    code = Str(required=True, description='Code of the eBPF program.')
     metrics = Nested(eBPFProgramCatalogMetricSchema, many=True,
                      description='eBPF program metrics.')
 

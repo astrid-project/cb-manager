@@ -1,0 +1,96 @@
+{
+    "id": "firewall",
+    "actions": [{
+            "id": "start",
+            "status": "started",
+            "config": {
+                "cmd": "polycubectl firewall add fw"
+            }
+        },
+        {
+            "id": "configure",
+            "config": {
+                "cmd": "polycubectl attach fw br:port1"
+            }
+        },
+        {
+            "id": "stop",
+            "status": "stopped",
+            "config": {
+                "cmd": "polycubectl fw del"
+            }
+        },
+        {
+            "id": "chain",
+            "config": {
+                "cmd": "polycubectl firewall fw chain {chain} insert src={src} dst={dst} action={action}"
+            }
+        },
+        {
+            "id": "chain-default-allow",
+            "config": {
+                "cmd": "polycubectl firewall fw chain {chain} set default=FORWARD"
+            }
+        },
+        {
+            "id": "chain-allow",
+            "config": {
+                "cmd": "polycubectl firewall fw chain {chain} insert src={src} dst={dst} action=FORWARD"
+            }
+        },
+        {
+            "id": "chain-deny",
+            "config": {
+                "cmd": "polycubectl firewall fw chain {chain} insert src={src} dst={dst} action=DENY"
+            }
+        },
+        {
+            "id": "egress",
+            "config": {
+                "cmd": "polycubectl firewall fw chain EGRESS insert src={src} dst={dst} action={action}"
+            }
+        },
+        {
+            "id": "ingress",
+            "config": {
+                "cmd": "polycubectl firewall fw chain INGRESS insert src={src} dst={dst} action={action}"
+            }
+        },
+        {
+            "id": "egress-default-allow",
+            "config": {
+                "cmd": "polycubectl firewall fw chain EGRESS set default=FORWARD"
+            }
+        },
+        {
+            "id": "ingress-default-allow",
+            "config": {
+                "cmd": "polycubectl firewall fw chain INGRESS set default=FORWARD"
+            }
+        },
+        {
+            "id": "egress-allow",
+            "config": {
+                "cmd": "polycubectl firewall fw chain EGRESS insert src={src} dst={dst} action=FORWARD"
+            }
+        },
+        {
+            "id": "ingress-allow",
+            "config": {
+                "cmd": "polycubectl firewall fw chain INGRESS insert src={src} dst={dst} action=FORWARD"
+            }
+        },
+        {
+            "id": "egress-deny",
+            "config": {
+                "cmd": "polycubectl firewall fw chain EGRESS insert src={src} dst={dst} action=DENY"
+            }
+        },
+        {
+            "id": "ingress-deny",
+            "config": {
+                "cmd": "polycubectl firewall fw chain INGRESS insert src={src} dst={dst} action=DENY"
+            }
+        }
+    ]
+}

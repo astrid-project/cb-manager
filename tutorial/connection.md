@@ -11,14 +11,20 @@ Defines the connection between [execution environments](exec-env.md) and [networ
 
 ## Schema
 
-Field             | Type   | Required | Readonly | Example
-------------------|--------|----------|----------|--------
-`id`              | String | True     | True     | http-db-connection
-`exec_env_id`     | String | True     | True     | mysql-server
-`network_link_id` | String | True     | True     | eth0
-`description`     | Text   | False    | False    | Connection for the HTTP and DB Servers.
+| Field             | Type   | Required | Readonly | Example                                 |
+| ----------------- | ------ | -------- | -------- | --------------------------------------- |
+| `id`              | String | True     | True     | http-db-connection                      |
+| `exec_env_id`     | String | True     | True     | mysql-server                            |
+| `network_link_id` | String | True     | True     | eth0                                    |
+| `description`     | String | False    | False    | Connection for the HTTP and DB Servers. |
 
-It is not possible to update readonly fields.
+Note:
+
+- It is not possible to update readonly fields.
+- `id` is required but it is auto-generated if not provided. It is recommended to provide a friendly for simplify the retrieve of
+  connected date in other indices.
+- `exec_env_id` should be one of those stored in [`exec-env`](exec-env.md) index.
+- `network_link_id` should be one of those stored in [`network-link`](network-link.md) index.
 
 ## Create
 
@@ -30,17 +36,14 @@ with the request body (in JSON format):
 
 ```json
 {
-    "id": "{name-connection}",
-    "exec_env_id": "{id-exec-env}",
-    "network_link_id": "{id-network-link}",
-    "description": "{human-readable-description}"
+    "id": "{connection_name}",
+    "exec_env_id": "{exec_env_id}",
+    "network_link_id": "{network_link_id}",
+    "description": "{human_readable_description}"
 }
 ```
 
-Replace the data with the correct values, for example `name-connection` with `http-db-connection`.
-The `id` is auto generated if missing in the request body.
-The `exec_env_id` should be one of those stored in [`exec-env`](exec-env.md) index.
-The `network_link_id` should be one of those stored in [`network-link`](network-link.md) index.
+Replace the data with the correct values, for example `connection_name` with `http-db-connection`.
 It is possible to add additional data specific for this connection.
 
 If the creation is correctly executed the response is:
@@ -51,10 +54,8 @@ If the creation is correctly executed the response is:
         "status": "created",
         "description": "Connection with the given [id] correctly created.",
         "data": {
-            "id": "{name-connection}",
-            "exec_env_id": "{id-exec-env}",
-            "network_link_id": "{id-network-link}",
-            "description": "{human-readable-description}"
+            "id": "{connection_name}",
+            ...
         },
         "http_status_code": 201
     }
@@ -70,7 +71,8 @@ Otherwise, if, for example, a connection with the given `id` is already found, t
         "error": true,
         "description": "Connection with the given [id] already found",
         "data": {
-            "id": "{name-connection}"
+            "id": "{connection_name}",
+            ...
         },
         "http_status_code": 409
     }
@@ -87,9 +89,8 @@ If some required data is missing (for example `exec_env_id`), the response could
         "description": "Not possible to create a Connection with the given [data]",
         "exception": "{'exec_env_id': [ValidationException('Value required for this field.')]}",
         "data": {
-            "id": "{name-connection}",
-            "network_link_id": "{id-network-link}",
-            "description": "{human-readable-description}"
+            "id": "{connection_name}",
+            ...
         },
         "http_status_code": 422
     }
@@ -112,13 +113,13 @@ It is possible to filter the results using the following request body:
     "where": {
         "equals": {
             "target:" "id",
-            "expr": "{name-connection}"
+            "expr": "{connection_name}"
         }
     }
 }
 ```
 
-In this way, it will be returned only the `network_link_id` of the connection with `id` = "_`{name-connection}`_"
+In this way, it will be returned only the `network_link_id` of the connection with `id` = "_`{connection_name}`_"
 
 ## Update
 
@@ -128,12 +129,12 @@ To update a connection, use:
 
 ```json
 {
-    "id": "{name-connection}",
-    "description":"{new-human-readable-description}"
+    "id": "{connection_name}",
+    "description":"{new_human_readable_description}"
 }
 ```
 
-This example set the new `description` for the connecion with `id` = "_`{name-connection}`_".
+This example set the new `description` for the connecion with `id` = "_`{connection_name}`_".
 Also during the update it is possible to add additional data for the specific connection.
 
 A possible response is:
@@ -144,8 +145,8 @@ A possible response is:
         "status": "updated",
         "description": "Connection with the given [id] correctly updated.",
         "data": {
-            "id": "{name-connection}",
-            "description":"{new-human-readable-description}"
+            "id": "{connection_name}",
+            ...
         },
         "http_status_code": 200
     }
@@ -160,8 +161,8 @@ Instead, if the are not changes the response is:
         "status": "noop",
         "description": "Connection with the given [id] not updated.",
         "data": {
-            "id": "{name-connection}",
-            "description":"{new-human-readable-description}"
+            "id": "{connection_name}",
+            ...
         },
         "http_status_code": 200
     }
@@ -179,13 +180,13 @@ To delete a connection, use:
     "where": {
         "equals": {
             "target:" "id",
-            "expr": "{name-connection}"
+            "expr": "{connection_name}"
         }
     }
 }
 ```
 
-This request removes the connection with `id` = "_`{name-connection}`_".
+This request removes the connection with `id` = "_`{connection_name}`_".
 
 This is a possible response:
 
@@ -195,10 +196,8 @@ This is a possible response:
         "status": "deleted",
         "description": "Connection with the given [id] correctly deleted.",
         "data": {
-            "id": "{name-connection}",
-            "exec_env_id": "{id-exec-env}",
-            "network_link_id": "{id-network-link}",
-            "description": "{human-readable-description}"
+            "id": "{connection_name}",
+            ...
         },
         "http_status_code": 200
     }

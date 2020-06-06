@@ -14,6 +14,8 @@ from resource.exec_env.type import ExecEnvTypeResource, ExecEnvTypeSelectedResou
 from resource.network_link import NetworkLinkResource, NetworkLinkSelectedResource
 from resource.network_link.type import NetworkLinkTypeResource, NetworkLinkTypeSelectedResource
 
+from resource.service_graph import ServiceGraphResource
+
 from utils.log import Log
 from utils.sequence import wrap
 
@@ -27,7 +29,8 @@ db = (
     ExecEnvResource, ExecEnvSelectedResource,
     ExecEnvTypeResource, ExecEnvTypeSelectedResource,
     NetworkLinkResource, NetworkLinkSelectedResource,
-    NetworkLinkTypeResource, NetworkLinkTypeSelectedResource
+    NetworkLinkTypeResource, NetworkLinkTypeSelectedResource,
+    ServiceGraphResource
 )
 
 tags = []

@@ -34,14 +34,10 @@ definitions:
         type: array
       description:
         description: Short descripton of the agent actions.
-        example: Start the execution.
+        example: Start the execution of the agent.
         type: string
       id:
         description: Action name
-        enum:
-        - start
-        - stop
-        - restart
         example: start
         readOnly: true
         type: string
@@ -564,7 +560,7 @@ definitions:
   eBPFProgramConfigCatalog:
     properties:
       code:
-        description: Code the eBPF program.
+        description: Code of the eBPF program.
         type: string
       metrics:
         description: eBPF program metrics.
@@ -644,7 +640,7 @@ definitions:
     type: object
 info:
   title: Context Broker Manager
-  version: 80a141ae87a966db487cca386dc9211c3f5fce1d@master
+  version: 71a8580224c48930adf8828ff1fa0a90c1538342@master
 paths:
   /catalog/agent/:
     delete:
@@ -3234,6 +3230,8 @@ paths:
       summary: Network Link Type Update (Single)
       tags:
       - network-link-type
+  /service-graph/:
+    post: {}
 produces:
 - application/json
 swagger: '2.0'
@@ -3280,3 +3278,4 @@ tags:
   name: network-link-type
 - description: Represents a network link type.
   name: network-link-type
+- []

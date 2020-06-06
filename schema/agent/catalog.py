@@ -38,14 +38,13 @@ class AgentCatalogActionConfigSchema(Schema):
 
 class AgentCatalogActionSchema(Schema):
     """Agent action."""
-    id = Str(required=True, dump_only=True, enum=['start', 'stop', 'restart'], description='Action name',
-             example='start', readonly=True)
+    id = Str(required=True, dump_only=True, description='Action name', example='start', readonly=True)
     config = Nested(AgentCatalogActionConfigSchema, required=True,
                     many=True, description='Action config.')
-    status = Str(enum=['started', 'stopped', 'unknown'], example='started', default=None,
+    status = Str(enum=['started', 'stopped', 'unknown'], example='started',
                  description='Update the status the of the agent-instance if the command is executed correctly.')
     description = Str(description='Short descripton of the agent actions.',
-                      example='Start the execution.')
+                      example='Start the execution of the agent.')
 
 
 class AgentCatalogSchema(Schema):

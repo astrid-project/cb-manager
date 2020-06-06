@@ -13,13 +13,17 @@ Each execution environment belongs to a specific type that is referred with the 
 
 ## Schema
 
-Field         | Type   | Required | Readonly | Example
---------------|--------|----------|----------|--------
-`id`          | String | True     | True     | vm
-`name`        | String | True     | False    | Virtual Machine
-`description` | Text   | False    | False    | The service is deployed in virtual machine.
+| Field         | Type   | Required | Readonly | Example                                     |
+| ------------- | ------ | -------- | -------- | ------------------------------------------- |
+| `id`          | String | True     | True     | vm                                          |
+| `name`        | String | True     | False    | Virtual Machine                             |
+| `description` | String | False    | False    | The service is deployed in virtual machine. |
 
-It is not possible to update readonly fields.
+Note:
+
+- It is not possible to update readonly fields.
+- `id` is required but it is auto-generated if not provided. It is recommended to provide a friendly for simplify the retrieve of
+  connected date in other indices.
 
 ## Create
 
@@ -31,14 +35,13 @@ with the request body (in JSON format):
 
 ```json
 {
-    id: "{name-type}",
-    "name": "{formal-name}"
+    "id": "{type_name}",
+    "name": "{formal_name}"
 }
 ```
 
-Replace the data with the correct values, for example `name-type`, and `formal-name` with `vm`
+Replace the data with the correct values, for example `type_name`, and `formal_name` with `vm`
 and `Virtual Machine`, respectively.
-The `id` is auto generated if missing in the request body.
 It is possible to add additional data specific for this execution environment type.
 
 If the creation is correctly executed the response is:
@@ -49,8 +52,8 @@ If the creation is correctly executed the response is:
         "status": "created",
         "description": "Execution Environment Type with the given [id] correctly created.",
         "data": {
-            "id": "{name-type}",
-            "name": "{forma-name}"
+            "id": "{type_name}",
+            ...
         },
         "http_status_code": 201
     }
@@ -66,7 +69,8 @@ Otherwise, if, for example, an execution environment type with the given `id` is
         "error": true,
         "description": "Execution Environment Type with the given [id] already found",
         "data": {
-            "id": "{name-type}"
+            "id": "{type_name}",
+            ...
         },
         "http_status_code": 409
     }
@@ -83,7 +87,8 @@ If some required data is missing (for example `name`), the response could be:
         "description": "Not possible to create a Execution Environment Type with the given [data]",
         "exception": "{'name': [ValidationException('Value required for this field.')]}",
         "data": {
-            "id": "{name-type}",
+            "id": "{type_name}",
+            ...
         },
         "http_status_code": 422
     }
@@ -106,13 +111,13 @@ It is possible to filter the results using the following request body:
     "where": {
         "equals": {
             "target:" "id",
-            "expr": "{name-type}"
+            "expr": "{type_name}"
         }
     }
 }
 ```
 
-In this way, it will be returned only the `name` of the execution environment type with `id` = "_`{name-type}`_"
+In this way, it will be returned only the `name` of the execution environment type with `id` = "_`{type_name}`_"
 
 ## Update
 
@@ -122,12 +127,12 @@ To update an execution environment type, use:
 
 ```json
 {
-    id: "{name-type}",
-    "name":"{new-formal-name}",
+    "id": "{type_name}",
+    "name":"{new_formal_name}",
 }
 ```
 
-This example set the new `name` for the execution environment type with `id` = "_`{name-type}`_".
+This example set the new `name` for the execution environment type with `id` = "_`{type_name}`_".
 Also during the update it is possible to add additional data for the specific execution environment type.
 
 A possible response is:
@@ -138,8 +143,8 @@ A possible response is:
         "status": "updated",
         "description": "Execution Environment Type with the given [id] correctly updated.",
         "data": {
-            "id": "{name-type}",
-            "name": "{new-formal-name}"
+            "id": "{type_name}",
+            ..
         },
         "http_status_code": 200
     }
@@ -154,8 +159,8 @@ Instead, if the are not changes the response is:
         "status": "noop",
         "description": "Execution Environment Type with the given [id] not updated.",
         "data": {
-            "id": "{name-type}",
-            "name": "{formal-name}"
+            "id": "{type_name}",
+            ...
         },
         "http_status_code": 200
     }
@@ -173,13 +178,13 @@ To delete an execution environment type, use:
     "where": {
         "equals": {
             "target:" "id",
-            "expr": "{name-type}"
+            "expr": "{type_name}"
         }
     }
 }
 ```
 
-This request removes the execution environment type with `id` = "_`{name-type}`_".
+This request removes the execution environment type with `id` = "_`{type_name}`_".
 
 This is a possible response:
 
@@ -189,8 +194,8 @@ This is a possible response:
         "status": "deleted",
         "description": "Execution Environment Type with the given [id] correctly deleted.",
         "data": {
-            "name": "{formal-name}",
-            "id": "{name-type}"
+            "id": "{type_name}",
+            ...
         },
         "http_status_code": 200
     }
@@ -201,7 +206,7 @@ NOTE: Without request body, it removes **all** the execution environments.
 
 ## Loaded data
 
-For the demo, this data are already available:
+For the demo, this data is already available:
 
 Response of **GET** /_type_/_exec-env_
 

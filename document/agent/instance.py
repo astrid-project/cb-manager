@@ -17,5 +17,5 @@ class AgentInstanceDocument(Document):
     description = Text()
 
     class Index:
-        """Elasticsearch configuration..."""
+        """Elasticsearch configuration."""
         name = 'agent-instance'

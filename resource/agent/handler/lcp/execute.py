@@ -25,7 +25,13 @@ def prepare(type, catalog, data, filter, resp_lcp):
 
 
 def filter_action(action, data):
-    return valmap(lambda x: x.format(**data), action)
+    def frmt(x):
+        if isinstance(x, (list, tuple)):
+            return [frmt(i) for i in x]
+        else:
+            return x.format(**data)
+
+    return valmap(lambda x: frmt(x), action)
 
 
 def filter_parameters(parameter, data):
