@@ -1,9 +1,12 @@
 {
     "cSpell.words": [
+        "certdir",
         "chdir",
-        "cubebeat",
         "cmds",
+        "codeclimate",
+        "cubebeat",
         "datetime",
+        "dind",
         "envs",
         "execenv",
         "filebeat",
@@ -21,6 +24,8 @@
         "polycube",
         "polycubectl",
         "proto",
+        "pycodestyle",
+        "pydocstyle",
         "quantulum",
         "rbac",
         "strftime",
@@ -28,6 +33,7 @@
         "synflood",
         "toolz",
         "unprocessable",
-        "ureg"
+        "ureg",
+        "werkzeug"
     ]
 }

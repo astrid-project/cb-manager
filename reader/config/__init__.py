@@ -35,7 +35,6 @@ class ConfigReader:
 
         Log.init(default=self.log_level, levels=self.cr.items('log'))
 
-
     def write(self, db):
         self.cr.set('context-broker', 'port', db.port)
         self.cr.set('elasticsearch', 'endpoint', db.es_endpoint)

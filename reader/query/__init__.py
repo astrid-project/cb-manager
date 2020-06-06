@@ -5,7 +5,8 @@ from utils.log import Log
 
 
 class QueryReader:
-    def __init__(self, index): self.s = Search(index=index)
+    def __init__(self, index):
+        self.s = Search(index=index)
 
     def parse(self, query, id=None):
         try:
@@ -15,7 +16,8 @@ class QueryReader:
             self._limit(query)
         except RequestError as req_err:
             raise HTTPBadRequest(title=req_err.error, description=req_err.info)
-        except HTTPBadRequest as http_bad_req: raise http_bad_req
+        except HTTPBadRequest as http_bad_req:
+            raise http_bad_req
         except Exception as exception:
             Log.get('query-reader').error(f'Exception: {exception}')
             raise HTTPBadRequest(
@@ -23,8 +25,11 @@ class QueryReader:
                 description='The request body is not a valid JSON or it is not encoded as UTF-8.')
         return self.s
 
-    def fix_target(self, prop): return '_id' if prop == 'id' else prop
-    def _select(self, query): self.s = self.s.source(query.get('select', None))
+    def fix_target(self, prop):
+        return '_id' if prop == 'id' else prop
+
+    def _select(self, query):
+        self.s = self.s.source(query.get('select', None))
 
     from reader.query.where import _where
     from reader.query.order import _order

@@ -6,7 +6,7 @@ from utils.sequence import wrap
 
 def on_base_post(self, req, resp, id=None):
     resp_data = []
-    req_data = req.context.get('json', []) # TODO add YAML and XML support
+    req_data = req.context.get('json', [])  # TODO add YAML and XML support
     if id is not None:
         if type(req_data) is list:
             raise HTTPBadRequest(title='id provided',
@@ -18,7 +18,8 @@ def on_base_post(self, req, resp, id=None):
         req_data_item_id = req_data_item.pop('id', None)
         if req_data_item_id is not None and single_item:
             resp_data.append(dict(status='error', error=True, description=f'Request not valid: two ids provided',
-                                  data=dict(id=dict(item=req_data_item_id, parameter=id)),
+                                  data=dict(
+                                      id=dict(item=req_data_item_id, parameter=id)),
                                   http_status_code=HTTPStatus.CONFLICT))
         else:
             try:
@@ -35,7 +36,7 @@ def on_base_post(self, req, resp, id=None):
                             req_data_item.pop(ignore_field)
                             self.log.info(
                                 f'field {ignore_field} in the request ignored when update {self.doc_name}')
-                        except:
+                        except Exception as exception:
                             pass
                     obj = self.doc_cls(meta=meta, **req_data_item)
                     obj.save()
@@ -45,7 +46,8 @@ def on_base_post(self, req, resp, id=None):
                     resp_data.append(resp_data_item)
                     lcp_handler = self.lcp_handler.get('post', None)
                     if lcp_handler:
-                        num_ok, num_errors = lcp_handler(instance=obj, req=req_data_lcp, resp=resp_data_item)
+                        num_ok, num_errors = lcp_handler(
+                            instance=obj, req=req_data_lcp, resp=resp_data_item)
                 else:
                     resp_data.append(dict(status='error', error=True,
                                           description=f'{self.doc_name} with the given [id] already found',

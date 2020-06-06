@@ -20,11 +20,13 @@ def heartbeat():
             lcp = exec_env.lcp
             lcp_cb_password = generate_password()
             lcp.cb_password = hash(lcp_cb_password)
-            lcp.cb_expiration = datetime_to_str(datetime.now() + timedelta(seconds=ArgReader.db.hb_auth_expiration))
-            auth = dict(username=lcp.username, password=lcp.password) if lcp.last_heartbeat else {}
+            lcp.cb_expiration = datetime_to_str(
+                datetime.now() + timedelta(seconds=ArgReader.db.hb_auth_expiration))
+            auth = dict(username=lcp.username,
+                        password=lcp.password) if lcp.last_heartbeat else {}
             resp = post(f'http://{exec_env.hostname}:{lcp.port}/status', timeout=ArgReader.db.hb_timeout,
                         json=dict(id=exec_env.meta.id, **auth, cb_password=lcp_cb_password,
-                                cb_expiration=lcp.cb_expiration))
+                                  cb_expiration=lcp.cb_expiration))
         except Exception as exception:
             log.error(f'Exception: {exception}')
             lcp.username = lcp.password = lcp.last_heartbeat = None
@@ -32,13 +34,15 @@ def heartbeat():
         else:
             try:
                 if resp.status_code == HTTPStatus.OK:
-                    data = resp.json() # TODO add YAML and XML support
+                    data = resp.json()  # TODO add YAML and XML support
                     lcp.username = data.get('username', None)
                     lcp.password = data.get('password', None)
                     lcp.last_heartbeat = data.get('last_hearthbeat', None)
-                    log.success(f'LCP Connection with id = {exec_env.meta.id} established')
+                    log.success(
+                        f'LCP Connection with id = {exec_env.meta.id} established')
                 else:
-                    log.warning(f'Reset LCP connection with id = {exec_env.meta.id}')
+                    log.warning(
+                        f'Reset LCP connection with id = {exec_env.meta.id}')
                     log.notice(f'response: {resp}')
                     lcp.username = lcp.password = lcp.last_heartbeat = None
             except Exception as exception:

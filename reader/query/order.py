@@ -8,6 +8,7 @@ def _order(self, query):
         mode = order.get('mode', None)
         if prop is not None and mode is not None:
             sort_list.append(prop if mode == 'asc' else f'-{prop}')
-        else: raise HTTPBadRequest(title='Request not valid',
-                                   description=f'order with not valid/missing data')
+        else:
+            raise HTTPBadRequest(title='Request not valid',
+                                 description=f'order with not valid/missing data')
     self.s = self.s.sort(*sort_list)

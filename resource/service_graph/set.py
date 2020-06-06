@@ -11,7 +11,7 @@ def __set(data, results):
                        auth=HTTPBasicAuth('cb-manager', 'astrid'), json=data)
     if resp_req.content:
         try:
-            resp_data = resp_req.json() # TODO add YAML and XML support
+            resp_data = resp_req.json()  # TODO add YAML and XML support
             results.append(resp_data[0])
             return not resp_data[0].get('error', False)
         except Exception as exception:
@@ -28,14 +28,15 @@ def __set(data, results):
 
 def set_action(target, chain, src, dst, action, results):
     data = dict(id=f'firewall@{target}', actions=dict(
-           id=chain, src=src, dst=dst, action=action.upper()))
+        id=chain, src=src, dst=dst, action=action.upper()))
     return __set(data, results)
 
 
 def set_default(action, results):
     s = ExecEnvDocument.search()
     for exec_env in s.execute():
-        data = dict(id=f'firewall@{exec_env.meta.id}', actions=dict(action=action.upper()))
+        data = dict(id=f'firewall@{exec_env.meta.id}',
+                    actions=dict(action=action.upper()))
         data['actions']['id'] = 'egress-default'
         if __set(data, results):
             data['actions']['id'] = 'ingress-default'

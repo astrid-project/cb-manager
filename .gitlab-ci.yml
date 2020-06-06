@@ -1,7 +1,8 @@
 docker-build:
   stage: build
   script:
-    - "curl -X POST -F token=0fc35482b4ca31b76ad4ee95587028 -F ref=master https://gitlab.com/api/v4/projects/18720527/trigger/pipeline"
+    - "curl -X POST -F token=0fc35482b4ca31b76ad4ee95587028 -F ref=master
+        https://gitlab.com/api/v4/projects/18720527/trigger/pipeline"
   rules:
     - changes:
         - "**/*.py"

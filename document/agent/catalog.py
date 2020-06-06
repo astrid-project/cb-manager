@@ -26,10 +26,11 @@ class AgentCatalogParameterConfigInnerDoc(InnerDoc):
 class AgentCatalogParameterInnerDoc(InnerDoc):
     """Agent parameter."""
     id = Text(required=True)
-    type = Text(required=True) # possible values: integer, number, time-duration, string, choice, boolean, binary
+    # possible values: integer, number, time-duration, string, choice, boolean, binary
+    type = Text(required=True)
     config = Nested(AgentCatalogParameterConfigInnerDoc, required=True)
     list = Boolean()
-    values = Text() # when type = choice
+    values = Text()  # when type = choice
     description = Text()
     example = Text()
 

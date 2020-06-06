@@ -18,7 +18,8 @@ class eBPFProgramCatalogMetricInnerDoc(InnerDoc):
     """eBPF program metric data."""
     name = Text(required=True)
     map_name = Text(required=True)
-    open_metrics_metadata = Nested(eBPFProgramCatalogOpenMetricsMetadataInnerDoc)
+    open_metrics_metadata = Nested(
+        eBPFProgramCatalogOpenMetricsMetadataInnerDoc)
 
 
 class eBPFProgramConfigCatalogInnerDoc(InnerDoc):
@@ -30,9 +31,10 @@ class eBPFProgramConfigCatalogInnerDoc(InnerDoc):
 class eBPFProgramParameterCatalogInnerDoc(InnerDoc):
     """eBPF program parameter."""
     id = Text(required=True)
-    type = Text(required=True) # possible values: integer, number, string, choice, boolean
+    # possible values: integer, number, string, choice, boolean
+    type = Text(required=True)
     list = Boolean()
-    values = Text() # when type = choice
+    values = Text()  # when type = choice
     description = Text()
     example = Text()
 

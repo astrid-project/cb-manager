@@ -1,4 +1,5 @@
 apispec
+bandit
 colorama
 coloredlogs
 elasticsearch-dsl>=7.0.0
@@ -8,6 +9,8 @@ falcon-auth
 falcon-marshmallow
 gitpython
 pint
+pycodestyle
+pydocstyle
 requests
 swagger-ui-py
 toolz

@@ -11,7 +11,8 @@ def lcp_delete(req, resp):
     resp_data = resp.get('data')
 
     ebpf_program_catalog = from_doc(document=eBPFProgramCatalogDocument,
-                                    id=resp_data.get('ebpf_program_catalog_id', None),
+                                    id=resp_data.get(
+                                        'ebpf_program_catalog_id', None),
                                     name='eBPF Program Catalog',
                                     resp_lcp=resp_lcp)
 
@@ -22,13 +23,16 @@ def lcp_delete(req, resp):
 
     if all([ebpf_program_catalog, exec_env]):
         resp_req = delete_req(f'http://{exec_env.hostname}:{exec_env.lcp.port}/code',
-                              auth=HTTPBasicAuth(exec_env.lcp.username, exec_env.lcp.password),
+                              auth=HTTPBasicAuth(
+                                  exec_env.lcp.username, exec_env.lcp.password),
                               json=dict(id=ebpf_program_catalog.meta.id))
         if resp_req.content:
             try:
-                resp_lcp.append(resp_req.json()) # TODO add YAML and XML support
+                # TODO add YAML and XML support
+                resp_lcp.append(resp_req.json())
             except Exception as exception:
-                Log.get('ebpf-program-instance-lcp').error(f'Exception: {exception}')
+                Log.get(
+                    'ebpf-program-instance-lcp').error(f'Exception: {exception}')
                 resp_lcp.append(dict(status='error', error=True, description='Response data not valid.',
                                      exception=str(exception), data=dict(response=resp_lcp.content),
                                      http_status_code=resp_req.status_code))
