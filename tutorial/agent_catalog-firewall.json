@@ -27,6 +27,12 @@
             }
         },
         {
+            "id": "chain-default",
+            "config": {
+                "cmd": "polycubectl firewall fw chain {chain} set default={action}"
+            }
+        },
+        {
             "id": "chain-default-allow",
             "config": {
                 "cmd": "polycubectl firewall fw chain {chain} set default=FORWARD"
@@ -54,6 +60,18 @@
             "id": "ingress",
             "config": {
                 "cmd": "polycubectl firewall fw chain INGRESS insert src={src} dst={dst} action={action}"
+            }
+        },
+        {
+            "id": "egress-default",
+            "config": {
+                "cmd": "polycubectl firewall fw chain EGRESS set default={action}"
+            }
+        },
+        {
+            "id": "ingress-default",
+            "config": {
+                "cmd": "polycubectl firewall fw chain INGRESS set default={action}"
             }
         },
         {

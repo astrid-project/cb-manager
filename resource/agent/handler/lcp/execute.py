@@ -34,8 +34,12 @@ def filter_action(action, data):
     return valmap(lambda x: frmt(x), action)
 
 
-def filter_parameters(parameter, data):
+def filter_parameter(parameter, data):
     return expand(parameter, value=data.get('value', None))
+
+
+def filter_resource(resource, data):
+    return expand(resource, content=data.get('content', None))
 
 
 def execute(instance, catalog, req, exec_env, resp_lcp):
@@ -44,8 +48,12 @@ def execute(instance, catalog, req, exec_env, resp_lcp):
     actions, req_lcp['actions'] = prepare('action', catalog.actions, req.get('actions', []),
                                            filter_action, resp_lcp)
     parameters, req_lcp['parameters'] = prepare('parameter', catalog.parameters, req.get('parameters', []),
-                                                filter_parameters, resp_lcp)
-    if len(req_lcp['actions']) + len(req_lcp['parameters']) > 0:
+                                                filter_parameter, resp_lcp)
+    resources, req_lcp['resources'] = prepare('resource', catalog.resources, req.get('resources', []),
+                                               filter_resource, resp_lcp)
+    num_ok = 0
+    num_errors = len(req_lcp['actions']) + len(req_lcp['parameters']) + len(req_lcp['resources'])
+    if num_errors > 0:
         username, password = exec_env.lcp.username, exec_env.lcp.password
         resp_req = post_req(f'http://{exec_env.hostname}:{exec_env.lcp.port}/config',
                             auth=HTTPBasicAuth(username, password), json=req_lcp)
@@ -53,7 +61,18 @@ def execute(instance, catalog, req, exec_env, resp_lcp):
             try:
                 resp = resp_req.json()
                 results = resp.get('results', [])
+
                 action_results = filter(lambda r: r.get('type') == 'action', results)
+                parameter_results = filter(lambda r: r.get('type') == 'parameter', results)
+                resource_results = filter(lambda r: r.get('type') == 'resource', results)
+
+                action_ok = len(list(filter(lambda r: not r.get('error', False), action_results)))
+                parameter_ok = len(list(filter(lambda r: not r.get('error', False), parameter_results)))
+                resource_ok = len(list(filter(lambda r: not r.get('error', False), resource_results)))
+
+                num_ok = action_ok + parameter_ok + resource_ok
+                num_errors = num_errors - num_ok
+
                 update_status = None
                 for action, action_result in zip(actions, action_results):
                     action_error = action_result.get('error', False)
@@ -71,3 +90,4 @@ def execute(instance, catalog, req, exec_env, resp_lcp):
             # TODO add more useful info
             resp_lcp.append(dict(status='error', error=True, description='Request not executed.',
                                  http_status_code=resp_req.status_code))
+    return num_ok, num_errors

@@ -8,7 +8,7 @@ from utils.sequence import subset, wrap
 
 def on_base_put(self, req, resp, id=None):
     resp_data = []
-    req_data = req.context.get('json', [])
+    req_data = req.context.get('json', []) # TODO add YAML and XML support
     if id is not None:
         if type(req_data) is list:
             raise HTTPBadRequest(title='id provided',
@@ -50,6 +50,7 @@ def on_base_put(self, req, resp, id=None):
                             break
                     if not error:
                         status_item = 'noop'
+                        desc_item = 'not'
                         for nested_field in self.nested_fields:
                             nested_data = wrap(req_data_item.get(nested_field, []))
                             status_item_rm = nested_rm(obj, data=nested_data, field=nested_field)
@@ -61,17 +62,20 @@ def on_base_put(self, req, resp, id=None):
                             status_req_data_item = obj.update(**subset_req_data_item)
                             if status_req_data_item == 'updated':
                                 status_item = status_req_data_item
-                        if status_item == 'updated':
-                            desc_item = f'{self.doc_name} with the given [id] correctly updated.'
-                        else:
-                            desc_item = f'{self.doc_name} with the given [id] not updated.'
-                        resp_data_item = dict(status=status_item, description=desc_item,
-                                            data=dict(**obj.to_dict(), id=req_data_item_id),
+                            if status_item == 'updated': desc_item = 'correctly'
+                        resp_data_item = dict(data=dict(**obj.to_dict(), id=req_data_item_id),
                                             http_status_code=HTTPStatus.OK)
-                        resp_data.append(resp_data_item)
                         lcp_handler = self.lcp_handler.get('put', None)
                         if lcp_handler:
-                            lcp_handler(instance=obj, req=req_data_lcp, resp=resp_data_item)
+                            num_ok, num_errors = lcp_handler(instance=obj, req=req_data_lcp, resp=resp_data_item)
+                            if num_ok > 0:
+                                status_item = 'updated'
+                                desc_item = 'correctly' if num_errors == 0 else 'partially'
+                            elif num_errors > 0 and status_item == 'updated':
+                                desc_item = 'partially'
+                        resp_data_item.update(status=status_item,
+                                              description=f'{self.doc_name} with the given [id] {desc_item} updated.')
+                        resp_data.append(resp_data_item)
             except NotFoundError as not_found_err:
                 self.log.error(f'Exception: {not_found_err}')
                 resp_data.append(dict(status='error', error=True,

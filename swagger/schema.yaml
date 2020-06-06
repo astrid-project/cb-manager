@@ -36,6 +36,10 @@ definitions:
         description: Short descripton of the agent actions.
         example: Start the execution of the agent.
         type: string
+      example:
+        description: Example of action parameter.
+        example: forward
+        type: string
       id:
         description: Action name
         example: start
@@ -640,7 +644,7 @@ definitions:
     type: object
 info:
   title: Context Broker Manager
-  version: 71a8580224c48930adf8828ff1fa0a90c1538342@master
+  version: 75a00d8610246d1784177a14989ed2b5d7309533@master
 paths:
   /catalog/agent/:
     delete:

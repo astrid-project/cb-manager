@@ -32,7 +32,7 @@ def heartbeat():
         else:
             try:
                 if resp.status_code == HTTPStatus.OK:
-                    data = resp.json()
+                    data = resp.json() # TODO add YAML and XML support
                     lcp.username = data.get('username', None)
                     lcp.password = data.get('password', None)
                     lcp.last_heartbeat = data.get('last_hearthbeat', None)

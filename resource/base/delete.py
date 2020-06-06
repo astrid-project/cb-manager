@@ -10,7 +10,7 @@ def on_base_delete(self, req, resp, id=None):
     try:
         resp_data = []
         qr = QueryReader(index=self.doc_cls.Index.name)
-        s = qr.parse(query=req.context.get('json', {}), id=id)
+        s = qr.parse(query=req.context.get('json', {}), id=id) # TODO add YAML and XML support
         for hit in s.execute():
             data = {}
             try:
@@ -22,7 +22,7 @@ def on_base_delete(self, req, resp, id=None):
                                       data=expand(obj.to_dict(), **data), http_status_code=HTTPStatus.OK)
                 lcp_handler = self.lcp_handler.get('delete', None)
                 if lcp_handler:
-                    lcp_handler(req=hit, resp=resp_data_item)
+                    num_ok, num_errors = lcp_handler(req=hit, resp=resp_data_item)
                 resp_data.append(resp_data_item)
             except NotFoundError as not_found_err: # TODO maybe it is useless
                 self.log.error(f'Exception: {not_found_err}')

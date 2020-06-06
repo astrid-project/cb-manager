@@ -6,7 +6,7 @@ from utils.sequence import wrap
 
 def on_base_post(self, req, resp, id=None):
     resp_data = []
-    req_data = req.context.get('json', [])
+    req_data = req.context.get('json', []) # TODO add YAML and XML support
     if id is not None:
         if type(req_data) is list:
             raise HTTPBadRequest(title='id provided',
@@ -45,8 +45,7 @@ def on_base_post(self, req, resp, id=None):
                     resp_data.append(resp_data_item)
                     lcp_handler = self.lcp_handler.get('post', None)
                     if lcp_handler:
-                        lcp_handler(instance=obj, req=req_data_lcp,
-                                    resp=resp_data_item)
+                        num_ok, num_errors = lcp_handler(instance=obj, req=req_data_lcp, resp=resp_data_item)
                 else:
                     resp_data.append(dict(status='error', error=True,
                                           description=f'{self.doc_name} with the given [id] already found',

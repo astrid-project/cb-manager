@@ -8,6 +8,8 @@ Contains the available agents to be installed in the [execution environments](ex
       - [Action Config Schema](#action-config-schema)
     - [Parameter Schema](#parameter-schema)
       - [Parameter Config Schema](#parameter-config-schema)
+    - [Resource Schema](#resource-schema)
+      - [Resource Config Schema](#resource-config-schema)
   - [Create](#create)
   - [Read](#read)
   - [Update](#update)
@@ -21,6 +23,7 @@ Contains the available agents to be installed in the [execution environments](ex
 | `id`          | String          | True     | True     | firewall |
 | `actions`     | List(Action)    | False    | False    |          |
 | `parameters`  | List(Parameter) | False    | False    |          |
+| `resources`   | List(Resource)  | False    | False    |          |
 | `description` | String          | False    | False    | [^1]     |
 
 [^1]: Monitors and controls incoming and outgoing network traffic based on predetermined security rules.
@@ -64,6 +67,21 @@ Contains the available agents to be installed in the [execution environments](ex
 | `source` | String                                    | False    | False    | /usr/share/filebeat/filebeat.yml |
 | `path`   | Lis(String)                               | False    | False    | enabled                          |
 
+### Resource Schema
+
+| Field         | Type           | Required | Readonly | Example             |
+| ------------- | -------------- | -------- | -------- | ------------------- |
+| `id`          | String         | True     | True     | filebeat-config     |
+| `config`      | ResourceConfig | True     | False    |                     |
+| `description` | String         | False    | False    | Configuration file. |
+| `example`     | String         | False    | False    |                     |
+
+#### Resource Config Schema
+
+| Field  | Type        | Required | Readonly | Example                           |
+| ------ | ----------- | -------- | -------- | --------------------------------- |
+| `path` | Lis(String) | False    | False    | /usr/share/filebeat/filebeat.yml  |
+
 Note:
 
 - It is not possible to update readonly fields.
@@ -81,28 +99,40 @@ with the request body (in JSON format):
 ```json
 {
     "id": "{agent_name}",
-    "parameters": [
-        {
-            "id": "{parameter_name}",
-            "type": "{parameter_type}",
-            "example": "{parameter_example}",
-            "description": "{parameter_human_readable_description}",
-            "config": {
-                "schema": "{parameter_schema}",
-                "source": "{parameter_source}",
-                "path": [
-                    "{parameter_path}"
-                ]
-            }
-        }
-    ],
     "actions": [
         {
             "id": "{action_name}",
             "status": "{action_status}",
             "config": {
                 "cmd": "{action_cmd}"
-            }
+            },
+            "description": "{action_human_readable_description}",
+            "example": "{action_example}"
+        }
+    ],
+    "parameters": [
+        {
+            "id": "{parameter_name}",
+            "type": "{parameter_type}",
+            "config": {
+                "schema": "{parameter_schema}",
+                "source": "{parameter_source}",
+                "path": [
+                    "{parameter_path}"
+                ]
+            },
+            "description": "{parameter_human_readable_description}",
+            "example": "{parameter_example}",
+        }
+    ],
+    "resources": [
+        {
+            "id": "{resource_name}",
+            "config": {
+                "path": "{resource_path}"
+            },
+            "description": "{resource_human_readable_description}",
+            "example": "{resource_example}",
         }
     ]
 }
@@ -214,7 +244,7 @@ To update an agent in the catalog, use:
 
 This example
 
-1. updates the new `type` of the `paramter` with `id` = "_`{parameter_name}`_";
+1. updates the new `type` of the `parameter` with `id` = "_`{parameter_name}`_";
 2. adds a new action
 
 of the agent with `id` = `agent_name`.

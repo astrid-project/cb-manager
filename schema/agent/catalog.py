@@ -2,6 +2,25 @@ from marshmallow import Schema
 from marshmallow.fields import Bool, Nested, Str
 
 
+class AgentCatalogActionConfigSchema(Schema):
+    """Agent action configuration."""
+    cmd = Str(required=True, description='Action command.', example='service filebeat start')
+    args = Str(many=True, description='Action command argument', example='-v')
+    daemon = Str(description='Key used to execute the command as daemon.', example='firewall')
+
+
+class AgentCatalogActionSchema(Schema):
+    """Agent action."""
+    id = Str(required=True, dump_only=True, description='Action name', example='start', readonly=True)
+    config = Nested(AgentCatalogActionConfigSchema, required=True,
+                    many=True, description='Action config.')
+    status = Str(enum=['started', 'stopped', 'unknown'], example='started',
+                 description='Update the status the of the agent-instance if the command is executed correctly.')
+    description = Str(description='Short descripton of the agent actions.',
+                      example='Start the execution of the agent.')
+    example = Str(description='Example of action parameter.', example='forward')
+
+
 class AgentCatalogParameterConfigSchema(Schema):
     """Agent parameter configuration."""
     schema = Str(required=True, enum=['yaml', 'json', 'properties'],
@@ -29,22 +48,20 @@ class AgentCatalogParameterSchema(Schema):
     example = Str(description='Example of parameter value.', example='10s')
 
 
-class AgentCatalogActionConfigSchema(Schema):
-    """Agent action configuration."""
-    cmd = Str(required=True, description='Action command.', example='service filebeat start')
-    args = Str(many=True, description='Action command argument', example='-v')
-    daemon = Str(description='Key used to execute the command as daemon.', example='firewall')
+class AgentCatalogResourceConfigSchema(Schema):
+    """Agent resource configuration."""
+    path = Str(required=True, description='File path', example='/usr/share/filebeat/filebeat.yml')
 
 
-class AgentCatalogActionSchema(Schema):
-    """Agent action."""
-    id = Str(required=True, dump_only=True, description='Action name', example='start', readonly=True)
-    config = Nested(AgentCatalogActionConfigSchema, required=True,
-                    many=True, description='Action config.')
-    status = Str(enum=['started', 'stopped', 'unknown'], example='started',
-                 description='Update the status the of the agent-instance if the command is executed correctly.')
-    description = Str(description='Short descripton of the agent actions.',
-                      example='Start the execution of the agent.')
+class AgentCatalogResourceSchema(Schema):
+    """Agent resource."""
+    id = Str(required=True, dump_only=True, readonly=True,
+             description='Resource id.', example='filebeat-config')
+    values = Str(example='mysql', many=True,
+                 description='Possible values if the parameter type is choice.')
+    description = Str(example='Enable the agent.',
+                      description='Short description of the parameter.', )
+    example = Str(description='Example of parameter value.', example='10s')
 
 
 class AgentCatalogSchema(Schema):

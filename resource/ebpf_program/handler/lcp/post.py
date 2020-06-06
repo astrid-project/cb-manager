@@ -27,7 +27,7 @@ def lcp_post(req, resp):
                                       **ebpf_program_catalog.config.to_dict()))
         if resp_req.content:
             try:
-                resp_lcp.append(resp_req.json())
+                resp_lcp.append(resp_req.json()) # TODO add YAML and XML support
             except Exception as exception:
                 Log.get('ebpf-program-instance-lcp').error(f'Exception: {exception}')
                 res_lcp.append(dict(status='error', error=True, description='Response data not valid.',

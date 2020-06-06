@@ -11,7 +11,7 @@ def __set(data, results):
                        auth=HTTPBasicAuth('cb-manager', 'astrid'), json=data)
     if resp_req.content:
         try:
-            resp_data = resp_req.json()
+            resp_data = resp_req.json() # TODO add YAML and XML support
             results.append(resp_data[0])
             return not resp_data[0].get('error', False)
         except Exception as exception:
