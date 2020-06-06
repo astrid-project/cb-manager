@@ -36,9 +36,9 @@ def lcp_put(req, resp):
             except Exception as exception:
                 Log.get(
                     'ebpf-program-instance-lcp').error(f'Exception: {exception}')
-                res_lcp.append(dict(status='error', error=True, description='Response data not valid.',
-                                    exception=str(exception), data=dict(response=resp_lcp.content),
-                                    http_status_code=resp_req.status_code))
+                resp_lcp.append(dict(status='error', error=True, description='Response data not valid.',
+                                     exception=str(exception), data=dict(response=resp_lcp.content),
+                                     http_status_code=resp_req.status_code))
         else:
             resp_lcp.append(dict(status='error', error=True, description='Request not executed.',
                                  http_status_code=resp_req.status_code))

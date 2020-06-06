@@ -8,6 +8,9 @@
 		"workbench.colorTheme": "Abyss",
 		"files.insertFinalNewline": true,
 		"editor.wordWrap": "on",
-		"editor.wrappingIndent": "deepIndent"
+		"editor.wrappingIndent": "deepIndent",
+		"cSpell.words": [
+			"psutil"
+		]
 	}
 }

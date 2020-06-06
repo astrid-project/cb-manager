@@ -13,6 +13,6 @@ def connection(endpoint, timeout, retry_period):
         log.error(f'connection to Elasticsearch ({endpoint}) not possible')
         log.error(f'try again in {retry_period} seconds')
         sleep(retry_period)
-        connection()
+        connection(endpoint, timeout, retry_period)
     else:
         log.success(f'connection to Elasticsearch ({endpoint}) established')
