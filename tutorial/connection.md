@@ -1,6 +1,6 @@
 # Connection
 
-Defines the connection between [execution environments](exec-env.md) and [network links](network-link.md).
+Defines the connection between [execution environments](exec-env/README.md) and [network links](network-link/README.md).
 
 - [Connection](#connection)
   - [Schema](#schema)
@@ -23,8 +23,8 @@ Note:
 - It is not possible to update readonly fields.
 - `id` is required but it is auto-generated if not provided. It is recommended to provide a friendly for simplify the retrieve of
   connected date in other indices.
-- `exec_env_id` should be one of those stored in [`exec-env`](exec-env.md) index.
-- `network_link_id` should be one of those stored in [`network-link`](network-link.md) index.
+- `exec_env_id` should be one of those stored in [`exec-env`](exec-env/README.md) index.
+- `network_link_id` should be one of those stored in [`network-link`](network-link/README.md) index.
 
 ## Create
 
@@ -37,8 +37,8 @@ with the request body (in JSON format):
 ```json
 {
     "id": "{connection_name}",
-    "exec_env_id": "{exec_env_id}",
-    "network_link_id": "{network_link_id}",
+    "exec_env_id": "{exec_env_name}",
+    "network_link_id": "{network_link_name}",
     "description": "{human_readable_description}"
 }
 ```
@@ -204,4 +204,4 @@ This is a possible response:
 ]
 ```
 
-NOTE: Without request body, it removes **all** the connection.
+NOTE: Without request body, it removes **all** the connections.

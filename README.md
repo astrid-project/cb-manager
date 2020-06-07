@@ -35,34 +35,34 @@ APIs to interact with the ``Context Broker``'s database. Through a **REST** Inte
 
 ## Terminologies
 
-**Term**     | **Meaning**
-:----------: | ---------------------
-*ACL*        | Access Control List
-*API*        | Application Program Interface
-*BA*         | Basic Authentication
-*BPF*        | Berkeley Packet Filter
-*CB*         | Context Broker
-*CRUD*       | Create - Read - Update - Delete
-*DB*         | Database
-*eBPF*       | extended BPF
-*ELK*        | Elastic - LogStash - Kibana
-*ExecEnv*    | Execution Environment
-*gRPC*       | Google RPC
-*HOBA*       | HTTP Origin-Bound Authentication
-*HTTP*       | Hyper Text Transfer Protocol
-*ID*         | Identification
-*IP*         | Internet Protocol
-*JSON*       | Java Object Notation
-*LDAP*       | Lightweight Directory Access Protocol
-*RBAC*       | Role-Based Access Control
-*regex*      | regular expression
-*RFC*        | Request For Comments
-*RPC*        | Remote Procedure Call
-*SCM*        | Security Context Model
-*SLA*        | Service Level Agreements
-*SQL*        | Structured Query Language
-*VNF*        | Virtual Network Function
-*YANG*       | Yet Another Next Generation
+| **Term**  | **Meaning**                           |
+| :-------: | ------------------------------------- |
+|   *ACL*   | Access Control List                   |
+|   *API*   | Application Program Interface         |
+|   *BA*    | Basic Authentication                  |
+|   *BPF*   | Berkeley Packet Filter                |
+|   *CB*    | Context Broker                        |
+|  *CRUD*   | Create - Read - Update - Delete       |
+|   *DB*    | Database                              |
+|  *eBPF*   | extended BPF                          |
+|   *ELK*   | Elastic - LogStash - Kibana           |
+| *ExecEnv* | Execution Environment                 |
+|  *gRPC*   | Google RPC                            |
+|  *HOBA*   | HTTP Origin-Bound Authentication      |
+|  *HTTP*   | Hyper Text Transfer Protocol          |
+|   *ID*    | Identification                        |
+|   *IP*    | Internet Protocol                     |
+|  *JSON*   | Java Object Notation                  |
+|  *LDAP*   | Lightweight Directory Access Protocol |
+|  *RBAC*   | Role-Based Access Control             |
+|  *regex*  | regular expression                    |
+|   *RFC*   | Request For Comments                  |
+|   *RPC*   | Remote Procedure Call                 |
+|   *SCM*   | Security Context Model                |
+|   *SLA*   | Service Level Agreements              |
+|   *SQL*   | Structured Query Language             |
+|   *VNF*   | Virtual Network Function              |
+|  *YANG*   | Yet Another Next Generation           |
 
 ## Data Model
 
@@ -101,9 +101,9 @@ The *software* index contains the installed software with relative properties. E
 
 ### ExecEnv
 
-**HTTP Method** | **Path**         | **Action**
-:-------------: | ---------------- | ----------------------------------
-GET             | /exec-env        | Returns the ExecEnvs selected by the query in the request body
+| **HTTP Method** | **Path**  | **Action**                                                     |
+| :-------------: | --------- | -------------------------------------------------------------- |
+|       GET       | /exec-env | Returns the ExecEnvs selected by the query in the request body |
                                      (or all it the request body is empty).
 POST            | /exec-env        | Create one or more new ExecEnvs.
 PUT             | /exec-env        | Update one or more existing ExecEnvs.
@@ -113,9 +113,9 @@ DELETE          | /exec-env        | Delete the ExecEnvs selected by the query
 
 ### ExecEnv type
 
-**HTTP Method** | **Path**              | **Action**
-:-------------: | --------------------- | --------------------------------------
-GET             | /type/exec-env        | Returns the ExecEnv types selected by the query in the request body
+| **HTTP Method** | **Path**       | **Action**                                                          |
+| :-------------: | -------------- | ------------------------------------------------------------------- |
+|       GET       | /type/exec-env | Returns the ExecEnv types selected by the query in the request body |
                                           (or all it the request body is empty).
 POST            | /type/exec-env        | Create one or more new ExecEnv types
 PUT             | /type/exec-env        | Update one or more existing ExecEnv types.
@@ -125,9 +125,9 @@ DELETE          | /type/exec-env        | Delete the ExecEnv types selected b
 
 #### Network link
 
-**HTTP Method** | **Path**             | **Action**
-:-------------: | -------------------- | ----------------------------------------
-GET             | /network-link        | Returns the network links selected by the query in the request body
+| **HTTP Method** | **Path**      | **Action**                                                          |
+| :-------------: | ------------- | ------------------------------------------------------------------- |
+|       GET       | /network-link | Returns the network links selected by the query in the request body |
                                          (or all it the request body is empty).
 POST            | /network-link        | Create one or more new network links.
 PUT             | /network-link        | Update one or more existing network links.
@@ -137,9 +137,9 @@ DELETE          | /network-link        | Delete the network links selected by 
 
 #### Network link type
 
-**HTTP Method** | **Path**                  | **Action**
-:-------------: | ------------------------- | ---------------------------------------------
-GET             | /type/network-link        | Returns the network link types selected by the query in the request body
+| **HTTP Method** | **Path**           | **Action**                                                               |
+| :-------------: | ------------------ | ------------------------------------------------------------------------ |
+|       GET       | /type/network-link | Returns the network link types selected by the query in the request body |
                                               (or all it the request body is empty).
 POST            | /type/network-link        | Create one or more new network link types.
 PUT            | /type/network-link         | Update one or more existing network link types.
@@ -149,9 +149,9 @@ DELETE          | /type/network-link        | Delete the network link types s
 
 #### Connection
 
-**HTTP Method** | **Path**           | **Action**
-:-------------: | ------------------ | ---------------------------------------------------------------------------
-GET             | /connection        | Returns the connections selected by the query in the request body
+| **HTTP Method** | **Path**    | **Action**                                                        |
+| :-------------: | ----------- | ----------------------------------------------------------------- |
+|       GET       | /connection | Returns the connections selected by the query in the request body |
                                        (or all it the request body is empty).
 POST            | /connection        | Create one or more new connections.
 PUT             | /connection        | Update one or more existing connections.
@@ -163,9 +163,9 @@ DELETE          | /connection        | Delete the connections selected by the
 
 #### Catalog
 
-**HTTP Method** | **Path*              | **Action**
-:-------------: | -------------------- | ----------------------------------
-GET             | /catalog/agent       | Returns the agents in catalog selected by the query in the request body
+| **HTTP Method** | **Path*        | **Action**                                                              |
+| :-------------: | -------------- | ----------------------------------------------------------------------- |
+|       GET       | /catalog/agent | Returns the agents in catalog selected by the query in the request body |
                                          (or all it the request body is empty).
 POST            | /catalog             | Create one or more new agent in catalog.
 PUT             | /catalog/{*id*}      | Update the agent in catalog with id = {id}.
@@ -174,9 +174,9 @@ DELETE          | /catalog             | Delete the agents in catalog selected b
 
 #### Instance
 
-**HTTP Method** | **Path*                | **Action**
-:-------------: | ---------------------- | ----------------------------------
-GET             | /instance/agent        | Returns the agent instances selected by the query in the request body
+| **HTTP Method** | **Path*         | **Action**                                                            |
+| :-------------: | --------------- | --------------------------------------------------------------------- |
+|       GET       | /instance/agent | Returns the agent instances selected by the query in the request body |
                                            (or all it the request body is empty).
 POST            | /instance/agent        | Create one or more new instances in the ExecEnv
                                            with the specified initial configurations.
@@ -199,9 +199,9 @@ DELETE          | /catalog/ebpf-program        | Delete the eBPF program in cata
 
 #### Instance
 
-**HTTP Method** | **Path*                       | **Action**
-:-------------: | ----------------------------- | ----------------------------------
-GET             | /instance/ebpf-program        | Returns the agent instances selected by the query in the request body
+| **HTTP Method** | **Path*                | **Action**                                                            |
+| :-------------: | ---------------------- | --------------------------------------------------------------------- |
+|       GET       | /instance/ebpf-program | Returns the agent instances selected by the query in the request body |
                                                   (or all it the request body is empty).
 POST            | /instance/ebpf-program        | Create one or more new instances in the ExecEnv
                                                   with the specified initial configurations.
@@ -212,16 +212,16 @@ DELETE          | /instance/ebpf-program        | Delete the agent instances sel
 
 ### Data Collection
 
-**HTTP Method** | **Path** | **Action**
-:-------------: | -------- | -----------
-GET             | /data    | Returns the collected data selected by the query in the request body
+| **HTTP Method** | **Path** | **Action**                                                           |
+| :-------------: | -------- | -------------------------------------------------------------------- |
+|       GET       | /data    | Returns the collected data selected by the query in the request body |
                              (or all it the request body is empty).
 
 #### Full Query
 
-**HTTP Method** | **Path**       | **Action**
-:-------------: | -------------- | ---------------------------------------------------------------------------------------------------|
-POST            | /data/dsl      | Returns the collected data filtered by the query in the request body using the
+| **HTTP Method** | **Path**  | **Action**                                                                     |
+| :-------------: | --------- | ------------------------------------------------------------------------------ |
+|      POST       | /data/dsl | Returns the collected data filtered by the query in the request body using the |
                                    [Elastic DSL](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl.html) syntax.
 POST            | /data/graph-ql | Returns the collected data filtered by the query in the request body using the
                                    [GraphQL](https://graphql.org) syntax.
@@ -256,16 +256,16 @@ See the [Swagger Schema](api/swagger.yaml, api/swagger.json) and the relative [d
 
 The configurations are stored in the [config.ini](config.ini) file.
 
-Section             | Setting   | Default value   | Note
---------------------|-----------|-----------------|---------------------------
-context-broker | host      | 0.0.0.0         | IP address to accept requests.
-context-broker | port      | 5000            | TCP port to accept requests.
-auth                | max-ttl   | 10min           | Maximum TTL of the authorization with the CB-Manager.
-polycube            | host      | localhost       | IP address to contact the polycube installation.
-polycube            | port      | 9000            | Port address to contact the polycube installation.
-polycube            | timeout   | 20s             | Timeout for the connection to polycube.
-dev                 | username  | lcp             | Username for HTTP authentication (for developer use).
-dev                 | password  |                 | Password for HTTP authentication (for developer use).
+| Section        | Setting  | Default value | Note                                                  |
+| -------------- | -------- | ------------- | ----------------------------------------------------- |
+| context-broker | host     | 0.0.0.0       | IP address to accept requests.                        |
+| context-broker | port     | 5000          | TCP port to accept requests.                          |
+| auth           | max-ttl  | 10min         | Maximum TTL of the authorization with the CB-Manager. |
+| polycube       | host     | localhost     | IP address to contact the polycube installation.      |
+| polycube       | port     | 9000          | Port address to contact the polycube installation.    |
+| polycube       | timeout  | 20s           | Timeout for the connection to polycube.               |
+| dev            | username | lcp           | Username for HTTP authentication (for developer use). |
+| dev            | password |               | Password for HTTP authentication (for developer use). |
 
 
 ## Usage

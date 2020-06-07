@@ -1,7 +1,7 @@
 # Execution Environment Type
 
-Describes the type of the [execution environment](exec-env.md) including additional info.
-Each execution environment belongs to a specific type that is referred with the [`type_id`](exec-env.md#create) field.
+Describes the type of the [execution environment](README.md) including additional info.
+Each execution environment belongs to a specific type that is referred with the [`type_id`](README.md#create) field.
 
 - [Execution Environment Type](#execution-environment-type)
   - [Schema](#schema)

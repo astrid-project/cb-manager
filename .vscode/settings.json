@@ -21,6 +21,7 @@
         "ldap",
         "metricbeat",
         "nprobe",
+        "pcap",
         "polycube",
         "polycubectl",
         "procs",

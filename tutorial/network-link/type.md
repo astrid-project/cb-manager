@@ -1,8 +1,8 @@
 # Network Link Type
 
 Describes the type of the network link including additional info.
-Each [network link](network-link.md) belongs to a specific type that is referred
-with the [`type_id`](network-link.md#create) field.
+Each [network link](README.md) belongs to a specific type that is referred
+with the [`type_id`](README.md#create) field.
 
 - [Network Link Type](#network-link-type)
   - [Schema](#schema)

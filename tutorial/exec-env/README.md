@@ -51,7 +51,7 @@ with the request body (in JSON format):
 {
     "id": "{service_name}",
     "description": "{human_readable_description}",
-    "type_id": "{idexec_env_type_id}",
+    "type_id": "{exec_env_type_name}",
     "hostname":"{ip_address}",
     "lcp": {
         "port" {lcp_port}

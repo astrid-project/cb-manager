@@ -1,6 +1,6 @@
 # Network Link
 
-Represents a network link that connect two or more [execution environment](exec-env.md).
+Represents a network link that connect two or more [execution environment](../exec-env/README.md).
 
 - [Network Link](#network-link)
   - [Schema](#schema)
@@ -22,7 +22,7 @@ Note:
 - It is not possible to update readonly fields.
 - `id` is required but it is auto-generated if not provided. It is recommended to provide a friendly for simplify the retrieve of
   connected date in other indices.
-- `type_id` should be one of those stored in [`network-link-type`](network-link-type.md) index.
+- `type_id` should be one of those stored in [`network-link-type`](type.md) index.
 
 ## Create
 
@@ -35,7 +35,7 @@ with the request body (in JSON format):
 ```json
 {
     "id": "{network_link_name}",
-    "type_id": "{network_link_type_id}",
+    "type_id": "{network_link_type_name}",
     "description":"{human_readable_description}"
 }
 ```
@@ -127,7 +127,7 @@ To update a network link, use:
 ```json
 {
     "id": "{network_link_name}",
-    "type_id":"{new_network_link_type_id}",
+    "type_id":"{new_network_link_type_name}",
 }
 ```
 

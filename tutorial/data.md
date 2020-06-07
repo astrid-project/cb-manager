@@ -1,7 +1,7 @@
 # Data
 
-This index stores all the incoming data from the [execution environments](exec-env.md) collected
-by the [agent](agent-instance.md) or [eBPF](ebpf-program-instance.md) instance installed on them.
+This index stores all the incoming data from the [execution environments](exec-env/README.md) collected
+by the [agent](agent/instance.md) or [eBPF](ebpf-program/instance.md) instance installed on them.
 
 - [Data](#data)
   - [Schema](#schema)
@@ -25,8 +25,8 @@ Note:
 - It is not possible to update readonly fields.
 - `id` is required but it is auto-generated if not provided. It is recommended to provide a friendly for simplify the retrieve of
   connected date in other indices.
-- `agent_instance_id` should be one of those stored in [`agent-instance`](agent-instance.md) index.
-- `ebpf_program_instance_id` should be one of those stored in [`ebpf-program-instance`](ebpf-program-instance.md) index.
+- `agent_instance_id` should be one of those stored in [`agent-instance`](agent/instance.md) index.
+- `ebpf_program_instance_id` should be one of those stored in [`ebpf-program-instance`](ebpf-program/instance.md) index.
 
 ## Create
 
@@ -39,7 +39,7 @@ with the request body (in JSON format):
 ```json
 {
     "id": "{data_name}",
-    "agent_instance_id": "{agent_instance_id}",
+    "agent_instance_id": "{agent_instance_name}",
     "timestamp_event": "{timestamp_event}",
     "timestamp_agent": "{timestamp_agent}",
 }

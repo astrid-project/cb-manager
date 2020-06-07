@@ -1,6 +1,6 @@
 # Agent Catalog
 
-Contains the available agents to be installed in the [execution environments](exec-env.md).
+Contains the available agents to be installed in the [execution environments](../exec-env/README.md).
 
 - [Agent Catalog](#agent-catalog)
   - [Schema](#schema)
@@ -57,7 +57,7 @@ Contains the available agents to be installed in the [execution environments](ex
 | `description` | String            | False    | False    | Enable the agent. |
 | `example`     | String            | False    | False    | 10s               |
 
-[^2] possible values: "integer", "number", "time-duration", "string", "choice", "boolean", and "binary".
+[^2]: Possible values are "integer", "number", "time-duration", "string", "choice", "boolean", and "binary".
 
 #### Parameter Config Schema
 
@@ -92,7 +92,7 @@ Note:
 
 To create a new agent in the catalog use the following REST call:
 
-**POST** /_catalog_ /_agent_
+**POST** /_catalog_/_agent_
 
 with the request body (in JSON format):
 
@@ -319,11 +319,11 @@ This is a possible response:
 ]
 ```
 
-NOTE: Without request body, it removes **all** the agent from the catalog.
+NOTE: Without request body, it removes **all** the agents from the catalog.
 
 ## Loaded data
 
 For the demo, this data is already available:
 
-- [firewall](agent_catalog-firewall.json)
-- [nprobe](agent_catalog-nprobe.json)
+- [firewall](data/firewall.json)
+- [nprobe](data/nprobe.json)

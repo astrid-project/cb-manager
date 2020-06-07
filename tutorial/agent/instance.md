@@ -1,6 +1,6 @@
 # Agent Instance
 
-Contains the [agent](agent-catalog.md) instances installed in the [execution environments](exec-env.md).
+Contains the [agent](catalog/README.md) instances installed in the [execution environments](../exec-env/README.md).
 
 - [Agent Instance](#agent-instance)
   - [Schema](#schema)
@@ -17,7 +17,7 @@ Contains the [agent](agent-catalog.md) instances installed in the [execution env
 | `id`               | String                                  | True     | True     | firewall@mysql-server |
 | `agent_catalog_id` | String                                  | True     | True     | firewall              |
 | `exec_env_id`      | String                                  | True     | True     | mysql-server          |
-| `status`           | Enum(String)[started, stopped, unknown] | True     | True     | started               |
+| `status`           | Enum(String){started, stopped, unknown} | True     | True     | started               |
 | `parameters`       | List(Parameter)                         | False    | False    |                       |
 | `description`      | String                                  | False    | False    | [^1]                  |
 
@@ -36,20 +36,22 @@ Note:
 - `id` is required but it is auto-generated if not provided.
   It is recommended to provide a friendly for simplify the retrieve of connected date in other indices.
   A common syntax is to use `agent_catalog_id` and `exec_env_id` concatenated with = '@'.
-- `agent_catalog_id` should be one of those stored in [`agent-catalog`](agent-catalog.md) index.
-- `exec_env_id` should be one of those stored in [`exec-env`](exec-env.md) index.
+- `agent_catalog_id` should be one of those stored in [`agent-catalog`](catalog/README.md) index.
+- `exec_env_id` should be one of those stored in [`exec-env`](../exec-env/README.md) index.
 
 ## Create
 
 To create a new agent instance use the following REST call:
 
-**POST** /_instance_ /_agent_
+**POST** /_instance_/_agent_
 
 with the request body (in JSON format):
 
 ```json
 {
     "id": "{agent_instance_name}",
+    "agent_catalog_id": "{agent_name}",
+    "exec_env_id": "{exec_env_name}",
     "parameters": [
         {
             "id": "{parameter_name}",
@@ -69,7 +71,7 @@ Replace the data with the correct values, for example `agent_instance_name` with
 It is possible to add additional data specific for this agent.
 The `actions` fields is used to perform the actions defined in the catalog referenced by the `id`.
 Any other fields (like, in the above example, `param` are used in the `cmd` field of
-the action defined in the [catalog](agent-catalog.md)).
+the action defined in the [catalog](catalog/README.md)).
 For example, if `cmd` is "firewall set {mode}" then it will be formatted using the values of the other fields.
 If the action has a field `status` in the catalog, this field is used to update the status of the agent instance
 if the execution finished correctly. Otherwise, if there are some error during the execution,
@@ -142,7 +144,7 @@ It is possible to filter the results using the following request body:
     "where": {
         "equals": {
             "target:" "id",
-            "expr": "{agent_name}"
+            "expr": "{agent_instance_name}"
         }
     }
 }
@@ -158,7 +160,7 @@ To update an agent instance, use:
 
 ```json
 {
-    "id": "{agent_name}",
+    "id": "{agent_instance_name}",
     "parameters": [
         {
             "id": "{parameter_name}",
@@ -176,7 +178,7 @@ To update an agent instance, use:
 
 This example
 
-1. updates the `valuee` of the `paramter` with `id` = "_`{parameter_name}`_";
+1. updates the `value` of the `parameter` with `id` = "_`{parameter_name}`_";
 2. execute a new action with  with `id` = "_`{action_name}`_
 
 of the agent instance with `id` = `agent_instance_name`.
