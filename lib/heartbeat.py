@@ -37,13 +37,13 @@ def heartbeat():
                     data = resp.json()  # TODO add YAML and XML support
                     lcp.username = data.get('username', None)
                     lcp.password = data.get('password', None)
-                    lcp.last_heartbeat = data.get('last_hearthbeat', None)
+                    lcp.last_heartbeat = data.get('last_heartbeat', None)
                     log.success(
                         f'LCP Connection with id = {exec_env.meta.id} established')
                 else:
                     log.warning(
                         f'Reset LCP connection with id = {exec_env.meta.id}')
-                    log.notice(f'response: {resp}')
+                    log.notice(f'response: {resp.content}')
                     lcp.username = lcp.password = lcp.last_heartbeat = None
             except Exception as exception:
                 log.error(f'Exception: {exception}')

@@ -1,4 +1,5 @@
-from elasticsearch_dsl import Date, Document, InnerDoc, Integer, Nested, Text
+from document.base import BaseDocument
+from elasticsearch_dsl import Date, InnerDoc, Integer, Nested, Text
 
 
 class LCPDocument(InnerDoc):
@@ -11,7 +12,7 @@ class LCPDocument(InnerDoc):
     last_heartbeat = Date()
 
 
-class ExecEnvDocument(Document):
+class ExecEnvDocument(BaseDocument):
     """Represents an execution environment."""
     # id already defined by Elasticsearch
     hostname = Text(required=True)
@@ -24,7 +25,7 @@ class ExecEnvDocument(Document):
         name = 'exec-env'
 
 
-class ExecEnvTypeDocument(Document):
+class ExecEnvTypeDocument(BaseDocument):
     """Type of execution environment. Example: virtual machine or container."""
     # id already defined by Elasticsearch
     name = Text(required=True)

@@ -1,4 +1,5 @@
-from elasticsearch_dsl import Boolean, Document, InnerDoc, Nested, Text
+from document.base import BaseDocument
+from elasticsearch_dsl import Boolean, InnerDoc, Nested, Text
 
 
 class AgentCatalogActionConfigInnerDoc(InnerDoc):
@@ -48,7 +49,7 @@ class AgentCatalogResourceInnerDoc(InnerDoc):
     example = Text()
 
 
-class AgentCatalogDocument(Document):
+class AgentCatalogDocument(BaseDocument):
     """Represents an agent in the catalog."""
     # id already defined by Elasticsearch
     actions = Nested(AgentCatalogActionInnerDoc)

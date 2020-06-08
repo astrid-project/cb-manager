@@ -1,22 +1,35 @@
+from document.network_link import NetworkLinkDocument, NetworkLinkTypeDocument
 from marshmallow import Schema
 from marshmallow.fields import Str
+from schema.base import BaseSchema
+from schema.validate import _in, msg_id_not_found
 
 
-class NetworkLinkSchema(Schema):
+class NetworkLinkSchema(BaseSchema):
     """Represents a network link."""
-    id = Str(required=True, dump_only=True, example='net-link-1',
-             description='Id of the network link.', readonly=True)
-    type_id = Str(required=True, description='Id of the network link type.',
-                  example='pnt2pnt')
-    description = Str(description='Short description of the network link,',
-                      example='Allow communication between front-end and back-end services.')
+    doc_cls = NetworkLinkDocument
+
+    id = Str(required=True, example='net-link-1',
+             description='Id of the network link.')
+
+    type_id = Str(required=True, example='pnt2pnt',
+                  description='Id of the network link type.',
+                  validate=_in(NetworkLinkTypeDocument.get_ids),
+                  error_messages=dict(validator_failed=msg_id_not_found))
+
+    description = Str(example='Allow communication between front-end and back-end services.',
+                      description='Short description of the network link,')
 
 
-class NetworkLinkTypeSchema(Schema):
+class NetworkLinkTypeSchema(BaseSchema):
     """Represents a network link type."""
-    id = Str(required=True, dump_only=True, example='pnt2pnt', readonly=True,
+    doc_cls = NetworkLinkTypeDocument
+
+    id = Str(required=True, example='pnt2pnt',
              description='Id of the network link type.')
-    name = Str(required=True, description='Name of the network link type.',
-               example='Point to point')
-    description = Str(description='Short description of the network link type,',
-                      example='Communications connection between two communication endpoints.')
+
+    name = Str(required=True, readonly=True, example='Point to point',
+               description='Name of the network link type.')
+
+    description = Str(example='Communications connection between two communication endpoints.',
+                      description='Short description of the network link type,')

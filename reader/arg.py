@@ -21,9 +21,9 @@ class ArgReader:
         add('--hb-timeout', '-b', type=str,
             help='Timeout (with unit, e.g.: 10s) for heartbeat with LCP', default=cr.hb_timeout)
         add('--hb-period', '-r', type=str,
-            help='Period (with unit, e.g.: 1min) for the hearthbeat with the LCP', default=cr.hb_period)
+            help='Period (with unit, e.g.: 1min) for the heartbeat with the LCP', default=cr.hb_period)
         add('--hb-auth-expiration', '-x', type=str,
-            help='Period (with unit, e.g.: 1min) for auth expiration used in the hearthbeat with the LCP',
+            help='Period (with unit, e.g.: 1min) for auth expiration used in the heartbeat with the LCP',
             default=cr.hb_auth_expiration)
 
         add('--es-endpoint', '-e', type=str,

@@ -6,11 +6,12 @@ elasticsearch-dsl>=7.0.0
 falcon
 falcon-apispec
 falcon-auth
-falcon-marshmallow
 gitpython
+msgpack
 pint
 pycodestyle
 pydocstyle
+pyyaml>=5.0
 requests
 swagger-ui-py
 toolz

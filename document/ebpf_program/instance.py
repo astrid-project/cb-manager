@@ -1,7 +1,8 @@
-from elasticsearch_dsl import Document, Text
+from document.base import BaseDocument
+from elasticsearch_dsl import Text
 
 
-class eBPFProgramInstanceDocument(Document):
+class eBPFProgramInstanceDocument(BaseDocument):
     """Represents an eBPF program installed in an execution environment."""
     # id already defined by Elasticsearch
     ebpf_program_catalog_id = Text(required=True)

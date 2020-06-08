@@ -20,9 +20,9 @@ class ConfigReader:
         self.cb_host = self.cr.get('context-broker', 'host')
         self.cb_port = self.cr.get('context-broker', 'port')
 
-        self.hb_timeout = self.cr.get('hearthbeat', 'timeout')
-        self.hb_period = self.cr.get('hearthbeat', 'period')
-        self.hb_auth_expiration = self.cr.get('hearthbeat', 'auth-expiration')
+        self.hb_timeout = self.cr.get('heartbeat', 'timeout')
+        self.hb_period = self.cr.get('heartbeat', 'period')
+        self.hb_auth_expiration = self.cr.get('heartbeat', 'auth-expiration')
 
         self.es_endpoint = self.cr.get('elasticsearch', 'endpoint')
         self.es_timeout = self.cr.get('elasticsearch', 'timeout')

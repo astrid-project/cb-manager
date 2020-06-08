@@ -1,19 +1,35 @@
+from document.agent.instance import AgentInstanceDocument
+from document.ebpf_program.instance import eBPFProgramInstanceDocument
+from document.data import DataDocument
 from marshmallow import Schema
 from marshmallow.fields import DateTime, Str
 from schema.agent.instance import AgentInstanceSchema
+from schema.base import BaseSchema
 from schema.ebpf_program.instance import eBPFProgramInstanceSchema
+from schema.validate import _in, msg_id_not_found
 
 
-class DataSchema(Schema):
+class DataSchema(BaseSchema):
     """Represents the stored data."""
-    id = Str(required=True, dump_only=True, readonly=True,
-             description='Id of the data.', example='BXrHRn5RPU55Qh9JwMZn')
-    agent_instance_id = Str(description="""Id of the agent instance in the execution environment
-                                              that collected the data""", example='filebeat@apache', readonly=True)
-    ebpf_program_instance_id = Str(description="""Id of the eBPF program instance in the execution
+    doc_cls = DataDocument
+
+    id = Str(required=True, example='BXrHRn5RPU55Qh9JwMZn',
+             description='Id of the data.')
+
+    agent_instance_id = Str(readonly=True, example='filebeat@apache',
+                            description="""Id of the agent instance in the execution environment
+                                           that collected the data""",
+                            validate=_in(AgentInstanceDocument.get_ids),
+                            error_messages=dict(validator_failed=msg_id_not_found))
+
+    ebpf_program_instance_id = Str(readonly=True, example='packet-capture@apache',
+                                   description="""Id of the eBPF program instance in the execution
                                                   environment that collected the data""",
-                                   example='packet-capture@apache', readonly=True)
-    timestamp_event = DateTime(description='Timestamp of the event related to the collected data',
-                               example='2019_02_14 15:23:30', readonly=True)
-    timestamp_agent = DateTime(description='Timestamp when the agent instance collected the data',
-                               example='2019_02_14 15:23:30', readonly=True)
+                                   validate=_in(eBPFProgramInstanceDocument.get_ids),
+                                   error_messages=dict(validator_failed=msg_id_not_found))
+
+    timestamp_event = DateTime(format='%Y/%m/%d %H:%M:%S', readonly=True, example='2019/02/14 15:23:30',
+                               description='Timestamp of the event related to the collected data')
+
+    timestamp_agent = DateTime(format='%Y/%m/%d %H:%M:%S', readonly=True, example='2019/02/14 15:23:30',
+                               description='Timestamp when the agent instance collected the data')

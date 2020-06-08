@@ -14,4 +14,5 @@ def lcp_post(instance, req, resp):
                         name='Execution Environment', resp_lcp=resp_lcp)
 
     if all([agent_catalog, exec_env]):
-        execute(instance=instance, catalog=agent_catalog, req=req, exec_env=exec_env, resp_lcp=resp_lcp)
+        return execute(instance=instance, catalog=agent_catalog, req=req, exec_env=exec_env, resp_lcp=resp_lcp)
+    return 0, 0

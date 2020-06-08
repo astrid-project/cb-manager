@@ -1,4 +1,5 @@
-from elasticsearch_dsl import Document, InnerDoc, Nested, Text
+from document.base import BaseDocument
+from elasticsearch_dsl import InnerDoc, Nested, Text
 
 
 class AgentInstanceParameterInnerDoc(InnerDoc):
@@ -7,7 +8,7 @@ class AgentInstanceParameterInnerDoc(InnerDoc):
     value = Text(required=True)
 
 
-class AgentInstanceDocument(Document):
+class AgentInstanceDocument(BaseDocument):
     """Represents an agent instance installed in an execution environment."""
     # id already defined by Elasticsearch
     agent_catalog_id = Text(required=True)

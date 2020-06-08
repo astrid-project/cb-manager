@@ -1,42 +1,63 @@
+from document.exec_env import ExecEnvDocument, ExecEnvTypeDocument
 from marshmallow import Schema
 from marshmallow.fields import DateTime, Integer, Nested, Str
+from schema.base import BaseSchema
+from schema.validate import _in, msg_id_not_found
 
 
 class LCPSchema(Schema):
     """Configuration of the LCP running in the execution environment."""
-    port = Integer(required=True, description='TCP port number of LCP in the execution environment.',
-                   example=5000)
-    username = Str(description='Username to connect from the CB to the LCP.',
-                   example='22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5')
-    password = Str(description='Password to connect from the CB to the LCP.',
-                   example='22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5')
-    cb_password = Str(description='Hashed password assigned to LCP to connect with the CB.',
-                      example='22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5')
-    cb_expiration = DateTime(description='Datetime until the authentication with the CB is valid.',
-                             example='2019_02_14 15:23:30')
-    last_hearbeat = DateTime(description='Timestamp of the last hearbeat between the LCP and CB.',
-                             example='2019_02_14 15:23:30')
+
+    port = Integer(required=True, example=5000,
+                   description='TCP port number of LCP in the execution environment.')
+
+    username = Str(example='22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5',
+                   description='Username to connect from the CB to the LCP.')
+
+    password = Str(example='22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5',
+                   description='Password to connect from the CB to the LCP.')
+
+    cb_password = Str(example='22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5',
+                      description='Hashed password assigned to LCP to connect with the CB.')
+
+    cb_expiration = DateTime(format='%Y/%m/%d %H:%M:%S', example='2019_02_14 15:23:30',
+                             description='Datetime until the authentication with the CB is valid.')
+
+    last_hearbeat = DateTime(format='%Y/%m/%d %H:%M:%S', example='2019_02_14 15:23:30',
+                             description='Timestamp of the last hearbeat between the LCP and CB.')
 
 
-class ExecEnvSchema(Schema):
+class ExecEnvSchema(BaseSchema):
     """Represents an execution environment."""
-    id = Str(required=True, dump_only=True, example='apache',
-             description='Id of the execution environment.', readonly=True)
+    doc_cls = ExecEnvDocument
+
+    id = Str(required=True, example='apache',
+             description='Id of the execution environment.')
+
     hostname = Str(required=True, example='192.168.1.2',
                    description='Hostname of the execution environment.')
+
     type_id = Str(required=True, example='vm',
-                  description='Id of the execution environment type.')
+                  description='Id of the execution environment type.',
+                  validate=_in(ExecEnvTypeDocument.get_ids),
+                  error_messages=dict(validator_failed=msg_id_not_found))
+
     lcp = Nested(LCPSchema, required=True,
                  description='Data related to the LCP.')
-    description = Str(description='Short description of the execution environment,',
-                      example='Apache HTTP Web Server.')
+
+    description = Str(example='Apache HTTP Web Server.',
+                      description='Short description of the execution environment,')
 
 
-class ExecEnvTypeSchema(Schema):
+class ExecEnvTypeSchema(BaseSchema):
     """Represents an execution environment type."""
-    id = Str(required=True, dump_only=True, example='vm',
-             description='Id of the execution environment type.', readonly=True)
-    name = Str(required=True, description='Name of the execution environment.',
-               example='Virtual Machine')
+    doc_cls = ExecEnvTypeDocument
+
+    id = Str(required=True, example='vm',
+             description='Id of the execution environment type.')
+
+    name = Str(required=True, example='Virtual Machine',
+               description='Name of the execution environment.')
+
     description = Str(example='Linux container.',
                       description='Short description of the type.')

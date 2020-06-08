@@ -19,7 +19,7 @@ from resource.service_graph import ServiceGraphResource
 from utils.log import Log
 from utils.sequence import wrap
 
-db = (
+db = [
     AgentCatalogResource, AgentCatalogSelectedResource,
     AgentInstanceResource, AgentInstanceSelectedResource,
     ConnectionResource, ConnectionSelectedResource,
@@ -31,7 +31,7 @@ db = (
     NetworkLinkResource, NetworkLinkSelectedResource,
     NetworkLinkTypeResource, NetworkLinkTypeSelectedResource,
     ServiceGraphResource
-)
+]
 
 tags = []
 for Resource in db:

@@ -15,12 +15,16 @@ definitions:
       id:
         description: Id of the agent in the catalog.
         example: filebeat
-        readOnly: true
         type: string
       parameters:
         description: Parameter properties.
         items:
           $ref: '#/definitions/AgentCatalogParameter'
+        type: array
+      resources:
+        description: Resource properties.
+        items:
+          $ref: '#/definitions/AgentCatalogResource'
         type: array
     required:
     - id
@@ -43,7 +47,6 @@ definitions:
       id:
         description: Action name
         example: start
-        readOnly: true
         type: string
       status:
         description: Update the status the of the agent-instance if the command is
@@ -92,7 +95,6 @@ definitions:
       id:
         description: Parameter id.
         example: log-period
-        readOnly: true
         type: string
       list:
         description: Indicate if the parameter can have multiple values.
@@ -142,6 +144,37 @@ definitions:
     - schema
     - source
     type: object
+  AgentCatalogResource:
+    properties:
+      config:
+        allOf:
+        - $ref: '#/definitions/AgentCatalogResourceConfig'
+        description: Resource configuration.
+      description:
+        description: Short description of the parameter.
+        example: Enable the agent.
+        type: string
+      example:
+        description: Example of parameter value.
+        example: 10s
+        type: string
+      id:
+        description: Resource id.
+        example: filebeat-config
+        type: string
+    required:
+    - config
+    - id
+    type: object
+  AgentCatalogResourceConfig:
+    properties:
+      path:
+        description: File path
+        example: /usr/share/filebeat/filebeat.yml
+        type: string
+    required:
+    - path
+    type: object
   AgentInstance:
     properties:
       agent_catalog_id:
@@ -159,7 +192,6 @@ definitions:
       id:
         description: Id of the agent instance installed in an execution environment.
         example: filebeat@apache
-        readOnly: true
         type: string
       parameters:
         description: List of agent instance parameters.
@@ -185,7 +217,6 @@ definitions:
       id:
         description: Parameter id.
         example: period
-        readOnly: true
         type: string
       value:
         description: Paremeter value.
@@ -208,7 +239,6 @@ definitions:
       id:
         description: Id of connection.
         example: conn-1
-        readOnly: true
         type: string
       network_link_id:
         description: Id of the connected network link.
@@ -223,7 +253,7 @@ definitions:
     properties:
       agent_instance_id:
         description: "Id of the agent instance in the execution environment\n    \
-          \                                          that collected the data"
+          \                                       that collected the data"
         example: filebeat@apache
         type: string
       ebpf_program_instance_id:
@@ -235,16 +265,15 @@ definitions:
       id:
         description: Id of the data.
         example: BXrHRn5RPU55Qh9JwMZn
-        readOnly: true
         type: string
       timestamp_agent:
         description: Timestamp when the agent instance collected the data
-        example: 2019_02_14 15:23:30
+        example: 2019/02/14 15:23:30
         format: date-time
         type: string
       timestamp_event:
         description: Timestamp of the event related to the collected data
-        example: 2019_02_14 15:23:30
+        example: 2019/02/14 15:23:30
         format: date-time
         type: string
     required:
@@ -263,7 +292,6 @@ definitions:
       id:
         description: Id of the execution environment.
         example: apache
-        readOnly: true
         type: string
       lcp:
         allOf:
@@ -288,7 +316,6 @@ definitions:
       id:
         description: Id of the execution environment type.
         example: vm
-        readOnly: true
         type: string
       name:
         description: Name of the execution environment.
@@ -303,8 +330,8 @@ definitions:
       description:
         description: Human readable message that describes the error.
         example: "Could not decode the request body, either because it was not\n \
-          \                                valid JSON or because it was not encoded\
-          \ as UTF-8."
+          \                                               valid or because it was\
+          \ not encoded as UTF-8."
         type: string
       title:
         description: Title error
@@ -355,7 +382,6 @@ definitions:
       id:
         description: Id of the network link.
         example: net-link-1
-        readOnly: true
         type: string
       type_id:
         description: Id of the network link type.
@@ -374,7 +400,6 @@ definitions:
       id:
         description: Id of the network link type.
         example: pnt2pnt
-        readOnly: true
         type: string
       name:
         description: Name of the network link type.
@@ -479,7 +504,7 @@ definitions:
         enum:
         - asc
         - desc
-        example: desc
+        example: asc
         type: string
       target:
         description: The field to compare.
@@ -495,13 +520,13 @@ definitions:
         $ref: '#/definitions/eBPFProgramConfigCatalog'
       description:
         description: Description of eBPF program.
-        example: Transparent service to capture packets flowing through the interface
-          it is attached to, apply filters and obtain capture in .pcap format.
+        example: "Transparent service to capture packets flowing through the interface\
+          \ it is attached to,\n                                 apply filters and\
+          \ obtain capture in .pcap format."
         type: string
       id:
-        description: Id of the eBPF program in the catalog.
+        description: Id of the eBPFProgram in the catalog.
         example: packet-capture
-        readOnly: true
         type: string
       parameters:
         items:
@@ -537,9 +562,10 @@ definitions:
           this probe.
         type: string
       labels:
-        allOf:
-        - $ref: '#/definitions/eBPFProgramCatalogOpenMetricsMetadataLabel'
         description: Labels of Open Metrics Metadata.
+        items:
+          $ref: '#/definitions/eBPFProgramCatalogOpenMetricsMetadataLabel'
+        type: array
       type:
         description: Metric type.
         example: counter
@@ -586,13 +612,12 @@ definitions:
         type: string
       exec_env_id:
         description: "Id of the execution environment where the eBPF program\n   \
-          \                                                 instance is installed"
+          \                                  instance is installed"
         example: apache
         type: string
       id:
         description: Id of the eBPF program installed in an execution environment.
         example: packet-capture@apache
-        readOnly: true
         type: string
     required:
     - ebpf_program_catalog_id
@@ -612,7 +637,6 @@ definitions:
       id:
         description: Parameter id.
         example: interface
-        readOnly: true
         type: string
       list:
         description: Indicate if the parameter can have multiple values.
@@ -632,19 +656,15 @@ definitions:
         type: string
       values:
         description: Possible values if the parameter type is choice.
-        items:
-          example:
-          - 'yes'
-          - 'no'
-          type: string
-        type: array
+        example: 'yes'
+        type: string
     required:
     - id
     - type
     type: object
 info:
   title: Context Broker Manager
-  version: 05dff394fb838a3729362aba58d8d3bbef64fb46@master
+  version: 97d0e2551b3052ae4825ada918bf7979d233928f@master
 paths:
   /catalog/agent/:
     delete:

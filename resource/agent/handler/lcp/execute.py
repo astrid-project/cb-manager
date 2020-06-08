@@ -63,12 +63,12 @@ def execute(instance, catalog, req, exec_env, resp_lcp):
                 resp = resp_req.json()
                 results = resp.get('results', [])
 
-                action_results = filter(
-                    lambda r: r.get('type') == 'action', results)
-                parameter_results = filter(
-                    lambda r: r.get('type') == 'parameter', results)
-                resource_results = filter(
-                    lambda r: r.get('type') == 'resource', results)
+                action_results = list(filter(
+                    lambda r: r.get('type') == 'action', results))
+                parameter_results = list(filter(
+                    lambda r: r.get('type') == 'parameter', results))
+                resource_results = list(filter(
+                    lambda r: r.get('type') == 'resource', results))
 
                 action_ok = len(
                     list(filter(lambda r: not r.get('error', False), action_results)))
@@ -77,11 +77,14 @@ def execute(instance, catalog, req, exec_env, resp_lcp):
                 resource_ok = len(
                     list(filter(lambda r: not r.get('error', False), resource_results)))
 
+                print(action_ok, parameter_ok, resource_ok)
+                print(results, list(action_results))
+
                 num_ok = action_ok + parameter_ok + resource_ok
                 num_errors = num_errors - num_ok
 
                 update_status = None
-                for action, action_result in zip(actions, action_results):
+                for action, action_result in zip(actions, list(action_results)):
                     action_error = action_result.get('error', False)
                     if action.status is not None:
                         update_status = action.status if not action_error else 'unknown'

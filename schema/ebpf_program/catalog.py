@@ -1,59 +1,100 @@
-from marshmallow import Schema
-from marshmallow.fields import Bool, List, Nested, Str
+from document.ebpf_program.catalog import eBPFProgramCatalogDocument
+from marshmallow import Schema, validate
+from marshmallow.fields import Bool, Nested, Str
+from schema.base import BaseSchema
+from schema.validate import msg_id_unique, unique_list
+
+
+parameter_types = ['integer', 'number', 'time-duration',
+                   'string', 'choice', 'boolean', 'binary']
 
 
 class eBPFProgramCatalogOpenMetricsMetadataLabelSchema(Schema):
     """eBPF program Open Metrics metadata label."""
-    name = Str(required=True, description='Label name.', example='IP_PROTO', readonly=True)
-    value = Str(required=True, description='Label value.', example='UDP')
+
+    name = Str(required=True, example='IP_PROTO',
+               description='Label name.')
+
+    value = Str(required=True, example='UDP',
+                description='Label value.')
 
 
 class eBPFProgramCatalogOpenMetricsMetadataSchema(Schema):
     """eBPF program Open Metrics metadata."""
-    type = Str(required=True, description='Metric type.', example='counter')
-    help = Str(description='Metric help.',
-               example='This metric represents the number of packets that has traveled trough this probe.')
-    labels = Nested(eBPFProgramCatalogOpenMetricsMetadataLabelSchema,
-                    description='Labels of Open Metrics Metadata.')
+
+    type = Str(required=True, example='counter',
+               description='Metric type.')
+
+    help = Str(example='This metric represents the number of packets that has traveled trough this probe.',
+               description='Metric help.')
+
+    labels = Nested(eBPFProgramCatalogOpenMetricsMetadataLabelSchema, many=True,
+                    description='Labels of Open Metrics Metadata.',
+                    validate=unique_list('name'),
+                    error_messages=dict(validator_failed=msg_id_unique))
 
 
 class eBPFProgramCatalogMetricSchema(Schema):
     """eBPF program metric."""
-    name = Str(required=True, description='Metric name.',
-               example='packets_total', readonly=True)
-    map_name = Str(data_key='map-name', required=True, description='Mapping value in the code.',
-                   example='PKT_COUNTER')
-    open_metrics_metadata = Nested(eBPFProgramCatalogOpenMetricsMetadataSchema,
-                                   data_key='open-metrics-metadata', description='Open Metrics Metadata.')
+
+    name = Str(required=True, example='packets_total',
+               description='Metric name.')
+
+    map_name = Str(data_key='map-name', required=True, example='PKT_COUNTER',
+                   description='Mapping value in the code.')
+
+    open_metrics_metadata = Nested(eBPFProgramCatalogOpenMetricsMetadataSchema, data_key='open-metrics-metadata',
+                                   description='Open Metrics Metadata.')
 
 
 class eBPFProgramConfigCatalogSchema(Schema):
     """eBPF program configuration."""
-    code = Str(required=True, description='Code of the eBPF program.')
+
+    code = Str(required=True,
+               description='Code of the eBPF program.')
+
     metrics = Nested(eBPFProgramCatalogMetricSchema, many=True,
-                     description='eBPF program metrics.')
+                     description='eBPF program metrics.',
+                     validate=unique_list('name'),
+                     error_messages=dict(validator_failed=msg_id_unique))
 
 
 class eBPFProgramParameterCatalogSchema(Schema):
     """eBPF program configuration."""
-    id = Str(required=True, dump_only=True, readonly=True,
-             description='Parameter id.', example='interface')
-    type = Str(required=True, description='Parameter type.', example='integer',
-               enum=['integer', 'number', 'time-duration', 'string', 'choice', 'boolean', 'binary'])
-    list = Bool(default=False, description='Indicate if the parameter can have multiple values.',
-                example=True)
-    values = List(Str(example=['yes', 'no']),
-                  description='Possible values if the parameter type is choice.')
-    description = Str(description='Short description of the parameter.',
-                      example='Network Interface to attach.')
-    example = Str(description='Example of parameter value.', example='eno0')
+
+    id = Str(required=True, example='interface',
+             description='Parameter id.')
+
+    type = Str(required=True, description='Parameter type.', enum=parameter_types, example='integer',
+               validate=validate.OneOf(parameter_types))
+
+    list = Bool(default=False, example=True,
+                description='Indicate if the parameter can have multiple values.')
+
+    values = Str(many=True, example='yes',
+                 description='Possible values if the parameter type is choice.')
+
+    description = Str(example='Network Interface to attach.',
+                      description='Short description of the parameter.')
+
+    example = Str(example='eno0',
+                  description='Example of parameter value.')
 
 
-class eBPFProgramCatalogSchema(Schema):
+class eBPFProgramCatalogSchema(BaseSchema):
     """Represents an eBPF program in the catalog."""
-    id = Str(required=True, dump_only=True, description='Id of the eBPF program in the catalog.',
-             example='packet-capture', readonly=True)
-    config = Nested(eBPFProgramConfigCatalogSchema, required=True, many=False)
-    parameters = Nested(eBPFProgramParameterCatalogSchema, many=True)
-    description = Str(description='Description of eBPF program.',
-                      example='Transparent service to capture packets flowing through the interface it is attached to, apply filters and obtain capture in .pcap format.')
+
+    doc_cls = eBPFProgramCatalogDocument
+
+    id = Str(required=True, example='packet-capture',
+             description='Id of the eBPFProgram in the catalog.')
+
+    config = Nested(eBPFProgramConfigCatalogSchema, required=True)
+
+    parameters = Nested(eBPFProgramParameterCatalogSchema, many=True,
+                        validate=unique_list('id'),
+                        error_messages=dict(validator_failed=msg_id_unique))
+
+    description = Str(example="""Transparent service to capture packets flowing through the interface it is attached to,
+                                 apply filters and obtain capture in .pcap format.""",
+                      description='Description of eBPF program.')

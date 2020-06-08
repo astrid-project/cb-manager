@@ -8,7 +8,7 @@ class ServiceGraphResource(BaseResource):
     routes = '/service-graph/'
 
     def on_post(self, req, resp):
-        data = req.context.get('json', {})
+        data = req.media
         spec = data.get('spec', {})
         policies = spec.get('policies', [])
         results = []

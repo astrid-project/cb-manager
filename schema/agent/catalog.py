@@ -1,75 +1,133 @@
-from marshmallow import Schema
+from document.agent.catalog import AgentCatalogDocument
+from marshmallow import Schema, validate
 from marshmallow.fields import Bool, Nested, Str
+from schema.base import BaseSchema, NestedSchema
+from schema.validate import msg_id_unique, unique_list
+
+
+action_status = ['started', 'stopped', 'unknown']
+parameter_schemas = ['yaml', 'json', 'properties']
+parameter_types = ['integer', 'number', 'time-duration',
+                   'string', 'choice', 'boolean', 'binary']
 
 
 class AgentCatalogActionConfigSchema(Schema):
     """Agent action configuration."""
-    cmd = Str(required=True, description='Action command.', example='service filebeat start')
-    args = Str(many=True, description='Action command argument', example='-v')
-    daemon = Str(description='Key used to execute the command as daemon.', example='firewall')
+
+    cmd = Str(required=True, example='service filebeat start',
+              description='Action command.')
+
+    args = Str(many=True, example='-v',
+               description='Action command argument')
+
+    daemon = Str(example='firewall',
+                 description='Key used to execute the command as daemon.')
 
 
 class AgentCatalogActionSchema(Schema):
     """Agent action."""
-    id = Str(required=True, dump_only=True, description='Action name', example='start', readonly=True)
-    config = Nested(AgentCatalogActionConfigSchema, required=True,
-                    many=True, description='Action config.')
-    status = Str(enum=['started', 'stopped', 'unknown'], example='started',
-                 description='Update the status the of the agent-instance if the command is executed correctly.')
-    description = Str(description='Short descripton of the agent actions.',
-                      example='Start the execution of the agent.')
-    example = Str(description='Example of action parameter.', example='forward')
+
+    id = Str(required=True, example='start',
+             description='Action name')
+
+    config = Nested(AgentCatalogActionConfigSchema, required=True, many=True,
+                    description='Action config.') # TODO unique?
+
+    status = Str(enum=action_status, example=action_status[0],
+                 description='Update the status the of the agent-instance if the command is executed correctly.',
+                 validate=validate.OneOf(action_status))
+
+    description = Str(example='Start the execution of the agent.',
+                      description='Short descripton of the agent actions.')
+
+    example = Str(example='forward',
+                  description='Example of action parameter.')
+
 
 
 class AgentCatalogParameterConfigSchema(Schema):
     """Agent parameter configuration."""
-    schema = Str(required=True, enum=['yaml', 'json', 'properties'],
-                 description='Schema of the parameter file', example='yaml')
-    source = Str(required=True, description='Path of the source parameter file',
-                 example='/usr/share/filebeat/filebeat.yml')
-    path = Str(required=True, many=True, description='Path of the parameter value in the file',
-               example='enabled')
+
+    schema = Str(required=True, enum=parameter_schemas, example=parameter_schemas[0],
+                 description='Schema of the parameter file',
+                 validate=validate.OneOf(parameter_schemas))
+
+    source = Str(required=True, example='/usr/share/filebeat/filebeat.yml',
+                 description='Path of the source parameter file')
+
+    path = Str(required=True, many=True, example='enabled',
+               description='Path of the parameter value in the file')
 
 
 class AgentCatalogParameterSchema(Schema):
     """Agent parameter."""
-    id = Str(required=True, dump_only=True, readonly=True,
-             description='Parameter id.', example='log-period')
-    type = Str(required=True, description='Parameter type.', example='integer',
-               enum=['integer', 'number', 'time-duration', 'string', 'choice', 'boolean', 'binary'])
+
+    id = Str(required=True, example='log-period',
+             description='Parameter id.')
+
+    type = Str(required=True, enum=parameter_types, example=parameter_types[0],
+               description='Parameter type.',
+               validate=validate.OneOf(parameter_types))
+
     config = Nested(AgentCatalogParameterConfigSchema, required=True,
                     description='Parameter configuration.')
-    list = Bool(default=False, description='Indicate if the parameter can have multiple values.',
-                example=True)
-    values = Str(example='mysql', many=True,
+
+    list = Bool(default=False, example=True,
+                description='Indicate if the parameter can have multiple values.')
+
+    values = Str(many=True, example='mysql',
                  description='Possible values if the parameter type is choice.')
+
     description = Str(example='Enable the agent.',
-                      description='Short description of the parameter.', )
-    example = Str(description='Example of parameter value.', example='10s')
+                      description='Short description of the parameter.')
+
+    example = Str(example='10s',
+                  description='Example of parameter value.')
 
 
 class AgentCatalogResourceConfigSchema(Schema):
     """Agent resource configuration."""
-    path = Str(required=True, description='File path', example='/usr/share/filebeat/filebeat.yml')
+
+    path = Str(required=True, example='/usr/share/filebeat/filebeat.yml',
+               description='File path')
 
 
-class AgentCatalogResourceSchema(Schema):
+class AgentCatalogResourceSchema(NestedSchema):
     """Agent resource."""
-    id = Str(required=True, dump_only=True, readonly=True,
-             description='Resource id.', example='filebeat-config')
-    values = Str(example='mysql', many=True,
-                 description='Possible values if the parameter type is choice.')
+    id = Str(required=True, example='filebeat-config',
+             description='Resource id.')
+
+    config = Nested(AgentCatalogResourceConfigSchema, required=True,
+                    description='Resource configuration.')
+
     description = Str(example='Enable the agent.',
                       description='Short description of the parameter.', )
-    example = Str(description='Example of parameter value.', example='10s')
+
+    example = Str(example='10s',
+                  description='Example of parameter value.')
 
 
-class AgentCatalogSchema(Schema):
+class AgentCatalogSchema(BaseSchema):
     """Represents an agent in the catalog."""
-    id = Str(required=True, dump_only=True, example='filebeat', readonly=True,
+    doc_cls = AgentCatalogDocument
+
+    id = Str(required=True, example='filebeat',
              description='Id of the agent in the catalog.')
-    actions = Nested(AgentCatalogActionSchema, many=True, description='Action properties.')
+
+    actions = Nested(AgentCatalogActionSchema, many=True,
+                     description='Action properties.',
+                     validate=unique_list('id'),
+                     error_messages=dict(validator_failed=msg_id_unique))
+
     parameters = Nested(AgentCatalogParameterSchema, many=True,
-                        description='Parameter properties.')
-    description = Str(description='Short description of the agent.',
-                      example='Collect system metrics from execution environments.')
+                        description='Parameter properties.',
+                        validate=unique_list('id'),
+                        error_messages=dict(validator_failed=msg_id_unique))
+
+    resources = Nested(AgentCatalogResourceSchema, many=True,
+                       description='Resource properties.',
+                       validate=unique_list('id'),
+                       error_messages=dict(validator_failed=msg_id_unique))
+
+    description = Str(example='Collect system metrics from execution environments.',
+                      description='Short description of the agent.')

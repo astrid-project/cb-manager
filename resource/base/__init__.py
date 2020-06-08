@@ -31,6 +31,16 @@ class BaseResource(object):
         else:
             Log.get(self.__class__.__name__).warning('doc_cls not set')
 
+    def remove_ignore_fields(self, data):
+        for ignore_field in self.ignore_fields:
+            try:
+                data.pop(ignore_field)
+                self.log.info(
+                    f'field {ignore_field} in the request ignored when update {self.doc_name}')
+            except Exception as exception:
+                self.log.notice(f'exception: {exception}')
+
+
     from resource.base.get import on_base_get
     from resource.base.post import on_base_post
     from resource.base.put import on_base_put

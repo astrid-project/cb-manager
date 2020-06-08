@@ -11,7 +11,8 @@ try:
     from reader.arg import ArgReader
     from werkzeug.serving import run_with_reloader
     import waitress
-except ImportError:
+except ImportError as error:
+    print(error)
     os.system('pip3 install -r requirements.txt')
 
 db = ArgReader.read()

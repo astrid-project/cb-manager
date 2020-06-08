@@ -1,7 +1,8 @@
-from elasticsearch_dsl import Date, Document, Text
+from document.base import BaseDocument
+from elasticsearch_dsl import Date, Text
 
 
-class DataDocument(Document):
+class DataDocument(BaseDocument):
     """Represents the stored data."""
 
     # id already defined by Elasticsearch

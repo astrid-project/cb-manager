@@ -1,4 +1,5 @@
-from elasticsearch_dsl import Boolean, Document, InnerDoc, Nested, Text
+from document.base import BaseDocument
+from elasticsearch_dsl import Boolean, InnerDoc, Nested, Text
 
 
 class eBPFProgramCatalogOpenMetricsMetadataLabelInnerDoc(InnerDoc):
@@ -39,7 +40,7 @@ class eBPFProgramParameterCatalogInnerDoc(InnerDoc):
     example = Text()
 
 
-class eBPFProgramCatalogDocument(Document):
+class eBPFProgramCatalogDocument(BaseDocument):
     """Represents an eBPF program in the catalog."""
     # id already defined by Elasticsearch
     config = Nested(eBPFProgramConfigCatalogInnerDoc, required=True)
