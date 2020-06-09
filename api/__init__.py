@@ -4,6 +4,7 @@ from api.spec import Spec
 from falcon import API, media
 from falcon_auth import FalconAuthMiddleware, BasicAuthBackend
 from functools import partial
+from lib.heartbeat import heartbeat
 from resource import routes
 from schema.query_request import QueryRequestSchema
 from schema.response import HTTPErrorSchema
@@ -36,5 +37,7 @@ def api(title, version, dev_username, dev_password):
     falcon_api_doc(instance, config_path='./swagger/schema.json',
                    url_prefix='/api/doc', title='API doc')
     api_spec.write()
+
+    heartbeat()
 
     return instance

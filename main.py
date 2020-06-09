@@ -7,7 +7,6 @@ os.chdir(dir_path)
 try:
     from api import api
     from elk import connection as elk_conn
-    from lib.heartbeat import heartbeat
     from reader.arg import ArgReader
     from werkzeug.serving import run_with_reloader
     import waitress
@@ -27,7 +26,6 @@ else:
 
     @run_with_reloader
     def run_server():
-        heartbeat()
         waitress.serve(api(title=db.config.title, version=db.config.version,
                            dev_username=db.dev_username, dev_password=db.dev_password),
                        host=db.host, port=db.port)

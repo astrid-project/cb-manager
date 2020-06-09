@@ -32,10 +32,9 @@ definitions:
   AgentCatalogAction:
     properties:
       config:
+        allOf:
+        - $ref: '#/definitions/AgentCatalogActionConfig'
         description: Action config.
-        items:
-          $ref: '#/definitions/AgentCatalogActionConfig'
-        type: array
       description:
         description: Short descripton of the agent actions.
         example: Start the execution of the agent.
@@ -343,32 +342,26 @@ definitions:
     type: object
   LCP:
     properties:
-      cb_expiration:
-        description: Datetime until the authentication with the CB is valid.
-        example: 2019_02_14 15:23:30
-        format: date-time
-        type: string
-      cb_password:
-        description: Hashed password assigned to LCP to connect with the CB.
-        example: 22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5
-        type: string
-      last_hearbeat:
-        description: Timestamp of the last hearbeat between the LCP and CB.
-        example: 2019_02_14 15:23:30
+      last_heartbeat:
+        description: Timestamp of the expiration of the API access configuration.
+        example: 2019/02/14 15:23:33
         format: date-time
         type: string
       password:
-        description: Password to connect from the CB to the LCP.
-        example: 22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5
+        description: Password for the CB to connect to this LCP.
         type: string
       port:
         description: TCP port number of LCP in the execution environment.
         example: 5000
         format: int32
         type: integer
+      started:
+        description: Timestamp when the LCP is started
+        example: 2019/02/14 15:23:30
+        format: date-time
+        type: string
       username:
-        description: Username to connect from the CB to the LCP.
-        example: 22c6d368beabf9de1ea03e010010758a394c37c3b18aa0705b8634f5
+        description: Username for the CB to connect to this LCP.
         type: string
     required:
     - port
@@ -521,7 +514,7 @@ definitions:
       description:
         description: Description of eBPF program.
         example: "Transparent service to capture packets flowing through the interface\
-          \ it is attached to,\n                                 apply filters and\
+          \ it\n                                 is attached to, apply filters and\
           \ obtain capture in .pcap format."
         type: string
       id:
@@ -664,7 +657,7 @@ definitions:
     type: object
 info:
   title: Context Broker Manager
-  version: 97d0e2551b3052ae4825ada918bf7979d233928f@master
+  version: a423baa4372e93c8eb3cc3346454d63c6b0bbc4a@master
 paths:
   /catalog/agent/:
     delete:

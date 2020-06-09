@@ -20,8 +20,6 @@ class AgentCatalogResource(BaseResource):
     routes = '/catalog/agent/'
     schema_cls = AgentCatalogSchema
 
-    def on_get(self, req, resp):
-        self.on_base_get(self, req, resp)
 
 
 @docstring(method='get', sum='Agent Read (Single)',

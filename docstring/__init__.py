@@ -1,4 +1,4 @@
-from docstring.copy_func import copy_func
+import types
 
 
 def docstring(**kwrd_params):
@@ -6,6 +6,16 @@ def docstring(**kwrd_params):
 
     :returns: decorator
     """
+
+    def copy_func(func, name=None):
+        """Copy function with a new name.
+
+        :param func: function to copy
+        :param name: new name
+        :returns: copied function
+        """
+        return types.FunctionType(func.__code__, func.__globals__, name or func.__name__,
+                                  func.__defaults__, func.__closure__)
 
     def decorator(self):
         kwrd_params['tag'] = self.doc_cls.Index.name
@@ -25,4 +35,5 @@ def docstring(**kwrd_params):
         setattr(self, 'tag', {'name': kwrd_params.get('tag'),
                               'description': self.schema_cls.__doc__.strip(' \n')})
         return self
+
     return decorator

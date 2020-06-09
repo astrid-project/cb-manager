@@ -1,7 +1,6 @@
 from document.agent.instance import AgentInstanceDocument
 from resource.base import BaseResource
-from resource.agent.handler.lcp.post import lcp_post
-from resource.agent.handler.lcp.put import lcp_put
+from resource.agent.handler.lcp import lcp_post, lcp_put
 from schema.agent.instance import AgentInstanceSchema
 from docstring import docstring
 
@@ -28,7 +27,6 @@ class AgentInstanceResource(BaseResource):
     schema_cls = AgentInstanceSchema
     lcp_handler = dict(post=lcp_post, put=lcp_put)
     nested_fields = ['parameters']
-    readonly_fields = ['agent_catalog_id', 'exec_env_id', 'status']
     ignore_fields = ['actions']
 
 

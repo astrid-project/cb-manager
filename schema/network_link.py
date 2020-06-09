@@ -11,12 +11,10 @@ class NetworkLinkSchema(BaseSchema):
 
     id = Str(required=True, example='net-link-1',
              description='Id of the network link.')
-
     type_id = Str(required=True, example='pnt2pnt',
                   description='Id of the network link type.',
                   validate=_in(NetworkLinkTypeDocument.get_ids),
                   error_messages=dict(validator_failed=msg_id_not_found))
-
     description = Str(example='Allow communication between front-end and back-end services.',
                       description='Short description of the network link,')
 
@@ -27,9 +25,7 @@ class NetworkLinkTypeSchema(BaseSchema):
 
     id = Str(required=True, example='pnt2pnt',
              description='Id of the network link type.')
-
     name = Str(required=True, readonly=True, example='Point to point',
                description='Name of the network link type.')
-
     description = Str(example='Communications connection between two communication endpoints.',
                       description='Short description of the network link type,')

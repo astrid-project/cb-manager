@@ -77,9 +77,6 @@ def execute(instance, catalog, req, exec_env, resp_lcp):
                 resource_ok = len(
                     list(filter(lambda r: not r.get('error', False), resource_results)))
 
-                print(action_ok, parameter_ok, resource_ok)
-                print(results, list(action_results))
-
                 num_ok = action_ok + parameter_ok + resource_ok
                 num_errors = num_errors - num_ok
 

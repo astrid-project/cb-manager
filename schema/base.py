@@ -19,9 +19,7 @@ class BaseSchema(Schema):
     def validate_readonly(self, data, **kwargs):
         if self.method == 'PUT':
             for field, props in self.declared_fields.items():
-                if props.metadata.get('readonly', False):
-                    readonly_data = data.get(field, None)
-                    if readonly_data is not None:
+                if props.metadata.get('readonly', False) and data.get(field, None) is not None:
                         raise ValidationError({field: msg_readonly})
 
 

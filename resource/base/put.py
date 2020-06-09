@@ -1,5 +1,4 @@
 from copy import deepcopy
-from document.nested import edit as nested_edit, rm as nested_rm
 from elasticsearch import NotFoundError
 from falcon.errors import HTTPBadRequest
 from http import HTTPStatus
@@ -25,10 +24,8 @@ def on_base_put(self, req, resp, id=None):
             for nested_field in self.nested_fields:
                 nested_data = wrap(
                     req_data_item.get(nested_field, []))
-                status_item_rm = nested_rm(
-                    obj, data=nested_data, field=nested_field)
-                status_item_edit = nested_edit(
-                    obj, data=nested_data, field=nested_field)
+                status_item_rm = obj.rm(data=nested_data, field=nested_field)
+                status_item_edit = obj.edit(data=nested_data, field=nested_field)
                 if 'updated' in [status_item_rm, status_item_edit]:
                     status_item = 'updated'
             subset_req_data_item = subset(

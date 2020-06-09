@@ -25,7 +25,6 @@ class ConnectionResource(BaseResource):
     doc_name = 'Connection'
     routes = '/connection/'
     schema_cls = ConnectionSchema
-    readonly_fields = ['exec_env_id', 'network_link_id']
 
 
 @docstring(method='get', sum='Connection Read (Single)',

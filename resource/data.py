@@ -19,7 +19,6 @@ class DataResource(BaseResource):
     doc_name = 'Data'
     routes = '/data/'
     schema_cls = DataSchema
-    readonly_fields = ['agent_instance_id', 'ebpf_program_instance_id', 'timestamp_event', 'timestamp_agent']
 
 
 @docstring(method='get', sum='Data Read (Single)',

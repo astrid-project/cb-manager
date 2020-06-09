@@ -29,7 +29,6 @@ class eBPFProgramInstanceResource(BaseResource):
     schema_cls = eBPFProgramInstanceSchema
     lcp_handler = dict(post=lcp_post, put=lcp_put, delete=lcp_delete)
     nested_fields = ['parameters']
-    readonly_fields = ['ebpf_program_catalog_id', 'exec_env_id']
 
 
 @docstring(method='get', sum='eBPF Program Instance Read (Single)',

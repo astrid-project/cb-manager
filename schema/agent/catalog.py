@@ -16,10 +16,8 @@ class AgentCatalogActionConfigSchema(Schema):
 
     cmd = Str(required=True, example='service filebeat start',
               description='Action command.')
-
     args = Str(many=True, example='-v',
                description='Action command argument')
-
     daemon = Str(example='firewall',
                  description='Key used to execute the command as daemon.')
 
@@ -29,20 +27,15 @@ class AgentCatalogActionSchema(Schema):
 
     id = Str(required=True, example='start',
              description='Action name')
-
-    config = Nested(AgentCatalogActionConfigSchema, required=True, many=True,
+    config = Nested(AgentCatalogActionConfigSchema, unknown='INCLUDE', required=True,
                     description='Action config.') # TODO unique?
-
     status = Str(enum=action_status, example=action_status[0],
                  description='Update the status the of the agent-instance if the command is executed correctly.',
                  validate=validate.OneOf(action_status))
-
     description = Str(example='Start the execution of the agent.',
                       description='Short descripton of the agent actions.')
-
     example = Str(example='forward',
                   description='Example of action parameter.')
-
 
 
 class AgentCatalogParameterConfigSchema(Schema):
@@ -51,10 +44,8 @@ class AgentCatalogParameterConfigSchema(Schema):
     schema = Str(required=True, enum=parameter_schemas, example=parameter_schemas[0],
                  description='Schema of the parameter file',
                  validate=validate.OneOf(parameter_schemas))
-
     source = Str(required=True, example='/usr/share/filebeat/filebeat.yml',
                  description='Path of the source parameter file')
-
     path = Str(required=True, many=True, example='enabled',
                description='Path of the parameter value in the file')
 
@@ -64,23 +55,17 @@ class AgentCatalogParameterSchema(Schema):
 
     id = Str(required=True, example='log-period',
              description='Parameter id.')
-
     type = Str(required=True, enum=parameter_types, example=parameter_types[0],
                description='Parameter type.',
                validate=validate.OneOf(parameter_types))
-
     config = Nested(AgentCatalogParameterConfigSchema, required=True,
                     description='Parameter configuration.')
-
     list = Bool(default=False, example=True,
                 description='Indicate if the parameter can have multiple values.')
-
     values = Str(many=True, example='mysql',
                  description='Possible values if the parameter type is choice.')
-
     description = Str(example='Enable the agent.',
                       description='Short description of the parameter.')
-
     example = Str(example='10s',
                   description='Example of parameter value.')
 
@@ -94,15 +79,13 @@ class AgentCatalogResourceConfigSchema(Schema):
 
 class AgentCatalogResourceSchema(NestedSchema):
     """Agent resource."""
+
     id = Str(required=True, example='filebeat-config',
              description='Resource id.')
-
     config = Nested(AgentCatalogResourceConfigSchema, required=True,
                     description='Resource configuration.')
-
     description = Str(example='Enable the agent.',
                       description='Short description of the parameter.', )
-
     example = Str(example='10s',
                   description='Example of parameter value.')
 
@@ -113,21 +96,17 @@ class AgentCatalogSchema(BaseSchema):
 
     id = Str(required=True, example='filebeat',
              description='Id of the agent in the catalog.')
-
     actions = Nested(AgentCatalogActionSchema, many=True,
                      description='Action properties.',
                      validate=unique_list('id'),
                      error_messages=dict(validator_failed=msg_id_unique))
-
     parameters = Nested(AgentCatalogParameterSchema, many=True,
                         description='Parameter properties.',
                         validate=unique_list('id'),
                         error_messages=dict(validator_failed=msg_id_unique))
-
     resources = Nested(AgentCatalogResourceSchema, many=True,
                        description='Resource properties.',
                        validate=unique_list('id'),
                        error_messages=dict(validator_failed=msg_id_unique))
-
     description = Str(example='Collect system metrics from execution environments.',
                       description='Short description of the agent.')

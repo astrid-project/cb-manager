@@ -8,7 +8,6 @@ class BaseResource(object):
     doc_cls = None
     lcp_handler = {}
     nested_fields = []
-    readonly_fields = []
     ignore_fields = []
 
     def __init__(self):

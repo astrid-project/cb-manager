@@ -6,6 +6,7 @@ from functools import partial
 import yaml
 
 
+# FIXME find XML library to load/dump content
 class XMLHandler(JSONHandler):
     # def __init__(self, dumps=None, loads=None):
         #self.dumps = dumps or lazyxml.dumps

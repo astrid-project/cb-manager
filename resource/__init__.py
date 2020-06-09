@@ -8,11 +8,11 @@ from resource.data import DataResource, DataSelectedResource
 from resource.ebpf_program.catalog import eBPFProgramCatalogResource, eBPFProgramCatalogSelectedResource
 from resource.ebpf_program.instance import eBPFProgramInstanceResource, eBPFProgramInstanceSelectedResource
 
-from resource.exec_env import ExecEnvResource, ExecEnvSelectedResource
-from resource.exec_env.type import ExecEnvTypeResource, ExecEnvTypeSelectedResource
+from resource.exec_env import ExecEnvResource, ExecEnvSelectedResource, \
+                              ExecEnvTypeResource, ExecEnvTypeSelectedResource
 
-from resource.network_link import NetworkLinkResource, NetworkLinkSelectedResource
-from resource.network_link.type import NetworkLinkTypeResource, NetworkLinkTypeSelectedResource
+from resource.network_link import NetworkLinkResource, NetworkLinkSelectedResource, \
+                                  NetworkLinkTypeResource, NetworkLinkTypeSelectedResource
 
 from resource.service_graph import ServiceGraphResource
 

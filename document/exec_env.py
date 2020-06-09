@@ -5,11 +5,10 @@ from elasticsearch_dsl import Date, InnerDoc, Integer, Nested, Text
 class LCPDocument(InnerDoc):
     """LCP configuration data."""
     port = Integer(required=True)
+    started = Date()
+    last_heartbeat = Date()
     username = Text()
     password = Text()
-    cb_password = Text()
-    cb_expiration = Date()
-    last_heartbeat = Date()
 
 
 class ExecEnvDocument(BaseDocument):
