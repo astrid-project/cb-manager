@@ -29,7 +29,11 @@ def filter_action(action, data):
         if isinstance(x, (list, tuple)):
             return [frmt(i) for i in x]
         else:
-            return x.format(**data)
+            try:
+                return x.format(**data)
+            except Exception as exception:
+                Log.get('agent-instance-execution-action').error(f'exception: {exception}')
+                return x
 
     return valmap(lambda x: frmt(x), action)
 
