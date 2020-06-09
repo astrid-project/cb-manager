@@ -414,9 +414,11 @@ definitions:
           $ref: '#/definitions/QueryRequestOrder'
         type: array
       select:
-        description: Fields to return.
-        example: id
-        type: string
+        items:
+          description: Fields to return.
+          example: id
+          type: string
+        type: array
       where:
         allOf:
         - $ref: '#/definitions/QueryRequestClause'
@@ -657,7 +659,7 @@ definitions:
     type: object
 info:
   title: Context Broker Manager
-  version: a423baa4372e93c8eb3cc3346454d63c6b0bbc4a@master
+  version: b80d3e904d131949f7e06572f52c5ee046772399@master
 paths:
   /catalog/agent/:
     delete:

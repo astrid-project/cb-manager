@@ -60,10 +60,10 @@ class QueryRequestClauseSchema(Schema):
 class QueryRequestSchema(Schema):
     """Query request to filter the items."""
 
-    select = Str(many=True, example='id',
+    select = List(Str(example='id',
                  description='Fields to return.',
                  validate=unique_list,
-                 error_messages=dict(validator_failed=msg_repeated_values))
+                 error_messages=dict(validator_failed=msg_repeated_values)))
     where = Nested(QueryRequestClauseSchema,
                    description='Filter the items based on different conditions.')
     order = Nested(QueryRequestOrderSchema, many=True,
