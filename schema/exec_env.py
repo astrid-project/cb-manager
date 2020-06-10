@@ -31,7 +31,7 @@ class ExecEnvSchema(BaseSchema):
                   description='Id of the execution environment type.',
                   validate=_in(ExecEnvTypeDocument.get_ids),
                   error_messages=dict(validator_failed=msg_id_not_found))
-    lcp = Nested(LCPSchema, required=True,
+    lcp = Nested(LCPSchema, required=True, unknown='INCLUDE',
                  description='Data related to the LCP.')
     description = Str(example='Apache HTTP Web Server.',
                       description='Short description of the execution environment,')

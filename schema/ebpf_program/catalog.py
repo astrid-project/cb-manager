@@ -1,6 +1,6 @@
 from document.ebpf_program.catalog import eBPFProgramCatalogDocument
 from marshmallow import Schema, validate
-from marshmallow.fields import Bool, Nested, Str
+from marshmallow.fields import Bool, Nested, Raw, Str
 from schema.base import BaseSchema
 from schema.validate import msg_id_unique, unique_list
 
@@ -23,9 +23,9 @@ class eBPFProgramCatalogOpenMetricsMetadataSchema(Schema):
 
     type = Str(required=True, example='counter',
                description='Metric type.')
-    help = Str(example='This metric represents the number of packets that has traveled trough this probe.',
+    help = Str(example='This metric represents the number of packets that has travelled trough this probe.',
                description='Metric help.')
-    labels = Nested(eBPFProgramCatalogOpenMetricsMetadataLabelSchema, many=True,
+    labels = Nested(eBPFProgramCatalogOpenMetricsMetadataLabelSchema, many=True, unknown='INCLUDE',
                     description='Labels of Open Metrics Metadata.',
                     validate=unique_list('name'),
                     error_messages=dict(validator_failed=msg_id_unique))
@@ -38,7 +38,8 @@ class eBPFProgramCatalogMetricSchema(Schema):
                description='Metric name.')
     map_name = Str(data_key='map-name', required=True, example='PKT_COUNTER',
                    description='Mapping value in the code.')
-    open_metrics_metadata = Nested(eBPFProgramCatalogOpenMetricsMetadataSchema, data_key='open-metrics-metadata',
+    open_metrics_metadata = Nested(eBPFProgramCatalogOpenMetricsMetadataSchema,
+                                   data_key='open-metrics-metadata', unknown='INCLUDE',
                                    description='Open Metrics Metadata.')
 
 
@@ -47,7 +48,7 @@ class eBPFProgramConfigCatalogSchema(Schema):
 
     code = Str(required=True,
                description='Code of the eBPF program.')
-    metrics = Nested(eBPFProgramCatalogMetricSchema, many=True,
+    metrics = Nested(eBPFProgramCatalogMetricSchema, many=True, unknown='INCLUDE',
                      description='eBPF program metrics.',
                      validate=unique_list('name'),
                      error_messages=dict(validator_failed=msg_id_unique))
@@ -66,7 +67,7 @@ class eBPFProgramParameterCatalogSchema(Schema):
                  description='Possible values if the parameter type is choice.')
     description = Str(example='Network Interface to attach.',
                       description='Short description of the parameter.')
-    example = Str(example='eno0',
+    example = Raw(example='eno0',
                   description='Example of parameter value.')
 
 
@@ -77,8 +78,8 @@ class eBPFProgramCatalogSchema(BaseSchema):
 
     id = Str(required=True, example='packet-capture',
              description='Id of the eBPFProgram in the catalog.')
-    config = Nested(eBPFProgramConfigCatalogSchema, required=True)
-    parameters = Nested(eBPFProgramParameterCatalogSchema, many=True,
+    config = Nested(eBPFProgramConfigCatalogSchema, required=True, unknown='INCLUDE')
+    parameters = Nested(eBPFProgramParameterCatalogSchema, many=True, unknown='INCLUDE',
                         validate=unique_list('id'),
                         error_messages=dict(validator_failed=msg_id_unique))
     description = Str(example="""Transparent service to capture packets flowing through the interface it

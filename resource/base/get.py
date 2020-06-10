@@ -7,7 +7,7 @@ from schema.validate import validate
 from schema.agent.instance import AgentInstanceSchema
 
 def on_base_get(self, req, resp, id=None):
-    req_data = validate(schema=QueryRequestSchema(), method='GET', data=req.media)
+    req_data = validate(schema=QueryRequestSchema(), method='GET', data=req.media or {})
     resp_data = []
     try:
         qr = QueryReader(index=self.doc_cls.Index.name)

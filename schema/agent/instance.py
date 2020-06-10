@@ -38,7 +38,7 @@ class AgentInstanceSchema(BaseSchema):
     status = Str(required=True, readonly=True, enum=agent_status, example=agent_status[0],
                  description='Status of the agent instance',
                  validate=validate.OneOf(agent_status))
-    parameters = Nested(AgentInstanceParameterSchema, many=True,
+    parameters = Nested(AgentInstanceParameterSchema, many=True, unknown='INCLUDE',
                         description='List of agent instance parameters.',
                         validate=unique_list('id'),
                         error_messages=dict(validator_failed=msg_id_unique))

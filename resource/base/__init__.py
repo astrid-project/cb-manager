@@ -18,15 +18,13 @@ class BaseResource(object):
                 try:
                     self.log.info(f'start initialization index {self.doc_cls.Index.name}')
                     self.doc_cls.init()
+                    self.log.success(f'index {self.doc_cls.Index.name} initialized')
+                    error_es_initialization = False
                 except Exception as exception:
                     self.log.error(f'Exception: {exception}')
                     self.log.error(f'initialization index {self.doc_cls.Index.name} not possible')
                     self.log.info(f'waiting for {ArgReader.db.es_retry_period} seconds and try again')
                     sleep(ArgReader.db.es_retry_period)
-                    self.__init__()
-                else:
-                    self.log.success(f'index {self.doc_cls.Index.name} initialized')
-                    error_es_initialization = False
         else:
             Log.get(self.__class__.__name__).warning('doc_cls not set')
 

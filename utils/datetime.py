@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 FORMAT = '%Y/%m/%d %H:%M:%S'
 
 

@@ -9,7 +9,7 @@ from utils.sequence import expand
 
 
 def on_base_delete(self, req, resp, id=None):
-    req_data = validate(schema=QueryRequestSchema(), method='DELETE', data=req.media)
+    req_data = validate(schema=QueryRequestSchema(), method='DELETE', data=req.media or {})
     resp_data = []
     try:
         qr = QueryReader(index=self.doc_cls.Index.name)

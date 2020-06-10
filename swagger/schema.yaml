@@ -42,7 +42,6 @@ definitions:
       example:
         description: Example of action parameter.
         example: forward
-        type: string
       id:
         description: Action name
         example: start
@@ -90,7 +89,6 @@ definitions:
       example:
         description: Example of parameter value.
         example: 10s
-        type: string
       id:
         description: Parameter id.
         example: log-period
@@ -123,9 +121,11 @@ definitions:
   AgentCatalogParameterConfig:
     properties:
       path:
-        description: Path of the parameter value in the file
-        example: enabled
-        type: string
+        items:
+          description: Path of the parameter value in the file
+          example: enabled
+          type: string
+        type: array
       schema:
         description: Schema of the parameter file
         enum:
@@ -139,7 +139,6 @@ definitions:
         example: /usr/share/filebeat/filebeat.yml
         type: string
     required:
-    - path
     - schema
     - source
     type: object
@@ -156,7 +155,6 @@ definitions:
       example:
         description: Example of parameter value.
         example: 10s
-        type: string
       id:
         description: Resource id.
         example: filebeat-config
@@ -553,7 +551,7 @@ definitions:
     properties:
       help:
         description: Metric help.
-        example: This metric represents the number of packets that has traveled trough
+        example: This metric represents the number of packets that has travelled trough
           this probe.
         type: string
       labels:
@@ -628,7 +626,6 @@ definitions:
       example:
         description: Example of parameter value.
         example: eno0
-        type: string
       id:
         description: Parameter id.
         example: interface
@@ -659,7 +656,7 @@ definitions:
     type: object
 info:
   title: Context Broker Manager
-  version: 451c0812b6a3c84a5b48ca0f67e79f5191454b96@master
+  version: c2d1bf67d236012970bde545d66233df82aae8e4@master
 paths:
   /catalog/agent/:
     delete:

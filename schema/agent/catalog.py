@@ -1,6 +1,6 @@
 from document.agent.catalog import AgentCatalogDocument
 from marshmallow import Schema, validate
-from marshmallow.fields import Bool, Nested, Str
+from marshmallow.fields import Bool, List, Nested, Raw, Str
 from schema.base import BaseSchema, NestedSchema
 from schema.validate import msg_id_unique, unique_list
 
@@ -34,7 +34,7 @@ class AgentCatalogActionSchema(Schema):
                  validate=validate.OneOf(action_status))
     description = Str(example='Start the execution of the agent.',
                       description='Short descripton of the agent actions.')
-    example = Str(example='forward',
+    example = Raw(example='forward',
                   description='Example of action parameter.')
 
 
@@ -46,8 +46,8 @@ class AgentCatalogParameterConfigSchema(Schema):
                  validate=validate.OneOf(parameter_schemas))
     source = Str(required=True, example='/usr/share/filebeat/filebeat.yml',
                  description='Path of the source parameter file')
-    path = Str(required=True, many=True, example='enabled',
-               description='Path of the parameter value in the file')
+    path = List(Str(required=True, example='enabled',
+               description='Path of the parameter value in the file'))
 
 
 class AgentCatalogParameterSchema(Schema):
@@ -58,7 +58,7 @@ class AgentCatalogParameterSchema(Schema):
     type = Str(required=True, enum=parameter_types, example=parameter_types[0],
                description='Parameter type.',
                validate=validate.OneOf(parameter_types))
-    config = Nested(AgentCatalogParameterConfigSchema, required=True,
+    config = Nested(AgentCatalogParameterConfigSchema, unknown='INCLUDE', required=True,
                     description='Parameter configuration.')
     list = Bool(default=False, example=True,
                 description='Indicate if the parameter can have multiple values.')
@@ -66,7 +66,7 @@ class AgentCatalogParameterSchema(Schema):
                  description='Possible values if the parameter type is choice.')
     description = Str(example='Enable the agent.',
                       description='Short description of the parameter.')
-    example = Str(example='10s',
+    example = Raw(example='10s',
                   description='Example of parameter value.')
 
 
@@ -82,11 +82,11 @@ class AgentCatalogResourceSchema(NestedSchema):
 
     id = Str(required=True, example='filebeat-config',
              description='Resource id.')
-    config = Nested(AgentCatalogResourceConfigSchema, required=True,
+    config = Nested(AgentCatalogResourceConfigSchema, unknown='INCLUDE', required=True,
                     description='Resource configuration.')
     description = Str(example='Enable the agent.',
                       description='Short description of the parameter.', )
-    example = Str(example='10s',
+    example = Raw(example='10s',
                   description='Example of parameter value.')
 
 
@@ -96,15 +96,15 @@ class AgentCatalogSchema(BaseSchema):
 
     id = Str(required=True, example='filebeat',
              description='Id of the agent in the catalog.')
-    actions = Nested(AgentCatalogActionSchema, many=True,
+    actions = Nested(AgentCatalogActionSchema, many=True, unknown='INCLUDE',
                      description='Action properties.',
                      validate=unique_list('id'),
                      error_messages=dict(validator_failed=msg_id_unique))
-    parameters = Nested(AgentCatalogParameterSchema, many=True,
+    parameters = Nested(AgentCatalogParameterSchema, many=True, unknown='INCLUDE',
                         description='Parameter properties.',
                         validate=unique_list('id'),
                         error_messages=dict(validator_failed=msg_id_unique))
-    resources = Nested(AgentCatalogResourceSchema, many=True,
+    resources = Nested(AgentCatalogResourceSchema, many=True, unknown='INCLUDE',
                        description='Resource properties.',
                        validate=unique_list('id'),
                        error_messages=dict(validator_failed=msg_id_unique))
