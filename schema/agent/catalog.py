@@ -33,7 +33,7 @@ class AgentCatalogActionSchema(Schema):
                  description='Update the status the of the agent-instance if the command is executed correctly.',
                  validate=validate.OneOf(action_status))
     description = Str(example='Start the execution of the agent.',
-                      description='Short descripton of the agent actions.')
+                      description='Short description of the agent actions.')
     example = Raw(example='forward',
                   description='Example of action parameter.')
 

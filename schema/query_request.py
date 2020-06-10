@@ -55,6 +55,8 @@ class QueryRequestClauseSchema(Schema):
                     description='The target field must be equal to the expr value.')
     reg_exp = Nested(QueryRequestFilterSchema,
                      description='The target field must be satisfy the regular expression in expr.')
+    wildcard = Nested(QueryRequestFilterSchema,
+                      description='The target field must be satisfy the wildcard in expr.')
 
 
 class QueryRequestSchema(Schema):

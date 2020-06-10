@@ -44,8 +44,8 @@ class QueryReader:
                 expr = clause.get('expr', None)
                 if prop is not None and expr is not None:
                     if op == 'equals':
-                        q = Q('term', **{prop: expr})
-                    elif op == 'reg-exp':
+                        q = Q('match', **{prop: expr})
+                    elif op == 'reg_exp':
                         q = Q('regexp', **{prop: dict(value=expr)})
                     elif op == 'wildcard':
                         q = Q('wildcard', **{prop: dict(value=expr)})

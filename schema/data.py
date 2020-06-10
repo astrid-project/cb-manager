@@ -26,7 +26,7 @@ class DataSchema(BaseSchema):
                                                   environment that collected the data""",
                                    validate=_in(eBPFProgramInstanceDocument.get_ids),
                                    error_messages=dict(validator_failed=msg_id_not_found))
-    timestamp_event = DateTime(format=FORMAT, readonly=True, example='2019/02/14 15:23:30',
-                               description='Timestamp of the event related to the collected data')
-    timestamp_agent = DateTime(format=FORMAT, readonly=True, example='2019/02/14 15:23:30',
-                               description='Timestamp when the agent instance collected the data')
+    timestamp_event = Str(format=FORMAT, readonly=True, example='2019/02/14 15:23:30',
+                          description='Timestamp of the event related to the collected data') # FIXME DateTime
+    timestamp_agent = Str(format=FORMAT, readonly=True, example='2019/02/14 15:23:30',
+                          description='Timestamp when the agent instance collected the data') # FIXME DateTime

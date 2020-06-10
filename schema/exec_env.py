@@ -11,12 +11,12 @@ class LCPSchema(Schema):
 
     port = Integer(required=True, example=5000,
                    description='TCP port number of LCP in the execution environment.')
-    started = DateTime(format=FORMAT, example='2019/02/14 15:23:30',
+    started = Str(example='2019/02/14 15:23:30',
                        description='Timestamp when the LCP is started')
-    last_heartbeat = DateTime(format=FORMAT, example='2019/02/14 15:23:33',
+    last_heartbeat = Str(example='2019/02/14 15:23:33',
                               description='Timestamp of the expiration of the API access configuration.')
-    username = Str(description='Username for the CB to connect to this LCP.')
-    password = Str(description='Password for the CB to connect to this LCP.')
+    username = Str(description='Username for the CB to connect to this LCP.') # FIXME DateTime
+    password = Str(description='Password for the CB to connect to this LCP.') # FIXME DateTime
 
 
 class ExecEnvSchema(BaseSchema):

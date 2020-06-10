@@ -36,7 +36,7 @@ definitions:
         - $ref: '#/definitions/AgentCatalogActionConfig'
         description: Action config.
       description:
-        description: Short descripton of the agent actions.
+        description: Short description of the agent actions.
         example: Start the execution of the agent.
         type: string
       example:
@@ -266,12 +266,12 @@ definitions:
       timestamp_agent:
         description: Timestamp when the agent instance collected the data
         example: 2019/02/14 15:23:30
-        format: date-time
+        format: '%Y/%m/%d %H:%M:%S'
         type: string
       timestamp_event:
         description: Timestamp of the event related to the collected data
         example: 2019/02/14 15:23:30
-        format: date-time
+        format: '%Y/%m/%d %H:%M:%S'
         type: string
     required:
     - id
@@ -343,7 +343,6 @@ definitions:
       last_heartbeat:
         description: Timestamp of the expiration of the API access configuration.
         example: 2019/02/14 15:23:33
-        format: date-time
         type: string
       password:
         description: Password for the CB to connect to this LCP.
@@ -356,7 +355,6 @@ definitions:
       started:
         description: Timestamp when the LCP is started
         example: 2019/02/14 15:23:30
-        format: date-time
         type: string
       username:
         description: Username for the CB to connect to this LCP.
@@ -462,6 +460,10 @@ definitions:
         allOf:
         - $ref: '#/definitions/QueryRequestFilter'
         description: The target field must be satisfy the regular expression in expr.
+      wildcard:
+        allOf:
+        - $ref: '#/definitions/QueryRequestFilter'
+        description: The target field must be satisfy the wildcard in expr.
     type: object
   QueryRequestFilter:
     properties:
@@ -656,7 +658,7 @@ definitions:
     type: object
 info:
   title: Context Broker Manager
-  version: c2d1bf67d236012970bde545d66233df82aae8e4@master
+  version: 82f262b60914535f679d7859521c59cadb88412f@master
 paths:
   /catalog/agent/:
     delete:
