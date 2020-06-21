@@ -1,49 +1,28 @@
-from document.agent.instance import AgentInstanceDocument
-from resource.base import BaseResource
-from resource.agent.handler.lcp import lcp_post, lcp_put
-from schema.agent.instance import AgentInstanceSchema
+from document.agent.instance import Agent_Instance_Document
+from lib.http import HTTP_Method
+from resource.base import Base_Resource
+from resource.agent.handler.lcp import LCP
+from schema.agent.instance import Agent_Instance_Schema
+from schema.response import *
 from docstring import docstring
 
+__all__ = [
+    'Agent_Instance_Resource',
+    'Agent_Instance_Selected_Resource'
+]
 
-@docstring(method='get', sum='Agent Instance Read (Multiple)',
-           desc="""Get the list of agent instances installed in the execution-environments
-                   filtered by the query in the request body.""",
-           resp="""List of agent instances installed in the execution-environment
-                   filtered by the query in the request body.""")
-@docstring(method='post', sum='Agent Instance Creation (Multiple)',
-           desc='Create new agent instances in the execution-environments.',
-           resp='Agent instances installed in the execution environments.')
-@docstring(method='delete', sum='Agent Instance Deletetion (Multiple)',
-           desc="""Remove the agent instances filtered by the query in the request body from the
-                   execution-environments.""",
-           resp='Agent instances filtered by the query in the request body uninstalled.')
-@docstring(method='put', sum='Agent Instance Update (Multiple)',
-           desc='Update the agent instances in the execution-environments.',
-           resp='Agent instances updated.')
-class AgentInstanceResource(BaseResource):
-    doc_cls = AgentInstanceDocument
-    doc_name = 'Agent Instance'
+
+@docstring()
+class Agent_Instance_Resource(Base_Resource):
+    doc = Agent_Instance_Document
+    name = 'agent instance'
+    names = 'agent instances'
     routes = '/instance/agent/'
-    schema_cls = AgentInstanceSchema
-    lcp_handler = dict(post=lcp_post, put=lcp_put)
-    nested_fields = ['parameters']
-    ignore_fields = ['actions']
+    schema = Agent_Instance_Schema
+    lcp_handler = dict(post=LCP.handler, put=LCP.handler)
+    ignore_fields = ['operations']
 
 
-@docstring(method='get', sum='Agent Instance Read (Single)',
-           desc="""Get the agent instance with the given `id` installed in the execution-environments
-                 filtered by the query in the request body.""",
-           resp="""Agent instance with the given `id` installed in the execution-environment filtered
-                   by the query in the request body.""")
-@docstring(method='post', sum='Agent Instance Creation (Single)',
-           desc='Install a new agent instance in the execution-environments with the given `id` .',
-           resp='Agent instance with the given `id` in the execution environments created.')
-@docstring(method='delete', sum='Agent Instance Deletion (Single)',
-           desc="""Remove the agent instance with the given `id` and filtered by the query
-                   in the request body from the execution-environments.""",
-           resp='Agent instance with the given `id` and filtered by the query in the request body deleted.')
-@docstring(method='put', sum='Agent Instance Update (Single)',
-           desc='Update the agent instance in the execution-environments with the given `id` .',
-           resp='Agent instance with the given `id` updated.')
-class AgentInstanceSelectedResource(AgentInstanceResource):
+@docstring()
+class Agent_Instance_Selected_Resource(Agent_Instance_Resource):
     routes = '/instance/agent/{id}'

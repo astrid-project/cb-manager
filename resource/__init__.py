@@ -1,36 +1,27 @@
-from resource.agent.catalog import AgentCatalogResource, AgentCatalogSelectedResource
-from resource.agent.instance import AgentInstanceResource, AgentInstanceSelectedResource
-
-from resource.connection import ConnectionResource, ConnectionSelectedResource
-
-from resource.data import DataResource, DataSelectedResource
-
-from resource.ebpf_program.catalog import eBPFProgramCatalogResource, eBPFProgramCatalogSelectedResource
-from resource.ebpf_program.instance import eBPFProgramInstanceResource, eBPFProgramInstanceSelectedResource
-
-from resource.exec_env import ExecEnvResource, ExecEnvSelectedResource, \
-                              ExecEnvTypeResource, ExecEnvTypeSelectedResource
-
-from resource.network_link import NetworkLinkResource, NetworkLinkSelectedResource, \
-                                  NetworkLinkTypeResource, NetworkLinkTypeSelectedResource
-
-from resource.service_graph import ServiceGraphResource
-
+from resource.agent import *
+from resource.connection import *
+from resource.data import *
+from resource.ebpf_program import *
+from resource.exec_env import *
+from resource.network_link import *
 from utils.log import Log
 from utils.sequence import wrap
 
+__all__ = [
+    'routes'
+]
+
 db = [
-    AgentCatalogResource, AgentCatalogSelectedResource,
-    AgentInstanceResource, AgentInstanceSelectedResource,
-    ConnectionResource, ConnectionSelectedResource,
-    DataResource, DataSelectedResource,
-    eBPFProgramCatalogResource, eBPFProgramCatalogSelectedResource,
-    eBPFProgramInstanceResource, eBPFProgramInstanceSelectedResource,
-    ExecEnvResource, ExecEnvSelectedResource,
-    ExecEnvTypeResource, ExecEnvTypeSelectedResource,
-    NetworkLinkResource, NetworkLinkSelectedResource,
-    NetworkLinkTypeResource, NetworkLinkTypeSelectedResource,
-    ServiceGraphResource
+    Agent_Catalog_Resource, Agent_Catalog_Selected_Resource,
+    Agent_Instance_Resource, Agent_Instance_Selected_Resource,
+    Connection_Resource, Connection_Selected_Resource,
+    Data_Resource, Data_Selected_Resource,
+    eBPF_Program_Catalog_Resource, eBPF_Program_Catalog_Selected_Resource,
+    eBPF_Program_Instance_Resource, eBPF_Program_Instance_Selected_Resource,
+    Exec_Env_Resource, Exec_Env_Selected_Resource,
+    Exec_Env_Type_Resource, Exec_Env_Type_Selected_Resource,
+    Network_Link_Resource, Network_Link_Selected_Resource,
+    Network_Link_Type_Resource, Network_Link_Type_Selected_Resource
 ]
 
 tags = []
@@ -40,9 +31,9 @@ for Resource in db:
 
 def routes(api, spec):
     log = Log.get('resource')
-    for Resource in db:
-        resource = Resource()
-        for route in wrap(Resource.routes):
-            api.add_route(route, resource)
-            spec.path(resource=resource)
+    for res_class in db:
+        res = res_class()
+        for route in wrap(res_class.routes):
+            api.add_route(route, res)
+            spec.path(resource=res)
             log.success(f'{route} endpoint configured')

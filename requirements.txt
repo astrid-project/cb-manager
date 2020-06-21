@@ -2,16 +2,19 @@ apispec
 bandit
 colorama
 coloredlogs
+dicttoxml
 elasticsearch-dsl>=7.0.0
 falcon
 falcon-apispec
 falcon-auth
 gitpython
+locust
 marshmallow
 msgpack
 pint
 pycodestyle
 pydocstyle
+pytest
 pyyaml>=5.0
 requests
 swagger-ui-py
@@ -19,3 +22,4 @@ toolz
 verboselogs
 waitress
 werkzeug
+xmltodict

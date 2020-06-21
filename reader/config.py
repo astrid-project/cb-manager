@@ -1,13 +1,17 @@
-from configparser import BasicInterpolation, ConfigParser
+from configparser import BasicInterpolation as Basic_Interpolation, ConfigParser as Config_Parser
 from os import path
 from utils.log import Log
 
 import git
 
+__all__ = [
+    'Config_Reader'
+]
 
-class ConfigReader:
+
+class Config_Reader:
     def __init__(self):
-        self.cr = ConfigParser(interpolation=ConfigReader.EnvInterpolation())
+        self.cr = Config_Parser(interpolation=Config_Reader.Env_Interpolation())
         repo = git.Repo(search_parent_directories=True)
         self.version = f'{repo.head.object.hexsha}@{repo.active_branch}'
 
@@ -43,7 +47,7 @@ class ConfigReader:
         with open('config.ini', 'w') as f:
             self.cr.write(f)
 
-    class EnvInterpolation(BasicInterpolation):
+    class Env_Interpolation(Basic_Interpolation):
         """Interpolation which expands environment variables in values."""
 
         def before_get(self, parser, section, option, value, defaults):

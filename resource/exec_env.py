@@ -1,74 +1,38 @@
-from document.exec_env import ExecEnvDocument, ExecEnvTypeDocument
-from resource.base import BaseResource
-from schema.exec_env import ExecEnvSchema, ExecEnvTypeSchema
+from document.exec_env import Exec_Env_Document, Exec_Env_Type_Document
+from resource.base import Base_Resource
+from schema.exec_env import Exec_Env_Schema, Exec_Env_Type_Schema
+from schema.response import *
 from docstring import docstring
 
+__all__ = [
+    'Exec_Env_Resource', 'Exec_Env_Selected_Resource',
+    'Exec_Env_Type_Resource', 'Exec_Env_Type_Selected_Resource'
+]
 
-@docstring(method='get', sum='Execution Environment Read (Multiple)',
-           desc='Get the list of execution environments filtered by the query in the request body.',
-           resp='List of execution environments filtered by the query in the request body.')
-@docstring(method='post', sum='Execution Environment Creation (Multiple)',
-           desc='Create new execution environments.', resp='Execution environments created.')
-@docstring(method='delete', sum='Execution Environment Delete (Multiple)',
-           desc='Delete execution environments filtered by the query in the request body.',
-           resp='Execution environments filtered by the query in the request body deleted.')
-@docstring(method='put', sum='Execution Environment Update (Multiple)',
-           desc='Update execution environments.', resp='Execution environments updated.')
-class ExecEnvResource(BaseResource):
-    doc_cls = ExecEnvDocument
-    doc_name = 'Execution Environment'
+
+@docstring()
+class Exec_Env_Resource(Base_Resource):
+    doc = Exec_Env_Document
+    name =  'execution environment'
+    names = 'execution environments'
     routes = '/exec-env/'
-    schema_cls = ExecEnvSchema
+    schema = Exec_Env_Schema
 
 
-@docstring(method='get', sum='Execution Environment Read (Single)',
-           desc='Get the execution environment with the given `id` and filtered by the query in the request body.',
-           resp='Execution environment with the given `id` and filtered by the query in the request body.')
-@docstring(method='post', sum='Execution Environment Creation (Single)',
-           desc='Create a new execution environment with the given `id`.',
-           resp='Execution environment with the given `id` created.')
-@docstring(method='delete', sum='Execution Environment Delete (Single)',
-           desc="""Delete the execution environment with the given `id`
-                 and filtered by the query in the request body.""",
-           resp='Execution environment with the given `id` and filtered by the query in the request body deleted.')
-@docstring(method='put', sum='Execution Environment Update (Single)',
-           desc='Update the execution environment with the given `id`.',
-           resp='Execution environment with the given `id` updated.')
-class ExecEnvSelectedResource(ExecEnvResource):
+@docstring()
+class Exec_Env_Selected_Resource(Exec_Env_Resource):
     routes = '/exec-env/{id}'
 
 
-@docstring(method='get', sum='Execution Environment Type Read (Multiple)',
-           desc='Get the list of execution environment types filtered by the query in the request body.',
-           resp='List of execution environment types filtered by the query in the request body.')
-@docstring(method='post', sum='Execution Environment Type Creation (Multiple)',
-           desc='Create new execution environment types.', resp='Execution environment types created.')
-@docstring(method='delete', sum='Execution Environment Type Delete (Multiple)',
-           desc='Delete execution environment types filtered by the query in the request body.',
-           resp='Execution environment types filtered by the query in the request body deleted.')
-@docstring(method='put', sum='Execution Environment Type Update (Multiple)',
-           desc='Update execution environment types.', resp='Execution environment types updated.')
-class ExecEnvTypeResource(BaseResource):
-    doc_cls = ExecEnvTypeDocument
-    doc_name = 'Execution Environment Type'
+@docstring()
+class Exec_Env_Type_Resource(Base_Resource):
+    doc = Exec_Env_Type_Document
+    name = 'execution environment type'
+    names = 'execution environment types'
     routes = '/type/exec-env/'
-    schema_cls = ExecEnvTypeSchema
+    schema = Exec_Env_Type_Schema
 
 
-@docstring(method='get', sum='Execution Environment Type Read (Single)',
-           desc="""Get the execution environment type with the given `id` and filtered by the
-                 query in the request body.""",
-           resp='Execution environment type with the given `id` and filtered by the query in the request body.')
-@docstring(method='post', sum='Execution Environment Type Creation (Single)',
-           desc='Create new execution environment type with the given `id`.',
-           resp='Execution environment type with the given `id` created.')
-@docstring(method='delete', sum='Execution Environment Type Delete (Single)',
-           desc="""Delete the execution environment type with the given `id` and filtered by
-                   the query in the request body.""",
-           resp="""Execution environment type with the given `id` and filtered by the query
-                   in the request body deleted.""")
-@docstring(method='put', sum='Execution Environment Type Update (Single)',
-           desc='Update the execution environment type with the given `id`.',
-           resp='Execution environment type with the given `id` updated.')
-class ExecEnvTypeSelectedResource(ExecEnvTypeResource):
+@docstring()
+class Exec_Env_Type_Selected_Resource(Exec_Env_Type_Resource):
     routes = '/exec-env-type/{id}'

@@ -1,27 +1,32 @@
-from document.exec_env import ExecEnvDocument, ExecEnvTypeDocument
+from document.exec_env import Exec_Env_Document, Exec_Env_Type_Document
 from marshmallow import Schema
-from marshmallow.fields import DateTime, Integer, Nested, Str
-from schema.base import BaseSchema
-from schema.validate import _in, msg_id_not_found
+from marshmallow.fields import DateTime as Date_Time, Integer, Nested, Str
+from schema.base import Base_Schema
+from schema.validate import In
 from utils.datetime import FORMAT
 
+__all__ = [
+    'Exec_Env_Schema',
+    'Exec_Env_Type_Schema'
+]
 
-class LCPSchema(Schema):
+
+class LCP_Schema(Schema):
     """Configuration of the LCP running in the execution environment."""
 
     port = Integer(required=True, example=5000,
                    description='TCP port number of LCP in the execution environment.')
-    started = Str(example='2019/02/14 15:23:30',
-                       description='Timestamp when the LCP is started') # FIXME DateTime
-    last_heartbeat = Str(example='2019/02/14 15:23:33',
-                              description='Timestamp of the expiration of the API access configuration.') # FIXME DateTime
+    started = Date_Time(example='2019/02/14 15:23:30',
+                        description='Timestamp when the LCP is started')
+    last_heartbeat = Date_Time(example='2019/02/14 15:23:33',
+                               description='Timestamp of the expiration of the API access configuration.')
     username = Str(description='Username for the CB to connect to this LCP.')
     password = Str(description='Password for the CB to connect to this LCP.')
 
 
-class ExecEnvSchema(BaseSchema):
+class Exec_Env_Schema(Base_Schema):
     """Represents an execution environment."""
-    doc_cls = ExecEnvDocument
+    doc = Exec_Env_Document
 
     id = Str(required=True, example='apache',
              description='Id of the execution environment.')
@@ -29,17 +34,17 @@ class ExecEnvSchema(BaseSchema):
                    description='Hostname of the execution environment.')
     type_id = Str(required=True, example='vm',
                   description='Id of the execution environment type.',
-                  validate=_in(ExecEnvTypeDocument.get_ids),
-                  error_messages=dict(validator_failed=msg_id_not_found))
-    lcp = Nested(LCPSchema, required=True, unknown='INCLUDE',
+                  validate=In.apply(Exec_Env_Type_Document.get_ids),
+                  error_messages=In.error_messages)
+    lcp = Nested(LCP_Schema, required=True, unknown='INCLUDE',
                  description='Data related to the LCP.')
     description = Str(example='Apache HTTP Web Server.',
                       description='Short description of the execution environment,')
 
 
-class ExecEnvTypeSchema(BaseSchema):
+class Exec_Env_Type_Schema(Base_Schema):
     """Represents an execution environment type."""
-    doc_cls = ExecEnvTypeDocument
+    doc= Exec_Env_Type_Document
 
     id = Str(required=True, example='vm',
              description='Id of the execution environment type.')

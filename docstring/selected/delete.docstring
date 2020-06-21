@@ -1,7 +1,7 @@
-{desc}
+Delete the {self.name} with the given `id` and filtered by the query in the request body.
 ---
-summary: {sum}
-description: {desc}
+summary: {self.name!c} Delete (Single).
+description: Delete the {self.name} with the given `id` and filtered by the query in the request body.
 parameters:
     - name: id
       required: true
@@ -10,20 +10,36 @@ parameters:
     - name: payload
       required: true
       in: body
-      schema: QueryRequestSchema
-tags: [{tag}]
+      schema: Query_Request_Schema
+tags: [{self.doc.Index.name}]
 responses:
-    200:
-        description: {resp}
+    205:
+        description: {self.name!c} with the given `id` correctly deleted.
         schema:
             type: array
-            items:
-                oneOf:
-                - ResponseSchema
-                - ErrorSchema
+            items: Reset_Content_Response_Schema
     400:
-        description: Bad request.
-        schema: HTTPErrorSchema
+        description: Request not valid.
+        schema: Bad_Request_Response_Schema
     401:
-        description: Unauthorized.
-        schema: HTTPErrorSchema
+        description: Authentication failed.
+        schema: Unauthorized_Response_Schema
+    404:
+        description: {self.name!c} with the given `id` and based on the request query not found.
+        schema:
+            type: array
+            items: Not_Found_Response_Schema
+    406:
+        description: Request validation failed.
+        schema: Not_Acceptable_Response_Schema
+    415:
+        description: Media type not supported.
+        schema: Unsupported_Media_Type_Response_Schema
+    422:
+        description: Not possible to delete the {self.name} with the given `id` and based on the request query.
+        schema:
+            type: array
+            items: Unprocessable_Entity_Response_Schema
+    500:
+        description: Server not available to satisfy the request.
+        schema: Internal_Server_Error_Response_Schema

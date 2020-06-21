@@ -1,10 +1,15 @@
 from elasticsearch_dsl import Q, Search
-from elasticsearch import RequestError
-from falcon.errors import HTTPBadRequest
+from elasticsearch import RequestError as Request_Error
+from falcon.errors import HTTPBadRequest as HTTP_Bad_Request
 from utils.log import Log
 
 
-class QueryReader:
+__all__ = [
+    'Query_Reader'
+]
+
+
+class Query_Reader:
     def __init__(self, index):
         self.s = Search(index=index)
 
@@ -14,13 +19,13 @@ class QueryReader:
             self.s.query = self.__where(query, id=id)
             self.__order(query)
             self.__limit(query)
-        except RequestError as req_err:
-            raise HTTPBadRequest(title=req_err.error, description=req_err.info)
-        except HTTPBadRequest as http_bad_req:
+        except Request_Error as req_err:
+            raise HTTP_Bad_Request(title=req_err.error, description=req_err.info)
+        except HTTP_Bad_Request as http_bad_req:
             raise http_bad_req
         except Exception as exception:
             Log.get('query-reader').error(f'Exception: {exception}')
-            raise HTTPBadRequest(
+            raise HTTP_Bad_Request(
                 title='Not valid JSON',
                 description='The request body is not a valid JSON or it is not encoded as UTF-8.')
         return self.s
@@ -52,11 +57,11 @@ class QueryReader:
                     elif op in ['lt', 'lte', 'gt', 'gte']:
                         q = Q('range', **{prop: {op: expr}})
                     else:
-                        raise HTTPBadRequest(title='Operation unknown',
-                                            description=f'{op} unknown')
+                        raise HTTP_Bad_Request(title='Operation unknown',
+                                               description=f'{op} unknown')
                 else:
-                    raise HTTPBadRequest(title='Request not valid',
-                                        description=f'{op} clause with not valid/missing data')
+                    raise HTTP_Bad_Request(title='Request not valid',
+                                           description=f'{op} clause with not valid/missing data')
         if id is not None:
             q = q & Q('term', _id=id)
         return q
@@ -69,8 +74,8 @@ class QueryReader:
             if prop is not None and mode is not None:
                 sort_list.append(prop if mode == 'asc' else f'-{prop}')
             else:
-                raise HTTPBadRequest(title='Request not valid',
-                                    description=f'order with not valid/missing data')
+                raise HTTP_Bad_Request(title='Request not valid',
+                                       description=f'order with not valid/missing data')
         self.s = self.s.sort(*sort_list)
 
     def __limit(self, query):

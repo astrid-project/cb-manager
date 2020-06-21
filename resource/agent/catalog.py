@@ -1,38 +1,24 @@
-from document.agent.catalog import AgentCatalogDocument
-from resource.base import BaseResource
-from schema.agent.catalog import AgentCatalogSchema
+from document.agent.catalog import Agent_Catalog_Document
+from lib.http import HTTP_Method
+from resource.base import Base_Resource
+from schema.agent.catalog import Agent_Catalog_Schema
+from schema.response import *
 from docstring import docstring
 
+__all__ = [
+    'Agent_Catalog_Resource',
+    'Agent_Catalog_Selected_Resource'
+]
 
-@docstring(method='get', sum='Agent Read (Multiple)',
-           desc='Get the list of agents in the catalog filtered by the query in the request body.',
-           resp='List of agents in the catalog filtered by the query in the request body.')
-@docstring(method='post', sum='Agent Creation (Multiple)',
-           desc='Add new agents to the catalog', resp='Agents inserted in the catalog.')
-@docstring(method='delete', sum='Agent Delete (Multiple)',
-           desc='Delete agents filtered by the query in the request body from the catalog.',
-           resp='Agents filtered by the query in the request body deleted from the catalog.')
-@docstring(method='put', sum='Agent Update (Multiple)',
-           desc='Update agents in the catalog.', resp='Agents updated in the catalog.')
-class AgentCatalogResource(BaseResource):
-    doc_cls = AgentCatalogDocument
-    doc_name = 'Agent Catalog'
+@docstring()
+class Agent_Catalog_Resource(Base_Resource):
+    doc = Agent_Catalog_Document
+    name = 'agent catalog'
+    names = 'agent catalogs'
     routes = '/catalog/agent/'
-    schema_cls = AgentCatalogSchema
+    schema = Agent_Catalog_Schema
 
 
-
-@docstring(method='get', sum='Agent Read (Single)',
-           desc='Get the agent in the catalog with the given `id` and filtered by the query in the request body.',
-           resp='Agent in the catalog with the given `id` and filtered by the query in the request body.')
-@docstring(method='post', sum='Agent Creation (Single)',
-           desc='Add a new agent in the catalog with the given `id`.',
-           resp='Agent with the given `id` inserted in the catalog.')
-@docstring(method='delete', sum='Agent Delete (Single)',
-           desc='Delete the agent with the given `id` and filtered by the query in the request body.',
-           resp='Agent with the given `id` and filtered by the query in the request body deleted from the catalog.')
-@docstring(method='put', sum='Agent Update (Single)',
-           desc='Update the agent in the catalog with the given `id`',
-           resp='Agent with the given `id` updated in the catalog.')
-class AgentCatalogSelectedResource(AgentCatalogResource):
+@docstring()
+class Agent_Catalog_Selected_Resource(Agent_Catalog_Resource):
     routes = '/catalog/agent/{id}'

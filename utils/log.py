@@ -1,6 +1,13 @@
+from utils.exception import to_str
+
 import coloredlogs
 import logging
 import verboselogs
+
+__all__ = [
+    'Log'
+]
+
 
 # FIXME DEBUG level not working
 
@@ -24,8 +31,9 @@ class Log:
         coloredlogs.install()
         cls.default = default
         cls.levels = {module: level for module, level in levels}
+        logging.get_logger = logging.getLogger
         for module, level in levels:
-            logging.getLogger(module).setLevel(level)
+            logging.get_logger(module).setLevel(level)
 
     @classmethod
     def get(cls, name):
@@ -37,7 +45,12 @@ class Log:
         :returns: logger instance
         """
         level = cls.levels.get(name, cls.default)
-        logger = logging.getLogger(name)
+        logger = logging.get_logger(name)
+
+        def __exception(exception):
+            logger.error(to_str(exception))
+        logger.exception = __exception
+
         logger.setLevel(level)
         return logger
 

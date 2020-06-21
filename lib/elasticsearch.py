@@ -4,8 +4,8 @@ from utils.log import Log
 
 
 def connection(endpoint, timeout, retry_period):
-    log = Log.get('elk')
     try:
+        log = Log.get('elastic-search')
         log.info(f'start connection to Elasticsearch ({endpoint})')
         connections.create_connection(hosts=endpoint, timeout=timeout)
     except Exception as exception:

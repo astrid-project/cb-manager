@@ -1,22 +1,28 @@
-from argparse import ArgumentParser
-from reader.config import ConfigReader
+from argparse import ArgumentParser as Argument_Parser
+from reader.config import Config_Reader
 from utils.log import Log
 from utils.time import get_seconds
 
+__all__ = [
+    'Arg_Reader'
+]
 
-class ArgReader:
+
+class Arg_Reader:
     db = None
 
     @classmethod
     def read(cls):
-        cr = ConfigReader()
+        cr = Config_Reader()
         cr.read()
-        ap = ArgumentParser(prog='python3 main.py',
+        ap = Argument_Parser(prog='python3 main.py',
                             description=f'{cr.title}: {cr.description}')
         add = ap.add_argument
 
-        add('--host', '-o', type=str, help='Hostname/IP of the REST Server', default=cr.cb_host)
-        add('--port', '-p', type=int, help='Tcr Port of the REST Server', default=cr.cb_port)
+        add('--host', '-o', type=str,
+            help='Hostname/IP of the REST Server', default=cr.cb_host)
+        add('--port', '-p', type=int,
+            help='Tcr Port of the REST Server', default=cr.cb_port)
 
         add('--hb-timeout', '-b', type=str,
             help='Timeout (with unit, e.g.: 10s) for heartbeat with LCP', default=cr.hb_timeout)
@@ -36,12 +42,17 @@ class ArgReader:
             help='Period (with unit, e.g.: 1min) to retry the connection to Elasticsearch',
             default=cr.es_retry_period)
 
-        add('--dev-username', '-u', type=str, help='Authorized username', default=cr.dev_username)
-        add('--dev-password', '-a', type=str, help='Authorized password', default=cr.dev_password)
-        add('--log-level', '-l', choices=Log.get_levels(), help='Log level', default=cr.log_level)
+        add('--dev-username', '-u', type=str,
+            help='Authorized username', default=cr.dev_username)
+        add('--dev-password', '-a', type=str,
+            help='Authorized password', default=cr.dev_password)
+        add('--log-level', '-l', choices=Log.get_levels(),
+            help='Log level', default=cr.log_level)
 
-        add('--write-config', '-w', help='Write options to cr.ini', action='store_true')
-        add('--version', '-v', help='Show version', action='store_const', const=cr.version)
+        add('--write-config', '-w',
+            help='Write options to cr.ini', action='store_true')
+        add('--version', '-v', help='Show version',
+            action='store_const', const=cr.version)
 
         cls.db = ap.parse_args()
         cls.db.config = cr

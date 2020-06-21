@@ -1,27 +1,33 @@
-from document.network_link import NetworkLinkDocument, NetworkLinkTypeDocument
+from document.network_link import Network_Link_Document, Network_Link_Type_Document
 from marshmallow import Schema
 from marshmallow.fields import Str
-from schema.base import BaseSchema
-from schema.validate import _in, msg_id_not_found
+from schema.base import Base_Schema
+from schema.validate import In
+
+__all__ = [
+    'Network_Link_Schema',
+    'Network_Link_Type_Schema'
+]
 
 
-class NetworkLinkSchema(BaseSchema):
+class Network_Link_Schema(Base_Schema):
     """Represents a network link."""
-    doc_cls = NetworkLinkDocument
+    doc = Network_Link_Document
 
     id = Str(required=True, example='net-link-1',
              description='Id of the network link.')
     type_id = Str(required=True, example='pnt2pnt',
                   description='Id of the network link type.',
-                  validate=_in(NetworkLinkTypeDocument.get_ids),
-                  error_messages=dict(validator_failed=msg_id_not_found))
+                  validate=In.apply(Network_Link_Type_Document.get_ids),
+                  error_messages=In.error_messages)
     description = Str(example='Allow communication between front-end and back-end services.',
                       description='Short description of the network link,')
 
 
-class NetworkLinkTypeSchema(BaseSchema):
+class Network_Link_Type_Schema(Base_Schema):
     """Represents a network link type."""
-    doc_cls = NetworkLinkTypeDocument
+    doc = Network_Link_Type_Document
+
 
     id = Str(required=True, example='pnt2pnt',
              description='Id of the network link type.')

@@ -1,6 +1,12 @@
 import hashlib
 import uuid
 
+__all__ = [
+    'hash',
+    'generate_username',
+    'generate_password'
+]
+
 
 def hash(text):
     """Make a hash of the text

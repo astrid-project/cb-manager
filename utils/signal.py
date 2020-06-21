@@ -1,6 +1,10 @@
 from psutil import Process, wait_procs
 from signal import SIGTERM
 
+__all__ = [
+    'send_tree'
+]
+
 
 def send_tree(pid, sig=SIGTERM, include_parent=True, timeout=None, on_terminate=None):
     """Kill a process tree (including grandchildren) with signal "sig" and return a (gone, still_alive) tuple.

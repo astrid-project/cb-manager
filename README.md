@@ -76,7 +76,7 @@ The *data* index contains the all the data collected from the ExecEnvs by means 
 2. *id* of the source ExecEnv (*exec_env_id*); and
 3. *id* of the agent instance that collect the data (*agent_instance_id*).
 
-The ID property type accepts only lowercase values without space that start with an alphabetic character, e.g: apache is valid but not Apache.
+The ID property type accepts only lower-case values without space that start with an alphabetic character, e.g: apache is valid but not Apache.
 Then, the other two properties are related to the time-stamp:
 
 1. *timestamp_event* when event is occurred; and

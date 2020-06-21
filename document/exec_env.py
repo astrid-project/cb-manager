@@ -1,8 +1,13 @@
-from document.base import BaseDocument
-from elasticsearch_dsl import Date, InnerDoc, Integer, Nested, Text
+from document.base import Base_Document
+from elasticsearch_dsl import Date, InnerDoc as Inner_Doc, Integer, Nested, Text
+
+__all__ = [
+    'Exec_Env_Document',
+    'Exec_Env_Type_Document'
+]
 
 
-class LCPDocument(InnerDoc):
+class LCP_Document_Inner_Doc(Inner_Doc):
     """LCP configuration data."""
     port = Integer(required=True)
     started = Date()
@@ -11,12 +16,12 @@ class LCPDocument(InnerDoc):
     password = Text()
 
 
-class ExecEnvDocument(BaseDocument):
+class Exec_Env_Document(Base_Document):
     """Represents an execution environment."""
     # id already defined by Elasticsearch
     hostname = Text(required=True)
     type_id = Text(required=True)
-    lcp = Nested(LCPDocument, required=True)
+    lcp = Nested(LCP_Document_Inner_Doc, required=True)
     description = Text()
 
     class Index:
@@ -24,7 +29,7 @@ class ExecEnvDocument(BaseDocument):
         name = 'exec-env'
 
 
-class ExecEnvTypeDocument(BaseDocument):
+class Exec_Env_Type_Document(Base_Document):
     """Type of execution environment. Example: virtual machine or container."""
     # id already defined by Elasticsearch
     name = Text(required=True)
