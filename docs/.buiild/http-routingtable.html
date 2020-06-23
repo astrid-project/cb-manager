@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP Routing Table &#8212; CB-Manager  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+
+    <script>
+      DOCUMENTATION_OPTIONS.COLLAPSE_INDEX = true;
+    </script>
+
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+
+   <h1>HTTP Routing Table</h1>
+
+   <div class="modindex-jumpbox">
+   <a href="#cap-/catalog"><strong>/catalog</strong></a> | 
+   <a href="#cap-/connection"><strong>/connection</strong></a> | 
+   <a href="#cap-/data"><strong>/data</strong></a> | 
+   <a href="#cap-/exec-env"><strong>/exec-env</strong></a> | 
+   <a href="#cap-/instance"><strong>/instance</strong></a> | 
+   <a href="#cap-/network-link"><strong>/network-link</strong></a> | 
+   <a href="#cap-/type"><strong>/type</strong></a>
+   </div>
+
+   <table class="indextable modindextable">
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/catalog"><td></td><td>
+       <strong>/catalog</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="agent-catalog.html#get--catalog-agent"><code class="xref">GET /catalog/agent</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="agent-catalog.html#get--catalog-agent-(string- id)"><code class="xref">GET /catalog/agent/(string: id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="ebpf-program-catalog.html#get--catalog-ebpf-program-(string- id)"><code class="xref">GET /catalog/ebpf-program/(string: id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="agent-catalog.html#post--catalog-agent-(string-id)"><code class="xref">POST /catalog/agent/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="ebpf-program-catalog.html#post--catalog-ebpf-program-(string-id)"><code class="xref">POST /catalog/ebpf-program/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="agent-catalog.html#put--catalog-agent-(string-id)"><code class="xref">PUT /catalog/agent/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="ebpf-program-catalog.html#put--catalog-ebpf-program-(string-id)"><code class="xref">PUT /catalog/ebpf-program/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="agent-catalog.html#delete--catalog-agent-(string-id)"><code class="xref">DELETE /catalog/agent/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="ebpf-program-catalog.html#delete--catalog-ebpf-program-(string-id)"><code class="xref">DELETE /catalog/ebpf-program/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/connection"><td></td><td>
+       <strong>/connection</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="connection.html#get--connection-(string- id)"><code class="xref">GET /connection/(string: id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="connection.html#post--connection-(string-id)"><code class="xref">POST /connection/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="connection.html#put--connection-(string-id)"><code class="xref">PUT /connection/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="connection.html#delete--connection-(string-id)"><code class="xref">DELETE /connection/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/data"><td></td><td>
+       <strong>/data</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="data.html#get--data-(string- id)"><code class="xref">GET /data/(string: id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="data.html#post--data-(string-id)"><code class="xref">POST /data/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="data.html#put--data-(string-id)"><code class="xref">PUT /data/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="data.html#delete--data-(string-id)"><code class="xref">DELETE /data/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/exec-env"><td></td><td>
+       <strong>/exec-env</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="exec-env.html#get--exec-env-(string- id)"><code class="xref">GET /exec-env/(string: id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="exec-env.html#post--exec-env-(string-id)"><code class="xref">POST /exec-env/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="exec-env.html#put--exec-env-(string-id)"><code class="xref">PUT /exec-env/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="exec-env.html#delete--exec-env-(string-id)"><code class="xref">DELETE /exec-env/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/instance"><td></td><td>
+       <strong>/instance</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="agent-instance.html#get--instance-agent-(string- id)"><code class="xref">GET /instance/agent/(string: id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="ebpf-program-instance.html#get--instance-ebpf-program-(string- id)"><code class="xref">GET /instance/ebpf-program/(string: id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="agent-instance.html#post--instance-agent-(string-id)"><code class="xref">POST /instance/agent/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="ebpf-program-instance.html#post--instance-ebpfprogrem-(string-id)"><code class="xref">POST /instance/ebpfprogrem/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="agent-instance.html#put--instance-agent-(string-id)"><code class="xref">PUT /instance/agent/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="ebpf-program-instance.html#put--instance-ebpf-program-(string-id)"><code class="xref">PUT /instance/ebpf-program/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="agent-instance.html#delete--instance-agent-(string-id)"><code class="xref">DELETE /instance/agent/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="ebpf-program-instance.html#delete--instance-ebpf-program-(string-id)"><code class="xref">DELETE /instance/ebpf-program/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/network-link"><td></td><td>
+       <strong>/network-link</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="network-link.html#get--network-link-(string- id)"><code class="xref">GET /network-link/(string: id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="network-link.html#post--network-link-(string-id)"><code class="xref">POST /network-link/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="network-link.html#put--network-link-(string-id)"><code class="xref">PUT /network-link/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="network-link.html#delete--network-link-(string-id)"><code class="xref">DELETE /network-link/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
+     <tr class="cap" id="cap-/type"><td></td><td>
+       <strong>/type</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="exec-env-type.html#get--type-exec-env"><code class="xref">GET /type/exec-env</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="exec-env-type.html#get--type-exec-env-(string- id)"><code class="xref">GET /type/exec-env/(string: id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="network-link-type.html#get--type-network-link"><code class="xref">GET /type/network-link</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="network-link-type.html#get--type-network-link-(string- id)"><code class="xref">GET /type/network-link/(string: id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="exec-env-type.html#post--type-exec-env-(string-id)"><code class="xref">POST /type/exec-env/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="network-link-type.html#post--type-network-link-(string-id)"><code class="xref">POST /type/network-link/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="exec-env-type.html#put--type-exec-env-(string-id)"><code class="xref">PUT /type/exec-env/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="network-link-type.html#put--type-network-link-(string-id)"><code class="xref">PUT /type/network-link/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="exec-env-type.html#delete--type-exec-env-(string-id)"><code class="xref">DELETE /type/exec-env/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="network-link-type.html#delete--type-network-link-(string-id)"><code class="xref">DELETE /type/network-link/(string:id)</code></a></td><td>
+       <em></em></td></tr>
+   </table>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">CB-Manager</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exec-env.html">2. Execution Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exec-env-type.html">3. Execution Environment Type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="network-link.html">4. Network Link</a></li>
+<li class="toctree-l1"><a class="reference internal" href="network-link-type.html">5. Network Link Type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connection.html">6. Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">7. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent-catalog.html">8. Agent Catalog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent-instance.html">9. Agent Instance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html">10. eBPF Program Catalog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-instance.html">11. eBPF Program Instance</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, ASTRID Project.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

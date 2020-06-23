@@ -26,9 +26,7 @@ responses:
         schema: Unauthorized_Response_Schema
     404:
         description: {self.name!c} with the given `id` and based on the request query not found.
-        schema:
-            type: array
-            items: Not_Found_Response_Schema
+        schema: Not_Found_Response_Schema
     406:
         description: Request validation failed.
         schema: Not_Acceptable_Response_Schema

@@ -16,12 +16,12 @@ class LCP_Schema(Schema):
 
     port = Integer(required=True, example=5000,
                    description='TCP port number of LCP in the execution environment.')
-    started = Date_Time(example='2019/02/14 15:23:30',
+    started = Date_Time(readonly=True, example='2019/02/14 15:23:30',
                         description='Timestamp when the LCP is started')
-    last_heartbeat = Date_Time(example='2019/02/14 15:23:33',
+    last_heartbeat = Date_Time(reaonly=True, example='2019/02/14 15:23:33',
                                description='Timestamp of the expiration of the API access configuration.')
-    username = Str(description='Username for the CB to connect to this LCP.')
-    password = Str(description='Password for the CB to connect to this LCP.')
+    username = Str(readonly=True, description='Username for the CB to connect to this LCP.')
+    password = Str(readonly=True, description='Password for the CB to connect to this LCP.')
 
 
 class Exec_Env_Schema(Base_Schema):
@@ -36,7 +36,7 @@ class Exec_Env_Schema(Base_Schema):
                   description='Id of the execution environment type.',
                   validate=In.apply(Exec_Env_Type_Document.get_ids),
                   error_messages=In.error_messages)
-    lcp = Nested(LCP_Schema, required=True, unknown='INCLUDE',
+    lcp = Nested(LCP_Schema, required=True, readonly=True, unknown='INCLUDE',
                  description='Data related to the LCP.')
     description = Str(example='Apache HTTP Web Server.',
                       description='Short description of the execution environment,')

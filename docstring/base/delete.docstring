@@ -21,13 +21,8 @@ responses:
         description: Authentication failed.
         schema: Unauthorized_Response_Schema
     404:
-        description: One or more {self.names} based on the request query not found.
-        schema:
-            type: array
-            items:
-                oneOf:
-                    - Reset_Content_Response_Schema
-                    - Not_Found_Response_Schema
+        description: {self.names!c} based on the request query not found.
+        schema: Not_Found_Response_Schema
     406:
         description: Request validation failed.
         schema: Not_Acceptable_Response_Schema
@@ -35,13 +30,12 @@ responses:
         description: Media type not supported.
         schema: Unsupported_Media_Type_Response_Schema
     422:
-        description: Not possible to delete one or more {self.names} and based on the request query.
+        description: Not possible to delete one or more {self.names} based on the request query.
         schema:
             type: array
             items :
                 oneOf:
                     - Reset_Content_Response_Schema
-                    - Not_Found_Response_Schema
                     - Unprocessable_Entity_Response_Schema
     500:
         description: Server not available to satisfy the request.

@@ -10,6 +10,8 @@
 			"Expat",
 			"Kubernetes",
 			"MSGPACK",
+			"Readonly",
+			"abbr",
 			"apispec",
 			"astrid",
 			"certdir",

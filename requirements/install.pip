@@ -8,13 +8,11 @@ falcon
 falcon-apispec
 falcon-auth
 gitpython
-locust
 marshmallow
 msgpack
 pint
 pycodestyle
 pydocstyle
-pytest
 pyyaml>=5.0
 requests
 swagger-ui-py

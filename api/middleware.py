@@ -6,17 +6,17 @@ from utils.hash import hash
 from utils.log import Log
 
 __all__ = [
-    'Basic_Auth_Backend_Extended',
+    'Basic_Auth_Backend_Middleware',
     'Negotiation_Middleware'
 ]
 
 
-class Basic_Auth_Backend_Extended(Basic_Auth_Backend):
+class Basic_Auth_Backend_Middleware(Basic_Auth_Backend):
     def __init__(self, dev_username, dev_password):
         super().__init__(self.__auth)
         self.dev_username = dev_username
         self.dev_password = dev_password
-        self.log = Log.get('basic-auth-backend-extended')
+        self.log = Log.get('basic-auth-backend-middleware')
 
     def authenticate(self, req, resp, resource):
         try:

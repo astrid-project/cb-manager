@@ -40,7 +40,7 @@ responses:
         description: Media type not supported.
         schema: Unsupported_Media_Type_Response_Schema
     422:
-        description: Not possible to update one or more {self.names} and based on the request.
+        description: Not possible to update one or more {self.names} based on the request.
         schema:
             type: array
             items :

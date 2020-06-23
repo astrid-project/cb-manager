@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. Network Link Type &#8212; CB-Manager  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6. Connection" href="connection.html" />
+    <link rel="prev" title="4. Network Link" href="network-link.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="network-link-type">
+<span id="id1"></span><h1><span class="section-number">5. </span>Network Link Type<a class="headerlink" href="#network-link-type" title="Permalink to this headline">¶</a></h1>
+<p>Describes the type of the network link including additional info.</p>
+<p>Each <a class="reference internal" href="network-link.html#network-link"><span class="std std-ref">Network Link</span></a> belongs to a specific type that is referred with the <code class="docutils literal notranslate"><span class="pre">type_id</span></code> field (see <a class="reference internal" href="network-link.html#network-link-create"><span class="std std-ref">Create</span></a>).</p>
+<div class="section" id="schema">
+<h2><span class="section-number">5.1. </span>Schema<a class="headerlink" href="#schema" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 7%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 12%" />
+<col style="width: 49%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Readonly</p></th>
+<th class="head"><p>Auto Managed</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">id</span></code></p></td>
+<td><p>String</p></td>
+<td><p>True</p></td>
+<td><p>True</p></td>
+<td><p>False</p></td>
+<td><p>pnt2pnt</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p>String</p></td>
+<td><p>True</p></td>
+<td><p>False</p></td>
+<td><p>False</p></td>
+<td><p>Point to Point</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">description</span></code></p></td>
+<td><p>String</p></td>
+<td><p>False</p></td>
+<td><p>False</p></td>
+<td><p>False</p></td>
+<td><p>Communications connection between two
+communication endpoints or nodes.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>It is not possible to update <em>readonly</em> fields.</p></li>
+<li><p>it is not possible to set the <em>auto managed</em> fields.</p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">id</span></code> is required but it is auto-generated if not provided.
+It is recommended to provide a friendly for simplify the retrieve of connected date in other indices.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="create">
+<h2><span class="section-number">5.2. </span>Create<a class="headerlink" href="#create" title="Permalink to this headline">¶</a></h2>
+<p>To create a new network link type use the following <abbr title="Representational State Transfer">REST</abbr> call:</p>
+<dl class="http post">
+<dt id="post--type-network-link-(string-id)">
+<code class="sig-name descname">POST </code><code class="sig-name descname">/type/network-link/</code><span class="sig-paren">(</span><em class="property">string: </em><em class="sig-param">id</em><span class="sig-paren">)</span><a class="headerlink" href="#post--type-network-link-(string-id)" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>with the request body in <abbr title="JavaScript Object Notation">JSON</abbr> format:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">POST</span> <span class="nn">/type/network-link</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cb-manager.example.com</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;type-id&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;human-readable-description&gt;&quot;</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;formal-name&gt;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">param id</dt>
+<dd class="field-odd"><p>optional network link type id.</p>
+</dd>
+<dt class="field-even">reqheader Authorization</dt>
+<dd class="field-even"><p>HTTP Basic Authentication with username and password.</p>
+</dd>
+<dt class="field-odd">reqheader Content-Type</dt>
+<dd class="field-odd"><p>application/json</p>
+</dd>
+<dt class="field-even">resheader Content-Type</dt>
+<dd class="field-even"><p>application/json</p>
+</dd>
+<dt class="field-odd">status 201</dt>
+<dd class="field-odd"><p>Network link types correctly created.</p>
+</dd>
+<dt class="field-even">status 204</dt>
+<dd class="field-even"><p>No content to create network link types based on the request.</p>
+</dd>
+<dt class="field-odd">status 400</dt>
+<dd class="field-odd"><p>Request not valid.</p>
+</dd>
+<dt class="field-even">status 401</dt>
+<dd class="field-even"><p>Authentication failed.</p>
+</dd>
+<dt class="field-odd">status 406</dt>
+<dd class="field-odd"><p>Request validation failed.</p>
+</dd>
+<dt class="field-even">status 415</dt>
+<dd class="field-even"><p>Media type not supported.</p>
+</dd>
+<dt class="field-odd">status 422</dt>
+<dd class="field-odd"><p>Not possible to create ore or more network link types based on the request.</p>
+</dd>
+<dt class="field-even">status 500</dt>
+<dd class="field-even"><p>Server not available to satisfy the request.</p>
+</dd>
+</dl>
+<p>Replace the data with the correct values, for example <code class="docutils literal notranslate"><span class="pre">id</span></code> with <code class="docutils literal notranslate"><span class="pre">p2p</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is possible to add additional data specific for this network link type.</p>
+</div>
+<p>If the creation is correctly executed the response is:</p>
+</div></blockquote>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>    HTTP/1.1 201 Created
+    Content-Type: application/json
+
+    [
+        {
+            &quot;status&quot;: &quot;Created&quot;,
+            &quot;code&quot;: 201,
+            &quot;error&quot;: false,
+            &quot;message&quot;: &quot;Network link type with id=&lt;network-link-type-id&gt; correctly created&quot;
+        }
+    ]
+
+Otherwise, if, for example, a network link type with the given ``id`` is already found, this is the response:
+
+.. sourcecode:: http
+
+    HTTP/1.1 406 Not Acceptable
+    Content-Type: application/json
+
+    [
+        {
+            &quot;status&quot;: &quot;Not Acceptable&quot;,
+            &quot;code&quot;: 406,
+            &quot;error&quot;: true,
+            &quot;message&quot;: &quot;Id already found&quot;
+        }
+    ]
+
+If some required data is missing (for example ``name``), the response could be:
+
+.. sourcecode:: http
+
+    HTTP/1.1 406 Not Acceptable
+    Content-Type: application/json
+
+    [
+        {
+            &quot;status&quot;: &quot;Not Acceptable&quot;,
+            &quot;code&quot;: 406,
+            &quot;error&quot;: true,
+            &quot;message&quot;: {
+                &quot;name&quot;: &quot;required&quot;
+            }
+        }
+    ]
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="read">
+<h2><span class="section-number">5.3. </span>Read<a class="headerlink" href="#read" title="Permalink to this headline">¶</a></h2>
+<p>To get the list of network Link types:</p>
+<dl class="http get">
+<dt id="get--type-network-link-(string- id)">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/type/network-link/(string: id)</code><a class="headerlink" href="#get--type-network-link-(string- id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>The response includes all the network link types created.</p>
+<p>It is possible to filter the results using the following request body:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/type/network-link</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cb-manager.example.com</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;select&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;type_id&quot;</span> <span class="p">],</span>
+    <span class="nt">&quot;where&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;equals&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;target:&quot;</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;network-link-type-id&gt;&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – optional network link type id.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Request Headers</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7235#section-4.2">Authorization</a> – HTTP Basic Authentication with username and password.</p></li>
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Response Headers</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – List of network link types filtered by the query in the request body.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Request not valid.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> – Authentication failed.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> – Network link types based on the request query not found.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7">406 Not Acceptable</a> – Request validation failed.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16">415 Unsupported Media Type</a> – Media type not supported.</p></li>
+<li><p><a class="reference external" href="http://tools.ietf.org/html/rfc4918#section-11.2">422 Unprocessable Entity</a> – Not possible to get network link types with the request query.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1">500 Internal Server Error</a> – Server not available to satisfy the request.</p></li>
+</ul>
+</dd>
+</dl>
+<p>In this way, it will be returned only the <code class="docutils literal notranslate"><span class="pre">name</span></code> of all the network
+link types with <code class="docutils literal notranslate"><span class="pre">id</span></code> = “&lt;network-link-type-id&gt;”.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="update">
+<h2><span class="section-number">5.4. </span>Update<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h2>
+<p>To update a network Link type, use:</p>
+<dl class="http put">
+<dt id="put--type-network-link-(string-id)">
+<code class="sig-name descname">PUT </code><code class="sig-name descname">/type/network-link/</code><span class="sig-paren">(</span><em class="property">string: </em><em class="sig-param">id</em><span class="sig-paren">)</span><a class="headerlink" href="#put--type-network-link-(string-id)" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">PUT</span> <span class="nn">/type/network-link</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cb-manager.example.com</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;network-link-type-id&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;&lt;new-formal-name&gt;&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – optional network link type id.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Request Headers</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7235#section-4.2">Authorization</a> – HTTP Basic Authentication with username and password.</p></li>
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Response Headers</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">200 OK</a> – All network link types correctly updated.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5">204 No Content</a> – No content to update network link types based on the request.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.5">304 Not Modified</a> – Update for one or more network link types not necessary.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Request not valid.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> – Authentication failed.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7">406 Not Acceptable</a> – Request validation failed.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16">415 Unsupported Media Type</a> – Media type not supported.</p></li>
+<li><p><a class="reference external" href="http://tools.ietf.org/html/rfc4918#section-11.2">422 Unprocessable Entity</a> – Not possible to update one or more network link types based on the request.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1">500 Internal Server Error</a> – Server not available to satisfy the request.</p></li>
+</ul>
+</dd>
+</dl>
+<p>This example set the new <code class="docutils literal notranslate"><span class="pre">name</span></code> for the network link type with <code class="docutils literal notranslate"><span class="pre">id</span></code> = “&lt;network-link-type-id&gt;”.</p>
+<p>A possible response is:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;code&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+        <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Network link type with  id=&lt;network-link-type-id&gt; correctly updated&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Instead, if the are not changes the response is:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">304</span> <span class="ne">Not Modified</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Not Modified&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;code&quot;</span><span class="p">:</span> <span class="mi">304</span><span class="p">,</span>
+        <span class="nt">&quot;error&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Update for network link type with id=&lt;network-link-type-id&gt; not necessary&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="delete">
+<h2><span class="section-number">5.5. </span>Delete<a class="headerlink" href="#delete" title="Permalink to this headline">¶</a></h2>
+<p>To delete network link types, use:</p>
+<dl class="http delete">
+<dt id="delete--type-network-link-(string-id)">
+<code class="sig-name descname">DELETE </code><code class="sig-name descname">/type/network-link/</code><span class="sig-paren">(</span><em class="property">string: </em><em class="sig-param">id</em><span class="sig-paren">)</span><a class="headerlink" href="#delete--type-network-link-(string-id)" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">DELETE</span> <span class="nn">/type/network-link</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">cb-manager.example.com</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">{</span>
+    <span class="nt">&quot;where&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;equals&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;target:&quot;</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span>
+            <span class="nt">&quot;expr&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;network-link-type-id&gt;&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>id</strong> – optional network link type id.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Request Headers</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7235#section-4.2">Authorization</a> – HTTP Basic Authentication with username and password.</p></li>
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Response Headers</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference external" href="https://tools.ietf.org/html/rfc7231#section-3.1.1.5">Content-Type</a> – application/json</p></li>
+</ul>
+</dd>
+<dt class="field-even">Status Codes</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.6">205 Reset Content</a> – All network link types correctly deleted.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">400 Bad Request</a> – Request not valid.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">401 Unauthorized</a> – Authentication failed.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">404 Not Found</a> – Network link types based on the request query not found.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7">406 Not Acceptable</a> – Request validation failed.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16">415 Unsupported Media Type</a> – Media type not supported.</p></li>
+<li><p><a class="reference external" href="http://tools.ietf.org/html/rfc4918#section-11.2">422 Unprocessable Entity</a> – Not possible to delete one or more network link types based on the request query.</p></li>
+<li><p><a class="reference external" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1">500 Internal Server Error</a> – Server not available to satisfy the request.</p></li>
+</ul>
+</dd>
+</dl>
+<p>This request removes the network link type with <code class="docutils literal notranslate"><span class="pre">id</span></code> = “&lt;network-link-type-id&gt;”.</p>
+<p>This is a possible response:</p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span>HTTP/1.1 205 Reset Content
+Content-Type: application/json
+
+[
+    {
+        &quot;status&quot;: &quot;Reset Content&quot;,
+        &quot;code&quot;: 200,
+        &quot;error&quot;: false,
+        &quot;message&quot;: &quot;Network link with id=&lt;network-link-type-id&gt; correctly deleted&quot;
+    }
+]
+
+.. caution::
+
+    Without request body, it removes **all** the network link types.
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="loaded-data">
+<h2><span class="section-number">5.6. </span>Loaded data<a class="headerlink" href="#loaded-data" title="Permalink to this headline">¶</a></h2>
+<p>For the demo, this data is already available:</p>
+<dl class="http get">
+<dt id="get--type-network-link">
+<code class="sig-name descname">GET </code><code class="sig-name descname">/type/network-link</code><a class="headerlink" href="#get--type-network-link" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/json</span>
+
+<span class="p">[</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;p2p&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Point to Point&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Communications connection between two communication endpoints or nodes.&quot;</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;slide&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Slice&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;&quot;Separation of multiple virtual networks that operate on the same physical hardware</span>
+<span class="s2">                          for different applications, services or purposes.&quot;&quot;&quot;</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">CB-Manager</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exec-env.html">2. Execution Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="exec-env-type.html">3. Execution Environment Type</a></li>
+<li class="toctree-l1"><a class="reference internal" href="network-link.html">4. Network Link</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Network Link Type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#schema">5.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create">5.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#read">5.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#update">5.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#delete">5.5. Delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loaded-data">5.6. Loaded data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="connection.html">6. Connection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">7. Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent-catalog.html">8. Agent Catalog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent-instance.html">9. Agent Instance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html">10. eBPF Program Catalog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html#schema">11. Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html#config-schema">12. Config Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html#metric-schema">13. Metric Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html#open-metrics-metadata-schema">14. Open Metrics Metadata Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html#open-metrics-metadata-label-schema">15. Open Metrics Metadata Label Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html#parameter-schema">16. Parameter Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html#create">17. Create</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html#read">18. Read</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html#update">19. Update</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html#delete">20. Delete</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-instance.html">21. eBPF Program Instance</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="network-link.html" title="previous chapter"><span class="section-number">4. </span>Network Link</a></li>
+      <li>Next: <a href="connection.html" title="next chapter"><span class="section-number">6. </span>Connection</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, ASTRID Project.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/network-link-type.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
