@@ -571,7 +571,9 @@ References
 .. _`managing relations inside elasticsearch`: https://www.elastic.co/blog/managing-relations-inside-elasticsearch
 
 
+.. |API| replace:: :abbr:`APIs (Application Program Interface)`
 .. |APIs| replace:: :abbr:`APIs (Application Program Interfaces)`
+.. |ASTRID| replace:: :abbr:`ASTRID (AddreSsing ThReats for virtualIseD services)`
 .. |DB| replace:: :abbr:`DB (DataBase)`
 .. |eBPF| replace:: :abbr:`eBPF (extended Berkeley Packet Filter)`
 .. |HTTP| replace:: :abbr:`HTTP (HyperText Transfer Protocol)`
