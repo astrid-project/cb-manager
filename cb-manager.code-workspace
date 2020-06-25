@@ -61,6 +61,7 @@
 			"rbac",
 			"resp",
 			"ruamel",
+			"setuptools",
 			"strftime",
 			"strptime",
 			"synflood",
