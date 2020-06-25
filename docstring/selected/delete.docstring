@@ -1,4 +1,5 @@
 Delete the {self.name} with the given `id` and filtered by the query in the request body.
+
 ---
 summary: {self.name!c} Delete (Single).
 description: Delete the {self.name} with the given `id` and filtered by the query in the request body.

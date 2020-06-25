@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>falcon.errors &#8212; CB-Manager  documentation</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../../index.html"><span><img src="../../_static/avatar.png"></span>
+          CB-Manager</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="http://github.com/astrid-project/cb-manager">GitHub</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../running.html">2. Running</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../running.html#reader-arg-py">2.1. reader/arg.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../exec-env.html">3. Execution Environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../exec-env.html#schema">3.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exec-env.html#lcp-schema">3.2. LCP Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exec-env.html#create">3.3. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exec-env.html#read">3.4. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exec-env.html#update">3.5. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exec-env.html#delete">3.6. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../exec-env-type.html">4. Execution Environment Type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../exec-env-type.html#schema">4.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exec-env-type.html#create">4.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exec-env-type.html#read">4.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exec-env-type.html#update">4.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exec-env-type.html#delete">4.5. Delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../exec-env-type.html#loaded-data">4.6. Loaded data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../network-link.html">5. Network Link</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../network-link.html#create">5.1. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../network-link.html#read">5.2. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../network-link.html#update">5.3. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../network-link.html#delete">5.4. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../network-link-type.html">6. Network Link Type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../network-link-type.html#schema">6.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../network-link-type.html#create">6.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../network-link-type.html#read">6.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../network-link-type.html#update">6.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../network-link-type.html#delete">6.5. Delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../network-link-type.html#loaded-data">6.6. Loaded data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../connection.html">7. Connection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../connection.html#schema">7.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../connection.html#create">7.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../connection.html#read">7.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../connection.html#update">7.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../connection.html#delete">7.5. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../data.html">8. Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../data.html#schema">8.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data.html#create">8.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data.html#read">8.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data.html#update">8.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../data.html#delete">8.5. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../agent-catalog.html">9. Agent Catalog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-catalog.html#schema">9.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-catalog.html#action-schema">9.2. Action Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-catalog.html#action-config-schema">9.3. Action Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-catalog.html#parameter-schema">9.4. Parameter Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-catalog.html#parameter-config-schema">9.5. Parameter Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-catalog.html#resource-schema">9.6. Resource Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-catalog.html#resource-config-schema">9.7. Resource Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-catalog.html#create">9.8. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-catalog.html#read">9.9. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-catalog.html#update">9.10. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-catalog.html#delete">9.11. Delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-catalog.html#loaded-data">9.12. Loaded data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../agent-instance.html">10. Agent Instance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-instance.html#schema">10.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-instance.html#parameter-schema">10.2. Parameter Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-instance.html#create">10.3. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-instance.html#read">10.4. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-instance.html#update">10.5. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../agent-instance.html#delete">10.6. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ebpf-program-catalog.html">11. eBPF Program Catalog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-catalog.html#schema">11.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-catalog.html#config-schema">11.2. Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-catalog.html#metric-schema">11.3. Metric Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-catalog.html#open-metrics-metadata-schema">11.4. Open Metrics Metadata Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-catalog.html#open-metrics-metadata-label-schema">11.5. Open Metrics Metadata Label Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-catalog.html#parameter-schema">11.6. Parameter Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-catalog.html#create">11.7. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-catalog.html#read">11.8. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-catalog.html#update">11.9. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-catalog.html#delete">11.10. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../ebpf-program-instance.html">12. eBPF Program Instance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-instance.html#schema">12.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-instance.html#create">12.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-instance.html#read">12.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-instance.html#update">12.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ebpf-program-instance.html#delete">12.5. Delete</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#error-handler">Error Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#media-handler">Media Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#middleware">Middleware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#spec">Spec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#docstring">Docstring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#document">Document</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#agent">Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#ebpf-program">eBPF Program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#connection">Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#data">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#execution-environment">Execution Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#network-link">Network Link</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#lib">Lib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#response">Response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#reader">Reader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#resource">Resource</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#id2">Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#id3">eBPF Program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#id4">Execution Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#id5">Network Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#id6">Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#id7">Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../api.html#schema">Schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#id8">Agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api.html#catalog">Catalog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api.html#instance">Instance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#id9">eBPF Program</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api.html#id10">Catalog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api.html#id11">Instance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#id12">Execution Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#id13">Network Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#id14">Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#id15">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#query-request">Query Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api.html#id16">Response</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#submitting-issues">Submitting issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#submitting-patches-bugfix-features">Submitting patches (bugfix, features, …)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#running-a-local-swagger-server">Running a local Swagger Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contributing.html#updating-copyright">Updating Copyright</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#id1">0.1</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <h1>Source code for falcon.errors</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2013 by Rackspace Hosting, Inc.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#    http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&quot;&quot;&quot;HTTP error classes and other Falcon-specific errors.</span>
+
+<span class="sd">This module implements a collection of `falcon.HTTPError`</span>
+<span class="sd">specializations that can be raised to generate a 4xx or 5xx HTTP</span>
+<span class="sd">response. All classes are available directly from the `falcon`</span>
+<span class="sd">package namespace::</span>
+
+<span class="sd">    import falcon</span>
+
+<span class="sd">    class MessageResource(object):</span>
+<span class="sd">        def on_get(self, req, resp):</span>
+
+<span class="sd">            # ...</span>
+
+<span class="sd">            raise falcon.HTTPBadRequest(</span>
+<span class="sd">                &#39;TTL Out of Range&#39;,</span>
+<span class="sd">                &#39;The message&#39;s TTL must be between 60 and 300 seconds, inclusive.&#39;</span>
+<span class="sd">            )</span>
+
+<span class="sd">            # ...</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="kn">from</span> <span class="nn">falcon</span> <span class="kn">import</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">falcon.http_error</span> <span class="kn">import</span> <span class="n">HTTPError</span><span class="p">,</span> <span class="n">NoRepresentation</span><span class="p">,</span> \
+    <span class="n">OptionalRepresentation</span>
+<span class="kn">import</span> <span class="nn">falcon.status_codes</span> <span class="k">as</span> <span class="nn">status</span>
+
+
+<span class="k">class</span> <span class="nc">HeaderNotSupported</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The specified header is not supported by this method.&quot;&quot;&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPBadRequest</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;400 Bad Request.</span>
+
+<span class="sd">    The server cannot or will not process the request due to something</span>
+<span class="sd">    that is perceived to be a client error (e.g., malformed request</span>
+<span class="sd">    syntax, invalid request message framing, or deceptive request</span>
+<span class="sd">    routing).</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.5.1)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;400 Bad Request&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPBadRequest</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_400</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                             <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPUnauthorized</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;401 Unauthorized.</span>
+
+<span class="sd">    The request has not been applied because it lacks valid</span>
+<span class="sd">    authentication credentials for the target resource.</span>
+
+<span class="sd">    The server generating a 401 response MUST send a WWW-Authenticate</span>
+<span class="sd">    header field containing at least one challenge applicable to the</span>
+<span class="sd">    target resource.</span>
+
+<span class="sd">    If the request included authentication credentials, then the 401</span>
+<span class="sd">    response indicates that authorization has been refused for those</span>
+<span class="sd">    credentials. The user agent MAY repeat the request with a new or</span>
+<span class="sd">    replaced Authorization header field. If the 401 response contains</span>
+<span class="sd">    the same challenge as the prior response, and the user agent has</span>
+<span class="sd">    already attempted authentication at least once, then the user agent</span>
+<span class="sd">    SHOULD present the enclosed representation to the user, since it</span>
+<span class="sd">    usually contains relevant diagnostic information.</span>
+
+<span class="sd">    (See also: RFC 7235, Section 3.1)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;401 Unauthorized&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        challenges (iterable of str): One or more authentication</span>
+<span class="sd">            challenges to use as the value of the WWW-Authenticate header in</span>
+<span class="sd">            the response.</span>
+
+<span class="sd">            (See also: RFC 7235, Section 2.1)</span>
+
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">challenges</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">headers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="n">challenges</span><span class="p">:</span>
+            <span class="n">headers</span><span class="p">[</span><span class="s1">&#39;WWW-Authenticate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">challenges</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPUnauthorized</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_401</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                               <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPForbidden</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;403 Forbidden.</span>
+
+<span class="sd">    The server understood the request but refuses to authorize it.</span>
+
+<span class="sd">    A server that wishes to make public why the request has been</span>
+<span class="sd">    forbidden can describe that reason in the response payload (if any).</span>
+
+<span class="sd">    If authentication credentials were provided in the request, the</span>
+<span class="sd">    server considers them insufficient to grant access. The client</span>
+<span class="sd">    SHOULD NOT automatically repeat the request with the same</span>
+<span class="sd">    credentials. The client MAY repeat the request with new or different</span>
+<span class="sd">    credentials. However, a request might be forbidden for reasons</span>
+<span class="sd">    unrelated to the credentials.</span>
+
+<span class="sd">    An origin server that wishes to &quot;hide&quot; the current existence of a</span>
+<span class="sd">    forbidden target resource MAY instead respond with a status code of</span>
+<span class="sd">    404 Not Found.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.5.4)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;403 Forbidden&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPForbidden</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_403</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                            <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPNotFound</span><span class="p">(</span><span class="n">OptionalRepresentation</span><span class="p">,</span> <span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;404 Not Found.</span>
+
+<span class="sd">    The origin server did not find a current representation for the</span>
+<span class="sd">    target resource or is not willing to disclose that one exists.</span>
+
+<span class="sd">    A 404 status code does not indicate whether this lack of</span>
+<span class="sd">    representation is temporary or permanent; the 410 Gone status code</span>
+<span class="sd">    is preferred over 404 if the origin server knows, presumably through</span>
+<span class="sd">    some configurable means, that the condition is likely to be</span>
+<span class="sd">    permanent.</span>
+
+<span class="sd">    A 404 response is cacheable by default; i.e., unless otherwise</span>
+<span class="sd">    indicated by the method definition or explicit cache controls.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.5.3)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Human-friendly error title. If not provided, and</span>
+<span class="sd">            `description` is also not provided, no body will be included</span>
+<span class="sd">            in the response.</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two (default ``None``).</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPNotFound</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_404</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPMethodNotAllowed</span><span class="p">(</span><span class="n">OptionalRepresentation</span><span class="p">,</span> <span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;405 Method Not Allowed.</span>
+
+<span class="sd">    The method received in the request-line is known by the origin</span>
+<span class="sd">    server but not supported by the target resource.</span>
+
+<span class="sd">    The origin server MUST generate an Allow header field in a 405</span>
+<span class="sd">    response containing a list of the target resource&#39;s currently</span>
+<span class="sd">    supported methods.</span>
+
+<span class="sd">    A 405 response is cacheable by default; i.e., unless otherwise</span>
+<span class="sd">    indicated by the method definition or explicit cache controls.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.5.5)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        allowed_methods (list of str): Allowed HTTP methods for this</span>
+<span class="sd">            resource (e.g., ``[&#39;GET&#39;, &#39;POST&#39;, &#39;HEAD&#39;]``).</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Human-friendly error title. If not provided, and</span>
+<span class="sd">            `description` is also not provided, no body will be included</span>
+<span class="sd">            in the response.</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two (default ``None``).</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">allowed_methods</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">new_headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Allow&#39;</span><span class="p">:</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">allowed_methods</span><span class="p">)}</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPMethodNotAllowed</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_405</span><span class="p">,</span>
+                                                   <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+                                                   <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_headers</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPNotAcceptable</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;406 Not Acceptable.</span>
+
+<span class="sd">    The target resource does not have a current representation that</span>
+<span class="sd">    would be acceptable to the user agent, according to the proactive</span>
+<span class="sd">    negotiation header fields received in the request, and the server</span>
+<span class="sd">    is unwilling to supply a default representation.</span>
+
+<span class="sd">    The server SHOULD generate a payload containing a list of available</span>
+<span class="sd">    representation characteristics and corresponding resource</span>
+<span class="sd">    identifiers from which the user or user agent can choose the one</span>
+<span class="sd">    most appropriate. A user agent MAY automatically select the most</span>
+<span class="sd">    appropriate choice from that list. However, this specification does</span>
+<span class="sd">    not define any standard for such automatic selection, as described</span>
+<span class="sd">    in RFC 7231, Section 6.4.1</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.5.6)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPNotAcceptable</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_406</span><span class="p">,</span>
+                                                <span class="s1">&#39;Media type not acceptable&#39;</span><span class="p">,</span>
+                                                <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                                <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPConflict</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;409 Conflict.</span>
+
+<span class="sd">    The request could not be completed due to a conflict with the</span>
+<span class="sd">    current state of the target resource. This code is used in</span>
+<span class="sd">    situations where the user might be able to resolve the conflict and</span>
+<span class="sd">    resubmit the request.</span>
+
+<span class="sd">    The server SHOULD generate a payload that includes enough</span>
+<span class="sd">    information for a user to recognize the source of the conflict.</span>
+
+<span class="sd">    Conflicts are most likely to occur in response to a PUT request. For</span>
+<span class="sd">    example, if versioning were being used and the representation being</span>
+<span class="sd">    PUT included changes to a resource that conflict with those made by</span>
+<span class="sd">    an earlier (third-party) request, the origin server might use a 409</span>
+<span class="sd">    response to indicate that it can&#39;t complete the request. In this</span>
+<span class="sd">    case, the response representation would likely contain information</span>
+<span class="sd">    useful for merging the differences based on the revision history.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.5.8)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;409 Conflict&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPConflict</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_409</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                           <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                           <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPGone</span><span class="p">(</span><span class="n">OptionalRepresentation</span><span class="p">,</span> <span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;410 Gone.</span>
+
+<span class="sd">    The target resource is no longer available at the origin server and</span>
+<span class="sd">    this condition is likely to be permanent.</span>
+
+<span class="sd">    If the origin server does not know, or has no facility to determine,</span>
+<span class="sd">    whether or not the condition is permanent, the status code 404 Not</span>
+<span class="sd">    Found ought to be used instead.</span>
+
+<span class="sd">    The 410 response is primarily intended to assist the task of web</span>
+<span class="sd">    maintenance by notifying the recipient that the resource is</span>
+<span class="sd">    intentionally unavailable and that the server owners desire that</span>
+<span class="sd">    remote links to that resource be removed. Such an event is common</span>
+<span class="sd">    for limited-time, promotional services and for resources belonging</span>
+<span class="sd">    to individuals no longer associated with the origin server&#39;s site.</span>
+<span class="sd">    It is not necessary to mark all permanently unavailable resources as</span>
+<span class="sd">    &quot;gone&quot; or to keep the mark for any length of time -- that is left to</span>
+<span class="sd">    the discretion of the server owner.</span>
+
+<span class="sd">    A 410 response is cacheable by default; i.e., unless otherwise</span>
+<span class="sd">    indicated by the method definition or explicit cache controls.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.5.9)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Human-friendly error title. If not provided, and</span>
+<span class="sd">            `description` is also not provided, no body will be included</span>
+<span class="sd">            in the response.</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two (default ``None``).</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPGone</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_410</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPLengthRequired</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;411 Length Required.</span>
+
+<span class="sd">    The server refuses to accept the request without a defined Content-</span>
+<span class="sd">    Length.</span>
+
+<span class="sd">    The client MAY repeat the request if it adds a valid Content-Length</span>
+<span class="sd">    header field containing the length of the message body in the</span>
+<span class="sd">    request message.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.5.10)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;411 Length Required&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPLengthRequired</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_411</span><span class="p">,</span>
+                                                 <span class="n">title</span><span class="p">,</span> <span class="n">description</span><span class="p">,</span>
+                                                 <span class="n">headers</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPPreconditionFailed</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;412 Precondition Failed.</span>
+
+<span class="sd">    One or more conditions given in the request header fields evaluated</span>
+<span class="sd">    to false when tested on the server.</span>
+
+<span class="sd">    This response code allows the client to place preconditions on the</span>
+<span class="sd">    current resource state (its current representations and metadata)</span>
+<span class="sd">    and, thus, prevent the request method from being applied if the</span>
+<span class="sd">    target resource is in an unexpected state.</span>
+
+<span class="sd">    (See also: RFC 7232, Section 4.2)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;412 Precondition Failed&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPPreconditionFailed</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_412</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                                     <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                                     <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPPayloadTooLarge</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;413 Payload Too Large.</span>
+
+<span class="sd">    The server is refusing to process a request because the request</span>
+<span class="sd">    payload is larger than the server is willing or able to process.</span>
+
+<span class="sd">    The server MAY close the connection to prevent the client from</span>
+<span class="sd">    continuing the request.</span>
+
+<span class="sd">    If the condition is temporary, the server SHOULD generate a Retry-</span>
+<span class="sd">    After header field to indicate that it is temporary and after what</span>
+<span class="sd">    time the client MAY try again.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.5.11)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;413 Payload Too Large&#39;).</span>
+
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+
+<span class="sd">        retry_after (datetime or int): Value for the Retry-After</span>
+<span class="sd">            header. If a ``datetime`` object, will serialize as an HTTP date.</span>
+<span class="sd">            Otherwise, a non-negative ``int`` is expected, representing the</span>
+<span class="sd">            number of seconds to wait.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry_after</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">headers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">retry_after</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
+            <span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Retry-After&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">dt_to_http</span><span class="p">(</span><span class="n">retry_after</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">retry_after</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Retry-After&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">retry_after</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPPayloadTooLarge</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_413</span><span class="p">,</span>
+                                                  <span class="n">title</span><span class="p">,</span>
+                                                  <span class="n">description</span><span class="p">,</span>
+                                                  <span class="n">headers</span><span class="p">,</span>
+                                                  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPUriTooLong</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;414 URI Too Long.</span>
+
+<span class="sd">    The server is refusing to service the request because the request-</span>
+<span class="sd">    target is longer than the server is willing to interpret.</span>
+
+<span class="sd">    This rare condition is only likely to occur when a client has</span>
+<span class="sd">    improperly converted a POST request to a GET request with long query</span>
+<span class="sd">    information, when the client has descended into a &quot;black hole&quot; of</span>
+<span class="sd">    redirection (e.g., a redirected URI prefix that points to a suffix</span>
+<span class="sd">    of itself) or when the server is under attack by a client attempting</span>
+<span class="sd">    to exploit potential security holes.</span>
+
+<span class="sd">    A 414 response is cacheable by default; i.e., unless otherwise</span>
+<span class="sd">    indicated by the method definition or explicit cache controls.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.5.12)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;414 URI Too Long&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two (default ``None``).</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPUriTooLong</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_414</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                             <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPUnsupportedMediaType</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;415 Unsupported Media Type.</span>
+
+<span class="sd">    The origin server is refusing to service the request because the</span>
+<span class="sd">    payload is in a format not supported by this method on the target</span>
+<span class="sd">    resource.</span>
+
+<span class="sd">    The format problem might be due to the request&#39;s indicated Content-</span>
+<span class="sd">    Type or Content-Encoding, or as a result of inspecting the data</span>
+<span class="sd">    directly.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.5.13)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPUnsupportedMediaType</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">status</span><span class="o">.</span><span class="n">HTTP_415</span><span class="p">,</span> <span class="s1">&#39;Unsupported media type&#39;</span><span class="p">,</span>
+            <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPRangeNotSatisfiable</span><span class="p">(</span><span class="n">NoRepresentation</span><span class="p">,</span> <span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;416 Range Not Satisfiable.</span>
+
+<span class="sd">    None of the ranges in the request&#39;s Range header field overlap the</span>
+<span class="sd">    current extent of the selected resource or that the set of ranges</span>
+<span class="sd">    requested has been rejected due to invalid ranges or an excessive</span>
+<span class="sd">    request of small or overlapping ranges.</span>
+
+<span class="sd">    For byte ranges, failing to overlap the current extent means that</span>
+<span class="sd">    the first-byte-pos of all of the byte-range-spec values were greater</span>
+<span class="sd">    than the current length of the selected representation. When this</span>
+<span class="sd">    status code is generated in response to a byte-range request, the</span>
+<span class="sd">    sender SHOULD generate a Content-Range header field specifying the</span>
+<span class="sd">    current length of the selected representation.</span>
+
+<span class="sd">    (See also: RFC 7233, Section 4.4)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        resource_length: The maximum value for the last-byte-pos of a range</span>
+<span class="sd">            request. Used to set the Content-Range header.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource_length</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">headers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">headers</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;Content-Range&#39;</span><span class="p">,</span> <span class="s1">&#39;bytes */&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">resource_length</span><span class="p">))</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPRangeNotSatisfiable</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_416</span><span class="p">,</span>
+                                                      <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPUnprocessableEntity</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;422 Unprocessable Entity.</span>
+
+<span class="sd">    The server understands the content type of the request entity (hence</span>
+<span class="sd">    a 415 Unsupported Media Type status code is inappropriate), and the</span>
+<span class="sd">    syntax of the request entity is correct (thus a 400 Bad Request</span>
+<span class="sd">    status code is inappropriate) but was unable to process the</span>
+<span class="sd">    contained instructions.</span>
+
+<span class="sd">    For example, this error condition may occur if an XML request body</span>
+<span class="sd">    contains well-formed (i.e., syntactically correct), but semantically</span>
+<span class="sd">    erroneous, XML instructions.</span>
+
+<span class="sd">    (See also: RFC 4918, Section 11.2)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;422 Unprocessable Entity&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPUnprocessableEntity</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_422</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                                      <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPLocked</span><span class="p">(</span><span class="n">OptionalRepresentation</span><span class="p">,</span> <span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;423 Locked.</span>
+
+<span class="sd">    The 423 (Locked) status code means the source or destination resource</span>
+<span class="sd">    of a method is locked. This response SHOULD contain an appropriate</span>
+<span class="sd">    precondition or postcondition code, such as &#39;lock-token-submitted&#39; or</span>
+<span class="sd">    &#39;no-conflicting-lock&#39;.</span>
+
+<span class="sd">    (See also: RFC 4918, Section 11.3)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;423 Locked&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPLocked</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_423</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                         <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                         <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPFailedDependency</span><span class="p">(</span><span class="n">OptionalRepresentation</span><span class="p">,</span> <span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;424 Failed Dependency.</span>
+
+<span class="sd">    The 424 (Failed Dependency) status code means that the method could</span>
+<span class="sd">    not be performed on the resource because the requested action</span>
+<span class="sd">    depended on another action and that action failed.</span>
+
+<span class="sd">    (See also: RFC 4918, Section 11.4)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;424 Failed Dependency&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPFailedDependency</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_424</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                                   <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                                   <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPPreconditionRequired</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;428 Precondition Required.</span>
+
+<span class="sd">    The 428 status code indicates that the origin server requires the</span>
+<span class="sd">    request to be conditional.</span>
+
+<span class="sd">    Its typical use is to avoid the &quot;lost update&quot; problem, where a client</span>
+<span class="sd">    GETs a resource&#39;s state, modifies it, and PUTs it back to the server,</span>
+<span class="sd">    when meanwhile a third party has modified the state on the server,</span>
+<span class="sd">    leading to a conflict.  By requiring requests to be conditional, the</span>
+<span class="sd">    server can assure that clients are working with the correct copies.</span>
+
+<span class="sd">    Responses using this status code SHOULD explain how to resubmit the</span>
+<span class="sd">    request successfully.</span>
+
+<span class="sd">    (See also: RFC 6585, Section 3)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;428 Precondition Required&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPPreconditionRequired</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_428</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                                       <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                                       <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPTooManyRequests</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;429 Too Many Requests.</span>
+
+<span class="sd">    The user has sent too many requests in a given amount of time (&quot;rate</span>
+<span class="sd">    limiting&quot;).</span>
+
+<span class="sd">    The response representations SHOULD include details explaining the</span>
+<span class="sd">    condition, and MAY include a Retry-After header indicating how long</span>
+<span class="sd">    to wait before making a new request.</span>
+
+<span class="sd">    Responses with the 429 status code MUST NOT be stored by a cache.</span>
+
+<span class="sd">    (See also: RFC 6585, Section 4)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;429 Too Many Requests&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the rate limit that</span>
+<span class="sd">            was exceeded.</span>
+<span class="sd">        retry_after (datetime or int): Value for the Retry-After</span>
+<span class="sd">            header. If a ``datetime`` object, will serialize as an HTTP date.</span>
+<span class="sd">            Otherwise, a non-negative ``int`` is expected, representing the</span>
+<span class="sd">            number of seconds to wait.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry_after</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">headers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">retry_after</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
+            <span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Retry-After&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">dt_to_http</span><span class="p">(</span><span class="n">retry_after</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">retry_after</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Retry-After&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">retry_after</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPTooManyRequests</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_429</span><span class="p">,</span>
+                                                  <span class="n">title</span><span class="p">,</span>
+                                                  <span class="n">description</span><span class="p">,</span>
+                                                  <span class="n">headers</span><span class="p">,</span>
+                                                  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPRequestHeaderFieldsTooLarge</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;431 Request Header Fields Too Large.</span>
+
+<span class="sd">    The 431 status code indicates that the server is unwilling to process</span>
+<span class="sd">    the request because its header fields are too large.  The request MAY</span>
+<span class="sd">    be resubmitted after reducing the size of the request header fields.</span>
+
+<span class="sd">    It can be used both when the set of request header fields in total is</span>
+<span class="sd">    too large, and when a single header field is at fault.  In the latter</span>
+<span class="sd">    case, the response representation SHOULD specify which header field</span>
+<span class="sd">    was too large.</span>
+
+<span class="sd">    Responses with the 431 status code MUST NOT be stored by a cache.</span>
+
+<span class="sd">    (See also: RFC 6585, Section 5)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;431 Request Header Fields Too Large&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the rate limit that</span>
+<span class="sd">            was exceeded.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPRequestHeaderFieldsTooLarge</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_431</span><span class="p">,</span>
+                                                              <span class="n">title</span><span class="p">,</span>
+                                                              <span class="n">description</span><span class="p">,</span>
+                                                              <span class="n">headers</span><span class="p">,</span>
+                                                              <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPUnavailableForLegalReasons</span><span class="p">(</span><span class="n">OptionalRepresentation</span><span class="p">,</span> <span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;451 Unavailable For Legal Reasons.</span>
+
+<span class="sd">    The server is denying access to the resource as a consequence of a</span>
+<span class="sd">    legal demand.</span>
+
+<span class="sd">    The server in question might not be an origin server. This type of</span>
+<span class="sd">    legal demand typically most directly affects the operations of ISPs</span>
+<span class="sd">    and search engines.</span>
+
+<span class="sd">    Responses using this status code SHOULD include an explanation, in</span>
+<span class="sd">    the response body, of the details of the legal demand: the party</span>
+<span class="sd">    making it, the applicable legislation or regulation, and what</span>
+<span class="sd">    classes of person and resource it applies to.</span>
+
+<span class="sd">    Note that in many cases clients can still access the denied resource</span>
+<span class="sd">    by using technical countermeasures such as a VPN or the Tor network.</span>
+
+<span class="sd">    A 451 response is cacheable by default; i.e., unless otherwise</span>
+<span class="sd">    indicated by the method definition or explicit cache controls.</span>
+
+<span class="sd">    (See also: RFC 7725, Section 3)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;451 Unavailable For Legal Reasons&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two (default ``None``).</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPUnavailableForLegalReasons</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_451</span><span class="p">,</span>
+                                                             <span class="n">title</span><span class="p">,</span>
+                                                             <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span>
+                                                             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPInternalServerError</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;500 Internal Server Error.</span>
+
+<span class="sd">    The server encountered an unexpected condition that prevented it</span>
+<span class="sd">    from fulfilling the request.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.6.1)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;500 Internal Server Error&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPInternalServerError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_500</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                                      <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                                      <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPNotImplemented</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;501 Not Implemented.</span>
+
+<span class="sd">    The 501 (Not Implemented) status code indicates that the server does</span>
+<span class="sd">    not support the functionality required to fulfill the request.  This</span>
+<span class="sd">    is the appropriate response when the server does not recognize the</span>
+<span class="sd">    request method and is not capable of supporting it for any resource.</span>
+
+<span class="sd">    A 501 response is cacheable by default; i.e., unless otherwise</span>
+<span class="sd">    indicated by the method definition or explicit cache controls</span>
+<span class="sd">    as described in RFC 7234, Section 4.2.2.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.6.2)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;500 Internal Server Error&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPNotImplemented</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_501</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                                 <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                                 <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPBadGateway</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;502 Bad Gateway.</span>
+
+<span class="sd">    The server, while acting as a gateway or proxy, received an invalid</span>
+<span class="sd">    response from an inbound server it accessed while attempting to</span>
+<span class="sd">    fulfill the request.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.6.3)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;502 Bad Gateway&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPBadGateway</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_502</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                             <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                             <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPServiceUnavailable</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;503 Service Unavailable.</span>
+
+<span class="sd">    The server is currently unable to handle the request due to a</span>
+<span class="sd">    temporary overload or scheduled maintenance, which will likely be</span>
+<span class="sd">    alleviated after some delay.</span>
+
+<span class="sd">    The server MAY send a Retry-After header field to suggest an</span>
+<span class="sd">    appropriate amount of time for the client to wait before retrying</span>
+<span class="sd">    the request.</span>
+
+<span class="sd">    Note: The existence of the 503 status code does not imply that a</span>
+<span class="sd">    server has to use it when becoming overloaded. Some servers might</span>
+<span class="sd">    simply refuse the connection.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.6.4)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;503 Service Unavailable&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        retry_after (datetime or int): Value for the Retry-After header. If a</span>
+<span class="sd">            ``datetime`` object, will serialize as an HTTP date. Otherwise,</span>
+<span class="sd">            a non-negative ``int`` is expected, representing the number of</span>
+<span class="sd">            seconds to wait.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry_after</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">headers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">headers</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">retry_after</span><span class="p">,</span> <span class="n">datetime</span><span class="p">):</span>
+            <span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Retry-After&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">dt_to_http</span><span class="p">(</span><span class="n">retry_after</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">retry_after</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Retry-After&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">retry_after</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPServiceUnavailable</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_503</span><span class="p">,</span>
+                                                     <span class="n">title</span><span class="p">,</span>
+                                                     <span class="n">description</span><span class="p">,</span>
+                                                     <span class="n">headers</span><span class="p">,</span>
+                                                     <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPGatewayTimeout</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;504 Gateway Timeout.</span>
+
+<span class="sd">    The 504 (Gateway Timeout) status code indicates that the server,</span>
+<span class="sd">    while acting as a gateway or proxy, did not receive a timely response</span>
+<span class="sd">    from an upstream server it needed to access in order to complete the</span>
+<span class="sd">    request.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.6.5)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;503 Service Unavailable&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPGatewayTimeout</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_504</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                                 <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                                 <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPVersionNotSupported</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;505 HTTP Version Not Supported</span>
+
+<span class="sd">    The 505 (HTTP Version Not Supported) status code indicates that the</span>
+<span class="sd">    server does not support, or refuses to support, the major version of</span>
+<span class="sd">    HTTP that was used in the request message.  The server is indicating</span>
+<span class="sd">    that it is unable or unwilling to complete the request using the same</span>
+<span class="sd">    major version as the client (as described in RFC 7230, Section 2.6),</span>
+<span class="sd">    other than with this error message.  The server SHOULD</span>
+<span class="sd">    generate a representation for the 505 response that describes why</span>
+<span class="sd">    that version is not supported and what other protocols are supported</span>
+<span class="sd">    by that server.</span>
+
+<span class="sd">    (See also: RFC 7231, Section 6.6.6)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;503 Service Unavailable&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPVersionNotSupported</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_505</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                                      <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                                      <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPInsufficientStorage</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;507 Insufficient Storage.</span>
+
+<span class="sd">    The 507 (Insufficient Storage) status code means the method could not</span>
+<span class="sd">    be performed on the resource because the server is unable to store</span>
+<span class="sd">    the representation needed to successfully complete the request. This</span>
+<span class="sd">    condition is considered to be temporary. If the request that</span>
+<span class="sd">    received this status code was the result of a user action, the</span>
+<span class="sd">    request MUST NOT be repeated until it is requested by a separate user</span>
+<span class="sd">    action.</span>
+
+<span class="sd">    (See also: RFC 4918, Section 11.5)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;507 Insufficient Storage&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPInsufficientStorage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_507</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                                      <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                                      <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPLoopDetected</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;508 Loop Detected.</span>
+
+<span class="sd">    The 508 (Loop Detected) status code indicates that the server</span>
+<span class="sd">    terminated an operation because it encountered an infinite loop while</span>
+<span class="sd">    processing a request with &quot;Depth: infinity&quot;. This status indicates</span>
+<span class="sd">    that the entire operation failed.</span>
+
+<span class="sd">    (See also: RFC 5842, Section 7.2)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;508 Loop Detected&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPLoopDetected</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_508</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span>
+                                               <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPNetworkAuthenticationRequired</span><span class="p">(</span><span class="n">HTTPError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;511 Network Authentication Required.</span>
+
+<span class="sd">    The 511 status code indicates that the client needs to authenticate</span>
+<span class="sd">    to gain network access.</span>
+
+<span class="sd">    The response representation SHOULD contain a link to a resource that</span>
+<span class="sd">    allows the user to submit credentials.</span>
+
+<span class="sd">    Note that the 511 response SHOULD NOT contain a challenge or the</span>
+<span class="sd">    authentication interface itself, because clients would show the</span>
+<span class="sd">    interface as being associated with the originally requested URL,</span>
+<span class="sd">    which may cause confusion.</span>
+
+<span class="sd">    The 511 status SHOULD NOT be generated by origin servers; it is</span>
+<span class="sd">    intended for use by intercepting proxies that are interposed as a</span>
+<span class="sd">    means of controlling access to the network.</span>
+
+<span class="sd">    Responses with the 511 status code MUST NOT be stored by a cache.</span>
+
+<span class="sd">    (See also: RFC 6585, Section 6)</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        title (str): Error title (default &#39;511 Network Authentication Required&#39;).</span>
+<span class="sd">        description (str): Human-friendly description of the error, along with</span>
+<span class="sd">            a helpful suggestion or two.</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPNetworkAuthenticationRequired</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_511</span><span class="p">,</span>
+                                                                <span class="n">title</span><span class="p">,</span>
+                                                                <span class="n">description</span><span class="p">,</span>
+                                                                <span class="n">headers</span><span class="p">,</span>
+                                                                <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPInvalidHeader</span><span class="p">(</span><span class="n">HTTPBadRequest</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;400 Bad Request.</span>
+
+<span class="sd">    One of the headers in the request is invalid.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        msg (str): A description of why the value is invalid.</span>
+<span class="sd">        header_name (str): The name of the invalid header.</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">header_name</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;The value provided for the </span><span class="si">{0}</span><span class="s1"> header is &#39;</span>
+                       <span class="s1">&#39;invalid. </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">header_name</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPInvalidHeader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;Invalid header value&#39;</span><span class="p">,</span>
+                                                <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                                <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPMissingHeader</span><span class="p">(</span><span class="n">HTTPBadRequest</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;400 Bad Request</span>
+
+<span class="sd">    A header is missing from the request.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        header_name (str): The name of the missing header.</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">header_name</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;The </span><span class="si">{0}</span><span class="s1"> header is required.&#39;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">header_name</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPMissingHeader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;Missing header value&#39;</span><span class="p">,</span>
+                                                <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                                <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPInvalidParam</span><span class="p">(</span><span class="n">HTTPBadRequest</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;400 Bad Request</span>
+
+<span class="sd">    A parameter in the request is invalid. This error may refer to a</span>
+<span class="sd">    parameter in a query string, form, or document that was submitted</span>
+<span class="sd">    with the request.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        msg (str): A description of the invalid parameter.</span>
+<span class="sd">        param_name (str): The name of the parameter.</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;The &quot;</span><span class="si">{0}</span><span class="s1">&quot; parameter is invalid. </span><span class="si">{1}</span><span class="s1">&#39;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param_name</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPInvalidParam</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;Invalid parameter&#39;</span><span class="p">,</span>
+                                               <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">HTTPMissingParam</span><span class="p">(</span><span class="n">HTTPBadRequest</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;400 Bad Request</span>
+
+<span class="sd">    A parameter is missing from the request. This error may refer to a</span>
+<span class="sd">    parameter in a query string, form, or document that was submitted</span>
+<span class="sd">    with the request.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        param_name (str): The name of the missing parameter.</span>
+
+<span class="sd">    Keyword Args:</span>
+<span class="sd">        headers (dict or list): A ``dict`` of header names and values</span>
+<span class="sd">            to set, or a ``list`` of (*name*, *value*) tuples. Both *name* and</span>
+<span class="sd">            *value* must be of type ``str`` or ``StringType``, and only</span>
+<span class="sd">            character values 0x00 through 0xFF may be used on platforms that</span>
+<span class="sd">            use wide characters.</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                The Content-Type header, if present, will be overridden. If</span>
+<span class="sd">                you wish to return custom error messages, you can create</span>
+<span class="sd">                your own HTTP error class, and install an error handler</span>
+<span class="sd">                to convert it into an appropriate HTTP response for the</span>
+<span class="sd">                client</span>
+
+<span class="sd">            Note:</span>
+<span class="sd">                Falcon can process a list of ``tuple`` slightly faster</span>
+<span class="sd">                than a ``dict``.</span>
+<span class="sd">        href (str): A URL someone can visit to find out more information</span>
+<span class="sd">            (default ``None``). Unicode characters are percent-encoded.</span>
+<span class="sd">        href_text (str): If href is given, use this as the friendly</span>
+<span class="sd">            title/description for the link (default &#39;API documentation</span>
+<span class="sd">            for this error&#39;).</span>
+<span class="sd">        code (int): An internal code that customers can reference in their</span>
+<span class="sd">            support request or to help them when searching for knowledge</span>
+<span class="sd">            base articles related to this error (default ``None``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param_name</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;The &quot;</span><span class="si">{0}</span><span class="s1">&quot; parameter is required.&#39;</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">param_name</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">HTTPMissingParam</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;Missing parameter&#39;</span><span class="p">,</span>
+                                               <span class="n">description</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+                                               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2020, ASTRID Project.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

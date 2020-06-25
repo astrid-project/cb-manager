@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>http &#8212; CB-Manager  documentation</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="../_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="../_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html"><span><img src="../_static/avatar.png"></span>
+          CB-Manager</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="http://github.com/astrid-project/cb-manager">GitHub</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../running.html">2. Running</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../running.html#reader-arg-py">2.1. reader/arg.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../exec-env.html">3. Execution Environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exec-env.html#schema">3.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exec-env.html#lcp-schema">3.2. LCP Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exec-env.html#create">3.3. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exec-env.html#read">3.4. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exec-env.html#update">3.5. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exec-env.html#delete">3.6. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../exec-env-type.html">4. Execution Environment Type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../exec-env-type.html#schema">4.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exec-env-type.html#create">4.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exec-env-type.html#read">4.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exec-env-type.html#update">4.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exec-env-type.html#delete">4.5. Delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../exec-env-type.html#loaded-data">4.6. Loaded data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../network-link.html">5. Network Link</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../network-link.html#create">5.1. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network-link.html#read">5.2. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network-link.html#update">5.3. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network-link.html#delete">5.4. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../network-link-type.html">6. Network Link Type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../network-link-type.html#schema">6.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network-link-type.html#create">6.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network-link-type.html#read">6.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network-link-type.html#update">6.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network-link-type.html#delete">6.5. Delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network-link-type.html#loaded-data">6.6. Loaded data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../connection.html">7. Connection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../connection.html#schema">7.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../connection.html#create">7.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../connection.html#read">7.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../connection.html#update">7.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../connection.html#delete">7.5. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../data.html">8. Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../data.html#schema">8.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data.html#create">8.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data.html#read">8.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data.html#update">8.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../data.html#delete">8.5. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../agent-catalog.html">9. Agent Catalog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../agent-catalog.html#schema">9.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-catalog.html#action-schema">9.2. Action Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-catalog.html#action-config-schema">9.3. Action Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-catalog.html#parameter-schema">9.4. Parameter Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-catalog.html#parameter-config-schema">9.5. Parameter Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-catalog.html#resource-schema">9.6. Resource Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-catalog.html#resource-config-schema">9.7. Resource Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-catalog.html#create">9.8. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-catalog.html#read">9.9. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-catalog.html#update">9.10. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-catalog.html#delete">9.11. Delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-catalog.html#loaded-data">9.12. Loaded data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../agent-instance.html">10. Agent Instance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../agent-instance.html#schema">10.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-instance.html#parameter-schema">10.2. Parameter Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-instance.html#create">10.3. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-instance.html#read">10.4. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-instance.html#update">10.5. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../agent-instance.html#delete">10.6. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ebpf-program-catalog.html">11. eBPF Program Catalog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-catalog.html#schema">11.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-catalog.html#config-schema">11.2. Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-catalog.html#metric-schema">11.3. Metric Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-catalog.html#open-metrics-metadata-schema">11.4. Open Metrics Metadata Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-catalog.html#open-metrics-metadata-label-schema">11.5. Open Metrics Metadata Label Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-catalog.html#parameter-schema">11.6. Parameter Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-catalog.html#create">11.7. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-catalog.html#read">11.8. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-catalog.html#update">11.9. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-catalog.html#delete">11.10. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ebpf-program-instance.html">12. eBPF Program Instance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-instance.html#schema">12.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-instance.html#create">12.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-instance.html#read">12.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-instance.html#update">12.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ebpf-program-instance.html#delete">12.5. Delete</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#error-handler">Error Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#media-handler">Media Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#middleware">Middleware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#spec">Spec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#docstring">Docstring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#document">Document</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#agent">Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#ebpf-program">eBPF Program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#connection">Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#data">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#execution-environment">Execution Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#network-link">Network Link</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#lib">Lib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#response">Response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#reader">Reader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#resource">Resource</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#id2">Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#id3">eBPF Program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#id4">Execution Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#id5">Network Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#id6">Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#id7">Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#schema">Schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#id8">Agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api.html#catalog">Catalog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api.html#instance">Instance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#id9">eBPF Program</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api.html#id10">Catalog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api.html#id11">Instance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#id12">Execution Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#id13">Network Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#id14">Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#id15">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#query-request">Query Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api.html#id16">Response</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#submitting-issues">Submitting issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#submitting-patches-bugfix-features">Submitting patches (bugfix, features, …)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#running-a-local-swagger-server">Running a local Swagger Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing.html#updating-copyright">Updating Copyright</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#id1">0.1</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm"></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <h1>Source code for http</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">IntEnum</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;HTTPStatus&#39;</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">HTTPStatus</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;HTTP status codes and reason phrases</span>
+
+<span class="sd">    Status codes from the following RFCs are all observed:</span>
+
+<span class="sd">        * RFC 7231: Hypertext Transfer Protocol (HTTP/1.1), obsoletes 2616</span>
+<span class="sd">        * RFC 6585: Additional HTTP Status Codes</span>
+<span class="sd">        * RFC 3229: Delta encoding in HTTP</span>
+<span class="sd">        * RFC 4918: HTTP Extensions for WebDAV, obsoletes 2518</span>
+<span class="sd">        * RFC 5842: Binding Extensions to WebDAV</span>
+<span class="sd">        * RFC 7238: Permanent Redirect</span>
+<span class="sd">        * RFC 2295: Transparent Content Negotiation in HTTP</span>
+<span class="sd">        * RFC 2774: An HTTP Extension Framework</span>
+<span class="sd">        * RFC 7725: An HTTP Status Code to Report Legal Obstacles</span>
+<span class="sd">        * RFC 7540: Hypertext Transfer Protocol Version 2 (HTTP/2)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">phrase</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="nb">int</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">_value_</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="n">obj</span><span class="o">.</span><span class="n">phrase</span> <span class="o">=</span> <span class="n">phrase</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="c1"># informational</span>
+    <span class="n">CONTINUE</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;Continue&#39;</span><span class="p">,</span> <span class="s1">&#39;Request received, please continue&#39;</span>
+    <span class="n">SWITCHING_PROTOCOLS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">101</span><span class="p">,</span> <span class="s1">&#39;Switching Protocols&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Switching to new protocol; obey Upgrade header&#39;</span><span class="p">)</span>
+    <span class="n">PROCESSING</span> <span class="o">=</span> <span class="mi">102</span><span class="p">,</span> <span class="s1">&#39;Processing&#39;</span>
+
+    <span class="c1"># success</span>
+    <span class="n">OK</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="s1">&#39;OK&#39;</span><span class="p">,</span> <span class="s1">&#39;Request fulfilled, document follows&#39;</span>
+    <span class="n">CREATED</span> <span class="o">=</span> <span class="mi">201</span><span class="p">,</span> <span class="s1">&#39;Created&#39;</span><span class="p">,</span> <span class="s1">&#39;Document created, URL follows&#39;</span>
+    <span class="n">ACCEPTED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">202</span><span class="p">,</span> <span class="s1">&#39;Accepted&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Request accepted, processing continues off-line&#39;</span><span class="p">)</span>
+    <span class="n">NON_AUTHORITATIVE_INFORMATION</span> <span class="o">=</span> <span class="p">(</span><span class="mi">203</span><span class="p">,</span>
+        <span class="s1">&#39;Non-Authoritative Information&#39;</span><span class="p">,</span> <span class="s1">&#39;Request fulfilled from cache&#39;</span><span class="p">)</span>
+    <span class="n">NO_CONTENT</span> <span class="o">=</span> <span class="mi">204</span><span class="p">,</span> <span class="s1">&#39;No Content&#39;</span><span class="p">,</span> <span class="s1">&#39;Request fulfilled, nothing follows&#39;</span>
+    <span class="n">RESET_CONTENT</span> <span class="o">=</span> <span class="mi">205</span><span class="p">,</span> <span class="s1">&#39;Reset Content&#39;</span><span class="p">,</span> <span class="s1">&#39;Clear input form for further input&#39;</span>
+    <span class="n">PARTIAL_CONTENT</span> <span class="o">=</span> <span class="mi">206</span><span class="p">,</span> <span class="s1">&#39;Partial Content&#39;</span><span class="p">,</span> <span class="s1">&#39;Partial content follows&#39;</span>
+    <span class="n">MULTI_STATUS</span> <span class="o">=</span> <span class="mi">207</span><span class="p">,</span> <span class="s1">&#39;Multi-Status&#39;</span>
+    <span class="n">ALREADY_REPORTED</span> <span class="o">=</span> <span class="mi">208</span><span class="p">,</span> <span class="s1">&#39;Already Reported&#39;</span>
+    <span class="n">IM_USED</span> <span class="o">=</span> <span class="mi">226</span><span class="p">,</span> <span class="s1">&#39;IM Used&#39;</span>
+
+    <span class="c1"># redirection</span>
+    <span class="n">MULTIPLE_CHOICES</span> <span class="o">=</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="s1">&#39;Multiple Choices&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Object has several resources -- see URI list&#39;</span><span class="p">)</span>
+    <span class="n">MOVED_PERMANENTLY</span> <span class="o">=</span> <span class="p">(</span><span class="mi">301</span><span class="p">,</span> <span class="s1">&#39;Moved Permanently&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Object moved permanently -- see URI list&#39;</span><span class="p">)</span>
+    <span class="n">FOUND</span> <span class="o">=</span> <span class="mi">302</span><span class="p">,</span> <span class="s1">&#39;Found&#39;</span><span class="p">,</span> <span class="s1">&#39;Object moved temporarily -- see URI list&#39;</span>
+    <span class="n">SEE_OTHER</span> <span class="o">=</span> <span class="mi">303</span><span class="p">,</span> <span class="s1">&#39;See Other&#39;</span><span class="p">,</span> <span class="s1">&#39;Object moved -- see Method and URL list&#39;</span>
+    <span class="n">NOT_MODIFIED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">304</span><span class="p">,</span> <span class="s1">&#39;Not Modified&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Document has not changed since given time&#39;</span><span class="p">)</span>
+    <span class="n">USE_PROXY</span> <span class="o">=</span> <span class="p">(</span><span class="mi">305</span><span class="p">,</span> <span class="s1">&#39;Use Proxy&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;You must use proxy specified in Location to access this resource&#39;</span><span class="p">)</span>
+    <span class="n">TEMPORARY_REDIRECT</span> <span class="o">=</span> <span class="p">(</span><span class="mi">307</span><span class="p">,</span> <span class="s1">&#39;Temporary Redirect&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Object moved temporarily -- see URI list&#39;</span><span class="p">)</span>
+    <span class="n">PERMANENT_REDIRECT</span> <span class="o">=</span> <span class="p">(</span><span class="mi">308</span><span class="p">,</span> <span class="s1">&#39;Permanent Redirect&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Object moved permanently -- see URI list&#39;</span><span class="p">)</span>
+
+    <span class="c1"># client error</span>
+    <span class="n">BAD_REQUEST</span> <span class="o">=</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="s1">&#39;Bad Request&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Bad request syntax or unsupported method&#39;</span><span class="p">)</span>
+    <span class="n">UNAUTHORIZED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">401</span><span class="p">,</span> <span class="s1">&#39;Unauthorized&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;No permission -- see authorization schemes&#39;</span><span class="p">)</span>
+    <span class="n">PAYMENT_REQUIRED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">402</span><span class="p">,</span> <span class="s1">&#39;Payment Required&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;No payment -- see charging schemes&#39;</span><span class="p">)</span>
+    <span class="n">FORBIDDEN</span> <span class="o">=</span> <span class="p">(</span><span class="mi">403</span><span class="p">,</span> <span class="s1">&#39;Forbidden&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Request forbidden -- authorization will not help&#39;</span><span class="p">)</span>
+    <span class="n">NOT_FOUND</span> <span class="o">=</span> <span class="p">(</span><span class="mi">404</span><span class="p">,</span> <span class="s1">&#39;Not Found&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Nothing matches the given URI&#39;</span><span class="p">)</span>
+    <span class="n">METHOD_NOT_ALLOWED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">405</span><span class="p">,</span> <span class="s1">&#39;Method Not Allowed&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Specified method is invalid for this resource&#39;</span><span class="p">)</span>
+    <span class="n">NOT_ACCEPTABLE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">406</span><span class="p">,</span> <span class="s1">&#39;Not Acceptable&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;URI not available in preferred format&#39;</span><span class="p">)</span>
+    <span class="n">PROXY_AUTHENTICATION_REQUIRED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">407</span><span class="p">,</span>
+        <span class="s1">&#39;Proxy Authentication Required&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;You must authenticate with this proxy before proceeding&#39;</span><span class="p">)</span>
+    <span class="n">REQUEST_TIMEOUT</span> <span class="o">=</span> <span class="p">(</span><span class="mi">408</span><span class="p">,</span> <span class="s1">&#39;Request Timeout&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Request timed out; try again later&#39;</span><span class="p">)</span>
+    <span class="n">CONFLICT</span> <span class="o">=</span> <span class="mi">409</span><span class="p">,</span> <span class="s1">&#39;Conflict&#39;</span><span class="p">,</span> <span class="s1">&#39;Request conflict&#39;</span>
+    <span class="n">GONE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">410</span><span class="p">,</span> <span class="s1">&#39;Gone&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;URI no longer exists and has been permanently removed&#39;</span><span class="p">)</span>
+    <span class="n">LENGTH_REQUIRED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">411</span><span class="p">,</span> <span class="s1">&#39;Length Required&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Client must specify Content-Length&#39;</span><span class="p">)</span>
+    <span class="n">PRECONDITION_FAILED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">412</span><span class="p">,</span> <span class="s1">&#39;Precondition Failed&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Precondition in headers is false&#39;</span><span class="p">)</span>
+    <span class="n">REQUEST_ENTITY_TOO_LARGE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">413</span><span class="p">,</span> <span class="s1">&#39;Request Entity Too Large&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Entity is too large&#39;</span><span class="p">)</span>
+    <span class="n">REQUEST_URI_TOO_LONG</span> <span class="o">=</span> <span class="p">(</span><span class="mi">414</span><span class="p">,</span> <span class="s1">&#39;Request-URI Too Long&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;URI is too long&#39;</span><span class="p">)</span>
+    <span class="n">UNSUPPORTED_MEDIA_TYPE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">415</span><span class="p">,</span> <span class="s1">&#39;Unsupported Media Type&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Entity body in unsupported format&#39;</span><span class="p">)</span>
+    <span class="n">REQUESTED_RANGE_NOT_SATISFIABLE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">416</span><span class="p">,</span>
+        <span class="s1">&#39;Requested Range Not Satisfiable&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Cannot satisfy request range&#39;</span><span class="p">)</span>
+    <span class="n">EXPECTATION_FAILED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">417</span><span class="p">,</span> <span class="s1">&#39;Expectation Failed&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Expect condition could not be satisfied&#39;</span><span class="p">)</span>
+    <span class="n">MISDIRECTED_REQUEST</span> <span class="o">=</span> <span class="p">(</span><span class="mi">421</span><span class="p">,</span> <span class="s1">&#39;Misdirected Request&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Server is not able to produce a response&#39;</span><span class="p">)</span>
+    <span class="n">UNPROCESSABLE_ENTITY</span> <span class="o">=</span> <span class="mi">422</span><span class="p">,</span> <span class="s1">&#39;Unprocessable Entity&#39;</span>
+    <span class="n">LOCKED</span> <span class="o">=</span> <span class="mi">423</span><span class="p">,</span> <span class="s1">&#39;Locked&#39;</span>
+    <span class="n">FAILED_DEPENDENCY</span> <span class="o">=</span> <span class="mi">424</span><span class="p">,</span> <span class="s1">&#39;Failed Dependency&#39;</span>
+    <span class="n">UPGRADE_REQUIRED</span> <span class="o">=</span> <span class="mi">426</span><span class="p">,</span> <span class="s1">&#39;Upgrade Required&#39;</span>
+    <span class="n">PRECONDITION_REQUIRED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">428</span><span class="p">,</span> <span class="s1">&#39;Precondition Required&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;The origin server requires the request to be conditional&#39;</span><span class="p">)</span>
+    <span class="n">TOO_MANY_REQUESTS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">429</span><span class="p">,</span> <span class="s1">&#39;Too Many Requests&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;The user has sent too many requests in &#39;</span>
+        <span class="s1">&#39;a given amount of time (&quot;rate limiting&quot;)&#39;</span><span class="p">)</span>
+    <span class="n">REQUEST_HEADER_FIELDS_TOO_LARGE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">431</span><span class="p">,</span>
+        <span class="s1">&#39;Request Header Fields Too Large&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;The server is unwilling to process the request because its header &#39;</span>
+        <span class="s1">&#39;fields are too large&#39;</span><span class="p">)</span>
+    <span class="n">UNAVAILABLE_FOR_LEGAL_REASONS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">451</span><span class="p">,</span>
+        <span class="s1">&#39;Unavailable For Legal Reasons&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;The server is denying access to the &#39;</span>
+        <span class="s1">&#39;resource as a consequence of a legal demand&#39;</span><span class="p">)</span>
+
+    <span class="c1"># server errors</span>
+    <span class="n">INTERNAL_SERVER_ERROR</span> <span class="o">=</span> <span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="s1">&#39;Internal Server Error&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Server got itself in trouble&#39;</span><span class="p">)</span>
+    <span class="n">NOT_IMPLEMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">501</span><span class="p">,</span> <span class="s1">&#39;Not Implemented&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Server does not support this operation&#39;</span><span class="p">)</span>
+    <span class="n">BAD_GATEWAY</span> <span class="o">=</span> <span class="p">(</span><span class="mi">502</span><span class="p">,</span> <span class="s1">&#39;Bad Gateway&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Invalid responses from another server/proxy&#39;</span><span class="p">)</span>
+    <span class="n">SERVICE_UNAVAILABLE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">503</span><span class="p">,</span> <span class="s1">&#39;Service Unavailable&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;The server cannot process the request due to a high load&#39;</span><span class="p">)</span>
+    <span class="n">GATEWAY_TIMEOUT</span> <span class="o">=</span> <span class="p">(</span><span class="mi">504</span><span class="p">,</span> <span class="s1">&#39;Gateway Timeout&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;The gateway server did not receive a timely response&#39;</span><span class="p">)</span>
+    <span class="n">HTTP_VERSION_NOT_SUPPORTED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">505</span><span class="p">,</span> <span class="s1">&#39;HTTP Version Not Supported&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Cannot fulfill request&#39;</span><span class="p">)</span>
+    <span class="n">VARIANT_ALSO_NEGOTIATES</span> <span class="o">=</span> <span class="mi">506</span><span class="p">,</span> <span class="s1">&#39;Variant Also Negotiates&#39;</span>
+    <span class="n">INSUFFICIENT_STORAGE</span> <span class="o">=</span> <span class="mi">507</span><span class="p">,</span> <span class="s1">&#39;Insufficient Storage&#39;</span>
+    <span class="n">LOOP_DETECTED</span> <span class="o">=</span> <span class="mi">508</span><span class="p">,</span> <span class="s1">&#39;Loop Detected&#39;</span>
+    <span class="n">NOT_EXTENDED</span> <span class="o">=</span> <span class="mi">510</span><span class="p">,</span> <span class="s1">&#39;Not Extended&#39;</span>
+    <span class="n">NETWORK_AUTHENTICATION_REQUIRED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">511</span><span class="p">,</span>
+        <span class="s1">&#39;Network Authentication Required&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;The client needs to authenticate to gain network access&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2020, ASTRID Project.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

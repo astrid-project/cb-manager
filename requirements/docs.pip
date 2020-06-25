@@ -1,3 +1,7 @@
+pyenchant
 sphinx
 sphinx-autobuild
-sphinxcontrib-httpdomain
+sphinx-bootstrap-theme
+sphinxcontrib-autoprogram
+sphinxcontrib.httpdomain
+sphinxcontrib.spelling

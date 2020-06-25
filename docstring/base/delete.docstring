@@ -35,9 +35,8 @@ responses:
             type: array
             items :
                 oneOf:
-                    - Reset_Content_Response_Schema
-                    - Unprocessable_Entity_Response_Schema
+                - Reset_Content_Response_Schema
+                - Unprocessable_Entity_Response_Schema
     500:
         description: Server not available to satisfy the request.
         schema: Internal_Server_Error_Response_Schema
-

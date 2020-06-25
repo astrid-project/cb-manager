@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to CB-Manager documentation! &#8212; CB-Manager  documentation</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="1. Installation" href="installation.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<script type="text/javascript" src="_static/js/jquery-1.11.0.min.js "></script>
+<script type="text/javascript" src="_static/js/jquery-fix.js "></script>
+<script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js "></script>
+<script type="text/javascript" src="_static/bootstrap-sphinx.js "></script>
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#"><span><img src="_static/avatar.png"></span>
+          CB-Manager</a>
+        <span class="navbar-text navbar-version pull-left"><b></b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+                <li><a href="http://github.com/astrid-project/cb-manager">GitHub</a></li>
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Contents <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">2. Running</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running.html#reader-arg-py">2.1. reader/arg.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="exec-env.html">3. Execution Environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="exec-env.html#schema">3.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env.html#lcp-schema">3.2. LCP Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env.html#create">3.3. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env.html#read">3.4. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env.html#update">3.5. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env.html#delete">3.6. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="exec-env-type.html">4. Execution Environment Type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="exec-env-type.html#schema">4.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env-type.html#create">4.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env-type.html#read">4.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env-type.html#update">4.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env-type.html#delete">4.5. Delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env-type.html#loaded-data">4.6. Loaded data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="network-link.html">5. Network Link</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="network-link.html#create">5.1. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link.html#read">5.2. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link.html#update">5.3. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link.html#delete">5.4. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="network-link-type.html">6. Network Link Type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="network-link-type.html#schema">6.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link-type.html#create">6.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link-type.html#read">6.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link-type.html#update">6.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link-type.html#delete">6.5. Delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link-type.html#loaded-data">6.6. Loaded data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="connection.html">7. Connection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#schema">7.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#create">7.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#read">7.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#update">7.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#delete">7.5. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">8. Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data.html#schema">8.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#create">8.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#read">8.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#update">8.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#delete">8.5. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="agent-catalog.html">9. Agent Catalog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#schema">9.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#action-schema">9.2. Action Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#action-config-schema">9.3. Action Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#parameter-schema">9.4. Parameter Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#parameter-config-schema">9.5. Parameter Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#resource-schema">9.6. Resource Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#resource-config-schema">9.7. Resource Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#create">9.8. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#read">9.9. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#update">9.10. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#delete">9.11. Delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#loaded-data">9.12. Loaded data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="agent-instance.html">10. Agent Instance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="agent-instance.html#schema">10.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-instance.html#parameter-schema">10.2. Parameter Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-instance.html#create">10.3. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-instance.html#read">10.4. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-instance.html#update">10.5. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-instance.html#delete">10.6. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html">11. eBPF Program Catalog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#schema">11.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#config-schema">11.2. Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#metric-schema">11.3. Metric Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#open-metrics-metadata-schema">11.4. Open Metrics Metadata Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#open-metrics-metadata-label-schema">11.5. Open Metrics Metadata Label Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#parameter-schema">11.6. Parameter Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#create">11.7. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#read">11.8. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#update">11.9. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#delete">11.10. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-instance.html">12. eBPF Program Instance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-instance.html#schema">12.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-instance.html#create">12.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-instance.html#read">12.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-instance.html#update">12.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-instance.html#delete">12.5. Delete</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#error-handler">Error Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#media-handler">Media Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#middleware">Middleware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#spec">Spec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#docstring">Docstring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#document">Document</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#agent">Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#ebpf-program">eBPF Program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#connection">Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#data">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#execution-environment">Execution Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#network-link">Network Link</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#lib">Lib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#response">Response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#reader">Reader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#resource">Resource</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id2">Agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id3">eBPF Program</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id4">Execution Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id5">Network Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id6">Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id7">Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#schema">Schema</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id8">Agent</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#catalog">Catalog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#instance">Instance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id9">eBPF Program</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#id10">Catalog</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#id11">Instance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id12">Execution Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id13">Network Link</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id14">Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id15">Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#query-request">Query Request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#id16">Response</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#submitting-issues">Submitting issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#submitting-patches-bugfix-features">Submitting patches (bugfix, features, …)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#running-a-local-swagger-server">Running a local Swagger Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#updating-copyright">Updating Copyright</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id1">0.1</a></li>
+</ul>
+</li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li><a class="reference internal" href="#">Welcome to CB-Manager documentation!</a></li>
+<li><a class="reference internal" href="#compatibility">Compatibility</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a><ul>
+<li><a class="reference internal" href="#api-reference">API Reference</a></li>
+<li><a class="reference internal" href="#additional-notes">Additional Notes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="installation.html" title="Next Chapter: 1. Installation"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">1. Installation &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/index.rst.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+    <div class="body col-md-12 content" role="main">
+      
+  <div class="section" id="welcome-to-cb-manager-documentation">
+<h1>Welcome to CB-Manager documentation!<a class="headerlink" href="#welcome-to-cb-manager-documentation" title="Permalink to this headline">¶</a></h1>
+<p>CB-Manager provides various <abbr title="Application Program Interfaces">APIs</abbr> to interact with the Context Broker’s database.
+Through a <abbr title="Representational State Transfer">REST</abbr> Interface, it exposes data and events stored in the internal storage system in a structured way.
+It provides uniform access to the capabilities of monitoring agents.</p>
+</div>
+<div class="section" id="compatibility">
+<h1>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">¶</a></h1>
+<p>cb-manager requires Python 3.5+.</p>
+</div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>You can install cb-manager with pip:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install cb-manager
+</pre></div>
+</div>
+<p>or with easy_install:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> easy_install cb-manager
+</pre></div>
+</div>
+</div>
+<div class="section" id="documentation">
+<h1>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h1>
+<p>This part of the documentation will show you how to get started in using CB-Manager.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="running.html">2. Running</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running.html#reader-arg-py">2.1. reader/arg.py</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="exec-env.html">3. Execution Environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="exec-env.html#schema">3.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env.html#lcp-schema">3.2. LCP Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env.html#create">3.3. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env.html#read">3.4. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env.html#update">3.5. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env.html#delete">3.6. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="exec-env-type.html">4. Execution Environment Type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="exec-env-type.html#schema">4.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env-type.html#create">4.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env-type.html#read">4.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env-type.html#update">4.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env-type.html#delete">4.5. Delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exec-env-type.html#loaded-data">4.6. Loaded data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="network-link.html">5. Network Link</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="network-link.html#create">5.1. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link.html#read">5.2. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link.html#update">5.3. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link.html#delete">5.4. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="network-link-type.html">6. Network Link Type</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="network-link-type.html#schema">6.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link-type.html#create">6.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link-type.html#read">6.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link-type.html#update">6.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link-type.html#delete">6.5. Delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network-link-type.html#loaded-data">6.6. Loaded data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="connection.html">7. Connection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#schema">7.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#create">7.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#read">7.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#update">7.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connection.html#delete">7.5. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="data.html">8. Data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data.html#schema">8.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#create">8.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#read">8.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#update">8.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data.html#delete">8.5. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="agent-catalog.html">9. Agent Catalog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#schema">9.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#action-schema">9.2. Action Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#action-config-schema">9.3. Action Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#parameter-schema">9.4. Parameter Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#parameter-config-schema">9.5. Parameter Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#resource-schema">9.6. Resource Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#resource-config-schema">9.7. Resource Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#create">9.8. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#read">9.9. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#update">9.10. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#delete">9.11. Delete</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-catalog.html#loaded-data">9.12. Loaded data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="agent-instance.html">10. Agent Instance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="agent-instance.html#schema">10.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-instance.html#parameter-schema">10.2. Parameter Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-instance.html#create">10.3. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-instance.html#read">10.4. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-instance.html#update">10.5. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="agent-instance.html#delete">10.6. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-catalog.html">11. eBPF Program Catalog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#schema">11.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#config-schema">11.2. Config Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#metric-schema">11.3. Metric Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#open-metrics-metadata-schema">11.4. Open Metrics Metadata Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#open-metrics-metadata-label-schema">11.5. Open Metrics Metadata Label Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#parameter-schema">11.6. Parameter Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#create">11.7. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#read">11.8. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#update">11.9. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-catalog.html#delete">11.10. Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ebpf-program-instance.html">12. eBPF Program Instance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-instance.html#schema">12.1. Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-instance.html#create">12.2. Create</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-instance.html#read">12.3. Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-instance.html#update">12.4. Update</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ebpf-program-instance.html#delete">12.5. Delete</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h2>
+<p>If you are looking for information on a specific function, class or method, this part of the documentation is for you.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#error-handler">Error Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#media-handler">Media Handler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#middleware">Middleware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#spec">Spec</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#docstring">Docstring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#document">Document</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#lib">Lib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#response">Response</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#reader">Reader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#resource">Resource</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#schema">Schema</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="additional-notes">
+<h2>Additional Notes<a class="headerlink" href="#additional-notes" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#submitting-issues">Submitting issues</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#submitting-patches-bugfix-features">Submitting patches (bugfix, features, …)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#running-a-local-swagger-server">Running a local Swagger Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#updating-copyright">Updating Copyright</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#id1">0.1</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2020, ASTRID Project.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

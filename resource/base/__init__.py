@@ -81,7 +81,7 @@ class Base_Resource(object):
                         req_data_id = req_data.pop('id', id)
                         self.rm_ignore_fields(req_data)
                         obj = self.doc(meta=dict(id=req_data_id),
-                                           **req_data)
+                                       **req_data)
                         obj.save()
                         msg = f'{self.name.capitalize()} with the id={req_data_id} correctly created'
                         resp_data_lcp = []
