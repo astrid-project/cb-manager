@@ -7,7 +7,6 @@ elasticsearch-dsl>=7.0.0
 falcon
 falcon-apispec
 falcon-auth
-gitpython
 marshmallow
 msgpack
 pint
