@@ -1,5 +1,8 @@
 .. glossary::
 
+Glossary
+--------
+
     DB
         DataBase
 

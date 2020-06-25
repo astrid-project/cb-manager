@@ -51,6 +51,7 @@ This part of the documentation will show you how to get started in using CB-Mana
    agent-instance
    ebpf-program-catalog
    ebpf-program-instance
+   glossary
 
 
 API Reference

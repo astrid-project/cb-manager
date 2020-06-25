@@ -10,6 +10,7 @@
 			"Expat",
 			"Kubernetes",
 			"MSGPACK",
+			"RDBMS",
 			"Readonly",
 			"abbr",
 			"apispec",
