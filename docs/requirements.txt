@@ -6,7 +6,6 @@ sphinx-bootstrap-theme
 sphinxcontrib-autoprogram
 sphinxcontrib.httpdomain
 sphinxcontrib.spelling
-
 apispec
 bandit
 colorama
@@ -30,6 +29,5 @@ verboselogs
 waitress
 werkzeug
 xmltodict
-
 locust
 pytest
