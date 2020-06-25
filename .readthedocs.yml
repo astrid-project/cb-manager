@@ -10,8 +10,8 @@ sphinx:
   configuration: docs/conf.py
 
 # Build documentation with MkDocs
-#mkdocs:
-#  configuration: mkdocs.yml
+# mkdocs:
+#   configuration: mkdocs.yml
 
 # Optionally build your docs in additional formats such as PDF formats:
 #  - pdf
@@ -20,6 +20,6 @@ sphinx:
 python:
   version: 3.7
   install:
-    - requirements: requirements/docs.pip
-    - requirements: requirements/install.pip
-    - requirements: requirements/test.pip
+    - requirements: docs/requirements.txt
+    - requirements: requirements.txt
+    - requirements: test/requirements.txt
