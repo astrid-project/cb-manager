@@ -7,6 +7,7 @@ import os
 import re
 import sys
 
+from about import description, version
 from setuptools import setup, find_packages
 
 RE_REQUIREMENT = re.compile(r'^\s*-r\s*(?P<filename>.*)$')
@@ -43,9 +44,9 @@ def rst(filename):
 
 
 def pip(filename):
-    '''Parse pip reqs file and transform it to setuptools requirements.'''
+    '''Parse pip requirements file and transform it to setuptools requirements.'''
     requirements = []
-    for line in io.open(os.path.join('requirements', '{0}.pip'.format(filename))):
+    for line in io.open(os.path.join('{0}', 'requirements.txt'.format(filename))):
         line = line.strip()
         if not line or '://' in line or line.startswith('#'):
             continue
@@ -59,35 +60,27 @@ long_description = '\n'.join((
     ''
 ))
 
-
-exec(compile(open('flask_restplus/__about__.py').read(), 'flask_restplus/__about__.py', 'exec'))
-
-install_requires = pip('install')
-doc_require = pip('doc')
-tests_require = pip('test')
-dev_require = tests_require + pip('develop')
+install_require = pip('.')
+docs_require = pip('docs') + install_require
+tests_require = pip('tests') + install_require
+dev_require = pip('dev') + docs_require + tests_require
 
 setup(
-    name='flask-restplus',
-    version=__version__,
-    description=__description__,
+    name='cb-manager',
+    version=version,
+    description=description,
     long_description=long_description,
-    url='https://github.com/noirbizarre/flask-restplus',
-    author='Axel Haustant',
-    author_email='axel@data.gouv.fr',
-    packages=find_packages(exclude=['tests', 'tests.*']),
+    url='https://github.com/astrid-project/cb-manager',
+    author='Alex Carrega',
+    author_email='alessndro.carrega@cnit.it',
+    packages=find_packages(exclude=['test', 'test.*']),
     include_package_data=True,
-    install_requires=install_requires,
+    install_requires=install_require,
     tests_require=tests_require,
     dev_require=dev_require,
-    extras_require={
-        'test': tests_require,
-        'doc': doc_require,
-        'dev': dev_require,
-    },
-    license='BSD-3-Clause',
+    license='MIT',
     zip_safe=False,
-    keywords='flask restplus rest api swagger openapi',
+    keywords='cb-manager rest api swagger openapi',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Programming Language :: Python',
@@ -96,15 +89,11 @@ setup(
         'Intended Audience :: Developers',
         'Topic :: System :: Software Distribution',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Software Development :: Libraries :: Python Modules',
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: MIT License',
     ],
 )

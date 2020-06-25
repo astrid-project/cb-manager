@@ -17,10 +17,6 @@ class Config_Reader:
     def read(self):
         self.cr.read(self.path.resolve())
 
-        self.title = self.cr.get('info', 'title')
-        self.description = self.cr.get('info', 'description')
-        self.version = self.cr.get('info', 'version')
-
         self.cb_host = self.cr.get('context-broker', 'host')
         self.cb_port = self.cr.get('context-broker', 'port')
 

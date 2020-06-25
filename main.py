@@ -8,6 +8,7 @@ os.chdir(dir_path)
 while True:
     from utils.exception import reload_import
     try:
+        from about import title, version
         from api import api
         from lib.elasticsearch import connection as es_conn
         from reader.arg import Arg_Reader
@@ -19,7 +20,7 @@ while True:
 
 db = Arg_Reader.read()
 
-print(f'{db.config.title} version:{db.config.version}')
+print(f'{title} version:{version}')
 
 if db.version is not None:
     print(db.version)
@@ -29,7 +30,7 @@ else:
 
     @run_with_reloader
     def run_server():
-        waitress.serve(api(title=db.config.title, version=db.config.version,
+        waitress.serve(api(title=title, version=version,
                            dev_username=db.dev_username, dev_password=db.dev_password),
                        host=db.host, port=db.port, expose_tracebacks=False)
 
