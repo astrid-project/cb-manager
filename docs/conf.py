@@ -28,12 +28,13 @@ author = 'Alex Carrega <alessandro.carrega@cnit.it>'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx_issues',
     'sphinx.ext.autodoc',
     'sphinx.ext.todo',
     'sphinx.ext.viewcode',
     'sphinxcontrib.autoprogram',
     'sphinxcontrib.httpdomain',
-    'sphinxcontrib.spelling'
+    'sphinxcontrib.spelling',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -125,6 +126,7 @@ html_theme_options = {
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+issues_github_path = "astrid-project/cb-manager"
 
 import os
 import sys

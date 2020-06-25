@@ -12,4 +12,3 @@ To run CB-Manager using ``python3``:
 
 
 .. autoprogram:: reader.arg:Arg_Reader.init()
-   :prog: reader/arg.py
