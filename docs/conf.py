@@ -54,15 +54,19 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 import sphinx_bootstrap_theme
-html_logo = "../avatar.png"
+
+html_logo = '../logo.png'
+
+html_favicon = '../logo.ico'
+
 html_theme = 'bootstrap'
 html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 html_theme_options = {
     # Tab name for entire site. (Default: "Site")
     'navbar_site_name': "Contents",
 
-    # A list of tuples containing pages or urls to link to.
-    # Valid tuples should be in the following forms:
+    # A list of tuple containing pages or urls to link to.
+    # Valid tuple should be in the following forms:
     #    (name, page)                 # a link to a page
     #    (name, "/aa/bb", 1)          # a link to an arbitrary relative url
     #    (name, "http://example.com", True) # arbitrary absolute url
@@ -123,6 +127,7 @@ html_theme_options = {
     # Values: "3" (default) or "2" (in quotes)
     'bootstrap_version': "3",
 }
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".

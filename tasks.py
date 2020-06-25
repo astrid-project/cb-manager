@@ -143,8 +143,8 @@ def qa(ctx):
     header(qa.__doc__)
     with ctx.cd(ROOT):
         info('Python Static Analysis')
-        flake8_results = ctx.run(
-            'flake8 flask_restplus tests', pty=True, warn=True)
+        flake8_results = ctx.run('flake8 flask_restplus tests',
+                                 pty=True, warn=True)
         if flake8_results.failed:
             error('There is some lints to fix')
         else:
@@ -167,7 +167,7 @@ def qa(ctx):
 def doc(ctx):
     '''Build the documentation'''
     header(doc.__doc__)
-    with ctx.cd(os.path.join(ROOT, 'doc')):
+    with ctx.cd(os.path.join(ROOT, 'docs')):
         ctx.run('make html', pty=True)
 
 
