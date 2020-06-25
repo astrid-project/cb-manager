@@ -58,10 +58,8 @@ An Invoke ``tasks.py`` is provided to simplify the common tasks:
     Available tasks:
 
       all      Run tests, reports and packaging
-      assets   Fetch web assets -- Swagger. Requires NPM (see below)
       clean    Clean-up all build artifacts
       cover    Run tests suite with coverage
-      demo     Run the demo
       dist     Package for distribution
       doc      Build the documentation
       qa       Run a quality report
@@ -88,24 +86,32 @@ To ensure everything is fine before committing, you can launch the all in one co
 
     $ inv qa tox
 
-It will ensure the code meet the coding conventions, runs on every version on python and the documentation is properly generating.
+It will ensure the code meet the coding conventions, runs on every version on python
+and the documentation is properly generating.
 
 .. _official cb-manager repository: https://github.com/astrid-project/cb-managar
 .. _official bugtracker: https://github.com/astrid-project/cb-manager/issues
 
-Running a local Swagger Server
-------------------------------
 
-For local development, you may wish to run a local server. running the following will install a swagger server.
+Code Style
+----------
 
-.. code-block:: console
+Naming convention rules:
 
-    $ inv assets
+- name *variables* and *methods*: **lower snake case** (example: ``extract_info``).
+- name *classes*: **title snake case** (example: ``Exec_Env_Document``).
 
-.. note:
 
-    You'll need `NPM <https://docs.npmjs.com/getting-started/>`_ installed to do this.
-    If you're new to NPM, also check out `nvm <https://github.com/creationix/nvm/blob/master/README.md>`_
+Semantic Version
+----------------
+
+Given a version number MAJOR.MINOR.PATCH, increment the:
+
+- MAJOR version when you make incompatible API changes,
+- MINOR version when you add functionality in a backwards compatible manner, and
+- PATCH version when you make backwards compatible bug fixes.
+
+Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
 
 
 Updating Copyright

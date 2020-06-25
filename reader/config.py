@@ -1,5 +1,6 @@
 from configparser import BasicInterpolation as Basic_Interpolation, ConfigParser as Config_Parser
 from os import path
+from pathlib import Path
 from utils.log import Log
 
 __all__ = [
@@ -8,11 +9,13 @@ __all__ = [
 
 
 class Config_Reader:
+    path = Path(__file__).parent / '../config.ini'
+
     def __init__(self):
         self.cr = Config_Parser(interpolation=Config_Reader.Env_Interpolation())
 
     def read(self):
-        self.cr.read('config.ini')
+        self.cr.read(self.path.resolve())
 
         self.title = self.cr.get('info', 'title')
         self.description = self.cr.get('info', 'description')
@@ -41,7 +44,7 @@ class Config_Reader:
         self.cr.set('elasticsearch', 'endpoint', db.es_endpoint)
         self.cr.set('elasticsearch', 'timeout', db.es_timeout)
 
-        with open('config.ini', 'w') as f:
+        with self.path.open('w') as f:
             self.cr.write(f)
 
     class Env_Interpolation(Basic_Interpolation):

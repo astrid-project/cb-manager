@@ -1,4 +1,5 @@
 from lib.http import  HTTP_Method
+from pathlib import Path
 from types import FunctionType as Function_Type
 from utils.sequence import wrap
 from utils.string import format
@@ -35,7 +36,8 @@ def docstring(**kwrd_params):
             if not callable(mth):
                 setattr(self, f'on_{method}', copy_func(base_mth, f'on_{method}'))
                 mth = getattr(self, f'on_{method}', None)
-            with open(f'./docstring/{mode}/{method}.docstring', 'r') as file:
+            path = Path(__file__).parent / f'../docstring/{mode}/{method}.docstring'
+            with path.open('r') as file:
                 mth.__doc__ = format(file.read(), self=self)
             if self.schema.__doc__ is not None:
                 setattr(self, 'tag', dict(name=self.doc.Index.name,

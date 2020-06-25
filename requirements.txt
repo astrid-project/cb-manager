@@ -16,6 +16,7 @@ pyyaml>=5.0
 requests
 swagger-ui-py
 toolz
+tox
 verboselogs
 waitress
 werkzeug

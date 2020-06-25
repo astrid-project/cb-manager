@@ -10,10 +10,8 @@ from invoke import task
 ROOT = os.path.dirname(__file__)
 
 CLEAN_PATTERNS = [
-    'build',
-    'dist',
     'cover',
-    'docs/_build',
+    'docs/.build',
     '**/*.pyc',
     '.tox',
     '**/__pycache__',
@@ -85,16 +83,8 @@ def deps(ctx):
     '''Install or update development dependencies'''
     header(deps.__doc__)
     with ctx.cd(ROOT):
-        ctx.run('pip install -r requirements.txt -r requirements/doc.pip',
+        ctx.run('pip install -r requirements.txt -r docs/requirements.txt r test/requirements.pip',
                 pty=True)
-
-
-@task
-def demo(ctx):
-    '''Run the demo'''
-    header(demo.__doc__)
-    with ctx.cd(ROOT):
-        ctx.run('python examples/todo.py')
 
 
 @task
@@ -181,30 +171,7 @@ def doc(ctx):
         ctx.run('make html', pty=True)
 
 
-@task
-def assets(ctx):
-    '''Fetch web assets'''
-    header(assets.__doc__)
-    with ctx.cd(ROOT):
-        ctx.run('npm install')
-        ctx.run('mkdir -p flask_restplus/static')
-        ctx.run(
-            'cp node_modules/swagger-ui-dist/{swagger-ui*.{css,js}{,.map},favicon*.png,oauth2-redirect.html} flask_restplus/static')
-        # Until next release we need to install droid sans separately
-        ctx.run(
-            'cp node_modules/typeface-droid-sans/index.css flask_restplus/static/droid-sans.css')
-        ctx.run('cp -R node_modules/typeface-droid-sans/files flask_restplus/static/')
-
-
-@task
-def dist(ctx):
-    '''Package for distribution'''
-    header(dist.__doc__)
-    with ctx.cd(ROOT):
-        ctx.run('python setup.py bdist_wheel', pty=True)
-
-
-@task(clean, deps, test, doc, qa, assets, dist, default=True)
+@task(clean, deps, test, doc, qa, default=True)
 def all(ctx):
     '''Run tests, reports and packaging'''
     pass

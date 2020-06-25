@@ -2,6 +2,7 @@ from apispec import APISpec as API_Spec
 from apispec.ext.marshmallow import MarshmallowPlugin as Marshmallow_Plugin
 from falcon_apispec import FalconPlugin as Falcon_Plugin
 from json import dumps
+from pathlib import Path
 from resource import tags as rc_tags
 from utils.string import is_str
 
@@ -20,9 +21,11 @@ class Spec:
         return self.obj
 
     def write(self):
-        with open('./swagger/schema.yaml', 'w') as file:
+        path = Path(__file__).parent / '../swagger/schema.yaml'
+        with path.open('w') as file:
             file.write(self.obj.to_yaml())
-        with open('./swagger/schema.json', 'w') as file:
+        path = Path(__file__).parent / '../swagger/schema.json'
+        with path.open('w') as file:
             file.write(dumps(self.obj.to_dict(), indent=2))
 
     @staticmethod
