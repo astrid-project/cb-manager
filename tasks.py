@@ -70,7 +70,7 @@ def build_args(*args):
 
 @task
 def clean(ctx):
-    '''Cleanup all build artifacts'''
+    '''Clean-up all build artifacts'''
     header(clean.__doc__)
     with ctx.cd(ROOT):
         for pattern in CLEAN_PATTERNS:
@@ -83,7 +83,10 @@ def deps(ctx):
     '''Install or update development dependencies'''
     header(deps.__doc__)
     with ctx.cd(ROOT):
-        ctx.run('pip install -r requirements.txt -r docs/requirements.txt r test/requirements.pip',
+        ctx.run("""pip3 install -r requirements.txt
+                                -r docs/requirements.txt
+                                -r test/requirements.txt
+                                -r dev/requirements.txt""",
                 pty=True)
 
 
@@ -126,8 +129,8 @@ def cover(ctx, html=False):
     header(cover.__doc__)
     extra = '--cov-report html' if html else ''
     with ctx.cd(ROOT):
-        ctx.run(
-            'pytest --benchmark-skip --cov . --cov-report term {0}'.format(extra), pty=True)
+        ctx.run('pytest --benchmark-skip --cov . --cov-report term {0}'.format(extra),
+                pty=True)
 
 
 @task
@@ -151,7 +154,7 @@ def qa(ctx):
             success('No linter errors')
         info('Ensure PyPI can render README and CHANGELOG')
         readme_results = ctx.run(
-            'python setup.py check -r -s', pty=True, warn=True, hide=True)
+            'python3 setup.py check -r -s', pty=True, warn=True, hide=True)
         if readme_results.failed:
             print(readme_results.stdout)
             error('README and/or CHANGELOG is not renderable by PyPI')

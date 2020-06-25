@@ -23,3 +23,4 @@ python:
     - requirements: docs/requirements.txt
     - requirements: requirements.txt
     - requirements: test/requirements.txt
+    - requirements: dev/requirements.txt

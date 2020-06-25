@@ -1,5 +1,4 @@
 apispec
-bandit
 colorama
 coloredlogs
 dicttoxml
@@ -7,17 +6,13 @@ elasticsearch-dsl>=7.0.0
 falcon
 falcon-apispec
 falcon-auth
-invoke
 marshmallow
 msgpack
 pint
-pycodestyle
-pydocstyle
 pyyaml>=5.0
 requests
 swagger-ui-py
 toolz
-tox
 verboselogs
 waitress
 werkzeug

@@ -10,6 +10,7 @@
 			"Expat",
 			"Kubernetes",
 			"MSGPACK",
+			"Markup",
 			"RDBMS",
 			"Readonly",
 			"TOCs",
@@ -21,6 +22,7 @@
 			"chdir",
 			"cmds",
 			"codeclimate",
+			"cprofile",
 			"cubebeat",
 			"datetime",
 			"dicttoxml",
@@ -40,7 +42,10 @@
 			"lcp",
 			"lcps",
 			"ldap",
+			"libbeat",
+			"maxdepth",
 			"metricbeat",
+			"mkdocs",
 			"nprobe",
 			"pagenav",
 			"pcap",
@@ -51,6 +56,7 @@
 			"psutil",
 			"pycodestyle",
 			"pydocstyle",
+			"pytest",
 			"quantulum",
 			"rbac",
 			"resp",
@@ -58,6 +64,7 @@
 			"strftime",
 			"strptime",
 			"synflood",
+			"timeout",
 			"toctree",
 			"toolz",
 			"unprocessable",
@@ -71,6 +78,9 @@
 		"editor.wrappingIndent": "deepIndent",
 		"files.insertFinalNewline": true,
 		"workbench.colorTheme": "Abyss",
-		"workbench.editor.tabSizing": "shrink"
+		"workbench.editor.tabSizing": "shrink",
+		"restructuredtext.builtDocumentationPath": "docs/.build/html",
+		"restructuredtext.confPath": "docs/conf.py",
+		"restructuredtext.experimental": true
 	}
 }
