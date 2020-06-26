@@ -9,7 +9,7 @@ __all__ = [
 ]
 
 
-def docstring(**kwrd_params):
+def docstring(ext='docstring', methods=[HTTP_Method.GET, HTTP_Method.POST, HTTP_Method.PUT, HTTP_Method.DELETE]):
     """Generate automatic docstring for the class with a decorator.
 
     :returns: decorator
@@ -25,7 +25,7 @@ def docstring(**kwrd_params):
         return Function_Type(func.__code__, func.__globals__, name or func.__name__,
                              func.__defaults__, func.__closure__)
 
-    def decorator(self, ext='docstring', methods=[HTTP_Method.GET, HTTP_Method.POST, HTTP_Method.PUT, HTTP_Method.DELETE]):
+    def decorator(self):
         if self.__name__.endswith('Selected_Resource'):
             mode = 'selected'
         else:

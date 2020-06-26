@@ -1,5 +1,7 @@
 Delete {self.names} filtered by the query in the request body.
+
 ---
+
 summary: <
   {self.name!c} Delete (Multiple).
 description: Delete {self.names} filtered by the query in the request body.
