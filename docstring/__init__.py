@@ -1,4 +1,4 @@
-from lib.http import  HTTP_Method
+from lib.http import HTTP_Method
 from pathlib import Path
 from types import FunctionType as Function_Type
 from utils.sequence import wrap
@@ -25,7 +25,7 @@ def docstring(**kwrd_params):
         return Function_Type(func.__code__, func.__globals__, name or func.__name__,
                              func.__defaults__, func.__closure__)
 
-    def decorator(self, methods=[HTTP_Method.GET, HTTP_Method.POST, HTTP_Method.PUT, HTTP_Method.DELETE]):
+    def decorator(self, ext='docstring', methods=[HTTP_Method.GET, HTTP_Method.POST, HTTP_Method.PUT, HTTP_Method.DELETE]):
         if self.__name__.endswith('Selected_Resource'):
             mode = 'selected'
         else:
@@ -36,7 +36,7 @@ def docstring(**kwrd_params):
             if not callable(mth):
                 setattr(self, f'on_{method}', copy_func(base_mth, f'on_{method}'))
                 mth = getattr(self, f'on_{method}', None)
-            path = Path(__file__).parent / f'../docstring/{mode}/{method}.docstring'
+            path = Path(__file__).parent / f'../docstring/{mode}/{method}.{ext}'
             with path.open('r') as file:
                 mth.__doc__ = format(file.read(), self=self)
             if self.schema.__doc__ is not None:

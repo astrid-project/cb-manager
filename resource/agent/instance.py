@@ -12,7 +12,7 @@ __all__ = [
 ]
 
 
-@docstring()
+@docstring(ext='yaml')
 class Agent_Instance_Resource(Base_Resource):
     doc = Agent_Instance_Document
     name = 'agent instance'
@@ -23,6 +23,6 @@ class Agent_Instance_Resource(Base_Resource):
     ignore_fields = ['operations']
 
 
-@docstring()
+@docstring(ext='yaml')
 class Agent_Instance_Selected_Resource(Agent_Instance_Resource):
     routes = '/instance/agent/{id}'

@@ -6,7 +6,7 @@ __all__ = [
 ]
 
 
-class __Formatter(String_Formatter):
+class Formatter(String_Formatter):
     def convert_field(self, value, conversion):
         if 'c' == conversion:
             return value.capitalize()
@@ -14,7 +14,7 @@ class __Formatter(String_Formatter):
             return super().convert_field(value, conversion)
 
 
-format = __Formatter().format
+format = Formatter().format
 
 
 def is_str(obj):

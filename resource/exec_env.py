@@ -10,7 +10,7 @@ __all__ = [
 ]
 
 
-@docstring()
+@docstring(ext='yaml')
 class Exec_Env_Resource(Base_Resource):
     doc = Exec_Env_Document
     name =  'execution environment'
@@ -19,12 +19,12 @@ class Exec_Env_Resource(Base_Resource):
     schema = Exec_Env_Schema
 
 
-@docstring()
+@docstring(ext='yaml')
 class Exec_Env_Selected_Resource(Exec_Env_Resource):
     routes = '/exec-env/{id}'
 
 
-@docstring()
+@docstring(ext='yaml')
 class Exec_Env_Type_Resource(Base_Resource):
     doc = Exec_Env_Type_Document
     name = 'execution environment type'
@@ -33,6 +33,6 @@ class Exec_Env_Type_Resource(Base_Resource):
     schema = Exec_Env_Type_Schema
 
 
-@docstring()
+@docstring(ext='yaml')
 class Exec_Env_Type_Selected_Resource(Exec_Env_Type_Resource):
     routes = '/exec-env-type/{id}'

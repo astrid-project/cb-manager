@@ -44,7 +44,7 @@ def iterate(source, *keys):
     """Iterate a nested dict based on list of keys
 
     :param source: nested dict
-    :param *keys: list of keys
+    :param keys: list of keys
     :returns: value
     """
     d = source

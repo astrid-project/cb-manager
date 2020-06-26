@@ -12,7 +12,7 @@ __all__ = [
 ]
 
 
-@docstring()
+@docstring(ext='yaml')
 class eBPF_Program_Instance_Resource(Base_Resource):
     doc = eBPF_Program_Instance_Document
     name = 'eBPF program'
@@ -23,6 +23,6 @@ class eBPF_Program_Instance_Resource(Base_Resource):
     ignore_fields = ['parameters']
 
 
-@docstring()
+@docstring(ext='yaml')
 class eBPF_Program_Instance_Selected_Resource(eBPF_Program_Instance_Resource):
     routes = '/instance/ebpf-program/{id}'

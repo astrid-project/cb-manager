@@ -10,7 +10,7 @@ __all__ = [
 ]
 
 
-@docstring()
+@docstring(ext='yaml')
 class Connection_Resource(Base_Resource):
     doc = Connection_Document
     name = 'connection'
@@ -19,6 +19,6 @@ class Connection_Resource(Base_Resource):
     schema = Connection_Schema
 
 
-@docstring()
+@docstring(ext='yaml')
 class Connection_Selected_Resource(Connection_Resource):
     routes = '/connection/{id}'

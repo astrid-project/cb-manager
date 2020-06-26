@@ -29,6 +29,10 @@ Context Broker Manager
     :target: https://pyup.io/repos/github/astrid-project/cb-manager/
     :alt: PyUP
 
+.. image:: https://pyup.io/repos/github/astrid-project/cb-manager/python-3-shield.svg
+     :target: https://pyup.io/repos/github/astrid-project/cb-manager/
+     :alt: Python 3
+
 
 APIs to interact with the ``Context Broker``'s database. Through a |REST| Interface, it exposes data and events stored
 in the internal storage system in a structured way. It provides uniform access to the capabilities of monitoring agents.
@@ -474,100 +478,7 @@ python3 main.py -h
 ```
 
 
-.. glossary::
-
-  ACL
-    Access Control Lis
-
-  API
-    Application Program Interface
-
-  BA
-    Basic Authentication
-
-  BPF
-    Berkeley Packet Filter
-
-  CB
-    Context Broker
-
-  CRUD
-    Create - Read - Update - Delete
-
-  DB
-    Database
-
-  eBPF
-    extended BPF
-
-  ELK
-    Elastic - LogStash - Kibana
-
-  Exec_Env
-    Execution Environment
-
-  gRPC
-    Google RPC
-
-  HOBA
-    HTTP Origin-Bound Authentication
-
-  HTTP
-    Hyper Text Transfer Protocol
-
-  ID
-    Identification
-
-  IP
-    Internet Protocol
-
-  JSON
-    Java Object Notation
-
-  LCP
-    Local Control Plane
-
-  LDAP
-    Lightweight Directory Access Protocol
-
-  RBAC
-    Role-Based Access Control
-
-  regex
-    regular expression
-
-  REST
-    Representational State Transfer
-
-  RFC
-    Request For Comments
-
-  RPC
-    Remote Procedure Call
-
-  SCM
-    Security Context Model
-
-  SLA
-    Service Level Agreements
-
-  SQL
-    Structured Query Language
-
-  TCP
-    Transmission Control Protocol
-
-  TTL
-    Time To Live
-
-  VNF
-    Virtual Network Function
-
-  YANG
-    Yet Another Next Generation
-
-  YAML
-    YAML Ain't Markup Language
+.. include:: docs/glossary.rst
 
 
 .. _references:
@@ -609,12 +520,14 @@ References
 .. |APIs| replace:: :abbr:`APIs (Application Program Interfaces)`
 .. |ASTRID| replace:: :abbr:`ASTRID (AddreSsing ThReats for virtualIseD services)`
 .. |CB| replace:: :abbr:`CB (Context Broker)`
+.. |CII| replace:: :abbr:`CII (Core Infrastructure Initiative)`
 .. |DB| replace:: :abbr:`DB (DataBase)`
 .. |eBPF| replace:: :abbr:`eBPF (extended Berkeley Packet Filter)`
 .. |HTTP| replace:: :abbr:`HTTP (HyperText Transfer Protocol)`
 .. |IP| replace:: :abbr:`IP (Internet Protocol)`
 .. |JSON| replace:: :abbr:`JSON (JavaScript Object Notation)`
 .. |LCP| replace:: :abbr:`LCP (Local Control Plane)`
+.. |MIT| replace:: :abbr:`MIT (Massachusetts Institute of Technology)`
 .. |REST| replace:: :abbr:`REST (Representational State Transfer)`
 .. |TCP| replace:: :abbr:`TCP (Transmission Control Protocol)`
 .. |TTL| replace:: :abbr:`TTL (Time To Live)`

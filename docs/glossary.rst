@@ -3,26 +3,101 @@
 Glossary
 --------
 
+    ACL
+        Access Control Lis
+
+    API
+        Application Program Interface
+
+    BA
+        Basic Authentication
+
+    BPF
+        Berkeley Packet Filter
+
+    CB
+        Context Broker
+
+    CII
+        Core Infrastructure Initiative
+
+    CRUD
+        Create - Read - Update - Delete
+
     DB
-        DataBase
+        Database
 
     eBPF
-        extended Berkeley Packet Filter
+        extended BPF
+
+    ELK
+        Elastic - LogStash - Kibana
+
+    Exec_Env
+        Execution Environment
+
+    gRPC
+        Google RPC
+
+    HOBA
+        HTTP Origin-Bound Authentication
 
     HTTP
-        HyperText Transfer Protocol
+        Hyper Text Transfer Protocol
+
+    ID
+        Identification
+
+    IP
+        Internet Protocol
 
     JSON
-        JavaScript Object Notation
+        Java Object Notation
 
     LCP
         Local Control Plane
 
-    NDA
-        Non-Disclosure Agreement
+    LDAP
+        Lightweight Directory Access Protocol
 
-    RDBMS
-        Relational Database Management System
+    MIT
+        Massachusetts Institute of Technology
+
+    RBAC
+        Role-Based Access Control
+
+    regex
+        regular expression
 
     REST
         Representational State Transfer
+
+      RFC
+        Request For Comments
+
+    RPC
+        Remote Procedure Call
+
+    SCM
+        Security Context Model
+
+    SLA
+        Service Level Agreements
+
+    SQL
+        Structured Query Language
+
+    TCP
+        Transmission Control Protocol
+
+    TTL
+        Time To Live
+
+    VNF
+        Virtual Network Function
+
+    YANG
+        Yet Another Next Generation
+
+    YAML
+        YAML Ain't Markup languages

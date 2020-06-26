@@ -3,21 +3,21 @@
 Welcome to CB-Manager documentation!
 ====================================
 
-CB-Manager provides various |APIs| to interact with the Context Broker's database.
+|CB|-Manager provides various |APIs| to interact with the Context Broker's database.
 Through a |REST| Interface, it exposes data and events stored in the internal storage system in a structured way.
 It provides uniform access to the capabilities of monitoring agents.
 
 Compatibility
 =============
 
-cb-manager requires Python 3.5+.
+|CB|-Manager requires Python 3.5+.
 
 
 Installation
 ============
 
 
-You can install cb-manager with pip:
+You can install |CB|-Manager with pip:
 
 .. code-block:: console
 
@@ -33,7 +33,7 @@ or with easy_install:
 Documentation
 =============
 
-This part of the documentation will show you how to get started in using CB-Manager.
+This part of the documentation will show you how to get started in using |CB|-Manager.
 
 .. toctree::
    :maxdepth: 2
@@ -83,4 +83,5 @@ Indices and tables
 
 
 .. |APIs| replace:: :abbr:`APIs (Application Program Interfaces)`
+.. |CB| replace:: :abbr:`CB (Context Broker)`
 .. |REST| replace:: :abbr:`REST (Representational State Transfer)`

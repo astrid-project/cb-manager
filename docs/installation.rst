@@ -3,15 +3,14 @@
 Installation
 ============
 
-Install CB-Manager with ``pip``:
+Install |CB|-Manager with ``pip``:
 
 .. code-block:: console
 
     pip install cb-manager
 
 
-The development version can be downloaded from
-`GitHub <https://github.com/astrid-project/cb-manager>`_.
+The development version can be downloaded from `GitHub <https://github.com/astrid-project/cb-manager>`_.
 
 .. code-block:: console
 
@@ -20,5 +19,8 @@ The development version can be downloaded from
     pip install -r requirements.txt
 
 
-CB-Manager requires Python version 3.5+.
+|CB|-Manager requires Python version 3.5+.
 It's also working with PyPy and PyPy3.
+
+
+.. |CB| replace:: :abbr:`CB (Context Broker)`

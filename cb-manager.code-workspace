@@ -17,6 +17,9 @@
 			"abbr",
 			"apispec",
 			"astrid",
+			"autoclass",
+			"autodecorator",
+			"autofunction",
 			"autoprogram",
 			"certdir",
 			"chdir",
@@ -24,7 +27,9 @@
 			"codeclimate",
 			"cprofile",
 			"cubebeat",
+			"currentmodule",
 			"datetime",
+			"dict",
 			"dicttoxml",
 			"dind",
 			"envs",
@@ -62,6 +67,7 @@
 			"resp",
 			"ruamel",
 			"setuptools",
+			"spec",
 			"strftime",
 			"strptime",
 			"synflood",
@@ -78,10 +84,10 @@
 		"editor.wordWrap": "on",
 		"editor.wrappingIndent": "deepIndent",
 		"files.insertFinalNewline": true,
-		"workbench.colorTheme": "Abyss",
 		"workbench.editor.tabSizing": "shrink",
 		"restructuredtext.builtDocumentationPath": "docs/.build/html",
 		"restructuredtext.confPath": "docs/conf.py",
-		"restructuredtext.experimental": true
+		"restructuredtext.experimental": true,
+		"workbench.colorTheme": "Electron"
 	}
 }

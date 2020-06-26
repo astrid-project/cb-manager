@@ -10,7 +10,7 @@ __all__ = [
     'Agent_Catalog_Selected_Resource'
 ]
 
-@docstring()
+@docstring(ext='yaml')
 class Agent_Catalog_Resource(Base_Resource):
     doc = Agent_Catalog_Document
     name = 'agent catalog'
@@ -19,6 +19,6 @@ class Agent_Catalog_Resource(Base_Resource):
     schema = Agent_Catalog_Schema
 
 
-@docstring()
+@docstring(ext='yaml')
 class Agent_Catalog_Selected_Resource(Agent_Catalog_Resource):
     routes = '/catalog/agent/{id}'

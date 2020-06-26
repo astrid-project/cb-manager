@@ -10,7 +10,7 @@ __all__ = [
     'Network_Link_Type_Resource', 'Network_Link_Type_Selected_Resource'
 ]
 
-@docstring()
+@docstring(ext='yaml')
 class Network_Link_Resource(Base_Resource):
     doc = Network_Link_Document
     name = 'network link'
@@ -19,12 +19,12 @@ class Network_Link_Resource(Base_Resource):
     schema = Network_Link_Schema
 
 
-@docstring()
+@docstring(ext='yaml')
 class Network_Link_Selected_Resource(Network_Link_Resource):
     routes = '/network-link/{id}'
 
 
-@docstring()
+@docstring(ext='yaml')
 class Network_Link_Type_Resource(Base_Resource):
     doc = Network_Link_Type_Document
     name = 'network link type'
@@ -33,6 +33,6 @@ class Network_Link_Type_Resource(Base_Resource):
     schema = Network_Link_Type_Schema
 
 
-@docstring()
+@docstring(ext='yaml')
 class Network_Link_Type_Selected_Resource(Network_Link_Type_Resource):
     routes = '/type/network-link/{id}'

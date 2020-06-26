@@ -10,7 +10,7 @@ __all__ = [
 ]
 
 
-@docstring()
+@docstring(ext='yaml')
 class Data_Resource(Base_Resource):
     doc = Data_Document
     name = 'data'
@@ -19,6 +19,6 @@ class Data_Resource(Base_Resource):
     schema = Data_Schema
 
 
-@docstring()
+@docstring(ext='yaml')
 class Data_Selected_Resource(Data_Resource):
     routes = '/data/{id}'
