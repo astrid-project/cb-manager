@@ -1,12 +1,42 @@
 Context Broker Manager
 ======================
 
+.. image:: https://img.shields.io/github/license/astrid-project/cb-manager
+    :target: https://github.com/astrid-project/cb-manager/-/blob/master/LICENSE
+    :alt: MIT License
+
+.. image:: https://img.shields.io/github/languages/code-size/astrid-project/cb-manager?color=red&logo=github
+    :target: https://github.com/astrid-project/cb-manager
+    :alt: GitHub Code Size
+
+.. image:: https://img.shields.io/github/repo-size/astrid-project/cb-manager?color=red&logo=github
+    :target: https://github.com/astrid-project/cb-manager
+    :alt: GitHub Repository Size
+
+.. image:: https://img.shields.io/github/v/tag/astrid-project/cb-manager?label=release&logo=github
+    :target: https://github.com/astrid-project/cb-manager/releases
+    :alt: GitJHub Release
+
+.. image:: https://img.shields.io/cii/summary/3991
+    :target: https://bestpractices.coreinfrastructure.org/en/projects/3991
+    :alt: CII Progress
+
+.. image:: https://readthedocs.org/projects/cb-manager/badge/?version=latest
+    :target: https://cb-manager.readthedocs.io
+    :alt: Readthedocs
+
+.. image:: https://pyup.io/repos/github/astrid-project/cb-manager/shield.svg
+    :target: https://pyup.io/repos/github/astrid-project/cb-manager/
+    :alt: PyUP
+
+
 APIs to interact with the ``Context Broker``'s database. Through a |REST| Interface, it exposes data and events stored
 in the internal storage system in a structured way. It provides uniform access to the capabilities of monitoring agents.
 
 .. toctree::
    :maxdepth: 2
    :numbered:
+
 
 Data Model
 ----------
@@ -443,6 +473,7 @@ Display help
 python3 main.py -h
 ```
 
+
 .. glossary::
 
   ACL
@@ -526,6 +557,9 @@ python3 main.py -h
   TCP
     Transmission Control Protocol
 
+  TTL
+    Time To Live
+
   VNF
     Virtual Network Function
 
@@ -574,6 +608,7 @@ References
 .. |API| replace:: :abbr:`APIs (Application Program Interface)`
 .. |APIs| replace:: :abbr:`APIs (Application Program Interfaces)`
 .. |ASTRID| replace:: :abbr:`ASTRID (AddreSsing ThReats for virtualIseD services)`
+.. |CB| replace:: :abbr:`CB (Context Broker)`
 .. |DB| replace:: :abbr:`DB (DataBase)`
 .. |eBPF| replace:: :abbr:`eBPF (extended Berkeley Packet Filter)`
 .. |HTTP| replace:: :abbr:`HTTP (HyperText Transfer Protocol)`
@@ -582,4 +617,5 @@ References
 .. |LCP| replace:: :abbr:`LCP (Local Control Plane)`
 .. |REST| replace:: :abbr:`REST (Representational State Transfer)`
 .. |TCP| replace:: :abbr:`TCP (Transmission Control Protocol)`
+.. |TTL| replace:: :abbr:`TTL (Time To Live)`
 .. |YAML| replace:: :abbr:`YAML (YAML Ain't Markup Language )`

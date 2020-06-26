@@ -1,6 +1,20 @@
 Context Broker Manager
 ======================
 
+[![MIT License](https://img.shields.io/github/license/astrid-project/cb-manager)](https://github.com/astrid-project/cb-manager/-/blob/master/LICENSE)
+
+[![GitHub Code Size](https://img.shields.io/github/languages/code-size/astrid-project/cb-manager?color=red&logo=github)](https://github.com/astrid-project/cb-manager)
+
+[![GitHub Repository Size](https://img.shields.io/github/repo-size/astrid-project/cb-manager?color=red&logo=github)](https://github.com/astrid-project/cb-manager)
+
+[![GitJHub Release](https://img.shields.io/github/v/tag/astrid-project/cb-manager?label=release&logo=github)](https://github.com/astrid-project/cb-manager/releases)
+
+[![CII Progress](https://img.shields.io/cii/summary/3991)](https://bestpractices.coreinfrastructure.org/en/projects/3991)
+
+[![Readthedocs](https://readthedocs.org/projects/cb-manager/badge/?version=latest)](https://cb-manager.readthedocs.io)
+
+[![PyUP](https://pyup.io/repos/github/astrid-project/cb-manager/shield.svg)](https://pyup.io/repos/github/astrid-project/cb-manager/)
+
 APIs to interact with the `Context Broker`\'s database. Through a
 `REST (Representational State Transfer)`{.interpreted-text role="abbr"}
 Interface, it exposes data and events stored in the internal storage
@@ -934,7 +948,7 @@ Usage
 
 `` `bash python3 main.py -h ``\`
 
-:: {.glossary}
+::: {.glossary}
 
 ACL
 
@@ -1043,6 +1057,10 @@ SQL
 TCP
 
 :   Transmission Control Protocol
+
+TTL
+
+:   Time To Live
 
 VNF
 
