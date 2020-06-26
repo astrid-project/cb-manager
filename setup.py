@@ -80,7 +80,7 @@ setup(
     dev_require=dev_require,
     license='MIT',
     zip_safe=False,
-    keywords='cb-manager rest api swagger openapi',
+    keywords='context-broker ebpf monitoring-agents database elasticsearch logstash kafka python java manager programmability agents cb-manager api openapi rest',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Programming Language :: Python',
