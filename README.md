@@ -934,7 +934,7 @@ Usage
 
 `` `bash python3 main.py -h ``\`
 
-::: {.glossary}
+:: {.glossary}
 
 ACL
 
