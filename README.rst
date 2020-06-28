@@ -1,6 +1,7 @@
 Context Broker Manager
 ======================
 
+
 .. image:: https://img.shields.io/github/license/astrid-project/cb-manager
     :target: https://github.com/astrid-project/cb-manager/-/blob/master/LICENSE
     :alt: MIT License
@@ -31,8 +32,11 @@ Context Broker Manager
 
 .. image:: https://pyup.io/repos/github/astrid-project/cb-manager/python-3-shield.svg
      :target: https://pyup.io/repos/github/astrid-project/cb-manager/
-     :alt: Python 3
+     :alt: Python 3991
 
+.. image:: https://travis-ci.org/astrid-project/cp-manager.svg?branch=master
+    :target: https://travis-ci.org/astrid-project/cb-manager
+    :alt: Travis CI
 
 APIs to interact with the ``Context Broker``'s database. Through a |REST| Interface, it exposes data and events stored
 in the internal storage system in a structured way. It provides uniform access to the capabilities of monitoring agents.

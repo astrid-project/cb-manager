@@ -8,6 +8,7 @@ import re
 import sys
 
 from about import description, version
+from readme_renderer.rst import render
 from setuptools import setup, find_packages
 
 RE_REQUIREMENT = re.compile(r'^\s*-r\s*(?P<filename>.*)$')
@@ -26,6 +27,13 @@ PYPI_RST_FILTERS = (
     (r':commit:`(.+?)`', r'`#\1 <https://github.com/astrid-project/cb-manager/commit/\1>`_'),
     # Drop unrecognised currentmodule
     (r'\.\. currentmodule:: .*', ''),
+
+    (r'\.\. image:: .*', ''),
+    (r'\.\. include:: .*', ''),
+    (r':target: .*', ''),
+    (r':alt: .*', ''),
+    (r'\.\. \|.*?\| .*', ''),
+    (r'\|([^ \n].*?)\|', r' \1 ')
 )
 
 
@@ -63,24 +71,48 @@ long_description = '\n'.join((
 install_require = pip('.')
 docs_require = pip('docs') + install_require
 tests_require = pip('tests') + install_require
-dev_require = pip('dev') + docs_require + tests_require
+dev_require = pip('dev')
+
+print(long_description)
+print(render(long_description))
 
 setup(
     name='cb-manager',
+    packages=find_packages(exclude=['test', 'test.*']),
+
     version=version,
+    license='MIT',
     description=description,
     long_description=long_description,
-    url='https://github.com/astrid-project/cb-manager',
+
     author='Alex Carrega',
     author_email='alessndro.carrega@cnit.it',
-    packages=find_packages(exclude=['test', 'test.*']),
-    include_package_data=True,
+
+    url='https://github.com/astrid-project/cb-manager',
+    download_url=f'https://github.com/astrid-project/cb-manager/archive/{version}.zip',
+
     install_requires=install_require,
-    tests_require=tests_require,
-    dev_require=dev_require,
-    license='MIT',
-    zip_safe=False,
-    keywords='context-broker ebpf monitoring-agents database elasticsearch logstash kafka python java manager programmability agents cb-manager api openapi rest',
+    tests_require=tests_require + dev_require,
+
+    keywords=[
+        'context-broker',
+        'ebpf',
+        'monitoring-agents',
+        'database',
+        'elasticsearch',
+        'logstash',
+        'kafka',
+        'python',
+        'java',
+        'manager',
+        'programmability',
+        'agents',
+        'cb-manager',
+        'api',
+        'openapi',
+        'rest'
+    ],
+
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Programming Language :: Python',
@@ -95,5 +127,5 @@ setup(
         'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: MIT License',
-    ],
+    ]
 )

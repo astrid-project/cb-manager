@@ -31,6 +31,7 @@ master_doc = 'index'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx_copybutton',
     'sphinx_issues',
     'sphinx.ext.autodoc',
     'sphinx.ext.todo',

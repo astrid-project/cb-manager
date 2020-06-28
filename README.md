@@ -1,5 +1,28 @@
-Context Broker Manager
-======================
+---
+title: Context Broker Manager
+---
+
+-   [Data Model](#data-model)
+-   [Methods](#methods)
+    -   [Exec\_Env](#exec_env)
+        -   [Exec\_Env Type](#exec_env-type)
+    -   [Network link](#network-link)
+        -   [Network link Type](#network-link-type)
+    -   [Connection](#connection)
+    -   [Agent](#agent)
+        -   [Catalog](#catalog)
+        -   [Instance](#instance)
+    -   [eBPF Program](#ebpf-program)
+        -   [Catalog](#catalog-1)
+        -   [Instance](#instance-1)
+    -   [Data](#data)
+-   [Guide](#guide)
+-   [Installation](#installation)
+-   [Configuration](#configuration)
+-   [Usage](#usage)
+    -   [Display help](#display-help)
+-   [Glossary](#glossary)
+-   [References](#references)
 
 [![MIT License](https://img.shields.io/github/license/astrid-project/cb-manager)](https://github.com/astrid-project/cb-manager/-/blob/master/LICENSE)
 
@@ -15,6 +38,10 @@ Context Broker Manager
 
 [![PyUP](https://pyup.io/repos/github/astrid-project/cb-manager/shield.svg)](https://pyup.io/repos/github/astrid-project/cb-manager/)
 
+[![Python 3991](https://pyup.io/repos/github/astrid-project/cb-manager/python-3-shield.svg)](https://pyup.io/repos/github/astrid-project/cb-manager/)
+
+[![Travis CI](https://travis-ci.org/astrid-project/cp-manager.svg?branch=master)](https://travis-ci.org/astrid-project/cb-manager)
+
 APIs to interact with the `Context Broker`\'s database. Through a
 `REST (Representational State Transfer)`{.interpreted-text role="abbr"}
 Interface, it exposes data and events stored in the internal storage
@@ -25,7 +52,7 @@ capabilities of monitoring agents.
 :::
 
 Data Model
-----------
+==========
 
 ![image](data_model.png)
 
@@ -126,9 +153,10 @@ data model allows the customization with the integration of additional
 entities in very simple way.
 
 Methods
--------
+=======
 
-### Exec\_Env
+Exec\_Env
+---------
 
 +---------+---------------+-------------------------------------------+
 | `HTTP ( | Path          | Action                                    |
@@ -190,7 +218,7 @@ Methods
 |         |               |     request body.                         |
 +---------+---------------+-------------------------------------------+
 
-#### Exec\_Env Type
+### Exec\_Env Type
 
 +--------+-----------------+-------------------------------------------+
 | `HTTP  | Path            | Action                                    |
@@ -254,7 +282,8 @@ Methods
 |        |                 |     request body.                         |
 +--------+-----------------+-------------------------------------------+
 
-### Network link
+Network link
+------------
 
 +---------+----------------+-------------------------------------------+
 | `HTTP ( | Path           | Action                                    |
@@ -320,7 +349,7 @@ Methods
 |         |                |     request body.                         |
 +---------+----------------+-------------------------------------------+
 
-#### Network link Type
+### Network link Type
 
 +--------+------------------+------------------------------------------+
 | `HTTP  | Path             | Action                                   |
@@ -388,7 +417,8 @@ Methods
 |        |                  |     query in the request body.           |
 +--------+------------------+------------------------------------------+
 
-### Connection
+Connection
+----------
 
 +---------+----------------+-------------------------------------------+
 | `HTTP ( | Path           | Action                                    |
@@ -451,9 +481,10 @@ Methods
 |         |                |     request body.                         |
 +---------+----------------+-------------------------------------------+
 
-### Agent
+Agent
+-----
 
-#### Catalog
+### Catalog
 
 +---------+-----------------+------------------------------------------+
 | `HTTP ( | Path            | Action                                   |
@@ -519,7 +550,7 @@ Methods
 |         |                 |     query in the request body.           |
 +---------+-----------------+------------------------------------------+
 
-#### Instance
+### Instance
 
 +---------+-------------------+---------------------------------------+
 | `HTTP ( | Path              | Action                                |
@@ -585,9 +616,10 @@ Methods
 |         |                   |     the query in the request body.    |
 +---------+-------------------+---------------------------------------+
 
-### eBPF Program
+eBPF Program
+------------
 
-#### Catalog
+### Catalog
 
 +--------+-------------------+-----------------------------------------+
 | `HTTP  | Path              | Action                                  |
@@ -671,7 +703,7 @@ Methods
 |        |                   |     and the query in the request body.  |
 +--------+-------------------+-----------------------------------------+
 
-#### Instance
+### Instance
 
 +--------+---------------------+---------------------------------------+
 | `HTTP  | Path                | Action                                |
@@ -755,7 +787,8 @@ Methods
 |        |                     |     the query in the request body.    |
 +--------+---------------------+---------------------------------------+
 
-### Data
+Data
+----
 
 +---------+------------+----------------------------------------------+
 | `HTTP ( | Path       | Action                                       |
@@ -820,7 +853,7 @@ Methods
 +---------+------------+----------------------------------------------+
 
 Guide
------
+=====
 
 See the Swagger Schema ([\|YAML\|](api/swagger.yaml),
 [\|JSON\|](api/swagger.json)) and the relative **documentation**
@@ -830,7 +863,7 @@ endpoint `/api/doc </api/doc>`) more details about the
 endpoints and relative formats and requirements of request and response.
 
 Installation
-------------
+============
 
 1.  Prerequisite
     -   python (version \>= 3.5)
@@ -849,7 +882,7 @@ pip3 install -r requirements.txt
 ```
 
 Configuration
--------------
+=============
 
 The configurations are stored in the [config.ini](config.ini) file.
 
@@ -942,141 +975,153 @@ The configurations are stored in the [config.ini](config.ini) file.
 +---------+----------+------------+-----------------------------------+
 
 Usage
------
+=====
 
-### Display help
+Display help
+------------
 
 `` `bash python3 main.py -h ``\`
 
 ::: {.glossary}
-
-ACL
-
-:   Access Control Lis
-
-API
-
-:   Application Program Interface
-
-BA
-
-:   Basic Authentication
-
-BPF
-
-:   Berkeley Packet Filter
-
-CB
-
-:   Context Broker
-
-CRUD
-
-:   Create - Read - Update - Delete
-
-DB
-
-:   Database
-
-eBPF
-
-:   extended BPF
-
-ELK
-
-:   Elastic - LogStash - Kibana
-
-Exec\_Env
-
-:   Execution Environment
-
-gRPC
-
-:   Google RPC
-
-HOBA
-
-:   HTTP Origin-Bound Authentication
-
-HTTP
-
-:   Hyper Text Transfer Protocol
-
-ID
-
-:   Identification
-
-IP
-
-:   Internet Protocol
-
-JSON
-
-:   Java Object Notation
-
-LCP
-
-:   Local Control Plane
-
-LDAP
-
-:   Lightweight Directory Access Protocol
-
-RBAC
-
-:   Role-Based Access Control
-
-regex
-
-:   regular expression
-
-REST
-
-:   Representational State Transfer
-
-RFC
-
-:   Request For Comments
-
-RPC
-
-:   Remote Procedure Call
-
-SCM
-
-:   Security Context Model
-
-SLA
-
-:   Service Level Agreements
-
-SQL
-
-:   Structured Query Language
-
-TCP
-
-:   Transmission Control Protocol
-
-TTL
-
-:   Time To Live
-
-VNF
-
-:   Virtual Network Function
-
-YANG
-
-:   Yet Another Next Generation
-
-YAML
-
-:   YAML Ain\'t Markup Language
 :::
 
+Glossary
+========
+
+> ACL
+>
+> :   Access Control Lis
+>
+> API
+>
+> :   Application Program Interface
+>
+> BA
+>
+> :   Basic Authentication
+>
+> BPF
+>
+> :   Berkeley Packet Filter
+>
+> CB
+>
+> :   Context Broker
+>
+> CII
+>
+> :   Core Infrastructure Initiative
+>
+> CRUD
+>
+> :   Create - Read - Update - Delete
+>
+> DB
+>
+> :   Database
+>
+> eBPF
+>
+> :   extended BPF
+>
+> ELK
+>
+> :   Elastic - LogStash - Kibana
+>
+> Exec\_Env
+>
+> :   Execution Environment
+>
+> gRPC
+>
+> :   Google RPC
+>
+> HOBA
+>
+> :   HTTP Origin-Bound Authentication
+>
+> HTTP
+>
+> :   Hyper Text Transfer Protocol
+>
+> ID
+>
+> :   Identification
+>
+> IP
+>
+> :   Internet Protocol
+>
+> JSON
+>
+> :   Java Object Notation
+>
+> LCP
+>
+> :   Local Control Plane
+>
+> LDAP
+>
+> :   Lightweight Directory Access Protocol
+>
+> MIT
+>
+> :   Massachusetts Institute of Technology
+>
+> RBAC
+>
+> :   Role-Based Access Control
+>
+> regex
+>
+> :   regular expression
+>
+> REST
+>
+> :   Representational State Transfer
+>
+> RFC
+>
+> :   Request For Comments
+>
+> RPC
+>
+> :   Remote Procedure Call
+>
+> SCM
+>
+> :   Security Context Model
+>
+> SLA
+>
+> :   Service Level Agreements
+>
+> SQL
+>
+> :   Structured Query Language
+>
+> TCP
+>
+> :   Transmission Control Protocol
+>
+> TTL
+>
+> :   Time To Live
+>
+> VNF
+>
+> :   Virtual Network Function
+>
+> YANG
+>
+> :   Yet Another Next Generation
+>
+> YAML
+>
+> :   YAML Ain\'t Markup languages
+>
 References
-----------
+==========
 
 [^1]: In the dash-case (also referred as **hyphen-case** or
     **kebab-case**) format all the letters are lower-case, the
@@ -1110,3 +1155,11 @@ References
     elasticsearch](https://www.elastic.co/blog/managing-relations-inside-elasticsearch)
 
 [^9]: Stored in hashed sha256 version.
+
+
+<!-- saved from url=(0035)https://pandoc.org/demo/footer.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head><body><div id="footer">
+  © 2006-2007 <a href="http://johnmacfarlane.net/">John MacFarlane</a>
+</div>
+
+</body></html>
