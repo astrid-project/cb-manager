@@ -18,7 +18,7 @@ class Base_Schema(Schema):
         self.method = method
         self.check_unique_id = check_unique_id
 
-    def validate(self, data, id=None):
+    def validate(self, data, response_type=Ok_Response, id=None):
         try:
             if id is not None:
                 if is_list(data):
@@ -33,7 +33,7 @@ class Base_Schema(Schema):
                 msg = 'Same id present multiple times in the request.'
                 raise Validation_Error(dict(id=msg))
             self.load(data)
-            return Ok_Response(data), True
+            return response_type(data), True
         except Validation_Error as val_err:
             def __norm(block):
                 for field in block.keys():

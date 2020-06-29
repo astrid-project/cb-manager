@@ -90,7 +90,7 @@
   "paths": {
     "/catalog/agent/": {
       "delete": {
-        "summary": "Agent catalog Delete (Single).",
+        "summary": "< Agent catalog Delete (Single).",
         "description": "Delete the agent catalog with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -113,7 +113,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Agent catalog with the given `id` correctly deleted.",
+            "description": "< Agent catalog with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -134,12 +134,9 @@
             }
           },
           "404": {
-            "description": "Agent catalog with the given `id` and based on the request query not found.",
+            "description": "< Agent catalog with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -172,7 +169,7 @@
         }
       },
       "get": {
-        "summary": "Agent catalog Read (Single).",
+        "summary": "< Agent catalog Read (Single).",
         "description": "Get the agent catalog with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -195,7 +192,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agent catalog with the given `id` and filtered by the query in the request body.",
+            "description": "< Agent catalog with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -216,7 +213,7 @@
             }
           },
           "404": {
-            "description": "Agent catalog based on the request _query_ not found.",
+            "description": "< Agent catalog based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -248,7 +245,7 @@
         }
       },
       "post": {
-        "summary": "Agent catalog Create (Single).",
+        "summary": "< Agent catalog Create (Single).",
         "description": "Create a new agent catalog with the given `id`.",
         "parameters": [
           {
@@ -274,7 +271,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Agent catalog with the given `id` correctly created.",
+            "description": "< Agent catalog with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -330,7 +327,7 @@
         }
       },
       "put": {
-        "summary": "Agent catalog Update (Single).",
+        "summary": "< Agent catalog Update (Single).",
         "description": "Update the agent catalog with the given `id`.",
         "parameters": [
           {
@@ -356,7 +353,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agent catalog with the given `id` correctly updated.",
+            "description": "< Agent catalog with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -423,7 +420,7 @@
     },
     "/catalog/agent/{id}": {
       "delete": {
-        "summary": "Agent catalog Delete (Single).",
+        "summary": "< Agent catalog Delete (Single).",
         "description": "Delete the agent catalog with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -446,7 +443,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Agent catalog with the given `id` correctly deleted.",
+            "description": "< Agent catalog with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -467,12 +464,9 @@
             }
           },
           "404": {
-            "description": "Agent catalog with the given `id` and based on the request query not found.",
+            "description": "< Agent catalog with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -505,7 +499,7 @@
         }
       },
       "get": {
-        "summary": "Agent catalog Read (Single).",
+        "summary": "< Agent catalog Read (Single).",
         "description": "Get the agent catalog with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -528,7 +522,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agent catalog with the given `id` and filtered by the query in the request body.",
+            "description": "< Agent catalog with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -549,7 +543,7 @@
             }
           },
           "404": {
-            "description": "Agent catalog based on the request _query_ not found.",
+            "description": "< Agent catalog based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -581,7 +575,7 @@
         }
       },
       "post": {
-        "summary": "Agent catalog Create (Single).",
+        "summary": "< Agent catalog Create (Single).",
         "description": "Create a new agent catalog with the given `id`.",
         "parameters": [
           {
@@ -607,7 +601,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Agent catalog with the given `id` correctly created.",
+            "description": "< Agent catalog with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -663,7 +657,7 @@
         }
       },
       "put": {
-        "summary": "Agent catalog Update (Single).",
+        "summary": "< Agent catalog Update (Single).",
         "description": "Update the agent catalog with the given `id`.",
         "parameters": [
           {
@@ -689,7 +683,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agent catalog with the given `id` correctly updated.",
+            "description": "< Agent catalog with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -756,7 +750,7 @@
     },
     "/instance/agent/": {
       "delete": {
-        "summary": "Agent instance Delete (Single).",
+        "summary": "< Agent instance Delete (Single).",
         "description": "Delete the agent instance with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -779,7 +773,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Agent instance with the given `id` correctly deleted.",
+            "description": "< Agent instance with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -800,12 +794,9 @@
             }
           },
           "404": {
-            "description": "Agent instance with the given `id` and based on the request query not found.",
+            "description": "< Agent instance with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -838,7 +829,7 @@
         }
       },
       "get": {
-        "summary": "Agent instance Read (Single).",
+        "summary": "< Agent instance Read (Single).",
         "description": "Get the agent instance with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -861,7 +852,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agent instance with the given `id` and filtered by the query in the request body.",
+            "description": "< Agent instance with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -882,7 +873,7 @@
             }
           },
           "404": {
-            "description": "Agent instance based on the request _query_ not found.",
+            "description": "< Agent instance based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -914,7 +905,7 @@
         }
       },
       "post": {
-        "summary": "Agent instance Create (Single).",
+        "summary": "< Agent instance Create (Single).",
         "description": "Create a new agent instance with the given `id`.",
         "parameters": [
           {
@@ -940,7 +931,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Agent instance with the given `id` correctly created.",
+            "description": "< Agent instance with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -996,7 +987,7 @@
         }
       },
       "put": {
-        "summary": "Agent instance Update (Single).",
+        "summary": "< Agent instance Update (Single).",
         "description": "Update the agent instance with the given `id`.",
         "parameters": [
           {
@@ -1022,7 +1013,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agent instance with the given `id` correctly updated.",
+            "description": "< Agent instance with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -1089,7 +1080,7 @@
     },
     "/instance/agent/{id}": {
       "delete": {
-        "summary": "Agent instance Delete (Single).",
+        "summary": "< Agent instance Delete (Single).",
         "description": "Delete the agent instance with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -1112,7 +1103,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Agent instance with the given `id` correctly deleted.",
+            "description": "< Agent instance with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -1133,12 +1124,9 @@
             }
           },
           "404": {
-            "description": "Agent instance with the given `id` and based on the request query not found.",
+            "description": "< Agent instance with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -1171,7 +1159,7 @@
         }
       },
       "get": {
-        "summary": "Agent instance Read (Single).",
+        "summary": "< Agent instance Read (Single).",
         "description": "Get the agent instance with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -1194,7 +1182,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agent instance with the given `id` and filtered by the query in the request body.",
+            "description": "< Agent instance with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -1215,7 +1203,7 @@
             }
           },
           "404": {
-            "description": "Agent instance based on the request _query_ not found.",
+            "description": "< Agent instance based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -1247,7 +1235,7 @@
         }
       },
       "post": {
-        "summary": "Agent instance Create (Single).",
+        "summary": "< Agent instance Create (Single).",
         "description": "Create a new agent instance with the given `id`.",
         "parameters": [
           {
@@ -1273,7 +1261,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Agent instance with the given `id` correctly created.",
+            "description": "< Agent instance with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -1329,7 +1317,7 @@
         }
       },
       "put": {
-        "summary": "Agent instance Update (Single).",
+        "summary": "< Agent instance Update (Single).",
         "description": "Update the agent instance with the given `id`.",
         "parameters": [
           {
@@ -1355,7 +1343,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Agent instance with the given `id` correctly updated.",
+            "description": "< Agent instance with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -1422,7 +1410,7 @@
     },
     "/connection/": {
       "delete": {
-        "summary": "Connection Delete (Single).",
+        "summary": "< Connection Delete (Single).",
         "description": "Delete the connection with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -1445,7 +1433,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Connection with the given `id` correctly deleted.",
+            "description": "< Connection with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -1466,12 +1454,9 @@
             }
           },
           "404": {
-            "description": "Connection with the given `id` and based on the request query not found.",
+            "description": "< Connection with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -1504,7 +1489,7 @@
         }
       },
       "get": {
-        "summary": "Connection Read (Single).",
+        "summary": "< Connection Read (Single).",
         "description": "Get the connection with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -1527,7 +1512,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Connection with the given `id` and filtered by the query in the request body.",
+            "description": "< Connection with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -1548,7 +1533,7 @@
             }
           },
           "404": {
-            "description": "Connection based on the request _query_ not found.",
+            "description": "< Connection based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -1580,7 +1565,7 @@
         }
       },
       "post": {
-        "summary": "Connection Create (Single).",
+        "summary": "< Connection Create (Single).",
         "description": "Create a new connection with the given `id`.",
         "parameters": [
           {
@@ -1606,7 +1591,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Connection with the given `id` correctly created.",
+            "description": "< Connection with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -1662,7 +1647,7 @@
         }
       },
       "put": {
-        "summary": "Connection Update (Single).",
+        "summary": "< Connection Update (Single).",
         "description": "Update the connection with the given `id`.",
         "parameters": [
           {
@@ -1688,7 +1673,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Connection with the given `id` correctly updated.",
+            "description": "< Connection with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -1755,7 +1740,7 @@
     },
     "/connection/{id}": {
       "delete": {
-        "summary": "Connection Delete (Single).",
+        "summary": "< Connection Delete (Single).",
         "description": "Delete the connection with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -1778,7 +1763,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Connection with the given `id` correctly deleted.",
+            "description": "< Connection with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -1799,12 +1784,9 @@
             }
           },
           "404": {
-            "description": "Connection with the given `id` and based on the request query not found.",
+            "description": "< Connection with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -1837,7 +1819,7 @@
         }
       },
       "get": {
-        "summary": "Connection Read (Single).",
+        "summary": "< Connection Read (Single).",
         "description": "Get the connection with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -1860,7 +1842,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Connection with the given `id` and filtered by the query in the request body.",
+            "description": "< Connection with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -1881,7 +1863,7 @@
             }
           },
           "404": {
-            "description": "Connection based on the request _query_ not found.",
+            "description": "< Connection based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -1913,7 +1895,7 @@
         }
       },
       "post": {
-        "summary": "Connection Create (Single).",
+        "summary": "< Connection Create (Single).",
         "description": "Create a new connection with the given `id`.",
         "parameters": [
           {
@@ -1939,7 +1921,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Connection with the given `id` correctly created.",
+            "description": "< Connection with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -1995,7 +1977,7 @@
         }
       },
       "put": {
-        "summary": "Connection Update (Single).",
+        "summary": "< Connection Update (Single).",
         "description": "Update the connection with the given `id`.",
         "parameters": [
           {
@@ -2021,7 +2003,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Connection with the given `id` correctly updated.",
+            "description": "< Connection with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -2088,7 +2070,7 @@
     },
     "/data/": {
       "delete": {
-        "summary": "Data Delete (Single).",
+        "summary": "< Data Delete (Single).",
         "description": "Delete the data with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -2111,7 +2093,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Data with the given `id` correctly deleted.",
+            "description": "< Data with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -2132,12 +2114,9 @@
             }
           },
           "404": {
-            "description": "Data with the given `id` and based on the request query not found.",
+            "description": "< Data with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -2170,7 +2149,7 @@
         }
       },
       "get": {
-        "summary": "Data Read (Single).",
+        "summary": "< Data Read (Single).",
         "description": "Get the data with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -2193,7 +2172,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Data with the given `id` and filtered by the query in the request body.",
+            "description": "< Data with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -2214,7 +2193,7 @@
             }
           },
           "404": {
-            "description": "Data based on the request _query_ not found.",
+            "description": "< Data based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -2246,7 +2225,7 @@
         }
       },
       "post": {
-        "summary": "Data Create (Single).",
+        "summary": "< Data Create (Single).",
         "description": "Create a new data with the given `id`.",
         "parameters": [
           {
@@ -2272,7 +2251,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Data with the given `id` correctly created.",
+            "description": "< Data with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -2328,7 +2307,7 @@
         }
       },
       "put": {
-        "summary": "Data Update (Single).",
+        "summary": "< Data Update (Single).",
         "description": "Update the data with the given `id`.",
         "parameters": [
           {
@@ -2354,7 +2333,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Data with the given `id` correctly updated.",
+            "description": "< Data with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -2421,7 +2400,7 @@
     },
     "/data/{id}": {
       "delete": {
-        "summary": "Data Delete (Single).",
+        "summary": "< Data Delete (Single).",
         "description": "Delete the data with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -2444,7 +2423,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Data with the given `id` correctly deleted.",
+            "description": "< Data with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -2465,12 +2444,9 @@
             }
           },
           "404": {
-            "description": "Data with the given `id` and based on the request query not found.",
+            "description": "< Data with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -2503,7 +2479,7 @@
         }
       },
       "get": {
-        "summary": "Data Read (Single).",
+        "summary": "< Data Read (Single).",
         "description": "Get the data with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -2526,7 +2502,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Data with the given `id` and filtered by the query in the request body.",
+            "description": "< Data with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -2547,7 +2523,7 @@
             }
           },
           "404": {
-            "description": "Data based on the request _query_ not found.",
+            "description": "< Data based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -2579,7 +2555,7 @@
         }
       },
       "post": {
-        "summary": "Data Create (Single).",
+        "summary": "< Data Create (Single).",
         "description": "Create a new data with the given `id`.",
         "parameters": [
           {
@@ -2605,7 +2581,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Data with the given `id` correctly created.",
+            "description": "< Data with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -2661,7 +2637,7 @@
         }
       },
       "put": {
-        "summary": "Data Update (Single).",
+        "summary": "< Data Update (Single).",
         "description": "Update the data with the given `id`.",
         "parameters": [
           {
@@ -2687,7 +2663,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Data with the given `id` correctly updated.",
+            "description": "< Data with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -2754,7 +2730,7 @@
     },
     "/catalog/ebpf-program/": {
       "delete": {
-        "summary": "Ebpf program catalog Delete (Single).",
+        "summary": "< Ebpf program catalog Delete (Single).",
         "description": "Delete the eBPF program catalog with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -2777,7 +2753,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Ebpf program catalog with the given `id` correctly deleted.",
+            "description": "< Ebpf program catalog with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -2798,12 +2774,9 @@
             }
           },
           "404": {
-            "description": "Ebpf program catalog with the given `id` and based on the request query not found.",
+            "description": "< Ebpf program catalog with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -2836,7 +2809,7 @@
         }
       },
       "get": {
-        "summary": "Ebpf program catalog Read (Single).",
+        "summary": "< Ebpf program catalog Read (Single).",
         "description": "Get the eBPF program catalog with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -2859,7 +2832,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ebpf program catalog with the given `id` and filtered by the query in the request body.",
+            "description": "< Ebpf program catalog with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -2880,7 +2853,7 @@
             }
           },
           "404": {
-            "description": "Ebpf program catalog based on the request _query_ not found.",
+            "description": "< Ebpf program catalog based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -2912,7 +2885,7 @@
         }
       },
       "post": {
-        "summary": "Ebpf program catalog Create (Single).",
+        "summary": "< Ebpf program catalog Create (Single).",
         "description": "Create a new eBPF program catalog with the given `id`.",
         "parameters": [
           {
@@ -2938,7 +2911,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Ebpf program catalog with the given `id` correctly created.",
+            "description": "< Ebpf program catalog with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -2994,7 +2967,7 @@
         }
       },
       "put": {
-        "summary": "Ebpf program catalog Update (Single).",
+        "summary": "< Ebpf program catalog Update (Single).",
         "description": "Update the eBPF program catalog with the given `id`.",
         "parameters": [
           {
@@ -3020,7 +2993,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ebpf program catalog with the given `id` correctly updated.",
+            "description": "< Ebpf program catalog with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -3087,7 +3060,7 @@
     },
     "/catalog/ebpf-program/{id}": {
       "delete": {
-        "summary": "Ebpf program catalog Delete (Single).",
+        "summary": "< Ebpf program catalog Delete (Single).",
         "description": "Delete the eBPF program catalog with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -3110,7 +3083,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Ebpf program catalog with the given `id` correctly deleted.",
+            "description": "< Ebpf program catalog with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -3131,12 +3104,9 @@
             }
           },
           "404": {
-            "description": "Ebpf program catalog with the given `id` and based on the request query not found.",
+            "description": "< Ebpf program catalog with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -3169,7 +3139,7 @@
         }
       },
       "get": {
-        "summary": "Ebpf program catalog Read (Single).",
+        "summary": "< Ebpf program catalog Read (Single).",
         "description": "Get the eBPF program catalog with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -3192,7 +3162,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ebpf program catalog with the given `id` and filtered by the query in the request body.",
+            "description": "< Ebpf program catalog with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -3213,7 +3183,7 @@
             }
           },
           "404": {
-            "description": "Ebpf program catalog based on the request _query_ not found.",
+            "description": "< Ebpf program catalog based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -3245,7 +3215,7 @@
         }
       },
       "post": {
-        "summary": "Ebpf program catalog Create (Single).",
+        "summary": "< Ebpf program catalog Create (Single).",
         "description": "Create a new eBPF program catalog with the given `id`.",
         "parameters": [
           {
@@ -3271,7 +3241,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Ebpf program catalog with the given `id` correctly created.",
+            "description": "< Ebpf program catalog with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -3327,7 +3297,7 @@
         }
       },
       "put": {
-        "summary": "Ebpf program catalog Update (Single).",
+        "summary": "< Ebpf program catalog Update (Single).",
         "description": "Update the eBPF program catalog with the given `id`.",
         "parameters": [
           {
@@ -3353,7 +3323,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ebpf program catalog with the given `id` correctly updated.",
+            "description": "< Ebpf program catalog with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -3420,7 +3390,7 @@
     },
     "/instance/ebpf-program/": {
       "delete": {
-        "summary": "Ebpf program Delete (Single).",
+        "summary": "< Ebpf program Delete (Single).",
         "description": "Delete the eBPF program with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -3443,7 +3413,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Ebpf program with the given `id` correctly deleted.",
+            "description": "< Ebpf program with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -3464,12 +3434,9 @@
             }
           },
           "404": {
-            "description": "Ebpf program with the given `id` and based on the request query not found.",
+            "description": "< Ebpf program with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -3502,7 +3469,7 @@
         }
       },
       "get": {
-        "summary": "Ebpf program Read (Single).",
+        "summary": "< Ebpf program Read (Single).",
         "description": "Get the eBPF program with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -3525,7 +3492,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ebpf program with the given `id` and filtered by the query in the request body.",
+            "description": "< Ebpf program with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -3546,7 +3513,7 @@
             }
           },
           "404": {
-            "description": "Ebpf program based on the request _query_ not found.",
+            "description": "< Ebpf program based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -3578,7 +3545,7 @@
         }
       },
       "post": {
-        "summary": "Ebpf program Create (Single).",
+        "summary": "< Ebpf program Create (Single).",
         "description": "Create a new eBPF program with the given `id`.",
         "parameters": [
           {
@@ -3604,7 +3571,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Ebpf program with the given `id` correctly created.",
+            "description": "< Ebpf program with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -3660,7 +3627,7 @@
         }
       },
       "put": {
-        "summary": "Ebpf program Update (Single).",
+        "summary": "< Ebpf program Update (Single).",
         "description": "Update the eBPF program with the given `id`.",
         "parameters": [
           {
@@ -3686,7 +3653,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ebpf program with the given `id` correctly updated.",
+            "description": "< Ebpf program with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -3753,7 +3720,7 @@
     },
     "/instance/ebpf-program/{id}": {
       "delete": {
-        "summary": "Ebpf program Delete (Single).",
+        "summary": "< Ebpf program Delete (Single).",
         "description": "Delete the eBPF program with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -3776,7 +3743,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Ebpf program with the given `id` correctly deleted.",
+            "description": "< Ebpf program with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -3797,12 +3764,9 @@
             }
           },
           "404": {
-            "description": "Ebpf program with the given `id` and based on the request query not found.",
+            "description": "< Ebpf program with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -3835,7 +3799,7 @@
         }
       },
       "get": {
-        "summary": "Ebpf program Read (Single).",
+        "summary": "< Ebpf program Read (Single).",
         "description": "Get the eBPF program with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -3858,7 +3822,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ebpf program with the given `id` and filtered by the query in the request body.",
+            "description": "< Ebpf program with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -3879,7 +3843,7 @@
             }
           },
           "404": {
-            "description": "Ebpf program based on the request _query_ not found.",
+            "description": "< Ebpf program based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -3911,7 +3875,7 @@
         }
       },
       "post": {
-        "summary": "Ebpf program Create (Single).",
+        "summary": "< Ebpf program Create (Single).",
         "description": "Create a new eBPF program with the given `id`.",
         "parameters": [
           {
@@ -3937,7 +3901,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Ebpf program with the given `id` correctly created.",
+            "description": "< Ebpf program with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -3993,7 +3957,7 @@
         }
       },
       "put": {
-        "summary": "Ebpf program Update (Single).",
+        "summary": "< Ebpf program Update (Single).",
         "description": "Update the eBPF program with the given `id`.",
         "parameters": [
           {
@@ -4019,7 +3983,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Ebpf program with the given `id` correctly updated.",
+            "description": "< Ebpf program with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -4086,7 +4050,7 @@
     },
     "/exec-env/": {
       "delete": {
-        "summary": "Execution environment Delete (Single).",
+        "summary": "< Execution environment Delete (Single).",
         "description": "Delete the execution environment with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -4109,7 +4073,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Execution environment with the given `id` correctly deleted.",
+            "description": "< Execution environment with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -4130,12 +4094,9 @@
             }
           },
           "404": {
-            "description": "Execution environment with the given `id` and based on the request query not found.",
+            "description": "< Execution environment with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -4168,7 +4129,7 @@
         }
       },
       "get": {
-        "summary": "Execution environment Read (Single).",
+        "summary": "< Execution environment Read (Single).",
         "description": "Get the execution environment with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -4191,7 +4152,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environment with the given `id` and filtered by the query in the request body.",
+            "description": "< Execution environment with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -4212,7 +4173,7 @@
             }
           },
           "404": {
-            "description": "Execution environment based on the request _query_ not found.",
+            "description": "< Execution environment based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -4244,7 +4205,7 @@
         }
       },
       "post": {
-        "summary": "Execution environment Create (Single).",
+        "summary": "< Execution environment Create (Single).",
         "description": "Create a new execution environment with the given `id`.",
         "parameters": [
           {
@@ -4270,7 +4231,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Execution environment with the given `id` correctly created.",
+            "description": "< Execution environment with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -4326,7 +4287,7 @@
         }
       },
       "put": {
-        "summary": "Execution environment Update (Single).",
+        "summary": "< Execution environment Update (Single).",
         "description": "Update the execution environment with the given `id`.",
         "parameters": [
           {
@@ -4352,7 +4313,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environment with the given `id` correctly updated.",
+            "description": "< Execution environment with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -4419,7 +4380,7 @@
     },
     "/exec-env/{id}": {
       "delete": {
-        "summary": "Execution environment Delete (Single).",
+        "summary": "< Execution environment Delete (Single).",
         "description": "Delete the execution environment with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -4442,7 +4403,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Execution environment with the given `id` correctly deleted.",
+            "description": "< Execution environment with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -4463,12 +4424,9 @@
             }
           },
           "404": {
-            "description": "Execution environment with the given `id` and based on the request query not found.",
+            "description": "< Execution environment with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -4501,7 +4459,7 @@
         }
       },
       "get": {
-        "summary": "Execution environment Read (Single).",
+        "summary": "< Execution environment Read (Single).",
         "description": "Get the execution environment with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -4524,7 +4482,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environment with the given `id` and filtered by the query in the request body.",
+            "description": "< Execution environment with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -4545,7 +4503,7 @@
             }
           },
           "404": {
-            "description": "Execution environment based on the request _query_ not found.",
+            "description": "< Execution environment based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -4577,7 +4535,7 @@
         }
       },
       "post": {
-        "summary": "Execution environment Create (Single).",
+        "summary": "< Execution environment Create (Single).",
         "description": "Create a new execution environment with the given `id`.",
         "parameters": [
           {
@@ -4603,7 +4561,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Execution environment with the given `id` correctly created.",
+            "description": "< Execution environment with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -4659,7 +4617,7 @@
         }
       },
       "put": {
-        "summary": "Execution environment Update (Single).",
+        "summary": "< Execution environment Update (Single).",
         "description": "Update the execution environment with the given `id`.",
         "parameters": [
           {
@@ -4685,7 +4643,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environment with the given `id` correctly updated.",
+            "description": "< Execution environment with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -4752,7 +4710,7 @@
     },
     "/type/exec-env/": {
       "delete": {
-        "summary": "Execution environment type Delete (Single).",
+        "summary": "< Execution environment type Delete (Single).",
         "description": "Delete the execution environment type with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -4775,7 +4733,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Execution environment type with the given `id` correctly deleted.",
+            "description": "< Execution environment type with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -4796,12 +4754,9 @@
             }
           },
           "404": {
-            "description": "Execution environment type with the given `id` and based on the request query not found.",
+            "description": "< Execution environment type with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -4834,7 +4789,7 @@
         }
       },
       "get": {
-        "summary": "Execution environment type Read (Single).",
+        "summary": "< Execution environment type Read (Single).",
         "description": "Get the execution environment type with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -4857,7 +4812,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environment type with the given `id` and filtered by the query in the request body.",
+            "description": "< Execution environment type with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -4878,7 +4833,7 @@
             }
           },
           "404": {
-            "description": "Execution environment type based on the request _query_ not found.",
+            "description": "< Execution environment type based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -4910,7 +4865,7 @@
         }
       },
       "post": {
-        "summary": "Execution environment type Create (Single).",
+        "summary": "< Execution environment type Create (Single).",
         "description": "Create a new execution environment type with the given `id`.",
         "parameters": [
           {
@@ -4936,7 +4891,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Execution environment type with the given `id` correctly created.",
+            "description": "< Execution environment type with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -4992,7 +4947,7 @@
         }
       },
       "put": {
-        "summary": "Execution environment type Update (Single).",
+        "summary": "< Execution environment type Update (Single).",
         "description": "Update the execution environment type with the given `id`.",
         "parameters": [
           {
@@ -5018,7 +4973,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environment type with the given `id` correctly updated.",
+            "description": "< Execution environment type with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -5085,7 +5040,7 @@
     },
     "/exec-env-type/{id}": {
       "delete": {
-        "summary": "Execution environment type Delete (Single).",
+        "summary": "< Execution environment type Delete (Single).",
         "description": "Delete the execution environment type with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -5108,7 +5063,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Execution environment type with the given `id` correctly deleted.",
+            "description": "< Execution environment type with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -5129,12 +5084,9 @@
             }
           },
           "404": {
-            "description": "Execution environment type with the given `id` and based on the request query not found.",
+            "description": "< Execution environment type with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -5167,7 +5119,7 @@
         }
       },
       "get": {
-        "summary": "Execution environment type Read (Single).",
+        "summary": "< Execution environment type Read (Single).",
         "description": "Get the execution environment type with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -5190,7 +5142,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environment type with the given `id` and filtered by the query in the request body.",
+            "description": "< Execution environment type with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -5211,7 +5163,7 @@
             }
           },
           "404": {
-            "description": "Execution environment type based on the request _query_ not found.",
+            "description": "< Execution environment type based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -5243,7 +5195,7 @@
         }
       },
       "post": {
-        "summary": "Execution environment type Create (Single).",
+        "summary": "< Execution environment type Create (Single).",
         "description": "Create a new execution environment type with the given `id`.",
         "parameters": [
           {
@@ -5269,7 +5221,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Execution environment type with the given `id` correctly created.",
+            "description": "< Execution environment type with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -5325,7 +5277,7 @@
         }
       },
       "put": {
-        "summary": "Execution environment type Update (Single).",
+        "summary": "< Execution environment type Update (Single).",
         "description": "Update the execution environment type with the given `id`.",
         "parameters": [
           {
@@ -5351,7 +5303,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Execution environment type with the given `id` correctly updated.",
+            "description": "< Execution environment type with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -5418,7 +5370,7 @@
     },
     "/network-link/": {
       "delete": {
-        "summary": "Network link Delete (Single).",
+        "summary": "< Network link Delete (Single).",
         "description": "Delete the network link with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -5441,7 +5393,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Network link with the given `id` correctly deleted.",
+            "description": "< Network link with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -5462,12 +5414,9 @@
             }
           },
           "404": {
-            "description": "Network link with the given `id` and based on the request query not found.",
+            "description": "< Network link with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -5500,7 +5449,7 @@
         }
       },
       "get": {
-        "summary": "Network link Read (Single).",
+        "summary": "< Network link Read (Single).",
         "description": "Get the network link with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -5523,7 +5472,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Network link with the given `id` and filtered by the query in the request body.",
+            "description": "< Network link with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -5544,7 +5493,7 @@
             }
           },
           "404": {
-            "description": "Network link based on the request _query_ not found.",
+            "description": "< Network link based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -5576,7 +5525,7 @@
         }
       },
       "post": {
-        "summary": "Network link Create (Single).",
+        "summary": "< Network link Create (Single).",
         "description": "Create a new network link with the given `id`.",
         "parameters": [
           {
@@ -5602,7 +5551,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Network link with the given `id` correctly created.",
+            "description": "< Network link with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -5658,7 +5607,7 @@
         }
       },
       "put": {
-        "summary": "Network link Update (Single).",
+        "summary": "< Network link Update (Single).",
         "description": "Update the network link with the given `id`.",
         "parameters": [
           {
@@ -5684,7 +5633,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Network link with the given `id` correctly updated.",
+            "description": "< Network link with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -5751,7 +5700,7 @@
     },
     "/network-link/{id}": {
       "delete": {
-        "summary": "Network link Delete (Single).",
+        "summary": "< Network link Delete (Single).",
         "description": "Delete the network link with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -5774,7 +5723,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Network link with the given `id` correctly deleted.",
+            "description": "< Network link with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -5795,12 +5744,9 @@
             }
           },
           "404": {
-            "description": "Network link with the given `id` and based on the request query not found.",
+            "description": "< Network link with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -5833,7 +5779,7 @@
         }
       },
       "get": {
-        "summary": "Network link Read (Single).",
+        "summary": "< Network link Read (Single).",
         "description": "Get the network link with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -5856,7 +5802,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Network link with the given `id` and filtered by the query in the request body.",
+            "description": "< Network link with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -5877,7 +5823,7 @@
             }
           },
           "404": {
-            "description": "Network link based on the request _query_ not found.",
+            "description": "< Network link based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -5909,7 +5855,7 @@
         }
       },
       "post": {
-        "summary": "Network link Create (Single).",
+        "summary": "< Network link Create (Single).",
         "description": "Create a new network link with the given `id`.",
         "parameters": [
           {
@@ -5935,7 +5881,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Network link with the given `id` correctly created.",
+            "description": "< Network link with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -5991,7 +5937,7 @@
         }
       },
       "put": {
-        "summary": "Network link Update (Single).",
+        "summary": "< Network link Update (Single).",
         "description": "Update the network link with the given `id`.",
         "parameters": [
           {
@@ -6017,7 +5963,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Network link with the given `id` correctly updated.",
+            "description": "< Network link with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -6084,7 +6030,7 @@
     },
     "/type/network-link/": {
       "delete": {
-        "summary": "Network link type Delete (Single).",
+        "summary": "< Network link type Delete (Single).",
         "description": "Delete the network link type with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -6107,7 +6053,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Network link type with the given `id` correctly deleted.",
+            "description": "< Network link type with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -6128,12 +6074,9 @@
             }
           },
           "404": {
-            "description": "Network link type with the given `id` and based on the request query not found.",
+            "description": "< Network link type with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -6166,7 +6109,7 @@
         }
       },
       "get": {
-        "summary": "Network link type Read (Single).",
+        "summary": "< Network link type Read (Single).",
         "description": "Get the network link type with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -6189,7 +6132,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Network link type with the given `id` and filtered by the query in the request body.",
+            "description": "< Network link type with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -6210,7 +6153,7 @@
             }
           },
           "404": {
-            "description": "Network link type based on the request _query_ not found.",
+            "description": "< Network link type based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -6242,7 +6185,7 @@
         }
       },
       "post": {
-        "summary": "Network link type Create (Single).",
+        "summary": "< Network link type Create (Single).",
         "description": "Create a new network link type with the given `id`.",
         "parameters": [
           {
@@ -6268,7 +6211,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Network link type with the given `id` correctly created.",
+            "description": "< Network link type with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -6324,7 +6267,7 @@
         }
       },
       "put": {
-        "summary": "Network link type Update (Single).",
+        "summary": "< Network link type Update (Single).",
         "description": "Update the network link type with the given `id`.",
         "parameters": [
           {
@@ -6350,7 +6293,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Network link type with the given `id` correctly updated.",
+            "description": "< Network link type with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -6417,7 +6360,7 @@
     },
     "/type/network-link/{id}": {
       "delete": {
-        "summary": "Network link type Delete (Single).",
+        "summary": "< Network link type Delete (Single).",
         "description": "Delete the network link type with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -6440,7 +6383,7 @@
         ],
         "responses": {
           "205": {
-            "description": "Network link type with the given `id` correctly deleted.",
+            "description": "< Network link type with the given `id` correctly deleted.",
             "schema": {
               "type": "array",
               "items": {
@@ -6461,12 +6404,9 @@
             }
           },
           "404": {
-            "description": "Network link type with the given `id` and based on the request query not found.",
+            "description": "< Network link type with the given `id` and based on the request query not found.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Not_Found_Response"
-              }
+              "$ref": "#/definitions/Not_Found_Response"
             }
           },
           "406": {
@@ -6499,7 +6439,7 @@
         }
       },
       "get": {
-        "summary": "Network link type Read (Single).",
+        "summary": "< Network link type Read (Single).",
         "description": "Get the network link type with the given `id` and filtered by the query in the request body.",
         "parameters": [
           {
@@ -6522,7 +6462,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Network link type with the given `id` and filtered by the query in the request body.",
+            "description": "< Network link type with the given `id` and filtered by the query in the request body.",
             "schema": {
               "type": "array",
               "items": {
@@ -6543,7 +6483,7 @@
             }
           },
           "404": {
-            "description": "Network link type based on the request _query_ not found.",
+            "description": "< Network link type based on the request _query_ not found.",
             "schema": {
               "$ref": "#/definitions/Not_Found_Response"
             }
@@ -6575,7 +6515,7 @@
         }
       },
       "post": {
-        "summary": "Network link type Create (Single).",
+        "summary": "< Network link type Create (Single).",
         "description": "Create a new network link type with the given `id`.",
         "parameters": [
           {
@@ -6601,7 +6541,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Network link type with the given `id` correctly created.",
+            "description": "< Network link type with the given `id` correctly created.",
             "schema": {
               "type": "array",
               "items": {
@@ -6657,7 +6597,7 @@
         }
       },
       "put": {
-        "summary": "Network link type Update (Single).",
+        "summary": "< Network link type Update (Single).",
         "description": "Update the network link type with the given `id`.",
         "parameters": [
           {
@@ -6683,7 +6623,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Network link type with the given `id` correctly updated.",
+            "description": "< Network link type with the given `id` correctly updated.",
             "schema": {
               "type": "array",
               "items": {
@@ -6751,10 +6691,27 @@
   },
   "info": {
     "title": "Context Broker Manager",
-    "version": "dd3163487d60173eca6dac058f0efdaa503e9c0f@master"
+    "version": "1.0.0"
   },
   "swagger": "2.0",
   "definitions": {
+    "Query_Request_Limit": {
+      "type": "object",
+      "properties": {
+        "to": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "Ended index of the items to return."
+        },
+        "from": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Started index of the items to return."
+        }
+      }
+    },
     "Query_Request_Filter": {
       "type": "object",
       "properties": {
@@ -6777,6 +6734,13 @@
     "Query_Request_Clause": {
       "type": "object",
       "properties": {
+        "and": {
+          "description": "All the clause has to be satisfied.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Query_Request_Clause"
+          }
+        },
         "or": {
           "description": "At least the clause has to be satisfied.",
           "type": "array",
@@ -6784,24 +6748,8 @@
             "$ref": "#/definitions/Query_Request_Clause"
           }
         },
-        "wildcard": {
-          "description": "The target field must be satisfy the wildcard in expr.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Query_Request_Filter"
-            }
-          ]
-        },
-        "not": {
-          "description": "The clause has to be not satisfied.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Query_Request_Clause"
-            }
-          ]
-        },
-        "lte": {
-          "description": "The target field must be lower or equal to the expr value.",
+        "reg_exp": {
+          "description": "The target field must be satisfy the regular expression in expr.",
           "allOf": [
             {
               "$ref": "#/definitions/Query_Request_Filter"
@@ -6816,23 +6764,24 @@
             }
           ]
         },
-        "reg_exp": {
-          "description": "The target field must be satisfy the regular expression in expr.",
+        "lte": {
+          "description": "The target field must be lower or equal to the expr value.",
           "allOf": [
             {
               "$ref": "#/definitions/Query_Request_Filter"
             }
           ]
         },
-        "and": {
-          "description": "All the clause has to be satisfied.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Query_Request_Clause"
-          }
-        },
         "lt": {
           "description": "The target field must be lower than the expr value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Query_Request_Filter"
+            }
+          ]
+        },
+        "equals": {
+          "description": "The target field must be equal to the expr value.",
           "allOf": [
             {
               "$ref": "#/definitions/Query_Request_Filter"
@@ -6847,8 +6796,16 @@
             }
           ]
         },
-        "equals": {
-          "description": "The target field must be equal to the expr value.",
+        "not": {
+          "description": "The clause has to be not satisfied.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Query_Request_Clause"
+            }
+          ]
+        },
+        "wildcard": {
+          "description": "The target field must be satisfy the wildcard in expr.",
           "allOf": [
             {
               "$ref": "#/definitions/Query_Request_Filter"
@@ -6860,6 +6817,11 @@
     "Query_Request_Order": {
       "type": "object",
       "properties": {
+        "target": {
+          "type": "string",
+          "example": "name",
+          "description": "The field to compare."
+        },
         "mode": {
           "type": "string",
           "enum": [
@@ -6868,11 +6830,6 @@
           ],
           "example": "asc",
           "description": "Order mode."
-        },
-        "target": {
-          "type": "string",
-          "example": "name",
-          "description": "The field to compare."
         }
       },
       "required": [
@@ -6880,26 +6837,17 @@
         "target"
       ]
     },
-    "Query_Request_Limit": {
-      "type": "object",
-      "properties": {
-        "to": {
-          "type": "integer",
-          "format": "int32",
-          "example": 5,
-          "description": "Ended index of the items to return."
-        },
-        "from": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1,
-          "description": "Started index of the items to return."
-        }
-      }
-    },
     "Query_Request": {
       "type": "object",
       "properties": {
+        "limit": {
+          "description": "Limit the number of items to return.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Query_Request_Limit"
+            }
+          ]
+        },
         "where": {
           "description": "Filter the items based on different conditions.",
           "allOf": [
@@ -6908,14 +6856,6 @@
             }
           ]
         },
-        "select": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "example": "id",
-            "description": "Fields to return."
-          }
-        },
         "order": {
           "description": "Order the filtered items.",
           "type": "array",
@@ -6923,13 +6863,13 @@
             "$ref": "#/definitions/Query_Request_Order"
           }
         },
-        "limit": {
-          "description": "Limit the number of items to return.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Query_Request_Limit"
-            }
-          ]
+        "select": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "id",
+            "description": "Fields to return."
+          }
         }
       }
     },
@@ -6965,8 +6905,16 @@
         "error": {
           "default": false
         },
+        "status": {
+          "default": "Reset Content"
+        },
         "code": {
           "default": 205
+        },
+        "message": {
+          "type": "string",
+          "example": "Request not valid: two ids provided.",
+          "description": "Human readable message that describes the status of the operation."
         },
         "exception": {
           "description": "Message of the occurred exception.",
@@ -6975,14 +6923,6 @@
               "$ref": "#/definitions/Exception_Response"
             }
           ]
-        },
-        "message": {
-          "type": "string",
-          "example": "Request not valid: two ids provided.",
-          "description": "Human readable message that describes the status of the operation."
-        },
-        "status": {
-          "default": "Reset Content"
         }
       },
       "required": [
@@ -6995,8 +6935,16 @@
         "error": {
           "default": true
         },
+        "status": {
+          "default": "Bad Request"
+        },
         "code": {
           "default": 400
+        },
+        "message": {
+          "type": "string",
+          "example": "Request not valid: two ids provided.",
+          "description": "Human readable message that describes the status of the operation."
         },
         "exception": {
           "description": "Message of the occurred exception.",
@@ -7005,14 +6953,6 @@
               "$ref": "#/definitions/Exception_Response"
             }
           ]
-        },
-        "message": {
-          "type": "string",
-          "example": "Request not valid: two ids provided.",
-          "description": "Human readable message that describes the status of the operation."
-        },
-        "status": {
-          "default": "Bad Request"
         }
       },
       "required": [
@@ -7025,8 +6965,16 @@
         "error": {
           "default": true
         },
+        "status": {
+          "default": "Unauthorized"
+        },
         "code": {
           "default": 401
+        },
+        "message": {
+          "type": "string",
+          "example": "Request not valid: two ids provided.",
+          "description": "Human readable message that describes the status of the operation."
         },
         "exception": {
           "description": "Message of the occurred exception.",
@@ -7035,14 +6983,6 @@
               "$ref": "#/definitions/Exception_Response"
             }
           ]
-        },
-        "message": {
-          "type": "string",
-          "example": "Request not valid: two ids provided.",
-          "description": "Human readable message that describes the status of the operation."
-        },
-        "status": {
-          "default": "Unauthorized"
         }
       },
       "required": [
@@ -7055,8 +6995,16 @@
         "error": {
           "default": true
         },
+        "status": {
+          "default": "Not Found"
+        },
         "code": {
           "default": 404
+        },
+        "message": {
+          "type": "string",
+          "example": "Request not valid: two ids provided.",
+          "description": "Human readable message that describes the status of the operation."
         },
         "exception": {
           "description": "Message of the occurred exception.",
@@ -7065,14 +7013,6 @@
               "$ref": "#/definitions/Exception_Response"
             }
           ]
-        },
-        "message": {
-          "type": "string",
-          "example": "Request not valid: two ids provided.",
-          "description": "Human readable message that describes the status of the operation."
-        },
-        "status": {
-          "default": "Not Found"
         }
       },
       "required": [
@@ -7085,8 +7025,16 @@
         "error": {
           "default": true
         },
+        "status": {
+          "default": "Not Acceptable"
+        },
         "code": {
           "default": 406
+        },
+        "message": {
+          "type": "string",
+          "example": "Request not valid: two ids provided.",
+          "description": "Human readable message that describes the status of the operation."
         },
         "exception": {
           "description": "Message of the occurred exception.",
@@ -7095,14 +7043,6 @@
               "$ref": "#/definitions/Exception_Response"
             }
           ]
-        },
-        "message": {
-          "type": "string",
-          "example": "Request not valid: two ids provided.",
-          "description": "Human readable message that describes the status of the operation."
-        },
-        "status": {
-          "default": "Not Acceptable"
         }
       },
       "required": [
@@ -7115,8 +7055,16 @@
         "error": {
           "default": true
         },
+        "status": {
+          "default": "Unsupported Media Type"
+        },
         "code": {
           "default": 415
+        },
+        "message": {
+          "type": "string",
+          "example": "Request not valid: two ids provided.",
+          "description": "Human readable message that describes the status of the operation."
         },
         "exception": {
           "description": "Message of the occurred exception.",
@@ -7125,14 +7073,6 @@
               "$ref": "#/definitions/Exception_Response"
             }
           ]
-        },
-        "message": {
-          "type": "string",
-          "example": "Request not valid: two ids provided.",
-          "description": "Human readable message that describes the status of the operation."
-        },
-        "status": {
-          "default": "Unsupported Media Type"
         }
       },
       "required": [
@@ -7145,8 +7085,16 @@
         "error": {
           "default": true
         },
+        "status": {
+          "default": "Unprocessable Entity"
+        },
         "code": {
           "default": 422
+        },
+        "message": {
+          "type": "string",
+          "example": "Request not valid: two ids provided.",
+          "description": "Human readable message that describes the status of the operation."
         },
         "exception": {
           "description": "Message of the occurred exception.",
@@ -7155,14 +7103,6 @@
               "$ref": "#/definitions/Exception_Response"
             }
           ]
-        },
-        "message": {
-          "type": "string",
-          "example": "Request not valid: two ids provided.",
-          "description": "Human readable message that describes the status of the operation."
-        },
-        "status": {
-          "default": "Unprocessable Entity"
         }
       },
       "required": [
@@ -7175,8 +7115,16 @@
         "error": {
           "default": true
         },
+        "status": {
+          "default": "Internal Server Error"
+        },
         "code": {
           "default": 500
+        },
+        "message": {
+          "type": "string",
+          "example": "Request not valid: two ids provided.",
+          "description": "Human readable message that describes the status of the operation."
         },
         "exception": {
           "description": "Message of the occurred exception.",
@@ -7185,14 +7133,6 @@
               "$ref": "#/definitions/Exception_Response"
             }
           ]
-        },
-        "message": {
-          "type": "string",
-          "example": "Request not valid: two ids provided.",
-          "description": "Human readable message that describes the status of the operation."
-        },
-        "status": {
-          "default": "Internal Server Error"
         }
       },
       "required": [
@@ -7202,15 +7142,15 @@
     "Agent_Catalog_Action_Config": {
       "type": "object",
       "properties": {
-        "cmd": {
-          "type": "string",
-          "example": "service filebeat start",
-          "description": "Action command."
-        },
         "daemon": {
           "type": "string",
           "example": "firewall",
           "description": "Key used to execute the command as daemon."
+        },
+        "cmd": {
+          "type": "string",
+          "example": "service filebeat start",
+          "description": "Action command."
         },
         "args": {
           "type": "string",
@@ -7225,32 +7165,10 @@
     "Agent_Catalog_Action": {
       "type": "object",
       "properties": {
-        "config": {
-          "description": "Action config.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Agent_Catalog_Action_Config"
-            }
-          ]
-        },
-        "example": {
-          "example": "forward",
-          "description": "Example of action parameter."
-        },
-        "id": {
-          "type": "string",
-          "example": "start",
-          "description": "Action name"
-        },
         "store": {
           "type": "boolean",
           "example": true,
           "description": "Indicate if the results of the actions are stored in the data parameter of the agent instance."
-        },
-        "description": {
-          "type": "string",
-          "example": "Start the execution of the agent.",
-          "description": "Short description of the agent actions."
         },
         "status": {
           "type": "string",
@@ -7261,6 +7179,28 @@
           ],
           "example": "started",
           "description": "Update the status the of the agent-instance if the command is executed correctly."
+        },
+        "config": {
+          "description": "Action config.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Agent_Catalog_Action_Config"
+            }
+          ]
+        },
+        "description": {
+          "type": "string",
+          "example": "Start the execution of the agent.",
+          "description": "Short description of the agent actions."
+        },
+        "example": {
+          "example": "forward",
+          "description": "Example of action parameter."
+        },
+        "id": {
+          "type": "string",
+          "example": "start",
+          "description": "Action name"
         }
       },
       "required": [
@@ -7271,10 +7211,13 @@
     "Agent_Catalog_Parameter_Config": {
       "type": "object",
       "properties": {
-        "source": {
-          "type": "string",
-          "example": "/usr/share/filebeat/filebeat.yml",
-          "description": "Path of the source parameter file"
+        "path": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "enabled",
+            "description": "Path of the parameter value in the file"
+          }
         },
         "schema": {
           "type": "string",
@@ -7287,13 +7230,10 @@
           "example": "properties",
           "description": "Schema of the parameter file"
         },
-        "path": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "example": "enabled",
-            "description": "Path of the parameter value in the file"
-          }
+        "source": {
+          "type": "string",
+          "example": "/usr/share/filebeat/filebeat.yml",
+          "description": "Path of the source parameter file"
         }
       },
       "required": [
@@ -7304,6 +7244,11 @@
     "Agent_Catalog_Parameter": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "example": "log-period",
+          "description": "Parameter id."
+        },
         "config": {
           "description": "Parameter configuration.",
           "allOf": [
@@ -7312,29 +7257,19 @@
             }
           ]
         },
-        "description": {
-          "type": "string",
-          "example": "Enable the agent.",
-          "description": "Short description of the parameter."
-        },
-        "id": {
-          "type": "string",
-          "example": "log-period",
-          "description": "Parameter id."
-        },
-        "example": {
-          "example": "10s",
-          "description": "Example of parameter value."
-        },
         "list": {
           "type": "boolean",
           "example": true,
           "description": "Indicate if the parameter can have multiple values."
         },
-        "values": {
+        "description": {
           "type": "string",
-          "example": "mysql",
-          "description": "Possible values if the parameter type is choice."
+          "example": "Enable the agent.",
+          "description": "Short description of the parameter."
+        },
+        "example": {
+          "example": "10s",
+          "description": "Example of parameter value."
         },
         "type": {
           "type": "string",
@@ -7349,6 +7284,11 @@
           ],
           "example": "binary",
           "description": "Parameter type."
+        },
+        "values": {
+          "type": "string",
+          "example": "mysql",
+          "description": "Possible values if the parameter type is choice."
         }
       },
       "required": [
@@ -7373,6 +7313,15 @@
     "Agent_Catalog_Resource": {
       "type": "object",
       "properties": {
+        "example": {
+          "example": "10s",
+          "description": "Example of parameter value."
+        },
+        "description": {
+          "type": "string",
+          "example": "Enable the agent.",
+          "description": "Short description of the parameter."
+        },
         "config": {
           "description": "Resource configuration.",
           "allOf": [
@@ -7381,19 +7330,10 @@
             }
           ]
         },
-        "example": {
-          "example": "10s",
-          "description": "Example of parameter value."
-        },
         "id": {
           "type": "string",
           "example": "filebeat-config",
           "description": "Resource id."
-        },
-        "description": {
-          "type": "string",
-          "example": "Enable the agent.",
-          "description": "Short description of the parameter."
         }
       },
       "required": [
@@ -7410,11 +7350,6 @@
           "items": {
             "$ref": "#/definitions/Agent_Catalog_Action"
           }
-        },
-        "id": {
-          "type": "string",
-          "example": "filebeat",
-          "description": "Id of the agent in the catalog."
         },
         "parameters": {
           "description": "Parameter properties.",
@@ -7434,6 +7369,11 @@
           "items": {
             "$ref": "#/definitions/Agent_Catalog_Resource"
           }
+        },
+        "id": {
+          "type": "string",
+          "example": "filebeat",
+          "description": "Id of the agent in the catalog."
         }
       },
       "required": [
@@ -7446,8 +7386,16 @@
         "error": {
           "default": false
         },
+        "status": {
+          "default": "Created"
+        },
         "code": {
           "default": 201
+        },
+        "message": {
+          "type": "string",
+          "example": "Request not valid: two ids provided.",
+          "description": "Human readable message that describes the status of the operation."
         },
         "exception": {
           "description": "Message of the occurred exception.",
@@ -7456,14 +7404,6 @@
               "$ref": "#/definitions/Exception_Response"
             }
           ]
-        },
-        "message": {
-          "type": "string",
-          "example": "Request not valid: two ids provided.",
-          "description": "Human readable message that describes the status of the operation."
-        },
-        "status": {
-          "default": "Created"
         }
       },
       "required": [
@@ -7476,8 +7416,16 @@
         "error": {
           "default": false
         },
+        "status": {
+          "default": "No Content"
+        },
         "code": {
           "default": 204
+        },
+        "message": {
+          "type": "string",
+          "example": "Request not valid: two ids provided.",
+          "description": "Human readable message that describes the status of the operation."
         },
         "exception": {
           "description": "Message of the occurred exception.",
@@ -7486,14 +7434,6 @@
               "$ref": "#/definitions/Exception_Response"
             }
           ]
-        },
-        "message": {
-          "type": "string",
-          "example": "Request not valid: two ids provided.",
-          "description": "Human readable message that describes the status of the operation."
-        },
-        "status": {
-          "default": "No Content"
         }
       },
       "required": [
@@ -7506,8 +7446,16 @@
         "error": {
           "default": false
         },
+        "status": {
+          "default": "OK"
+        },
         "code": {
           "default": 200
+        },
+        "message": {
+          "type": "string",
+          "example": "Request not valid: two ids provided.",
+          "description": "Human readable message that describes the status of the operation."
         },
         "exception": {
           "description": "Message of the occurred exception.",
@@ -7516,14 +7464,6 @@
               "$ref": "#/definitions/Exception_Response"
             }
           ]
-        },
-        "message": {
-          "type": "string",
-          "example": "Request not valid: two ids provided.",
-          "description": "Human readable message that describes the status of the operation."
-        },
-        "status": {
-          "default": "OK"
         }
       },
       "required": [
@@ -7536,8 +7476,16 @@
         "error": {
           "default": false
         },
+        "status": {
+          "default": "Not Modified"
+        },
         "code": {
           "default": 304
+        },
+        "message": {
+          "type": "string",
+          "example": "Request not valid: two ids provided.",
+          "description": "Human readable message that describes the status of the operation."
         },
         "exception": {
           "description": "Message of the occurred exception.",
@@ -7546,14 +7494,6 @@
               "$ref": "#/definitions/Exception_Response"
             }
           ]
-        },
-        "message": {
-          "type": "string",
-          "example": "Request not valid: two ids provided.",
-          "description": "Human readable message that describes the status of the operation."
-        },
-        "status": {
-          "default": "Not Modified"
         }
       },
       "required": [
@@ -7568,14 +7508,14 @@
           "format": "date-time",
           "description": "Timestamp of the last time the action was executed correctly."
         },
+        "data": {
+          "example": "drop: all",
+          "description": "Action data."
+        },
         "id": {
           "type": "string",
           "example": "list",
           "description": "Action id."
-        },
-        "data": {
-          "example": "drop: all",
-          "description": "Action data."
         }
       },
       "required": [
@@ -7611,14 +7551,14 @@
           "format": "date-time",
           "description": "Timestamp of the last time the resource data was updated or created correctly."
         },
+        "content": {
+          "type": "string",
+          "description": "Resource content."
+        },
         "id": {
           "type": "string",
           "example": "/opt/firewall.xml",
           "description": "Resource path."
-        },
-        "content": {
-          "type": "string",
-          "description": "Resource content."
         }
       },
       "required": [
@@ -7637,15 +7577,15 @@
             "$ref": "#/definitions/Agent_Instance_Action"
           }
         },
-        "id": {
+        "status": {
           "type": "string",
-          "example": "filebeat@apache",
-          "description": "Id of the agent instance installed in an execution environment."
-        },
-        "agent_catalog_id": {
-          "type": "string",
-          "example": "filebeat",
-          "description": "Id of the agent in the catalog."
+          "enum": [
+            "started",
+            "stopped",
+            "unknown"
+          ],
+          "example": "started",
+          "description": "Status of the agent instance"
         },
         "parameters": {
           "description": "List of agent instance parameters.",
@@ -7666,20 +7606,20 @@
             "$ref": "#/definitions/Agent_Instance_Resource"
           }
         },
-        "status": {
-          "type": "string",
-          "enum": [
-            "started",
-            "stopped",
-            "unknown"
-          ],
-          "example": "started",
-          "description": "Status of the agent instance"
-        },
         "exec_env_id": {
           "type": "string",
           "example": "apache",
           "description": "Id of the execution environment where the agent instance is installed."
+        },
+        "agent_catalog_id": {
+          "type": "string",
+          "example": "filebeat",
+          "description": "Id of the agent in the catalog."
+        },
+        "id": {
+          "type": "string",
+          "example": "filebeat@apache",
+          "description": "Id of the agent instance installed in an execution environment."
         }
       },
       "required": [
@@ -7692,11 +7632,6 @@
     "Connection": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "example": "conn-1",
-          "description": "Id of connection."
-        },
         "network_link_id": {
           "type": "string",
           "example": "net-link-1",
@@ -7711,6 +7646,11 @@
           "type": "string",
           "example": "Added to this network for debug purposes.",
           "description": "Short description of the connection."
+        },
+        "id": {
+          "type": "string",
+          "example": "conn-1",
+          "description": "Id of connection."
         }
       },
       "required": [
@@ -7722,6 +7662,18 @@
     "Data": {
       "type": "object",
       "properties": {
+        "timestamp_event": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019/02/14 15:23:30",
+          "description": "Timestamp of the event related to the collected data"
+        },
+        "timestamp_agent": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019/02/14 15:23:30",
+          "description": "Timestamp when the agent instance collected the data"
+        },
         "ebpf_program_instance_id": {
           "type": "string",
           "example": "packet-capture@apache",
@@ -7736,36 +7688,71 @@
           "type": "string",
           "example": "BXrHRn5RPU55Qh9JwMZn",
           "description": "Id of the data."
-        },
-        "timestamp_event": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2019/02/14 15:23:30",
-          "description": "Timestamp of the event related to the collected data"
-        },
-        "timestamp_agent": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2019/02/14 15:23:30",
-          "description": "Timestamp when the agent instance collected the data"
         }
       },
       "required": [
         "id"
       ]
     },
+    "eBPF_Program_Catalog_Parameter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "interface",
+          "description": "Parameter id."
+        },
+        "list": {
+          "type": "boolean",
+          "example": true,
+          "description": "Indicate if the parameter can have multiple values."
+        },
+        "description": {
+          "type": "string",
+          "example": "Network Interface to attach.",
+          "description": "Short description of the parameter."
+        },
+        "example": {
+          "example": "eno0",
+          "description": "Example of parameter value."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "binary",
+            "boolean",
+            "choice",
+            "integer",
+            "number",
+            "time-duration",
+            "string"
+          ],
+          "description": "Parameter type.",
+          "example": "integer"
+        },
+        "values": {
+          "type": "string",
+          "example": "yes",
+          "description": "Possible values if the parameter type is choice."
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
     "eBPF_Program_Catalog_Config_Metric_Open_Metrics_Metadata_Label": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "example": "IP_PROTO",
-          "description": "Label name."
-        },
         "value": {
           "type": "string",
           "example": "UDP",
           "description": "Label value."
+        },
+        "name": {
+          "type": "string",
+          "example": "IP_PROTO",
+          "description": "Label name."
         }
       },
       "required": [
@@ -7801,6 +7788,16 @@
     "eBPF_Program_Catalog_Config_Metric": {
       "type": "object",
       "properties": {
+        "map-name": {
+          "type": "string",
+          "example": "PKT_COUNTER",
+          "description": "Mapping value in the code."
+        },
+        "name": {
+          "type": "string",
+          "example": "packets_total",
+          "description": "Metric name."
+        },
         "open-metrics-metadata": {
           "description": "Open Metrics Metadata.",
           "allOf": [
@@ -7808,16 +7805,6 @@
               "$ref": "#/definitions/eBPF_Program_Catalog_Config_Metric_Open_Metrics_Metadata"
             }
           ]
-        },
-        "name": {
-          "type": "string",
-          "example": "packets_total",
-          "description": "Metric name."
-        },
-        "map-name": {
-          "type": "string",
-          "example": "PKT_COUNTER",
-          "description": "Mapping value in the code."
         }
       },
       "required": [
@@ -7828,79 +7815,29 @@
     "eBPF_Program_Catalog_Config": {
       "type": "object",
       "properties": {
+        "code": {
+          "type": "string",
+          "description": "Code of the eBPF program."
+        },
         "metrics": {
           "description": "eBPF program metrics.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/eBPF_Program_Catalog_Config_Metric"
           }
-        },
-        "code": {
-          "type": "string",
-          "description": "Code of the eBPF program."
         }
       },
       "required": [
         "code"
       ]
     },
-    "eBPF_Program_Catalog_Parameter": {
-      "type": "object",
-      "properties": {
-        "example": {
-          "example": "eno0",
-          "description": "Example of parameter value."
-        },
-        "id": {
-          "type": "string",
-          "example": "interface",
-          "description": "Parameter id."
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "binary",
-            "boolean",
-            "choice",
-            "integer",
-            "number",
-            "time-duration",
-            "string"
-          ],
-          "description": "Parameter type.",
-          "example": "integer"
-        },
-        "list": {
-          "type": "boolean",
-          "example": true,
-          "description": "Indicate if the parameter can have multiple values."
-        },
-        "values": {
-          "type": "string",
-          "example": "yes",
-          "description": "Possible values if the parameter type is choice."
-        },
-        "description": {
-          "type": "string",
-          "example": "Network Interface to attach.",
-          "description": "Short description of the parameter."
-        }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
-    },
     "eBPF_Program_Catalog": {
       "type": "object",
       "properties": {
-        "config": {
-          "$ref": "#/definitions/eBPF_Program_Catalog_Config"
-        },
-        "id": {
+        "description": {
           "type": "string",
-          "example": "packet-capture",
-          "description": "Id of the eBPF_Program_ in the catalog."
+          "example": "Transparent service to capture packets flowing through the interface it\n                                 is attached to, apply filters and obtain capture in .pcap format.",
+          "description": "Description of eBPF program."
         },
         "parameters": {
           "type": "array",
@@ -7908,10 +7845,13 @@
             "$ref": "#/definitions/eBPF_Program_Catalog_Parameter"
           }
         },
-        "description": {
+        "config": {
+          "$ref": "#/definitions/eBPF_Program_Catalog_Config"
+        },
+        "id": {
           "type": "string",
-          "example": "Transparent service to capture packets flowing through the interface it\n                                 is attached to, apply filters and obtain capture in .pcap format.",
-          "description": "Description of eBPF program."
+          "example": "packet-capture",
+          "description": "Id of the eBPF_Program_ in the catalog."
         }
       },
       "required": [
@@ -7946,11 +7886,6 @@
           "example": "packet-capture",
           "description": "Id of the agent in the catalog."
         },
-        "id": {
-          "type": "string",
-          "example": "packet-capture@apache",
-          "description": "Id of the eBPF program installed in an execution environment."
-        },
         "parameters": {
           "description": "List of eBPF program instance parameters.",
           "type": "array",
@@ -7967,6 +7902,11 @@
           "type": "string",
           "example": "apache",
           "description": "Id of the execution environment where the eBPF program\n                                     instance is installed"
+        },
+        "id": {
+          "type": "string",
+          "example": "packet-capture@apache",
+          "description": "Id of the eBPF program installed in an execution environment."
         }
       },
       "required": [
@@ -7984,6 +7924,12 @@
           "example": "2019/02/14 15:23:30",
           "description": "Timestamp when the LCP is started"
         },
+        "last_heartbeat": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019/02/14 15:23:33",
+          "description": "Timestamp of the expiration of the API access configuration."
+        },
         "port": {
           "type": "integer",
           "format": "int32",
@@ -7993,12 +7939,6 @@
         "password": {
           "type": "string",
           "description": "Password for the CB to connect to this LCP."
-        },
-        "last_heartbeat": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2019/02/14 15:23:33",
-          "description": "Timestamp of the expiration of the API access configuration."
         },
         "username": {
           "type": "string",
@@ -8012,6 +7952,21 @@
     "Exec_Env": {
       "type": "object",
       "properties": {
+        "type_id": {
+          "type": "string",
+          "example": "vm",
+          "description": "Id of the execution environment type."
+        },
+        "description": {
+          "type": "string",
+          "example": "Apache HTTP Web Server.",
+          "description": "Short description of the execution environment,"
+        },
+        "hostname": {
+          "type": "string",
+          "example": "192.168.1.2",
+          "description": "Hostname of the execution environment."
+        },
         "lcp": {
           "description": "Data related to the LCP.",
           "allOf": [
@@ -8024,21 +7979,6 @@
           "type": "string",
           "example": "apache",
           "description": "Id of the execution environment."
-        },
-        "type_id": {
-          "type": "string",
-          "example": "vm",
-          "description": "Id of the execution environment type."
-        },
-        "hostname": {
-          "type": "string",
-          "example": "192.168.1.2",
-          "description": "Hostname of the execution environment."
-        },
-        "description": {
-          "type": "string",
-          "example": "Apache HTTP Web Server.",
-          "description": "Short description of the execution environment,"
         }
       },
       "required": [
@@ -8056,15 +7996,15 @@
           "example": "Linux container.",
           "description": "Short description of the type."
         },
-        "id": {
-          "type": "string",
-          "example": "vm",
-          "description": "Id of the execution environment type."
-        },
         "name": {
           "type": "string",
           "example": "Virtual Machine",
           "description": "Name of the execution environment."
+        },
+        "id": {
+          "type": "string",
+          "example": "vm",
+          "description": "Id of the execution environment type."
         }
       },
       "required": [
@@ -8080,15 +8020,15 @@
           "example": "pnt2pnt",
           "description": "Id of the network link type."
         },
-        "id": {
-          "type": "string",
-          "example": "net-link-1",
-          "description": "Id of the network link."
-        },
         "description": {
           "type": "string",
           "example": "Allow communication between front-end and back-end services.",
           "description": "Short description of the network link,"
+        },
+        "id": {
+          "type": "string",
+          "example": "net-link-1",
+          "description": "Id of the network link."
         }
       },
       "required": [
@@ -8104,15 +8044,15 @@
           "example": "Communications connection between two communication endpoints.",
           "description": "Short description of the network link type,"
         },
-        "id": {
-          "type": "string",
-          "example": "pnt2pnt",
-          "description": "Id of the network link type."
-        },
         "name": {
           "type": "string",
           "example": "Point to point",
           "description": "Name of the network link type."
+        },
+        "id": {
+          "type": "string",
+          "example": "pnt2pnt",
+          "description": "Id of the network link type."
         }
       },
       "required": [

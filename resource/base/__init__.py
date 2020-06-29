@@ -45,7 +45,7 @@ class Base_Resource(object):
 
     def on_base_get(self, req, resp, id=None):
         req_data = req.media or {}
-        qrs = Query_Request_Schema(method=HTTP_Method.GET)
+        qrs = Query_Request_Schema(method=HTTP_Method.GET, unknown='INCLUDE')
         resp_data, valid = qrs.validate(data=req_data, id=id)
         if valid:
             try:
@@ -54,9 +54,10 @@ class Base_Resource(object):
                 resp_data = [dict(hit.to_dict(), id=hit.meta.id)
                              for hit in s.execute()]
                 if len(resp_data) > 0:
-                    self.schema(many=True, partial=True, unknown='INCLUDE',
-                                method=HTTP_Method.GET).validate(data=resp_data)
-                    Content_Response(resp_data).apply(resp)
+                    resp_data, valid = self.schema(many=True, partial=True, unknown='INCLUDE',
+                                            method=HTTP_Method.GET).validate(data=resp_data,
+                                                                             response_type=Content_Response)
+                    resp_data.apply(resp)
                 else:
                     msg = f'{self.name.capitalize()} based on the request {{query}} not found'
                     Not_Found_Response(msg, query=req_data).apply(resp)
