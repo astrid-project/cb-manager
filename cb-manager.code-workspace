@@ -70,6 +70,7 @@
 			"pycache",
 			"pycodestyle",
 			"pydocstyle",
+			"pypi",
 			"pytest",
 			"quantulum",
 			"rbac",
