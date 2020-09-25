@@ -14,7 +14,7 @@ The development version can be downloaded from `GitHub <https://github.com/astri
 
 .. code-block:: console
 
-    git clone https://github.com/astrid-porject/cb-manager.git
+    git clone https://github.com/astrid-project/cb-manager.git
     cd cb-manager
     pip install -r requirements.txt
 

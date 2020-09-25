@@ -2,7 +2,7 @@
     "name": "cp-manager",
     "version": "1.1.0",
     "description": "Get and update collected data of the service chain with topology information.",
-    "repository": "astrid-project/lcp",
+    "repository": "astrid-project/cb-manager",
     "keywords": [
         "agents",
         "api",
