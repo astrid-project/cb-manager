@@ -35,6 +35,10 @@ class Arg_Reader:
             help='Period (with unit, e.g.: 1min) for auth expiration used in the heartbeat with the LCP',
             default=cls.cr.hb_auth_expiration)
 
+        add('--apm-server', '-m', type=str,
+            help='Elastic APM hostname/IP:port',
+            default=cls.cr.elastic_apm_server)
+
         add('--es-endpoint', '-e', type=str,
             help='Elasticsearch server hostname/IP:port',
             default=cls.cr.es_endpoint)

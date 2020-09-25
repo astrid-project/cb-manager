@@ -2,7 +2,7 @@ from elasticsearch_dsl import Q, Search
 from elasticsearch import RequestError as Request_Error
 from falcon.errors import HTTPBadRequest as HTTP_Bad_Request
 from utils.log import Log
-
+from utils.sequence import is_dict, is_list
 
 __all__ = [
     'Query_Reader'
@@ -34,16 +34,36 @@ class Query_Reader:
         self.s = self.s.source(query.get('select', None))
 
     def __where(self, query, id=None):
-        q = Q()
+        q = None 
         for op, clause in query.get('where', {}).items():
             if op == 'and':
-                for sub_op, sub_clause in clause.items():
-                    q = q & self._where({'where': {sub_op: sub_clause}})
+                if is_dict(clause):
+                    for sub_op, sub_clause in clause.items():
+                        if q is None:
+                            q = self.__where(dict(where={sub_op: sub_clause}))
+                        else:
+                            q = q & self.__where(dict(where={sub_op: sub_clause}))
+                elif is_list(clause):
+                    for sub_clause in clause:
+                        if q is None:
+                            q = self.__where(dict(where=sub_clause))
+                        else:
+                           q = q & self.__where(dict(where=sub_clause))
             elif op == 'or':
-                for sub_op, sub_clause in clause.items():
-                    q = q | self._where({'where': {sub_op: sub_clause}})
+                if is_dict(clause):
+                    for sub_op, sub_clause in clause.items():
+                        if q is None:
+                            q = self.__where(dict(where={sub_op: sub_clause}))
+                        else:
+                            q = q | self.__where(dict(where={sub_op: sub_clause}))
+                elif is_list(clause):
+                    for sub_clause in clause:
+                        if q is None:
+                            q = self.__where(dict(where=sub_clause))
+                        else:
+                            q = q | self.__where(dict(where=sub_clause))
             elif op == 'not':
-                q = ~self._where(clause)
+                q = ~self.__where(clause)
             else:
                 prop = self.__fix_target(clause.get('target', None))
                 expr = clause.get('expr', None)
@@ -63,8 +83,11 @@ class Query_Reader:
                     raise HTTP_Bad_Request(title='Request not valid',
                                            description=f'{op} clause with not valid/missing data')
         if id is not None:
-            q = q & Q('term', _id=id)
-        return q
+            if q is None:
+                q = Q('term', _id=id)
+            else:
+                q = q & Q('term', _id=id)
+        return q if q is not None else Q()
 
     def __order(self, query):
         sort_list = []

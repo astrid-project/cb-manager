@@ -28,6 +28,8 @@ class Config_Reader:
         self.es_timeout = self.cr.get('elasticsearch', 'timeout')
         self.es_retry_period = self.cr.get('elasticsearch', 'retry-period')
 
+        self.elastic_apm_server = self.cr.get('elastic-apm', 'server');
+
         self.dev_username = self.cr.get('dev', 'username')
         self.dev_password = self.cr.get('dev', 'password')
 

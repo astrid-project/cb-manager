@@ -74,6 +74,7 @@
 			"pytest",
 			"quantulum",
 			"rbac",
+			"recid",
 			"resp",
 			"ruamel",
 			"sdist",
@@ -99,6 +100,7 @@
 		"restructuredtext.builtDocumentationPath": "docs/.build/html",
 		"restructuredtext.confPath": "docs/conf.py",
 		"restructuredtext.experimental": true,
-		"workbench.colorTheme": "Electron"
+		"workbench.colorTheme": "Electron",
+		"editor.fontFamily": "Fira Code Retina"
 	}
 }

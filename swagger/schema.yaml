@@ -2324,6 +2324,10 @@ paths:
       summary: < Connection Update (Single).
       tags:
       - connection
+  /dashboard:
+    get: {}
+  /dashboard/{part}/{resource}:
+    get: {}
   /data/:
     delete:
       description: Delete the data with the given `id` and filtered by the query in
@@ -5526,6 +5530,7 @@ tags:
 - description: Represents an connection between execution environments and network
     links.
   name: connection
+- []
 - description: Represents the stored data.
   name: data
 - description: Represents the stored data.

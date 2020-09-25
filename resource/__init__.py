@@ -1,5 +1,6 @@
 from resource.agent import *
 from resource.connection import *
+from resource.dashboard import *
 from resource.data import *
 from resource.ebpf_program import *
 from resource.exec_env import *
@@ -15,6 +16,7 @@ db = [
     Agent_Catalog_Resource, Agent_Catalog_Selected_Resource,
     Agent_Instance_Resource, Agent_Instance_Selected_Resource,
     Connection_Resource, Connection_Selected_Resource,
+    Dashboard_Resource,
     Data_Resource, Data_Selected_Resource,
     eBPF_Program_Catalog_Resource, eBPF_Program_Catalog_Selected_Resource,
     eBPF_Program_Instance_Resource, eBPF_Program_Instance_Selected_Resource,

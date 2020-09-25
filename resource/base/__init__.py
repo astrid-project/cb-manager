@@ -10,14 +10,18 @@ from utils.log import Log
 from utils.sequence import is_list, wrap
 
 __all__ = [
+    'Base_Minimal_Resource',
     'Base_Resource'
 ]
 
 
-class Base_Resource(object):
+class Base_Minimal_Resource(object):
     tag = []
     doc = None
     schema = None
+
+
+class Base_Resource(Base_Minimal_Resource):
     lcp_handler = {}
     ignore_fields = []
 

@@ -51,14 +51,12 @@ class LCP(Base_LCP):
 
     def __apply(self, instance, exec_env):
         if self.num > 0:
-            print(self.req_lcp)
             username, password = exec_env.lcp.username, exec_env.lcp.password
             resp_lcp = post_req(f'http://{exec_env.hostname}:{exec_env.lcp.port}/config',
                                 auth=HTTP_Basic_Auth(username, password), json=self.req_lcp)
             if resp_lcp.content:
                 try:
                     resp_lcp_data = resp_lcp.json()
-                    print(resp_lcp_data)
                     if resp_lcp.status_code >= 300 or (is_dict(resp_lcp) and resp_lcp_data.get('error', False)):
                         Unprocessable_Entity_Response(resp_lcp_data) \
                             .add(self.resp)
