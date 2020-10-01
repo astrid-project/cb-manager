@@ -54,6 +54,7 @@
 			"lcps",
 			"ldap",
 			"libbeat",
+			"lowercase",
 			"maxdepth",
 			"metricbeat",
 			"mkdocs",
