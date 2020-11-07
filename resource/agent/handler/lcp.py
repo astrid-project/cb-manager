@@ -89,7 +89,7 @@ class LCP(Base_LCP):
                     return False
             else:
                 msg = f'Request to LCP({exec_env.meta.id}@{exec_env.hostname}:{exec_env.lcp.port}) not executed'
-                self.resp.append(Unprocessable_Entity_Response(msg))
+                Unprocessable_Entity_Response(msg).add(self.resp)
                 return False
         return False
 
@@ -145,6 +145,7 @@ class LCP(Base_LCP):
         save = False
         if doc.status is not None:
             instance.status = doc.status if not error else 'unknown'
+            doc.store = True
             save = True
         if doc.store and not error:
             data = extract(result,
