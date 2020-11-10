@@ -372,7 +372,6 @@ definitions:
       reason:
         description: Exception reason.
         example: Connection timeout
-        type: string
     required:
     - filename
     - line
