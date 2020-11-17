@@ -56,6 +56,14 @@
       "description": "Represents an eBPF program instance installed in an execution environment."
     },
     {
+      "name": "event",
+      "description": "Represents the stored events."
+    },
+    {
+      "name": "event",
+      "description": "Represents the stored events."
+    },
+    {
       "name": "exec-env",
       "description": "Represents an execution environment."
     },
@@ -4055,6 +4063,666 @@
         }
       }
     },
+    "/event/": {
+      "delete": {
+        "summary": "< Event Delete (Single).",
+        "description": "Delete the event with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/Query_Request"
+            }
+          }
+        ],
+        "tags": [
+          "event"
+        ],
+        "responses": {
+          "205": {
+            "description": "< Event with the given `id` correctly deleted.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Reset_Content_Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Request not valid.",
+            "schema": {
+              "$ref": "#/definitions/Bad_Request_Response"
+            }
+          },
+          "401": {
+            "description": "Authentication failed.",
+            "schema": {
+              "$ref": "#/definitions/Unauthorized_Response"
+            }
+          },
+          "404": {
+            "description": "< Event with the given `id` and based on the request query not found.",
+            "schema": {
+              "$ref": "#/definitions/Not_Found_Response"
+            }
+          },
+          "406": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/Not_Acceptable_Response"
+            }
+          },
+          "415": {
+            "description": "Media type not supported.",
+            "schema": {
+              "$ref": "#/definitions/Unsupported_Media_Type_Response"
+            }
+          },
+          "422": {
+            "description": "Not possible to delete the event with the given `id` and based on the request query.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Unprocessable_Entity_Response"
+              }
+            }
+          },
+          "500": {
+            "description": "Server not available to satisfy the request.",
+            "schema": {
+              "$ref": "#/definitions/Internal_Server_Error_Response"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "< Event Read (Single).",
+        "description": "Get the event with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/Query_Request"
+            }
+          }
+        ],
+        "tags": [
+          "event"
+        ],
+        "responses": {
+          "200": {
+            "description": "< Event with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Event"
+              }
+            }
+          },
+          "400": {
+            "description": "Request not valid.",
+            "schema": {
+              "$ref": "#/definitions/Bad_Request_Response"
+            }
+          },
+          "401": {
+            "description": "Authentication failed.",
+            "schema": {
+              "$ref": "#/definitions/Unauthorized_Response"
+            }
+          },
+          "404": {
+            "description": "< Event based on the request _query_ not found.",
+            "schema": {
+              "$ref": "#/definitions/Not_Found_Response"
+            }
+          },
+          "406": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/Not_Acceptable_Response"
+            }
+          },
+          "415": {
+            "description": "Media type not supported.",
+            "schema": {
+              "$ref": "#/definitions/Unsupported_Media_Type_Response"
+            }
+          },
+          "422": {
+            "description": "Not possible to get event with the request _query_.",
+            "schema": {
+              "$ref": "#/definitions/Unprocessable_Entity_Response"
+            }
+          },
+          "500": {
+            "description": "Server not available to satisfy the request.",
+            "schema": {
+              "$ref": "#/definitions/Internal_Server_Error_Response"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "< Event Create (Single).",
+        "description": "Create a new event with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Event"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "event"
+        ],
+        "responses": {
+          "201": {
+            "description": "< Event with the given `id` correctly created.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Created_Response"
+              }
+            }
+          },
+          "204": {
+            "description": "No content to create the event with the given `id` and based on the request.",
+            "schema": {
+              "$ref": "#/definitions/No_Content_Response"
+            }
+          },
+          "400": {
+            "description": "Request not valid.",
+            "schema": {
+              "$ref": "#/definitions/Bad_Request_Response"
+            }
+          },
+          "401": {
+            "description": "Authentication failed.",
+            "schema": {
+              "$ref": "#/definitions/Unauthorized_Response"
+            }
+          },
+          "406": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/Not_Acceptable_Response"
+            }
+          },
+          "415": {
+            "description": "Media type not supported.",
+            "schema": {
+              "$ref": "#/definitions/Unsupported_Media_Type_Response"
+            }
+          },
+          "422": {
+            "description": "Not possible to create the event with the given `id` and based on the request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Unprocessable_Entity_Response"
+              }
+            }
+          },
+          "500": {
+            "description": "Server not available to satisfy the request.",
+            "schema": {
+              "$ref": "#/definitions/Internal_Server_Error_Response"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "< Event Update (Single).",
+        "description": "Update the event with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Event"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "event"
+        ],
+        "responses": {
+          "200": {
+            "description": "< Event with the given `id` correctly updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Ok_Response"
+              }
+            }
+          },
+          "204": {
+            "description": "No content to update event with the given `id` and based on the request.",
+            "schema": {
+              "$ref": "#/definitions/No_Content_Response"
+            }
+          },
+          "304": {
+            "description": "Update of the event with the given `id` not necessary.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Not_Modified_Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Request not valid.",
+            "schema": {
+              "$ref": "#/definitions/Bad_Request_Response"
+            }
+          },
+          "401": {
+            "description": "Authentication failed.",
+            "schema": {
+              "$ref": "#/definitions/Unauthorized_Response"
+            }
+          },
+          "406": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/Not_Acceptable_Response"
+            }
+          },
+          "415": {
+            "description": "Media type not supported.",
+            "schema": {
+              "$ref": "#/definitions/Unsupported_Media_Type_Response"
+            }
+          },
+          "422": {
+            "description": "Not possible to update the event with the given `id` and based on the request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Unprocessable_Entity_Response"
+              }
+            }
+          },
+          "500": {
+            "description": "Server not available to satisfy the request.",
+            "schema": {
+              "$ref": "#/definitions/Internal_Server_Error_Response"
+            }
+          }
+        }
+      }
+    },
+    "/event/{id}": {
+      "delete": {
+        "summary": "< Event Delete (Single).",
+        "description": "Delete the event with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/Query_Request"
+            }
+          }
+        ],
+        "tags": [
+          "event"
+        ],
+        "responses": {
+          "205": {
+            "description": "< Event with the given `id` correctly deleted.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Reset_Content_Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Request not valid.",
+            "schema": {
+              "$ref": "#/definitions/Bad_Request_Response"
+            }
+          },
+          "401": {
+            "description": "Authentication failed.",
+            "schema": {
+              "$ref": "#/definitions/Unauthorized_Response"
+            }
+          },
+          "404": {
+            "description": "< Event with the given `id` and based on the request query not found.",
+            "schema": {
+              "$ref": "#/definitions/Not_Found_Response"
+            }
+          },
+          "406": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/Not_Acceptable_Response"
+            }
+          },
+          "415": {
+            "description": "Media type not supported.",
+            "schema": {
+              "$ref": "#/definitions/Unsupported_Media_Type_Response"
+            }
+          },
+          "422": {
+            "description": "Not possible to delete the event with the given `id` and based on the request query.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Unprocessable_Entity_Response"
+              }
+            }
+          },
+          "500": {
+            "description": "Server not available to satisfy the request.",
+            "schema": {
+              "$ref": "#/definitions/Internal_Server_Error_Response"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "< Event Read (Single).",
+        "description": "Get the event with the given `id` and filtered by the query in the request body.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "in": "body",
+            "required": true,
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/Query_Request"
+            }
+          }
+        ],
+        "tags": [
+          "event"
+        ],
+        "responses": {
+          "200": {
+            "description": "< Event with the given `id` and filtered by the query in the request body.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Event"
+              }
+            }
+          },
+          "400": {
+            "description": "Request not valid.",
+            "schema": {
+              "$ref": "#/definitions/Bad_Request_Response"
+            }
+          },
+          "401": {
+            "description": "Authentication failed.",
+            "schema": {
+              "$ref": "#/definitions/Unauthorized_Response"
+            }
+          },
+          "404": {
+            "description": "< Event based on the request _query_ not found.",
+            "schema": {
+              "$ref": "#/definitions/Not_Found_Response"
+            }
+          },
+          "406": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/Not_Acceptable_Response"
+            }
+          },
+          "415": {
+            "description": "Media type not supported.",
+            "schema": {
+              "$ref": "#/definitions/Unsupported_Media_Type_Response"
+            }
+          },
+          "422": {
+            "description": "Not possible to get event with the request _query_.",
+            "schema": {
+              "$ref": "#/definitions/Unprocessable_Entity_Response"
+            }
+          },
+          "500": {
+            "description": "Server not available to satisfy the request.",
+            "schema": {
+              "$ref": "#/definitions/Internal_Server_Error_Response"
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "< Event Create (Single).",
+        "description": "Create a new event with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Event"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "event"
+        ],
+        "responses": {
+          "201": {
+            "description": "< Event with the given `id` correctly created.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Created_Response"
+              }
+            }
+          },
+          "204": {
+            "description": "No content to create the event with the given `id` and based on the request.",
+            "schema": {
+              "$ref": "#/definitions/No_Content_Response"
+            }
+          },
+          "400": {
+            "description": "Request not valid.",
+            "schema": {
+              "$ref": "#/definitions/Bad_Request_Response"
+            }
+          },
+          "401": {
+            "description": "Authentication failed.",
+            "schema": {
+              "$ref": "#/definitions/Unauthorized_Response"
+            }
+          },
+          "406": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/Not_Acceptable_Response"
+            }
+          },
+          "415": {
+            "description": "Media type not supported.",
+            "schema": {
+              "$ref": "#/definitions/Unsupported_Media_Type_Response"
+            }
+          },
+          "422": {
+            "description": "Not possible to create the event with the given `id` and based on the request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Unprocessable_Entity_Response"
+              }
+            }
+          },
+          "500": {
+            "description": "Server not available to satisfy the request.",
+            "schema": {
+              "$ref": "#/definitions/Internal_Server_Error_Response"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "< Event Update (Single).",
+        "description": "Update the event with the given `id`.",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "type": "String"
+          },
+          {
+            "name": "payload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Event"
+              }
+            }
+          }
+        ],
+        "tags": [
+          "event"
+        ],
+        "responses": {
+          "200": {
+            "description": "< Event with the given `id` correctly updated.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Ok_Response"
+              }
+            }
+          },
+          "204": {
+            "description": "No content to update event with the given `id` and based on the request.",
+            "schema": {
+              "$ref": "#/definitions/No_Content_Response"
+            }
+          },
+          "304": {
+            "description": "Update of the event with the given `id` not necessary.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Not_Modified_Response"
+              }
+            }
+          },
+          "400": {
+            "description": "Request not valid.",
+            "schema": {
+              "$ref": "#/definitions/Bad_Request_Response"
+            }
+          },
+          "401": {
+            "description": "Authentication failed.",
+            "schema": {
+              "$ref": "#/definitions/Unauthorized_Response"
+            }
+          },
+          "406": {
+            "description": "Request validation failed.",
+            "schema": {
+              "$ref": "#/definitions/Not_Acceptable_Response"
+            }
+          },
+          "415": {
+            "description": "Media type not supported.",
+            "schema": {
+              "$ref": "#/definitions/Unsupported_Media_Type_Response"
+            }
+          },
+          "422": {
+            "description": "Not possible to update the event with the given `id` and based on the request.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Unprocessable_Entity_Response"
+              }
+            }
+          },
+          "500": {
+            "description": "Server not available to satisfy the request.",
+            "schema": {
+              "$ref": "#/definitions/Internal_Server_Error_Response"
+            }
+          }
+        }
+      }
+    },
     "/exec-env/": {
       "delete": {
         "summary": "< Execution environment Delete (Single).",
@@ -6702,28 +7370,22 @@
   },
   "swagger": "2.0",
   "definitions": {
-    "Query_Request_Order": {
+    "Query_Request_Limit": {
       "type": "object",
       "properties": {
-        "target": {
-          "type": "string",
-          "example": "name",
-          "description": "The field to compare."
+        "to": {
+          "type": "integer",
+          "format": "int32",
+          "example": 5,
+          "description": "Ended index of the items to return."
         },
-        "mode": {
-          "type": "string",
-          "enum": [
-            "asc",
-            "desc"
-          ],
-          "example": "asc",
-          "description": "Order mode."
+        "from": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Started index of the items to return."
         }
-      },
-      "required": [
-        "mode",
-        "target"
-      ]
+      }
     },
     "Query_Request_Filter": {
       "type": "object",
@@ -6747,21 +7409,6 @@
     "Query_Request_Clause": {
       "type": "object",
       "properties": {
-        "or": {
-          "description": "At least the clause has to be satisfied.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Query_Request_Clause"
-          }
-        },
-        "gt": {
-          "description": "The target field must be greater to the expr value.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Query_Request_Filter"
-            }
-          ]
-        },
         "gte": {
           "description": "The target field must be greater or equal to the expr value.",
           "allOf": [
@@ -6769,45 +7416,6 @@
               "$ref": "#/definitions/Query_Request_Filter"
             }
           ]
-        },
-        "wildcard": {
-          "description": "The target field must be satisfy the wildcard in expr.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Query_Request_Filter"
-            }
-          ]
-        },
-        "lte": {
-          "description": "The target field must be lower or equal to the expr value.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Query_Request_Filter"
-            }
-          ]
-        },
-        "reg_exp": {
-          "description": "The target field must be satisfy the regular expression in expr.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Query_Request_Filter"
-            }
-          ]
-        },
-        "equals": {
-          "description": "The target field must be equal to the expr value.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Query_Request_Filter"
-            }
-          ]
-        },
-        "and": {
-          "description": "All the clause has to be satisfied.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Query_Request_Clause"
-          }
         },
         "not": {
           "description": "The clause has to be not satisfied.",
@@ -6824,41 +7432,89 @@
               "$ref": "#/definitions/Query_Request_Filter"
             }
           ]
+        },
+        "wildcard": {
+          "description": "The target field must be satisfy the wildcard in expr.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Query_Request_Filter"
+            }
+          ]
+        },
+        "and": {
+          "description": "All the clause has to be satisfied.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Query_Request_Clause"
+          }
+        },
+        "reg_exp": {
+          "description": "The target field must be satisfy the regular expression in expr.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Query_Request_Filter"
+            }
+          ]
+        },
+        "lte": {
+          "description": "The target field must be lower or equal to the expr value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Query_Request_Filter"
+            }
+          ]
+        },
+        "gt": {
+          "description": "The target field must be greater to the expr value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Query_Request_Filter"
+            }
+          ]
+        },
+        "equals": {
+          "description": "The target field must be equal to the expr value.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Query_Request_Filter"
+            }
+          ]
+        },
+        "or": {
+          "description": "At least the clause has to be satisfied.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Query_Request_Clause"
+          }
         }
       }
     },
-    "Query_Request_Limit": {
+    "Query_Request_Order": {
       "type": "object",
       "properties": {
-        "from": {
-          "type": "integer",
-          "format": "int32",
-          "example": 1,
-          "description": "Started index of the items to return."
+        "target": {
+          "type": "string",
+          "example": "name",
+          "description": "The field to compare."
         },
-        "to": {
-          "type": "integer",
-          "format": "int32",
-          "example": 5,
-          "description": "Ended index of the items to return."
+        "mode": {
+          "type": "string",
+          "enum": [
+            "asc",
+            "desc"
+          ],
+          "example": "asc",
+          "description": "Order mode."
         }
-      }
+      },
+      "required": [
+        "mode",
+        "target"
+      ]
     },
     "Query_Request": {
       "type": "object",
       "properties": {
-        "force": {
-          "type": "boolean",
-          "example": true,
-          "description": "Force the execution of the request even there are some errors (example: delete a inconstent entries."
-        },
-        "order": {
-          "description": "Order the filtered items.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Query_Request_Order"
-          }
-        },
         "select": {
           "type": "array",
           "items": {
@@ -6866,6 +7522,19 @@
             "example": "id",
             "description": "Fields to return."
           }
+        },
+        "force": {
+          "type": "boolean",
+          "example": true,
+          "description": "Force the execution of the request even there are some errors (example: delete a inconstent entries."
+        },
+        "limit": {
+          "description": "Limit the number of items to return.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Query_Request_Limit"
+            }
+          ]
         },
         "where": {
           "description": "Filter the items based on different conditions.",
@@ -6875,13 +7544,12 @@
             }
           ]
         },
-        "limit": {
-          "description": "Limit the number of items to return.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Query_Request_Limit"
-            }
-          ]
+        "order": {
+          "description": "Order the filtered items.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Query_Request_Order"
+          }
         }
       }
     },
@@ -6892,16 +7560,16 @@
           "example": "Connection timeout",
           "description": "Exception reason."
         },
-        "filename": {
-          "type": "string",
-          "example": "lib/connection.py",
-          "description": "Filename where the exception is raised."
-        },
         "line": {
           "type": "integer",
           "format": "int32",
           "example": 80,
           "description": "Line where the exception is raised."
+        },
+        "filename": {
+          "type": "string",
+          "example": "lib/connection.py",
+          "description": "Filename where the exception is raised."
         }
       },
       "required": [
@@ -6916,9 +7584,6 @@
         "error": {
           "default": false
         },
-        "status": {
-          "default": "Reset Content"
-        },
         "exception": {
           "description": "Message of the occurred exception.",
           "allOf": [
@@ -6929,6 +7594,9 @@
         },
         "code": {
           "default": 205
+        },
+        "status": {
+          "default": "Reset Content"
         },
         "message": {
           "type": "string",
@@ -6946,9 +7614,6 @@
         "error": {
           "default": true
         },
-        "status": {
-          "default": "Bad Request"
-        },
         "exception": {
           "description": "Message of the occurred exception.",
           "allOf": [
@@ -6959,6 +7624,9 @@
         },
         "code": {
           "default": 400
+        },
+        "status": {
+          "default": "Bad Request"
         },
         "message": {
           "type": "string",
@@ -6976,9 +7644,6 @@
         "error": {
           "default": true
         },
-        "status": {
-          "default": "Unauthorized"
-        },
         "exception": {
           "description": "Message of the occurred exception.",
           "allOf": [
@@ -6989,6 +7654,9 @@
         },
         "code": {
           "default": 401
+        },
+        "status": {
+          "default": "Unauthorized"
         },
         "message": {
           "type": "string",
@@ -7006,9 +7674,6 @@
         "error": {
           "default": true
         },
-        "status": {
-          "default": "Not Found"
-        },
         "exception": {
           "description": "Message of the occurred exception.",
           "allOf": [
@@ -7019,6 +7684,9 @@
         },
         "code": {
           "default": 404
+        },
+        "status": {
+          "default": "Not Found"
         },
         "message": {
           "type": "string",
@@ -7036,9 +7704,6 @@
         "error": {
           "default": true
         },
-        "status": {
-          "default": "Not Acceptable"
-        },
         "exception": {
           "description": "Message of the occurred exception.",
           "allOf": [
@@ -7049,6 +7714,9 @@
         },
         "code": {
           "default": 406
+        },
+        "status": {
+          "default": "Not Acceptable"
         },
         "message": {
           "type": "string",
@@ -7066,9 +7734,6 @@
         "error": {
           "default": true
         },
-        "status": {
-          "default": "Unsupported Media Type"
-        },
         "exception": {
           "description": "Message of the occurred exception.",
           "allOf": [
@@ -7079,6 +7744,9 @@
         },
         "code": {
           "default": 415
+        },
+        "status": {
+          "default": "Unsupported Media Type"
         },
         "message": {
           "type": "string",
@@ -7096,9 +7764,6 @@
         "error": {
           "default": true
         },
-        "status": {
-          "default": "Unprocessable Entity"
-        },
         "exception": {
           "description": "Message of the occurred exception.",
           "allOf": [
@@ -7109,6 +7774,9 @@
         },
         "code": {
           "default": 422
+        },
+        "status": {
+          "default": "Unprocessable Entity"
         },
         "message": {
           "type": "string",
@@ -7126,9 +7794,6 @@
         "error": {
           "default": true
         },
-        "status": {
-          "default": "Internal Server Error"
-        },
         "exception": {
           "description": "Message of the occurred exception.",
           "allOf": [
@@ -7140,6 +7805,9 @@
         "code": {
           "default": 500
         },
+        "status": {
+          "default": "Internal Server Error"
+        },
         "message": {
           "type": "string",
           "example": "Request not valid: two ids provided.",
@@ -7148,114 +7816,6 @@
       },
       "required": [
         "message"
-      ]
-    },
-    "Agent_Catalog_Action_Config": {
-      "type": "object",
-      "properties": {
-        "args": {
-          "type": "string",
-          "example": "-v",
-          "description": "Action command argument"
-        },
-        "cmd": {
-          "type": "string",
-          "example": "service filebeat start",
-          "description": "Action command."
-        },
-        "daemon": {
-          "type": "boolean",
-          "example": true,
-          "description": "Execute the command as daemon."
-        }
-      },
-      "required": [
-        "cmd"
-      ]
-    },
-    "Agent_Catalog_Action": {
-      "type": "object",
-      "properties": {
-        "config": {
-          "description": "Action config.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Agent_Catalog_Action_Config"
-            }
-          ]
-        },
-        "status": {
-          "type": "string",
-          "enum": [
-            "started",
-            "stopped",
-            "unknown"
-          ],
-          "example": "started",
-          "description": "Update the status the of the agent-instance if the command is executed correctly."
-        },
-        "id": {
-          "type": "string",
-          "example": "start",
-          "description": "Action name"
-        },
-        "description": {
-          "type": "string",
-          "example": "Start the execution of the agent.",
-          "description": "Short description of the agent actions."
-        },
-        "example": {
-          "example": "forward",
-          "description": "Example of action parameter."
-        }
-      },
-      "required": [
-        "config",
-        "id"
-      ]
-    },
-    "Agent_Catalog_Resource_Config": {
-      "type": "object",
-      "properties": {
-        "path": {
-          "type": "string",
-          "example": "/usr/share/filebeat/filebeat.yml",
-          "description": "File path"
-        }
-      },
-      "required": [
-        "path"
-      ]
-    },
-    "Agent_Catalog_Resource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "example": "filebeat-config",
-          "description": "Resource id."
-        },
-        "config": {
-          "description": "Resource configuration.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Agent_Catalog_Resource_Config"
-            }
-          ]
-        },
-        "description": {
-          "type": "string",
-          "example": "Enable the agent.",
-          "description": "Short description of the parameter."
-        },
-        "example": {
-          "example": "10s",
-          "description": "Example of parameter value."
-        }
-      },
-      "required": [
-        "config",
-        "id"
       ]
     },
     "Agent_Catalog_Parameter_Config": {
@@ -7294,10 +7854,10 @@
     "Agent_Catalog_Parameter": {
       "type": "object",
       "properties": {
-        "values": {
+        "id": {
           "type": "string",
-          "example": "mysql",
-          "description": "Possible values if the parameter type is choice."
+          "example": "log-period",
+          "description": "Parameter id."
         },
         "type": {
           "type": "string",
@@ -7313,10 +7873,10 @@
           "example": "binary",
           "description": "Parameter type."
         },
-        "list": {
-          "type": "boolean",
-          "example": true,
-          "description": "Indicate if the parameter can have multiple values."
+        "values": {
+          "type": "string",
+          "example": "mysql",
+          "description": "Possible values if the parameter type is choice."
         },
         "config": {
           "description": "Parameter configuration.",
@@ -7326,10 +7886,47 @@
             }
           ]
         },
+        "example": {
+          "example": "10s",
+          "description": "Example of parameter value."
+        },
+        "description": {
+          "type": "string",
+          "example": "Enable the agent.",
+          "description": "Short description of the parameter."
+        },
+        "list": {
+          "type": "boolean",
+          "example": true,
+          "description": "Indicate if the parameter can have multiple values."
+        }
+      },
+      "required": [
+        "config",
+        "id",
+        "type"
+      ]
+    },
+    "Agent_Catalog_Resource_Config": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "example": "/usr/share/filebeat/filebeat.yml",
+          "description": "File path"
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+    "Agent_Catalog_Resource": {
+      "type": "object",
+      "properties": {
         "id": {
           "type": "string",
-          "example": "log-period",
-          "description": "Parameter id."
+          "example": "filebeat-config",
+          "description": "Resource id."
         },
         "description": {
           "type": "string",
@@ -7339,17 +7936,102 @@
         "example": {
           "example": "10s",
           "description": "Example of parameter value."
+        },
+        "config": {
+          "description": "Resource configuration.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Agent_Catalog_Resource_Config"
+            }
+          ]
         }
       },
       "required": [
         "config",
-        "id",
-        "type"
+        "id"
+      ]
+    },
+    "Agent_Catalog_Action_Config": {
+      "type": "object",
+      "properties": {
+        "args": {
+          "type": "string",
+          "example": "-v",
+          "description": "Action command argument"
+        },
+        "cmd": {
+          "type": "string",
+          "example": "service filebeat start",
+          "description": "Action command."
+        },
+        "daemon": {
+          "type": "boolean",
+          "example": true,
+          "description": "Execute the command as daemon."
+        }
+      },
+      "required": [
+        "cmd"
+      ]
+    },
+    "Agent_Catalog_Action": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "start",
+          "description": "Action name"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "started",
+            "stopped",
+            "unknown"
+          ],
+          "example": "started",
+          "description": "Update the status the of the agent-instance if the command is executed correctly."
+        },
+        "example": {
+          "example": "forward",
+          "description": "Example of action parameter."
+        },
+        "description": {
+          "type": "string",
+          "example": "Start the execution of the agent.",
+          "description": "Short description of the agent actions."
+        },
+        "config": {
+          "description": "Action config.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Agent_Catalog_Action_Config"
+            }
+          ]
+        }
+      },
+      "required": [
+        "config",
+        "id"
       ]
     },
     "Agent_Catalog": {
       "type": "object",
       "properties": {
+        "parameters": {
+          "description": "Parameter properties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Agent_Catalog_Parameter"
+          }
+        },
+        "resources": {
+          "description": "Resource properties.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Agent_Catalog_Resource"
+          }
+        },
         "id": {
           "type": "string",
           "example": "filebeat",
@@ -7366,20 +8048,6 @@
           "items": {
             "$ref": "#/definitions/Agent_Catalog_Action"
           }
-        },
-        "resources": {
-          "description": "Resource properties.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Agent_Catalog_Resource"
-          }
-        },
-        "parameters": {
-          "description": "Parameter properties.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Agent_Catalog_Parameter"
-          }
         }
       },
       "required": [
@@ -7392,9 +8060,6 @@
         "error": {
           "default": false
         },
-        "status": {
-          "default": "Created"
-        },
         "exception": {
           "description": "Message of the occurred exception.",
           "allOf": [
@@ -7405,6 +8070,9 @@
         },
         "code": {
           "default": 201
+        },
+        "status": {
+          "default": "Created"
         },
         "message": {
           "type": "string",
@@ -7422,9 +8090,6 @@
         "error": {
           "default": false
         },
-        "status": {
-          "default": "No Content"
-        },
         "exception": {
           "description": "Message of the occurred exception.",
           "allOf": [
@@ -7435,6 +8100,9 @@
         },
         "code": {
           "default": 204
+        },
+        "status": {
+          "default": "No Content"
         },
         "message": {
           "type": "string",
@@ -7452,9 +8120,6 @@
         "error": {
           "default": false
         },
-        "status": {
-          "default": "OK"
-        },
         "exception": {
           "description": "Message of the occurred exception.",
           "allOf": [
@@ -7465,6 +8130,9 @@
         },
         "code": {
           "default": 200
+        },
+        "status": {
+          "default": "OK"
         },
         "message": {
           "type": "string",
@@ -7482,9 +8150,6 @@
         "error": {
           "default": false
         },
-        "status": {
-          "default": "Not Modified"
-        },
         "exception": {
           "description": "Message of the occurred exception.",
           "allOf": [
@@ -7495,6 +8160,9 @@
         },
         "code": {
           "default": 304
+        },
+        "status": {
+          "default": "Not Modified"
         },
         "message": {
           "type": "string",
@@ -7528,29 +8196,6 @@
         "id"
       ]
     },
-    "Agent_Instance_Resource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "example": "/opt/firewall.xml",
-          "description": "Resource path."
-        },
-        "timestamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp of the last time the resource data was updated or created correctly."
-        },
-        "content": {
-          "type": "string",
-          "description": "Resource content."
-        }
-      },
-      "required": [
-        "content",
-        "id"
-      ]
-    },
     "Agent_Instance_Parameter": {
       "type": "object",
       "properties": {
@@ -7569,6 +8214,29 @@
         "id"
       ]
     },
+    "Agent_Instance_Resource": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Resource content."
+        },
+        "id": {
+          "type": "string",
+          "example": "/opt/firewall.xml",
+          "description": "Resource path."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last time the resource data was updated or created correctly."
+        }
+      },
+      "required": [
+        "content",
+        "id"
+      ]
+    },
     "Agent_Instance_Operation": {
       "type": "object",
       "properties": {
@@ -7579,18 +8247,18 @@
             "$ref": "#/definitions/Agent_Instance_Action"
           }
         },
-        "resources": {
-          "description": "List of agent instance resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Agent_Instance_Resource"
-          }
-        },
         "parameters": {
           "description": "List of agent instance parameters.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Agent_Instance_Parameter"
+          }
+        },
+        "resources": {
+          "description": "List of agent instance resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Agent_Instance_Resource"
           }
         }
       }
@@ -7598,11 +8266,6 @@
     "Agent_Instance": {
       "type": "object",
       "properties": {
-        "exec_env_id": {
-          "type": "string",
-          "example": "apache",
-          "description": "Id of the execution environment where the agent instance is installed."
-        },
         "operations": {
           "description": "List of agent instance operations.",
           "allOf": [
@@ -7615,6 +8278,11 @@
           "type": "string",
           "example": "filebeat@apache",
           "description": "Id of the agent instance installed in an execution environment."
+        },
+        "exec_env_id": {
+          "type": "string",
+          "example": "apache",
+          "description": "Id of the execution environment where the agent instance is installed."
         },
         "description": {
           "type": "string",
@@ -7641,6 +8309,11 @@
           "example": "conn-1",
           "description": "Id of connection."
         },
+        "exec_env_id": {
+          "type": "string",
+          "example": "apache",
+          "description": "Id of the connected execution environment."
+        },
         "network_link_id": {
           "type": "string",
           "example": "net-link-1",
@@ -7650,11 +8323,6 @@
           "type": "string",
           "example": "Added to this network for debug purposes.",
           "description": "Short description of the connection."
-        },
-        "exec_env_id": {
-          "type": "string",
-          "example": "apache",
-          "description": "Id of the connected execution environment."
         }
       },
       "required": [
@@ -7666,36 +8334,83 @@
     "Data": {
       "type": "object",
       "properties": {
-        "id": {
+        "agent_instance_id": {
           "type": "string",
-          "example": "BXrHRn5RPU55Qh9JwMZn",
-          "description": "Id of the data."
+          "example": "filebeat@apache",
+          "description": "Id of the agent instance in the execution environment\n                                           that collected the data"
         },
         "ebpf_program_instance_id": {
           "type": "string",
           "example": "packet-capture@apache",
           "description": "Id of the eBPF program instance in the execution\n                                                  environment that collected the data"
         },
-        "agent_instance_id": {
+        "id": {
           "type": "string",
-          "example": "filebeat@apache",
-          "description": "Id of the agent instance in the execution environment\n                                           that collected the data"
-        },
-        "timestamp_agent": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2019/02/14 15:23:30",
-          "description": "Timestamp when the agent instance collected the data"
+          "example": "BXrHRn5RPU55Qh9JwMZn",
+          "description": "Id of the data."
         },
         "timestamp_event": {
           "type": "string",
           "format": "date-time",
           "example": "2019/02/14 15:23:30",
           "description": "Timestamp of the event related to the collected data"
+        },
+        "timestamp_agent": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019/02/14 15:23:30",
+          "description": "Timestamp when the agent instance collected the data"
         }
       },
       "required": [
         "id"
+      ]
+    },
+    "eBPF_Program_Catalog_Parameter": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "interface",
+          "description": "Parameter id."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "binary",
+            "boolean",
+            "choice",
+            "integer",
+            "number",
+            "time-duration",
+            "string"
+          ],
+          "description": "Parameter type.",
+          "example": "integer"
+        },
+        "values": {
+          "type": "string",
+          "example": "yes",
+          "description": "Possible values if the parameter type is choice."
+        },
+        "example": {
+          "example": "eno0",
+          "description": "Example of parameter value."
+        },
+        "description": {
+          "type": "string",
+          "example": "Network Interface to attach.",
+          "description": "Short description of the parameter."
+        },
+        "list": {
+          "type": "boolean",
+          "example": true,
+          "description": "Indicate if the parameter can have multiple values."
+        }
+      },
+      "required": [
+        "id",
+        "type"
       ]
     },
     "eBPF_Program_Catalog_Config_Metric_Open_Metrics_Metadata_Label": {
@@ -7720,15 +8435,15 @@
     "eBPF_Program_Catalog_Config_Metric_Open_Metrics_Metadata": {
       "type": "object",
       "properties": {
-        "help": {
-          "type": "string",
-          "example": "This metric represents the number of packets that has travelled trough this probe.",
-          "description": "Metric help."
-        },
         "type": {
           "type": "string",
           "example": "counter",
           "description": "Metric type."
+        },
+        "help": {
+          "type": "string",
+          "example": "This metric represents the number of packets that has travelled trough this probe.",
+          "description": "Metric help."
         },
         "labels": {
           "description": "Labels of Open Metrics Metadata.",
@@ -7791,74 +8506,27 @@
         "code"
       ]
     },
-    "eBPF_Program_Catalog_Parameter": {
-      "type": "object",
-      "properties": {
-        "values": {
-          "type": "string",
-          "example": "yes",
-          "description": "Possible values if the parameter type is choice."
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "binary",
-            "boolean",
-            "choice",
-            "integer",
-            "number",
-            "time-duration",
-            "string"
-          ],
-          "description": "Parameter type.",
-          "example": "integer"
-        },
-        "list": {
-          "type": "boolean",
-          "example": true,
-          "description": "Indicate if the parameter can have multiple values."
-        },
-        "id": {
-          "type": "string",
-          "example": "interface",
-          "description": "Parameter id."
-        },
-        "description": {
-          "type": "string",
-          "example": "Network Interface to attach.",
-          "description": "Short description of the parameter."
-        },
-        "example": {
-          "example": "eno0",
-          "description": "Example of parameter value."
-        }
-      },
-      "required": [
-        "id",
-        "type"
-      ]
-    },
     "eBPF_Program_Catalog": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "example": "packet-capture",
-          "description": "Id of the eBPF_Program_ in the catalog."
-        },
-        "config": {
-          "$ref": "#/definitions/eBPF_Program_Catalog_Config"
-        },
         "description": {
           "type": "string",
           "example": "Transparent service to capture packets flowing through the interface it\n                                 is attached to, apply filters and obtain capture in .pcap format.",
           "description": "Description of eBPF program."
+        },
+        "id": {
+          "type": "string",
+          "example": "packet-capture",
+          "description": "Id of the eBPF_Program_ in the catalog."
         },
         "parameters": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/eBPF_Program_Catalog_Parameter"
           }
+        },
+        "config": {
+          "$ref": "#/definitions/eBPF_Program_Catalog_Config"
         }
       },
       "required": [
@@ -7887,37 +8555,50 @@
     "eBPF_Program_Instance": {
       "type": "object",
       "properties": {
-        "exec_env_id": {
-          "type": "string",
-          "example": "apache",
-          "description": "Id of the execution environment where the eBPF program\n                                     instance is installed"
-        },
-        "id": {
-          "type": "string",
-          "example": "packet-capture@apache",
-          "description": "Id of the eBPF program installed in an execution environment."
-        },
-        "description": {
-          "type": "string",
-          "example": "Collect system metrics from Apache HTTP Web Server.",
-          "description": "Short description of the agent installed in the execution environment."
-        },
-        "ebpf_program_catalog_id": {
-          "type": "string",
-          "example": "packet-capture",
-          "description": "Id of the agent in the catalog."
-        },
         "parameters": {
           "description": "List of eBPF program instance parameters.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/eBPF_Program_Instance_Parameter"
           }
+        },
+        "id": {
+          "type": "string",
+          "example": "packet-capture@apache",
+          "description": "Id of the eBPF program installed in an execution environment."
+        },
+        "ebpf_program_catalog_id": {
+          "type": "string",
+          "example": "packet-capture",
+          "description": "Id of the agent in the catalog."
+        },
+        "exec_env_id": {
+          "type": "string",
+          "example": "apache",
+          "description": "Id of the execution environment where the eBPF program\n                                     instance is installed"
+        },
+        "description": {
+          "type": "string",
+          "example": "Collect system metrics from Apache HTTP Web Server.",
+          "description": "Short description of the agent installed in the execution environment."
         }
       },
       "required": [
         "ebpf_program_catalog_id",
         "exec_env_id",
+        "id"
+      ]
+    },
+    "Event": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "BXrHRn5RPU55Qh9JwMZn",
+          "description": "Id of the event."
+        }
+      },
+      "required": [
         "id"
       ]
     },
@@ -7930,6 +8611,16 @@
           "example": 5000,
           "description": "TCP port number of LCP in the execution environment."
         },
+        "started": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2019/02/14 15:23:30",
+          "description": "Timestamp when the LCP is started"
+        },
+        "username": {
+          "type": "string",
+          "description": "Username for the CB to connect to this LCP."
+        },
         "last_heartbeat": {
           "type": "string",
           "format": "date-time",
@@ -7939,16 +8630,6 @@
         "password": {
           "type": "string",
           "description": "Password for the CB to connect to this LCP."
-        },
-        "username": {
-          "type": "string",
-          "description": "Username for the CB to connect to this LCP."
-        },
-        "started": {
-          "type": "string",
-          "format": "date-time",
-          "example": "2019/02/14 15:23:30",
-          "description": "Timestamp when the LCP is started"
         }
       },
       "required": [
@@ -7966,30 +8647,30 @@
             }
           ]
         },
-        "type_id": {
-          "type": "string",
-          "example": "vm",
-          "description": "Id of the execution environment type."
+        "enabled": {
+          "type": "boolean",
+          "example": "Yes",
+          "description": "Indicate if the execution environment is enabled or not"
         },
         "id": {
           "type": "string",
           "example": "apache",
           "description": "Id of the execution environment."
         },
+        "hostname": {
+          "type": "string",
+          "example": "192.168.1.2",
+          "description": "Hostname of the execution environment."
+        },
         "description": {
           "type": "string",
           "example": "Apache HTTP Web Server.",
           "description": "Short description of the execution environment,"
         },
-        "enabled": {
-          "type": "boolean",
-          "example": "Yes",
-          "description": "Indicate if the execution environment is enabled or not"
-        },
-        "hostname": {
+        "type_id": {
           "type": "string",
-          "example": "192.168.1.2",
-          "description": "Hostname of the execution environment."
+          "example": "vm",
+          "description": "Id of the execution environment type."
         }
       },
       "required": [
@@ -8003,6 +8684,11 @@
     "Exec_Env_Type": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "example": "Virtual Machine",
+          "description": "Name of the execution environment."
+        },
         "id": {
           "type": "string",
           "example": "vm",
@@ -8012,11 +8698,6 @@
           "type": "string",
           "example": "Linux container.",
           "description": "Short description of the type."
-        },
-        "name": {
-          "type": "string",
-          "example": "Virtual Machine",
-          "description": "Name of the execution environment."
         }
       },
       "required": [
@@ -8032,15 +8713,15 @@
           "example": "net-link-1",
           "description": "Id of the network link."
         },
-        "description": {
-          "type": "string",
-          "example": "Allow communication between front-end and back-end services.",
-          "description": "Short description of the network link,"
-        },
         "type_id": {
           "type": "string",
           "example": "pnt2pnt",
           "description": "Id of the network link type."
+        },
+        "description": {
+          "type": "string",
+          "example": "Allow communication between front-end and back-end services.",
+          "description": "Short description of the network link,"
         }
       },
       "required": [
@@ -8051,6 +8732,11 @@
     "Network_Link_Type": {
       "type": "object",
       "properties": {
+        "name": {
+          "type": "string",
+          "example": "Point to point",
+          "description": "Name of the network link type."
+        },
         "id": {
           "type": "string",
           "example": "pnt2pnt",
@@ -8060,11 +8746,6 @@
           "type": "string",
           "example": "Communications connection between two communication endpoints.",
           "description": "Short description of the network link type,"
-        },
-        "name": {
-          "type": "string",
-          "example": "Point to point",
-          "description": "Name of the network link type."
         }
       },
       "required": [
