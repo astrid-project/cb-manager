@@ -17,25 +17,25 @@ class Config_Reader:
     def read(self):
         self.cr.read(self.path.resolve())
 
-        self.cb_host = self.cr.get('context-broker', 'host')
-        self.cb_port = self.cr.get('context-broker', 'port')
+        self.cb_host = self.cr.get('context-broker', 'host', fallback='0.0.0.0')
+        self.cb_port = self.cr.get('context-broker', 'port', fallback=5000)
 
-        self.hb_timeout = self.cr.get('heartbeat', 'timeout')
-        self.hb_period = self.cr.get('heartbeat', 'period')
-        self.hb_auth_expiration = self.cr.get('heartbeat', 'auth-expiration')
+        self.hb_timeout = self.cr.get('heartbeat', 'timeout', fallback='10s')
+        self.hb_period = self.cr.get('heartbeat', 'period', fallback='1min')
+        self.hb_auth_expiration = self.cr.get('heartbeat', 'auth-expiration', fallback='5min')
 
-        self.es_endpoint = self.cr.get('elasticsearch', 'endpoint')
-        self.es_timeout = self.cr.get('elasticsearch', 'timeout')
-        self.es_retry_period = self.cr.get('elasticsearch', 'retry-period')
+        self.es_endpoint = self.cr.get('elasticsearch', 'endpoint', fallback='localhost:9200')
+        self.es_timeout = self.cr.get('elasticsearch', 'timeout', fallback='20s')
+        self.es_retry_period = self.cr.get('elasticsearch', 'retry-period', fallback='3min')
 
-        self.elastic_apm_server = self.cr.get('elastic-apm', 'server');
+        self.elastic_apm_server = self.cr.get('elastic-apm', 'server', fallback='https://localhost:8200');
 
-        self.dev_username = self.cr.get('dev', 'username')
-        self.dev_password = self.cr.get('dev', 'password')
+        self.dev_username = self.cr.get('dev', 'username', fallback='cb-manager')
+        self.dev_password = self.cr.get('dev', 'password', fallback='9c804f2550e31d8f98ac9b460cfe7fbfc676c5e4452a261a2899a1ea168c0a50') # astrid in sha256
 
-        self.log_level = self.cr.get('log', 'level')
+        self.log_level = self.cr.get('log', 'level', fallback='INFO')
 
-        Log.init(default=self.log_level, levels=self.cr.items('log'))
+        Log.init(default=self.log_level, levels=self.cr.items('log') if self.cr.has_section('log') else [])
 
     def write(self, db):
         self.cr.set('context-broker', 'port', db.port)
