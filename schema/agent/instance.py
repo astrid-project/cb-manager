@@ -21,10 +21,8 @@ class Agent_Instance_Action_Schema(Schema):
 
     id = Str(required=True, example='list',
              description='Action id.')
-    output_format = Str(enum=OUTPUT_FORMATS, default=OUTPUT_FORMATS[0],
-                        example=OUTPUT_FORMATS[1], description='Format of the output of the command.')
-    timestamp = Date_Time(format=FORMAT, readonly=True,
-                          description="Timestamp of the last time the action was executed correctly.")
+    output_format = Str(enum=OUTPUT_FORMATS, example=OUTPUT_FORMATS[1], default=OUTPUT_FORMATS[0],
+                        description='Output format for stdout and stderr result of action execution.')
 
 
 class Agent_Instance_Parameter_Schema(Schema):
@@ -34,19 +32,15 @@ class Agent_Instance_Parameter_Schema(Schema):
              description='Parameter id.')
     value = Raw(required=True, example='10s',
                 description='Paremeter value.'),
-    timestamp = Date_Time(format=FORMAT, readonly=True,
-                          description="Timestamp of the last time the parameter was set correctly.")
 
 
 class Agent_Instance_Resource_Schema(Schema):
     """Resource of the agent instance installed in an execution environment."""
 
-    id = Str(required=True, example='/opt/firewall.xml',
-             description='Resource path.')
-    content = Str(required=True,
+    id = Str(required=True, example='filebeat-config',
+             description='Resource id.')
+    content = Str(required=True, example='period: 10s',
                   description='Resource content.')
-    timestamp = Date_Time(format=FORMAT, readonly=True,
-                          description="Timestamp of the last time the resource data was updated or created correctly.")
 
 
 class Agent_Instance_Operation_Schema(Base_Schema):
@@ -78,6 +72,8 @@ class Agent_Instance_Schema(Base_Schema):
                       description='Id of the execution environment where the agent instance is installed.',
                       validate=In.apply(Exec_Env_Document.get_ids),
                       error_messages=In.error_messages)
+    status = Str(enum=AGENT_STATUS, required=True, readonly=True, example=AGENT_STATUS[0],
+                 description='Status of the agent.')
     operations = Nested(Agent_Instance_Operation_Schema, unknown='INCLUDE',
                         description='List of agent instance operations.')
     description = Str(example='Collect system metrics from execution environments.',
