@@ -7,6 +7,7 @@ Welcome to CB-Manager documentation!
 Through a |REST| Interface, it exposes data and events stored in the internal storage system in a structured way.
 It provides uniform access to the capabilities of monitoring agents.
 
+
 Compatibility
 =============
 
@@ -22,6 +23,7 @@ If you are looking for information on a specific function, class or method, this
    :maxdepth: 2
 
    api
+
 
 Additional Notes
 ----------------
