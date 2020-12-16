@@ -56,7 +56,6 @@ Additional Notes
 .. toctree::
    :maxdepth: 1
 
-   contributing
    changelog
 
 
