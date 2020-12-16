@@ -21,7 +21,6 @@ This part of the documentation will show you how to get started in using |CB|-Ma
 
 .. toctree::
    :maxdepth: 1
-   :numbered:
 
    installation
    running
