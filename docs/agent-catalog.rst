@@ -133,7 +133,6 @@ To create a new agent in the catalog use the following |REST| call:
 
 .. http:post:: /catalog/agent/(string:id)
 
-
     with the request body in |JSON| format:
 
     .. sourcecode:: http
