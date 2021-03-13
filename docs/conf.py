@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.abspath('..'))
 # -- Project information -----------------------------------------------------
 
 project = 'CB-Manager'
-copyright = '2020, ASTRID Project'
+copyright = '2020-2022, ASTRID Project'
 author = 'Alex Carrega <alessandro.carrega@cnit.it>'
 
 
