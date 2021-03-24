@@ -25,7 +25,7 @@ __all__ = [
 ]
 
 
-def api(title, version, dev_username, dev_password):
+def api(title, version):
     log = Log.get('api')
     middlewares = [
         Negotiation_Middleware()
