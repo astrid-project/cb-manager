@@ -37,6 +37,7 @@ This part of the documentation will show you how to get started in using |CB|-Ma
    ebpf-program-instance
    algorithm-catalog
    algorithm-instance
+   pipeline
    glossary
 
 
