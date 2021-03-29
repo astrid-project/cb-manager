@@ -183,7 +183,7 @@ To create a new agent in the catalog use the following |REST| call:
 
     :param id: optional agent id.
 
-    :reqheader Authorization: HTTP Basic Authentication with username and password.
+    :reqheader Authorization: JWT Authentication.
     :reqheader Content-Type: application/json
 
     :resheader Content-Type: application/json
@@ -282,7 +282,7 @@ To get the list of the agents available in the catalog:
 
     :param id: optional agent id from the catalog.
 
-    :reqheader Authorization: HTTP Basic Authentication with username and password.
+    :reqheader Authorization: JWT Authentication.
     :reqheader Content-Type: application/json
 
     :resheader Content-Type: application/json
@@ -332,7 +332,7 @@ To update an agent in the catalog, use:
 
     :param id: optional agent id.
 
-    :reqheader Authorization: HTTP Basic Authentication with username and password.
+    :reqheader Authorization: JWT Authentication.
     :reqheader Content-Type: application/json
 
     :resheader Content-Type: application/json
@@ -415,7 +415,7 @@ To delete agents from the catalog, use:
 
     :param id: optional agent id from the catalog.
 
-    :reqheader Authorization: HTTP Basic Authentication with username and password.
+    :reqheader Authorization: JWT Authentication.
     :reqheader Content-Type: application/json
 
     :resheader Content-Type: application/json

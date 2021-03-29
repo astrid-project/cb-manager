@@ -1,18 +1,11 @@
 from resource.base.handler.lcp import LCP as Base_LCP
 
-from requests import post as post_req
-from requests.auth import HTTPBasicAuth as HTTP_Basic_Auth
 from toolz import valmap
 
 from document.algorithm.catalog import Algorithm_Catalog_Document
-from document.exec_env import Exec_Env_Document
 from lib.response import Unprocessable_Entity_Response
 from utils.log import Log
-from utils.sequence import expand, extract, is_dict, wrap
-
-__all__ = [
-    'LCP'
-]
+from utils.sequence import expand, wrap
 
 
 class LCP(Base_LCP):
@@ -42,15 +35,13 @@ class LCP(Base_LCP):
     def __apply(self, instance):
         if self.num > 0:
             try:
-                save_parameters = self.__save(instance=instance,
-                                              type='parameter',
-                                              catalogs=self.catalogs['parameters'],
-                                              handler=self.__save_parameter)
+                save_parameters = self.__save(instance=instance, type='parameter',
+                                              catalogs=self.catalogs['parameters'], handler=self.__save_parameter)
                 if save_parameters:
                     instance.save()
                 return True
             except Exception as e:
-                msg = f'Request not valid'
+                msg = 'Request not valid'
                 self.log.exception(msg, e)
                 uer = Unprocessable_Entity_Response(msg, exception=e)
                 uer.add(self.resp)

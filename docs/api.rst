@@ -56,11 +56,6 @@ Middleware
 
 .. currentmodule:: api.middleware
 
-.. autoclass:: Basic_Auth_Backend_Middleware
-    :members:
-    :private-members:
-    :inherited-members:
-
 .. autoclass:: Negotiation_Middleware
     :members:
     :private-members:
@@ -208,6 +203,10 @@ Lib
     :members:
     :private-members:
     :inherited-members:
+
+.. currentmodule:: lib.token
+
+.. autofunction:: create_token
 
 
 Response
@@ -840,17 +839,6 @@ Exception
 
 .. autofunction:: to_str
 
-
-Hash
-^^^^
-
-.. currentmodule:: utils.hash
-
-.. autofunction:: hash
-
-.. autofunction:: generate_username
-
-.. autofunction:: generate_password
 
 
 JSON

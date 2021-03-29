@@ -1,12 +1,9 @@
-from elasticsearch_dsl import Q, Search
 from elasticsearch import RequestError as Request_Error
+from elasticsearch_dsl import Q, Search
 from falcon.errors import HTTPBadRequest as HTTP_Bad_Request
+
 from utils.log import Log
 from utils.sequence import is_dict, is_list
-
-__all__ = [
-    'Query_Reader'
-]
 
 
 class Query_Reader:
@@ -20,15 +17,13 @@ class Query_Reader:
             self.__order(query)
             self.__limit(query)
         except Request_Error as req_err:
-            raise HTTP_Bad_Request(title=req_err.error,
-                                   description=req_err.info)
+            raise HTTP_Bad_Request(title=req_err.error, description=req_err.info)
         except HTTP_Bad_Request as http_bad_req:
             raise http_bad_req
         except Exception as exception:
             Log.get('query-reader').error(f'Exception: {exception}')
-            raise HTTP_Bad_Request(
-                title='Not valid JSON',
-                description='The request body is not a valid JSON or it is not encoded as UTF-8.')
+            raise HTTP_Bad_Request(title='Not valid JSON',
+                                   description='The request body is not a valid JSON or it is not encoded as UTF-8.')
         return self.s
 
     def __select(self, query):
@@ -43,8 +38,7 @@ class Query_Reader:
                         if q is None:
                             q = self.__where(dict(where={sub_op: sub_clause}))
                         else:
-                            q = q & self.__where(
-                                dict(where={sub_op: sub_clause}))
+                            q = q & self.__where(dict(where={sub_op: sub_clause}))
                 elif is_list(clause):
                     for sub_clause in clause:
                         if q is None:
@@ -57,8 +51,7 @@ class Query_Reader:
                         if q is None:
                             q = self.__where(dict(where={sub_op: sub_clause}))
                         else:
-                            q = q | self.__where(
-                                dict(where={sub_op: sub_clause}))
+                            q = q | self.__where(dict(where={sub_op: sub_clause}))
                 elif is_list(clause):
                     for sub_clause in clause:
                         if q is None:
@@ -80,8 +73,7 @@ class Query_Reader:
                     elif op in ['lt', 'lte', 'gt', 'gte']:
                         q = Q('range', **{prop: {op: expr}})
                     else:
-                        raise HTTP_Bad_Request(title='Operation unknown',
-                                               description=f'{op} unknown')
+                        raise HTTP_Bad_Request(title='Operation unknown', description=f'{op} unknown')
                 else:
                     raise HTTP_Bad_Request(title='Request not valid',
                                            description=f'{op} clause with not valid/missing data')
@@ -100,8 +92,7 @@ class Query_Reader:
             if prop is not None and mode is not None:
                 sort_list.append(prop if mode == 'asc' else f'-{prop}')
             else:
-                raise HTTP_Bad_Request(title='Request not valid',
-                                       description=f'order with not valid/missing data')
+                raise HTTP_Bad_Request(title='Request not valid', description='order with not valid/missing data')
         self.s = self.s.sort(*sort_list)
 
     def __limit(self, query):
