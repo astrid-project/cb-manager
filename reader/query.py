@@ -36,28 +36,28 @@ class Query_Reader:
                 if is_dict(clause):
                     for sub_op, sub_clause in clause.items():
                         if q is None:
-                            q = self.__where(dict(where={sub_op: sub_clause}))
+                            q = self.__where({'where': {sub_op: sub_clause}})
                         else:
-                            q = q & self.__where(dict(where={sub_op: sub_clause}))
+                            q = q & self.__where({'where': {sub_op: sub_clause}})
                 elif is_list(clause):
                     for sub_clause in clause:
                         if q is None:
-                            q = self.__where(dict(where=sub_clause))
+                            q = self.__where({'where': sub_clause})
                         else:
-                            q = q & self.__where(dict(where=sub_clause))
+                            q = q & self.__where({'where': sub_clause})
             elif op == 'or':
                 if is_dict(clause):
                     for sub_op, sub_clause in clause.items():
                         if q is None:
-                            q = self.__where(dict(where={sub_op: sub_clause}))
+                            q = self.__where({'where': {sub_op: sub_clause}})
                         else:
-                            q = q | self.__where(dict(where={sub_op: sub_clause}))
+                            q = q | self.__where({'where': {sub_op: sub_clause}})
                 elif is_list(clause):
                     for sub_clause in clause:
                         if q is None:
-                            q = self.__where(dict(where=sub_clause))
+                            q = self.__where({'where': sub_clause})
                         else:
-                            q = q | self.__where(dict(where=sub_clause))
+                            q = q | self.__where({'where': sub_clause})
             elif op == 'not':
                 q = ~self.__where(clause)
             else:
@@ -67,9 +67,9 @@ class Query_Reader:
                     if op == 'equals':
                         q = Q('match_phrase', **{prop: expr})
                     elif op == 'reg_exp':
-                        q = Q('regexp', **{prop: dict(value=expr)})
+                        q = Q('regexp', **{prop: {'value': expr}})
                     elif op == 'wildcard':
-                        q = Q('wildcard', **{prop: dict(value=expr)})
+                        q = Q('wildcard', **{prop: {'value': expr}})
                     elif op in ['lt', 'lte', 'gt', 'gte']:
                         q = Q('range', **{prop: {op: expr}})
                     else:

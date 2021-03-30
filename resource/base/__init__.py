@@ -50,8 +50,7 @@ class Base_Resource(Base_Minimal_Resource):
             try:
                 qr = Query_Reader(index=self.doc.Index.name)
                 s = qr.parse(query=req_data, id=id)
-                resp_data = [dict(hit.to_dict(), id=hit.meta.id)
-                             for hit in s.execute()]
+                resp_data = [dict(hit.to_dict(), id=hit.meta.id) for hit in s.execute()]
                 if len(resp_data) > 0:
                     Content_Response(resp_data).apply(resp)
                 else:
@@ -75,7 +74,7 @@ class Base_Resource(Base_Minimal_Resource):
                     req_data_id = req_data.pop('id', id)
                     try:
                         self.rm_ignore_fields(req_data)
-                        obj = self.doc(meta=dict(id=req_data_id), **req_data)
+                        obj = self.doc(meta={'id': req_data_id}, **req_data)
                         msg = f'{self.name.capitalize()} with the id={req_data_id} correctly created'
                         resp_data_lcp = []
                         resp_data = Created_Response(msg)
@@ -129,7 +128,8 @@ class Base_Resource(Base_Minimal_Resource):
                             if len(resp_data_lcp) > 0:
                                 for rdl in resp_data_lcp:
                                     if rdl['error']:
-                                        resp_data = Unprocessable_Entity_Response(f'Not possible to update a {self.name} with the id={req_data_id}')
+                                        msg = f'Not possible to update a {self.name} with the id={req_data_id}'
+                                        resp_data = Unprocessable_Entity_Response(msg)
                                         break
                                 resp_data.update(lcp_response=resp_data_lcp)
                             force = req_data.get('force', False)
@@ -141,7 +141,8 @@ class Base_Resource(Base_Minimal_Resource):
                                         msg = f'Some errors occur but the {self.name} with the id={req_data_id} forcedly updated'
                                         resp_data = Unprocessable_Entity_Response(msg)
                             if not resp_data.error and not modified:
-                                resp_data = Not_Modified_Response(f'{self.name.capitalize()} with the id={req_data_id} no need to update')
+                                msg = f'{self.name.capitalize()} with the id={req_data_id} no need to update'
+                                resp_data = Not_Modified_Response(msg)
                             resp_data.add(resp)
                     except Exception as e:
                         msg = f'Not possible to update a {self.name} with the id={req_data_id}'
