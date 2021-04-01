@@ -1,0 +1,110 @@
+2021-04-01 at 11:37:13 🔖   INFO     Found additional log level customization: 💪   SUCCESS                                                💻 log.py@init:74 ⏰ 0:00:01.829631
+2021-04-01 at 11:37:13 🔖   INFO     Found additional log level customization: 👀   WARN                                                   💻 log.py@init:74 ⏰ 0:00:01.831628
+2021-04-01 at 11:37:13 🔖   INFO     Found additional log level customization: 🔖   INFO                                                   💻 log.py@init:74 ⏰ 0:00:01.832626
+2021-04-01 at 11:37:13 🔖   INFO     Found additional log level customization: ❌   ERROR                                                  💻 log.py@init:74 ⏰ 0:00:01.833626
+2021-04-01 at 11:37:13 🔖   INFO     Found additional log level customization: 🎯   NOTICE                                                 💻 log.py@init:74 ⏰ 0:00:01.836627
+2021-04-01 at 11:37:13 🔖   INFO     Found additional log level customization: 💩   SPAM                                                   💻 log.py@init:74 ⏰ 0:00:01.837626
+2021-04-01 at 11:37:13 🔖   INFO     Found additional log level customization: 📝   VERBOSE                                                💻 log.py@init:74 ⏰ 0:00:01.838629
+2021-04-01 at 11:37:13 🔖   INFO     Found additional log level customization: 💥   CRITICAL                                               💻 log.py@init:74 ⏰ 0:00:01.839628
+2021-04-01 at 11:37:13 🔖   INFO     Start connection to Elasticsearch (guard3.westeurope.cloudapp.azure.com:9200)                        💻 elasticsearch.py@connection:9 ⏰ 0:00:01.840631
+2021-04-01 at 11:37:13 💪   SUCCESS  Connection to Elasticsearch (guard3.westeurope.cloudapp.azure.com:9200) established                  💻 elasticsearch.py@connection:17 ⏰ 0:00:01.841629
+2021-04-01 at 11:37:13 🎯   NOTICE   JWT authentication enabled                                                                           💻 __init__.py@api:32 ⏰ 0:00:01.842627
+2021-04-01 at 11:37:13 🎯   NOTICE   HTTPS not set                                                                                        💻 __init__.py@api:44 ⏰ 0:00:01.844627
+2021-04-01 at 11:37:13 🎯   NOTICE   Elastic APM disabled                                                                                 💻 __init__.py@api:50 ⏰ 0:00:01.845628
+2021-04-01 at 11:37:13 🔖   INFO     Start initialization index agent-catalog                                                             💻 __init__.py@__init__:31 ⏰ 0:00:02.144267
+2021-04-01 at 11:37:14 💪   SUCCESS  Index agent-catalog initialized                                                                      💻 __init__.py@__init__:34 ⏰ 0:00:02.756492
+2021-04-01 at 11:37:14 💪   SUCCESS  /catalog/agent/ endpoint configured                                                                  💻 __init__.py@routes:50 ⏰ 0:00:02.787490
+2021-04-01 at 11:37:14 🔖   INFO     Start initialization index agent-catalog                                                             💻 __init__.py@__init__:31 ⏰ 0:00:02.788490
+2021-04-01 at 11:37:14 💪   SUCCESS  Index agent-catalog initialized                                                                      💻 __init__.py@__init__:34 ⏰ 0:00:03.107106
+2021-04-01 at 11:37:14 💪   SUCCESS  /catalog/agent/{id} endpoint configured                                                              💻 __init__.py@routes:50 ⏰ 0:00:03.151755
+2021-04-01 at 11:37:14 🔖   INFO     Start initialization index agent-instance                                                            💻 __init__.py@__init__:31 ⏰ 0:00:03.152738
+2021-04-01 at 11:37:14 💪   SUCCESS  Index agent-instance initialized                                                                     💻 __init__.py@__init__:34 ⏰ 0:00:03.479445
+2021-04-01 at 11:37:14 💪   SUCCESS  /instance/agent/ endpoint configured                                                                 💻 __init__.py@routes:50 ⏰ 0:00:03.500485
+2021-04-01 at 11:37:14 🔖   INFO     Start initialization index agent-instance                                                            💻 __init__.py@__init__:31 ⏰ 0:00:03.500997
+2021-04-01 at 11:37:15 💪   SUCCESS  Index agent-instance initialized                                                                     💻 __init__.py@__init__:34 ⏰ 0:00:03.829310
+2021-04-01 at 11:37:15 💪   SUCCESS  /instance/agent/{id} endpoint configured                                                             💻 __init__.py@routes:50 ⏰ 0:00:03.850320
+2021-04-01 at 11:37:15 🔖   INFO     Start initialization index algorithm-catalog                                                         💻 __init__.py@__init__:31 ⏰ 0:00:03.851311
+2021-04-01 at 11:37:15 💪   SUCCESS  Index algorithm-catalog initialized                                                                  💻 __init__.py@__init__:34 ⏰ 0:00:04.156228
+2021-04-01 at 11:37:15 💪   SUCCESS  /catalog/algorithm/ endpoint configured                                                              💻 __init__.py@routes:50 ⏰ 0:00:04.191254
+2021-04-01 at 11:37:15 🔖   INFO     Start initialization index algorithm-catalog                                                         💻 __init__.py@__init__:31 ⏰ 0:00:04.192219
+2021-04-01 at 11:37:15 💪   SUCCESS  Index algorithm-catalog initialized                                                                  💻 __init__.py@__init__:34 ⏰ 0:00:04.495453
+2021-04-01 at 11:37:15 💪   SUCCESS  /catalog/algorithm/{id} endpoint configured                                                          💻 __init__.py@routes:50 ⏰ 0:00:04.525151
+2021-04-01 at 11:37:15 🔖   INFO     Start initialization index algorithm-instance                                                        💻 __init__.py@__init__:31 ⏰ 0:00:04.526158
+2021-04-01 at 11:37:16 💪   SUCCESS  Index algorithm-instance initialized                                                                 💻 __init__.py@__init__:34 ⏰ 0:00:04.896643
+2021-04-01 at 11:37:16 💪   SUCCESS  /instance/algorithm/ endpoint configured                                                             💻 __init__.py@routes:50 ⏰ 0:00:04.925644
+2021-04-01 at 11:37:16 🔖   INFO     Start initialization index algorithm-instance                                                        💻 __init__.py@__init__:31 ⏰ 0:00:04.926656
+2021-04-01 at 11:37:16 💪   SUCCESS  Index algorithm-instance initialized                                                                 💻 __init__.py@__init__:34 ⏰ 0:00:05.246261
+2021-04-01 at 11:37:16 💪   SUCCESS  /instance/algorithm/{id} endpoint configured                                                         💻 __init__.py@routes:50 ⏰ 0:00:05.269333
+2021-04-01 at 11:37:16 🔖   INFO     Start initialization index connection                                                                💻 __init__.py@__init__:31 ⏰ 0:00:05.269333
+2021-04-01 at 11:37:16 💪   SUCCESS  Index connection initialized                                                                         💻 __init__.py@__init__:34 ⏰ 0:00:05.576384
+2021-04-01 at 11:37:16 💪   SUCCESS  /connection/ endpoint configured                                                                     💻 __init__.py@routes:50 ⏰ 0:00:05.608386
+2021-04-01 at 11:37:16 🔖   INFO     Start initialization index connection                                                                💻 __init__.py@__init__:31 ⏰ 0:00:05.610385
+2021-04-01 at 11:37:17 💪   SUCCESS  Index connection initialized                                                                         💻 __init__.py@__init__:34 ⏰ 0:00:05.925476
+2021-04-01 at 11:37:17 💪   SUCCESS  /connection/{id} endpoint configured                                                                 💻 __init__.py@routes:50 ⏰ 0:00:05.952504
+2021-04-01 at 11:37:17 💪   SUCCESS  /dashboard endpoint configured                                                                       💻 __init__.py@routes:50 ⏰ 0:00:05.955467
+2021-04-01 at 11:37:17 💪   SUCCESS  /dashboard/{part}/{resource} endpoint configured                                                     💻 __init__.py@routes:50 ⏰ 0:00:05.956465
+2021-04-01 at 11:37:17 🔖   INFO     Start initialization index data                                                                      💻 __init__.py@__init__:31 ⏰ 0:00:05.957508
+2021-04-01 at 11:37:17 💪   SUCCESS  Index data initialized                                                                               💻 __init__.py@__init__:34 ⏰ 0:00:06.270355
+2021-04-01 at 11:37:17 💪   SUCCESS  /data/ endpoint configured                                                                           💻 __init__.py@routes:50 ⏰ 0:00:06.291380
+2021-04-01 at 11:37:17 🔖   INFO     Start initialization index data                                                                      💻 __init__.py@__init__:31 ⏰ 0:00:06.292350
+2021-04-01 at 11:37:17 💪   SUCCESS  Index data initialized                                                                               💻 __init__.py@__init__:34 ⏰ 0:00:06.594768
+2021-04-01 at 11:37:17 💪   SUCCESS  /data/{id} endpoint configured                                                                       💻 __init__.py@routes:50 ⏰ 0:00:06.620770
+2021-04-01 at 11:37:17 🔖   INFO     Start initialization index ebpf-program-catalog                                                      💻 __init__.py@__init__:31 ⏰ 0:00:06.621735
+2021-04-01 at 11:37:18 💪   SUCCESS  Index ebpf-program-catalog initialized                                                               💻 __init__.py@__init__:34 ⏰ 0:00:06.958302
+2021-04-01 at 11:37:18 💪   SUCCESS  /catalog/ebpf-program/ endpoint configured                                                           💻 __init__.py@routes:50 ⏰ 0:00:07.002301
+2021-04-01 at 11:37:18 🔖   INFO     Start initialization index ebpf-program-catalog                                                      💻 __init__.py@__init__:31 ⏰ 0:00:07.003302
+2021-04-01 at 11:37:18 💪   SUCCESS  Index ebpf-program-catalog initialized                                                               💻 __init__.py@__init__:34 ⏰ 0:00:07.445672
+2021-04-01 at 11:37:18 💪   SUCCESS  /catalog/ebpf-program/{id} endpoint configured                                                       💻 __init__.py@routes:50 ⏰ 0:00:07.467671
+2021-04-01 at 11:37:18 🔖   INFO     Start initialization index ebpf-program-instance                                                     💻 __init__.py@__init__:31 ⏰ 0:00:07.469638
+2021-04-01 at 11:37:19 💪   SUCCESS  Index ebpf-program-instance initialized                                                              💻 __init__.py@__init__:34 ⏰ 0:00:07.791735
+2021-04-01 at 11:37:19 💪   SUCCESS  /instance/ebpf-program/ endpoint configured                                                          💻 __init__.py@routes:50 ⏰ 0:00:07.815734
+2021-04-01 at 11:37:19 🔖   INFO     Start initialization index ebpf-program-instance                                                     💻 __init__.py@__init__:31 ⏰ 0:00:07.816736
+2021-04-01 at 11:37:19 💪   SUCCESS  Index ebpf-program-instance initialized                                                              💻 __init__.py@__init__:34 ⏰ 0:00:08.120460
+2021-04-01 at 11:37:19 💪   SUCCESS  /instance/ebpf-program/{id} endpoint configured                                                      💻 __init__.py@routes:50 ⏰ 0:00:08.148600
+2021-04-01 at 11:37:19 🔖   INFO     Start initialization index event                                                                     💻 __init__.py@__init__:31 ⏰ 0:00:08.150187
+2021-04-01 at 11:37:19 💪   SUCCESS  Index event initialized                                                                              💻 __init__.py@__init__:34 ⏰ 0:00:08.367279
+2021-04-01 at 11:37:19 💪   SUCCESS  /event/ endpoint configured                                                                          💻 __init__.py@routes:50 ⏰ 0:00:08.388286
+2021-04-01 at 11:37:19 🔖   INFO     Start initialization index event                                                                     💻 __init__.py@__init__:31 ⏰ 0:00:08.390343
+2021-04-01 at 11:37:19 💪   SUCCESS  Index event initialized                                                                              💻 __init__.py@__init__:34 ⏰ 0:00:08.600119
+2021-04-01 at 11:37:19 💪   SUCCESS  /event/{id} endpoint configured                                                                      💻 __init__.py@routes:50 ⏰ 0:00:08.623109
+2021-04-01 at 11:37:19 🔖   INFO     Start initialization index exec-env                                                                  💻 __init__.py@__init__:31 ⏰ 0:00:08.624112
+2021-04-01 at 11:37:20 💪   SUCCESS  Index exec-env initialized                                                                           💻 __init__.py@__init__:34 ⏰ 0:00:08.953835
+2021-04-01 at 11:37:20 💪   SUCCESS  /exec-env/ endpoint configured                                                                       💻 __init__.py@routes:50 ⏰ 0:00:08.974604
+2021-04-01 at 11:37:20 🔖   INFO     Start initialization index exec-env                                                                  💻 __init__.py@__init__:31 ⏰ 0:00:08.976574
+2021-04-01 at 11:37:20 💪   SUCCESS  Index exec-env initialized                                                                           💻 __init__.py@__init__:34 ⏰ 0:00:09.351538
+2021-04-01 at 11:37:20 💪   SUCCESS  /exec-env/{id} endpoint configured                                                                   💻 __init__.py@routes:50 ⏰ 0:00:09.381541
+2021-04-01 at 11:37:20 🔖   INFO     Start initialization index exec-env-type                                                             💻 __init__.py@__init__:31 ⏰ 0:00:09.382540
+2021-04-01 at 11:37:20 💪   SUCCESS  Index exec-env-type initialized                                                                      💻 __init__.py@__init__:34 ⏰ 0:00:09.679914
+2021-04-01 at 11:37:20 💪   SUCCESS  /type/exec-env/ endpoint configured                                                                  💻 __init__.py@routes:50 ⏰ 0:00:09.701912
+2021-04-01 at 11:37:20 🔖   INFO     Start initialization index exec-env-type                                                             💻 __init__.py@__init__:31 ⏰ 0:00:09.703877
+2021-04-01 at 11:37:21 💪   SUCCESS  Index exec-env-type initialized                                                                      💻 __init__.py@__init__:34 ⏰ 0:00:10.170875
+2021-04-01 at 11:37:21 💪   SUCCESS  /exec-env-type/{id} endpoint configured                                                              💻 __init__.py@routes:50 ⏰ 0:00:10.195490
+2021-04-01 at 11:37:21 🔖   INFO     Start initialization index network-link                                                              💻 __init__.py@__init__:31 ⏰ 0:00:10.196869
+2021-04-01 at 11:37:21 💪   SUCCESS  Index network-link initialized                                                                       💻 __init__.py@__init__:34 ⏰ 0:00:10.486029
+2021-04-01 at 11:37:21 💪   SUCCESS  /network-link/ endpoint configured                                                                   💻 __init__.py@routes:50 ⏰ 0:00:10.509023
+2021-04-01 at 11:37:21 🔖   INFO     Start initialization index network-link                                                              💻 __init__.py@__init__:31 ⏰ 0:00:10.510027
+2021-04-01 at 11:37:22 💪   SUCCESS  Index network-link initialized                                                                       💻 __init__.py@__init__:34 ⏰ 0:00:10.799453
+2021-04-01 at 11:37:22 💪   SUCCESS  /network-link/{id} endpoint configured                                                               💻 __init__.py@routes:50 ⏰ 0:00:10.825644
+2021-04-01 at 11:37:22 🔖   INFO     Start initialization index network-link-type                                                         💻 __init__.py@__init__:31 ⏰ 0:00:10.827651
+2021-04-01 at 11:37:22 💪   SUCCESS  Index network-link-type initialized                                                                  💻 __init__.py@__init__:34 ⏰ 0:00:11.120852
+2021-04-01 at 11:37:22 💪   SUCCESS  /type/network-link/ endpoint configured                                                              💻 __init__.py@routes:50 ⏰ 0:00:11.150880
+2021-04-01 at 11:37:22 🔖   INFO     Start initialization index network-link-type                                                         💻 __init__.py@__init__:31 ⏰ 0:00:11.151900
+2021-04-01 at 11:37:22 💪   SUCCESS  Index network-link-type initialized                                                                  💻 __init__.py@__init__:34 ⏰ 0:00:11.462513
+2021-04-01 at 11:37:22 💪   SUCCESS  /type/network-link/{id} endpoint configured                                                          💻 __init__.py@routes:50 ⏰ 0:00:11.487514
+2021-04-01 at 11:37:22 🔖   INFO     Start initialization index pipeline                                                                  💻 __init__.py@__init__:31 ⏰ 0:00:11.490544
+2021-04-01 at 11:37:22 💪   SUCCESS  Index pipeline initialized                                                                           💻 __init__.py@__init__:34 ⏰ 0:00:11.682458
+2021-04-01 at 11:37:22 💪   SUCCESS  /pipeline/ endpoint configured                                                                       💻 __init__.py@routes:50 ⏰ 0:00:11.719457
+2021-04-01 at 11:37:22 🔖   INFO     Start initialization index pipeline                                                                  💻 __init__.py@__init__:31 ⏰ 0:00:11.721461
+2021-04-01 at 11:37:23 💪   SUCCESS  Index pipeline initialized                                                                           💻 __init__.py@__init__:34 ⏰ 0:00:11.907490
+2021-04-01 at 11:37:23 💪   SUCCESS  /pipeline/{id} endpoint configured                                                                   💻 __init__.py@routes:50 ⏰ 0:00:11.942492
+2021-04-01 at 11:37:24 🎯   NOTICE   Exec-env simulation-model-tool (LCP at 192.168.0.172:4000) not enabled                               💻 heartbeat.py@heartbeat_exec_env:54 ⏰ 0:00:12.788941
+2021-04-01 at 11:37:28 ❌   ERROR    Connection refused with exec-env mobile-phone (LCP at localhost:4321)                                💻 heartbeat.py@heartbeat_exec_env:58 ⏰ 0:00:16.861938
+2021-04-01 at 11:37:28 ❌   ERROR    Connection refused with exec-env user-vm (LCP at localhost:4567)                                     💻 heartbeat.py@heartbeat_exec_env:58 ⏰ 0:00:16.862935
+2021-04-01 at 11:37:28 ❌   ERROR    Connection refused with exec-env network-manager (LCP at localhost:4000)                             💻 heartbeat.py@heartbeat_exec_env:58 ⏰ 0:00:16.862935
+2021-04-01 at 11:37:34 ❌   ERROR    Connection timeout with exec-env lora (LCP at 11.23.45.33:4000)                                      💻 heartbeat.py@heartbeat_exec_env:56 ⏰ 0:00:22.811453
+2021-04-01 at 11:37:34 ❌   ERROR    Connection timeout with exec-env backend-backup (LCP at 20.52.36.121:4000)                           💻 heartbeat.py@heartbeat_exec_env:56 ⏰ 0:00:22.812539
+2021-04-01 at 11:37:34 ❌   ERROR    Connection timeout with exec-env backend-prod (LCP at 35.193.65.139:4000)                            💻 heartbeat.py@heartbeat_exec_env:56 ⏰ 0:00:22.813047
+2021-04-01 at 11:37:34 ❌   ERROR    Connection timeout with exec-env web-server (LCP at guard-lcp01.8bellsresearch.com:4000)             💻 heartbeat.py@heartbeat_exec_env:56 ⏰ 0:00:22.813047
+2021-04-01 at 11:37:34 ❌   ERROR    Connection timeout with exec-env backend-test (LCP at 35.193.65.139:4444)                            💻 heartbeat.py@heartbeat_exec_env:56 ⏰ 0:00:22.814060
+2021-04-01 at 11:37:34 ❌   ERROR    Connection timeout with exec-env frontend (LCP at 139.91.70.90:33664)                                💻 heartbeat.py@heartbeat_exec_env:56 ⏰ 0:00:22.814060
+2021-04-01 at 11:37:34 💪   SUCCESS  Accept requests at 0.0.0.0:5000                                                                      💻 main.py@<module>:37 ⏰ 0:00:22.821062
