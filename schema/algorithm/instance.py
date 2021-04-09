@@ -30,9 +30,6 @@ class Algorithm_Instance_Schema(Base_Schema):
     id = Str(required=True, example='ddos-predictor-1', description='Id of the algorithm instance.')
     algorithm_catalog_id = Str(required=True, readonly=True, example='ddos-predictor', description='Id of the algorithm in the catalog.',
                                validate=In.apply(Algorithm_Catalog_Document.get_ids), error_messages=In.error_messages)
-    exec_env_id = Str(required=True, readonly=True, example='apache',
-                      description='Id of the execution environment where the algorithm instance is installed.',
-                      validate=In.apply(Exec_Env_Document.get_ids), error_messages=In.error_messages)
     operations = Nested(Algorithm_Instance_Operation_Schema, unknown='INCLUDE', description='List of algorithm instance operations.')
     description = Str(example='Collect system metrics from execution environments.',
                       description='Short description of the algorithm installed in the execution environment.')
