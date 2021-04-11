@@ -4,6 +4,7 @@ from marshmallow.fields import Bool, List, Nested, Raw, Str
 from document.agent.catalog import Agent_Catalog_Document
 from schema.base import Base_Schema
 from schema.validate import Unique_List
+from utils.schema import List_or_One
 
 AGENT_STATUS = ['started', 'stopped', 'unknown']
 PARAMETER_SCHEMAS = ['properties', 'json', 'xml', 'yaml']
@@ -15,7 +16,7 @@ class Agent_Catalog_Action_Config_Schema(Schema):
     """Agent action configuration."""
 
     cmd = Str(required=True, example='service filebeat start', description='Action command.')
-    args = Str(many=True, example='-v', description='Action command argument')
+    args = List_or_One(Str, example='-v', description='Action command argument')
     daemon = Bool(default=False, example=True, description='Execute the command as daemon.')
 
 
@@ -38,7 +39,7 @@ class Agent_Catalog_Parameter_Config_Schema(Schema):
                  description='Schema of the parameter file', validate=validate.OneOf(PARAMETER_SCHEMAS))
     source = Str(required=True, example='/usr/share/filebeat/filebeat.yml',
                  description='Path of the source parameter file')
-    path = List(Str(required=True, example='enabled', description='Path of the parameter value in the file'))
+    path = List_or_One(Str(required=True, example='enabled', description='Path of the parameter value in the file'))
 
 
 class Agent_Catalog_Parameter_Schema(Schema):
@@ -50,7 +51,7 @@ class Agent_Catalog_Parameter_Schema(Schema):
     config = Nested(Agent_Catalog_Parameter_Config_Schema, unknown='INCLUDE', required=True,
                     description='Parameter configuration.')
     list = Bool(default=False, example=True, description='Indicate if the parameter can have multiple values.')
-    values = Str(many=True, example='mysql', description='Possible values if the parameter type is choice.')
+    values = List_or_One(Str, example='mysql', description='Possible values if the parameter type is choice.')
     description = Str(example='Enable the agent.', description='Short description of the parameter.')
     example = Raw(example='10s', description='Example of parameter value.')
 
@@ -58,7 +59,7 @@ class Agent_Catalog_Parameter_Schema(Schema):
 class Agent_Catalog_Resource_Config_Schema(Schema):
     """Agent resource configuration."""
 
-    path = Str(required=True, example='/usr/share/filebeat/filebeat.yml', description='File path.')
+    path = List_or_One(Str, required=True, example='/usr/share/filebeat/filebeat.yml', description='File path.')
 
 
 class Agent_Catalog_Resource_Schema(Schema):

@@ -38,9 +38,11 @@ class Agent_Instance_Operation_Schema(Base_Schema):
 
     actions = Nested(Agent_Instance_Action_Schema, many=True, unknown='INCLUDE',
                      description='List of agent instance actions.')
-    parameters = Nested(Agent_Instance_Parameter_Schema, many=True, unknown='INCLUDE', description='List of agent instance parameters.',
+    parameters = Nested(Agent_Instance_Parameter_Schema, many=True, unknown='INCLUDE',
+                        description='List of agent instance parameters.',
                         validate=Unique_List.apply('id'), error_messages=Unique_List.error_messages)
-    resources = Nested(Agent_Instance_Resource_Schema, many=True, unknown='INCLUDE', description='List of agent instance resources.',
+    resources = Nested(Agent_Instance_Resource_Schema, many=True, unknown='INCLUDE',
+                       description='List of agent instance resources.',
                        validate=Unique_List.apply('id'), error_messages=Unique_List.error_messages)
 
 
@@ -57,6 +59,7 @@ class Agent_Instance_Schema(Base_Schema):
                       validate=In.apply(Exec_Env_Document.get_ids), error_messages=In.error_messages)
     status = Str(enum=AGENT_STATUS, required=True, readonly=True, example=AGENT_STATUS[0],
                  description='Status of the agent.')
-    operations = Nested(Agent_Instance_Operation_Schema, unknown='INCLUDE', description='List of agent instance operations.')
+    operations = Nested(Agent_Instance_Operation_Schema, many=True, unknown='INCLUDE',
+                        description='List of agent instance operations.')
     description = Str(example='Collect system metrics from execution environments.',
                       description='Short description of the agent installed in the execution environment.')
