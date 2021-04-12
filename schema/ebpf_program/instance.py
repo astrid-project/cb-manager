@@ -23,7 +23,8 @@ class eBPF_Program_Instance_Schema(Base_Schema):
 
     doc = eBPF_Program_Instance_Document
     id = Str(required=True, example='packet-capture@apache', description='Id of the eBPF program installed in an execution environment.')
-    ebpf_program_catalog_id = Str(required=True, readonly=True, example='packet-capture', description='Id of the agent in the catalog.',
+    ebpf_program_catalog_id = Str(required=True, readonly=True, example='packet-capture',
+                                  description='Id of the agent in the catalog.',
                                   validate=In.apply(eBPF_Program_Catalog_Document.get_ids), error_messages=In.error_messages)
     exec_env_id = Str(required=True, readonly=True, example='apache',
                       description="Id of the execution environment where the eBPF program instance is installed",
