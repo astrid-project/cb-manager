@@ -24,6 +24,7 @@
         "restructuredtext.confPath": "docs/conf.py",
         "restructuredtext.experimental": true,
         "workbench.colorTheme": "GitHub Dark", // Only for this workspace
-        "workbench.editor.tabSizing": "shrink"
+        "workbench.editor.tabSizing": "shrink",
+        "restructuredtext.languageServer.disabled": true
     }
 }
