@@ -17,6 +17,7 @@ class Algorithm_Catalog_Parameter_Schema(Schema):
                description='Parameter type.', validate=validate.OneOf(PARAMETER_TYPES))
     list = Bool(default=False, example=True, description='Indicate if the parameter can have multiple values.')
     values = List_or_One(Str, example='mysql', description='Possible values if the parameter type is choice.')
+    encoding_scheme = Str(default='base64', example='base64', description='Encoding scheme used to store the binary data')
     description = Str(example='Enable the algorithm.', description='Short description of the parameter.')
     example = Raw(example='10s', description='Example of parameter value.')
 
