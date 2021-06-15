@@ -12,6 +12,8 @@ class Pipeline_Document(Base_Document):
     name = Text()
     status = Text(required=True)
     user = Text()
+    agent_instance_ids = Text()
+    algorithm_instance_ids = Text()
 
     class Index:
         """Elasticsearch configuration."""
