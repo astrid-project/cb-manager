@@ -14,7 +14,7 @@ msgpack==1.0.0
 pint==0.11
 pyjwt[crypto]>=2.4.0
 pyyaml==5.4
-requests==2.24.0
+requests==2.31.0
 rich==9.2.0
 swagger-ui-py==0.2.0
 toolz==0.10.0
