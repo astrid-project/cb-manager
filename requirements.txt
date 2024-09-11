@@ -15,7 +15,7 @@ pint==0.24.3
 pyjwt[crypto]>=2.4.0
 pyyaml==6.0.2
 requests==2.32.3
-rich==13.8.0
+rich==13.8.1
 swagger-ui-py==23.8.23
 toolz==0.12.1
 waitress>=2.1.2
