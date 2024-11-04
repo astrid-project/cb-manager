@@ -34,13 +34,13 @@ class LCP(Base_LCP):
             return dict(id=instance.meta.id, interface=req.get('interface', None), **catalog.config.to_dict())
         cls.__handler(instance=instance, req=req, resp=resp, caller=put_req, data=__data)
 
-    @ classmethod
+    @classmethod
     def delete(cls, instance, req, resp):
         def __data(instance, _):
             return {'id': instance.meta.id}
         cls.__handler(instance=instance, req=req, resp=resp, caller=delete_req, data=__data)
 
-    @ classmethod
+    @classmethod
     def __handler(cls, instance, req, resp, caller, data):
         ebpf_program_catalog = cls.from_doc(document=eBPF_Program_Catalog_Document, id=instance.ebpf_program_catalog_id,
                                             label='eBPF Program Catalog', resp=resp)
