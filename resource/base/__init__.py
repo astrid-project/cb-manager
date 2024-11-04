@@ -206,7 +206,7 @@ class Base_Resource(Base_Minimal_Resource):
             if data.pop(ign_f, None) is not None:
                 self.log.info(f'Field {ign_f} in the request ignored when update {self.names}')
 
-    @ classmethod
+    @classmethod
     def get_lcp_handler(cls, method):
         def __default(instance, req, resp):
             return resp
