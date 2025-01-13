@@ -9,7 +9,7 @@ falcon-auth==1.1.0
 falcon-elastic-apm==0.1.1
 falcon-require-https==0.1.0
 loguru==0.7.3
-marshmallow==3.25.0
+marshmallow==3.25.1
 msgpack==1.1.0
 pint==0.24.4
 pyjwt[crypto]>=2.4.0
