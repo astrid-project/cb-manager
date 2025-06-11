@@ -1,7 +1,7 @@
 apispec==6.8.1
 bunch==1.0.1
 dicttoxml==1.7.16
-elasticsearch-dsl==8.17.1
+elasticsearch-dsl==8.18.0
 emoji==2.14.1
 falcon==4.0.2
 falcon-apispec==0.4.0
