@@ -13,7 +13,7 @@ marshmallow==4.0.1
 msgpack==1.1.1
 pint==0.24.4
 pyjwt[crypto]>=2.4.0
-pyyaml==6.0.2
+pyyaml==6.0.3
 requests==2.32.5
 rich==14.1.0
 swagger-ui-py==25.7.1
