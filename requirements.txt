@@ -11,7 +11,7 @@ falcon-require-https==0.1.0
 loguru==0.7.3
 marshmallow==4.0.1
 msgpack==1.1.2
-pint==0.25
+pint~=0.25
 pyjwt[crypto]>=2.4.0
 pyyaml==6.0.3
 requests==2.32.5
